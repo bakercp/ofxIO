@@ -10,8 +10,8 @@ A collection of I/O core utils.
 * Recursive File Listing `Poco::RecursiveDirectoryIterator`
     * List files and folders inside of directories.
     * Use custom file filters to return relevant results.
-    * _NOTE: `Poco::RecursiveDirectoryIterator` was added in Poco 1.6+.  These files are included for backward compatability.
+    * _NOTE: `Poco::RecursiveDirectoryIterator` was added in Poco 1.6+.  These files are included for backward compatability._
 * Correct alphanumeric filename ordering
-    * Implemented using http://www.davekoelle.com/files/alphanum.hpp
+    * _Note: Implemented using http://www.davekoelle.com/files/alphanum.hpp_
 
 See the examples!
