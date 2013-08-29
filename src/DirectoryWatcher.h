@@ -32,91 +32,20 @@
 #include "BaseFileFilter.h"
 #include "FileWatcher.h"
 #include "ofEvents.h"
+#include "DirectoryWatcherEvents.h"
 
 
 namespace ofx {
 namespace IO {
 
-
-class DirectoryWatcherEventArgs;
-class DirectoryWatcherMoveEventArgs;
-
-
-class DirectoryWatcherEvents {
-public:
-
-    // Type will eventually be an alias for Poco::DirectoryWatcher
-    enum Type {
-        
-        ITEM_ADDED = 1,
-        /// A new item has been created and added to the directory.
-
-        ITEM_REMOVED = 2,
-        /// An item has been removed from the directory.
-
-        ITEM_MODIFIED = 4,
-        /// An item has been modified.
-
-        ITEM_MOVED_FROM = 8,
-        /// An item has been renamed or moved. This event delivers the old name.
-
-        ITEM_MOVED_TO = 16,
-        /// An item has been renamed or moved. This event delivers the new name.
-    };
-
-    DirectoryWatcherEvents() { }
-    virtual ~DirectoryWatcherEvents() { }
-
-    ofEvent<const DirectoryWatcherEventArgs>       onItemAdded;
-    ofEvent<const DirectoryWatcherEventArgs>       onItemRemoved;
-    ofEvent<const DirectoryWatcherEventArgs>       onItemModified;
-    ofEvent<const DirectoryWatcherMoveEventArgs>   onItemMoved;
-    ofEvent<const Poco::Exception>                 onError;
     
-};
-
-
-class DirectoryWatcherEventArgs {
-public:
-    DirectoryWatcherEventArgs(const Poco::Path& _path,
-                              const Poco::File& _item,
-                              DirectoryWatcherEvents::Type _event)
-    : path(_path)
-    , item(_item)
-    , event(_event)
-    {
-    }
-
-    const Poco::Path& path;
-    const Poco::File& item;
-    DirectoryWatcherEvents::Type event;
-};
-
-
-class DirectoryWatcherMoveEventArgs : public DirectoryWatcherEventArgs {
-public:
-    DirectoryWatcherMoveEventArgs(const Poco::Path& _path,
-                                  const Poco::File& _item,
-                                  DirectoryWatcherEvents::Type _event,
-                                  const Poco::Path& _newPath,
-                                  const Poco::File& _newItem)
-    : DirectoryWatcherEventArgs(_path, _item, _event)
-    , newPath(_newPath)
-    , newItem(_newItem)
-    {
-    }
-
-    const Poco::Path& newPath;
-    const Poco::File& newItem;
-};
-
-
-class DirectoryWatcher : public FileWatcher, public FileWatchListener {
+class DirectoryWatcher: public FileWatcher, public FileWatchListener
+{
 public:
     typedef Poco::FastMutex::ScopedLock ScopedLock;
 
-    
-    enum DirectoryEventMask {
+    enum DirectoryEventMask
+    {
 		DW_FILTER_ENABLE_ALL = 31,
         /// Enables all event types.
         
@@ -124,22 +53,24 @@ public:
         /// Disables all event types.
 	};
 
-    enum {
+    enum
+    {
 		DW_DEFAULT_SCAN_INTERVAL = 5 /// Default scan interval for platforms that don't provide a native notification mechanism.
 	};
 
     DirectoryWatcher();
     
+    virtual ~DirectoryWatcher();
+
     void addPath(const Poco::Path& path,
                  bool bListExistingItemsOnStart = false,
+                 bool bSortAlphaNumeric         = false,
                  BaseFileFilter* fileFilterPtr  = NULL,
                  int  eventMask                 = DW_FILTER_ENABLE_ALL,
                  int  scanInterval              = DW_DEFAULT_SCAN_INTERVAL);
 
     void removePath(const Poco::Path& path);
-
-    virtual ~DirectoryWatcher();
-
+    
     bool isWatching(const Poco::Path& path) const;
 
     DirectoryWatcherEvents events;
@@ -165,51 +96,12 @@ public:
 
 
 protected:
-    
     void handleFileAction(WatchID watchid,
                           const string& _path,
                           const string& _item,
-                          FileWatcher::Action action) {
-        
-        DirectoryWatcherEvents::Type evt = (DirectoryWatcherEvents::Type)0;
+                          FileWatcher::Action action);
 
-        Poco::Path path(_path);
-        Poco::File item(Poco::Path(_item).makeAbsolute());
-
-        BaseFileFilter* fileFilterPtr = getFilterForPath(path);
-
-        if(fileFilterPtr == NULL || fileFilterPtr->accept(item)) {
-            // not all events are supported yet
-            if(action == FileWatcher::Add) {
-                evt = DirectoryWatcherEvents::ITEM_ADDED;
-                DirectoryWatcherEventArgs args(path,item,evt);
-                ofNotifyEvent(events.onItemAdded,args,this);
-            } else if(action == FileWatcher::Delete) {
-                evt = DirectoryWatcherEvents::ITEM_REMOVED;
-                DirectoryWatcherEventArgs args(path,item,evt);
-                ofNotifyEvent(events.onItemRemoved,args,this);
-            } else if(action == FileWatcher::Modified) {
-                evt = DirectoryWatcherEvents::ITEM_MODIFIED;
-                DirectoryWatcherEventArgs args(path,item,evt);
-                ofNotifyEvent(events.onItemModified,args,this);
-            } else {
-                Poco::IOException exc("Unknown FileWatcher::Action",action);
-                ofNotifyEvent(events.onError,exc);
-            }
-        } else {
-            // file was ignored based on the file filter
-        }
-    }
-
-    BaseFileFilter* getFilterForPath(const Poco::Path& path) {
-        ScopedLock lock(mutex);
-        FilterListIter iter = filterList.find(path);
-        if(iter != filterList.end()) {
-            return (*iter).second;
-        } else {
-            return NULL;
-        }
-    }
+    BaseFileFilter* getFilterForPath(const Poco::Path& path);
 
 private:
     typedef std::map<Poco::File,WatchID>         WatchList;
@@ -221,8 +113,8 @@ private:
     FilterList filterList;
 
     mutable Poco::FastMutex mutex;
+    
 };
 
 
-} }
-
+} } // namespace ofx::IO

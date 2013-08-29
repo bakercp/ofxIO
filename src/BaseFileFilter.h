@@ -35,7 +35,9 @@ namespace IO {
 
 class BaseFileFilter {
 public:
-    virtual ~BaseFileFilter() { }
+    virtual ~BaseFileFilter()
+    {
+    }
 
     virtual bool accept(const Poco::File& file) const = 0;
 
