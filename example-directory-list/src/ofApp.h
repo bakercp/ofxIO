@@ -30,10 +30,12 @@
 #include "ofMain.h"
 #include "DirectoryUtils.h"
 #include "BaseFileFilter.h"
+#include "ByteBuffer.h"
 
 
 using ofx::IO::BaseFileFilter;
 using ofx::IO::DirectoryUtils;
+using ofx::IO::ByteBuffer;
 
 
 // a custom hidden file filter
@@ -71,5 +73,7 @@ public:
     
     CustomFileFilter fileFilter; // an example file filter
     std::deque<std::string> messages;
+
+    ByteBuffer buffer;
 
 };

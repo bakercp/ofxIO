@@ -44,4 +44,4 @@ public:
 };
 
 
-} }
+} } // namespace ofx::IO

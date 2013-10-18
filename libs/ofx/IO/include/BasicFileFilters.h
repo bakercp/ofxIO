@@ -40,8 +40,13 @@ namespace IO {
 class FileFilterCollection: public BaseFileFilter
 {
 public:
-    FileFilterCollection() { }
-    virtual ~FileFilterCollection() { }
+    FileFilterCollection()
+    {
+    }
+
+    virtual ~FileFilterCollection()
+    {
+    }
 
     bool accept(const Poco::File& file) const
     {
@@ -71,17 +76,18 @@ private:
     std::set<BaseFileFilter*> _filters;
 };
 
+
 class FileExtensionFilter: public BaseFileFilter
 {
 public:
 
-    FileExtensionFilter(): _bIgnoreCase(true), _bIncludeMatches(true)
+    FileExtensionFilter(): _ignoreCase(true), _includeMatches(true)
     {
     }
 
-    FileExtensionFilter(bool bIgnoreCase, bool bIncludeMatches = true):
-        _bIgnoreCase(bIgnoreCase),
-        _bIncludeMatches(bIncludeMatches)
+    FileExtensionFilter(bool ignoreCase, bool includeMatches = true):
+        _bIgnoreCase(ignoreCase),
+        _bIncludeMatches(includeMatches)
     {
     }
 
@@ -101,7 +107,7 @@ public:
         {
             bool match = false;
 
-            if(_bIgnoreCase)
+            if(_ignoreCase)
             {
                 match = (Poco::UTF8::icompare(extension,*iter) == 0);
             }
@@ -110,7 +116,7 @@ public:
                 match = (extension == *iter);
             }
 
-            if(_bIncludeMatches && match)
+            if(_includeMatches && match)
             {
                 return true;
             }
@@ -118,7 +124,7 @@ public:
             ++iter;
         }
 
-        return !_bIncludeMatches;
+        return !_includeMatches;
 
     }
 
@@ -143,8 +149,8 @@ public:
     }
 
 private:
-    bool _bIgnoreCase;
-    bool _bIncludeMatches;
+    bool _ignoreCase;
+    bool _includeMatches;
     std::set<std::string> _extensions;
     
 };

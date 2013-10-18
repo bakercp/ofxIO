@@ -28,7 +28,7 @@
 
 #include "Poco/File.h"
 #include "ofFileUtils.h"
-#include "Poco/RecursiveDirectoryIterator.h"
+#include "RecursiveDirectoryIterator.h"
 
 
 namespace ofx {
