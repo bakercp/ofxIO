@@ -211,7 +211,7 @@ public:
 		{
 			try
 			{
-				FileImpl::handleLastErrorImpl(path);
+				handleLastErrorImpl(path);
 			}
 			catch (Poco::Exception& exc)
 			{
@@ -241,7 +241,7 @@ public:
 						std::swap(entries, newEntries);
 						if (FindNextChangeNotification(hChange) == FALSE)
 						{
-							FileImpl::handleLastErrorImpl(path);
+							handleLastErrorImpl(path);
 						}
 					}
 					break;
@@ -310,7 +310,7 @@ public:
 		{
 			try
 			{
-				FileImpl::handleLastErrorImpl(owner().directory().path());
+				handleLastErrorImpl(owner().directory().path());
 			}
 			catch (Poco::Exception& exc)
 			{
@@ -448,7 +448,7 @@ public:
 			{
 				try
 				{
-                    // todo
+                    // TODO
 					handleLastErrorImpl(owner().directory().path());
 				}
 				catch (Poco::Exception& exc)
