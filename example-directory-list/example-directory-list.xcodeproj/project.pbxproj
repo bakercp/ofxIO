@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00c224d098e2f7ddba622bb1ad2d60c0 /* DirectoryWatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = a62593b90606a9d4c9dc06f73617c1b2 /* DirectoryWatcher.cpp */; };
 		1209e996e75d0d2127e86c9cfd5da4e2 /* FileWatcherWin32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ee900272727acb33a661bbd844c323c3 /* FileWatcherWin32.cpp */; };
 		24b98cdc023d5b1e7b74dcbccac7b673 /* FileWatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 983556a86d557f400fa10292a0e69abf /* FileWatcher.cpp */; };
 		2c994e52018125a2ab4c66a72958c4f9 /* ByteBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = d756e6feac91cec877a0d9097fc90530 /* ByteBuffer.cpp */; };
 		368cdbdb0c09df8434984d536842bb9d /* RecursiveDirectoryIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = b67fd470c21d8e91f5e36bdd1be20a82 /* RecursiveDirectoryIterator.cpp */; };
+		39306d6a544962c3faca02812db03099 /* DirectoryWatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22ac7a3a4fea81cd176b784bc721d17a /* DirectoryWatcher.cpp */; };
 		4271204f695e67e468455b4455b8d5d7 /* RecursiveDirectoryIteratorStategies.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9be123a8de40b299460131fa7bd2386d /* RecursiveDirectoryIteratorStategies.cpp */; };
 		4b14cedcc7195a4d1f8e28b4f9635a89 /* ofApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 19c22cd05d10f78b32ff80c6be3a9385 /* ofApp.cpp */; };
 		5f642c27577e6c04a03c93b07e59a283 /* ByteBufferUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06ae758b40442a847002f166b1ac0047 /* ByteBufferUtils.cpp */; };
+		61afd64cc88dc67292ae15e28c9b79f0 /* DirectoryWatcherManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2cbd2011d5caa34b207ea857d2c0bc72 /* DirectoryWatcherManager.cpp */; };
 		6fb52e774c905212f7dfcdf4c3897078 /* FileWatcherLinux.cpp in Sources */ = {isa = PBXBuildFile; fileRef = b894f0ed6d8f725f5327776aeb8fb566 /* FileWatcherLinux.cpp */; };
 		7b6d4ccb49300694d66bef53e37b82fa /* FileWatcherOSX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = e4beaacce9b56d4ac20acb8cf5187fd0 /* FileWatcherOSX.cpp */; };
 		80e8c80ee02b79fc1e7e22374d1dbf5f /* DirectoryUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = acae10bc853a462f93e64df8bd9d41d4 /* DirectoryUtils.cpp */; };
@@ -74,8 +75,10 @@
 		120db29f900e26b84d1a44c860f7b354 /* RecursiveDirectoryIterator.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = RecursiveDirectoryIterator.h; path = ../../../addons/ofxIO/libs/Poco/Foundation/include/Poco/RecursiveDirectoryIterator.h; sourceTree = SOURCE_ROOT; };
 		194b0ca6a2caf72c4457dab69db14394 /* AbstractTypes.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = AbstractTypes.h; path = ../../../addons/ofxIO/libs/ofx/IO/include/AbstractTypes.h; sourceTree = SOURCE_ROOT; };
 		19c22cd05d10f78b32ff80c6be3a9385 /* ofApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofApp.cpp; path = src/ofApp.cpp; sourceTree = SOURCE_ROOT; };
+		22ac7a3a4fea81cd176b784bc721d17a /* DirectoryWatcher.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = DirectoryWatcher.cpp; path = ../../../addons/ofxIO/libs/Poco/src/Foundation/DirectoryWatcher.cpp; sourceTree = SOURCE_ROOT; };
 		2adc7fbb64c056f4ea32fc3d765507f8 /* DirectoryUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = DirectoryUtils.h; path = ../../../addons/ofxIO/libs/ofx/IO/include/DirectoryUtils.h; sourceTree = SOURCE_ROOT; };
 		2ae0bb5b49278539dd311edd4943a32f /* ByteBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ByteBuffer.h; path = ../../../addons/ofxIO/libs/ofx/IO/include/ByteBuffer.h; sourceTree = SOURCE_ROOT; };
+		2cbd2011d5caa34b207ea857d2c0bc72 /* DirectoryWatcherManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = DirectoryWatcherManager.cpp; path = ../../../addons/ofxIO/libs/ofx/IO/src/DirectoryWatcherManager.cpp; sourceTree = SOURCE_ROOT; };
 		3de3432f67fb008767e008e700dbb9c0 /* FileWatcherImpl.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = FileWatcherImpl.h; path = ../../../addons/ofxIO/libs/FileWatcher/src/FileWatcherImpl.h; sourceTree = SOURCE_ROOT; };
 		4124a1d61f736238d37d8486782af9c9 /* AbstractDataView.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = AbstractDataView.h; path = ../../../addons/ofxIO/libs/ofx/IO/include/AbstractDataView.h; sourceTree = SOURCE_ROOT; };
 		4d38898647bbfeebb89c1569bf8791b4 /* alphanum.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = alphanum.hpp; path = ../../../addons/ofxIO/libs/alphanum/include/alphanum.hpp; sourceTree = SOURCE_ROOT; };
@@ -83,7 +86,6 @@
 		565a5b63cff7d96c82b93187c593fe15 /* FileWatcher.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = FileWatcher.h; path = ../../../addons/ofxIO/libs/FileWatcher/src/FileWatcher.h; sourceTree = SOURCE_ROOT; };
 		5c1865536f5a04c28572a12452a77547 /* RecursiveDirectoryIteratorImpl.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = RecursiveDirectoryIteratorImpl.h; path = ../../../addons/ofxIO/libs/Poco/Foundation/include/Poco/RecursiveDirectoryIteratorImpl.h; sourceTree = SOURCE_ROOT; };
 		64ecdfcbab35e9d5cbf33979eb6b0a92 /* FileWatcherWin32.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = FileWatcherWin32.h; path = ../../../addons/ofxIO/libs/FileWatcher/src/FileWatcherWin32.h; sourceTree = SOURCE_ROOT; };
-		68f705b94f2f01b4e17de9e65afb8938 /* DirectoryWatcherEvents.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = DirectoryWatcherEvents.h; path = ../../../addons/ofxIO/libs/ofx/IO/include/DirectoryWatcherEvents.h; sourceTree = SOURCE_ROOT; };
 		7309fff9e8c934b9b472fb5bdd937005 /* FileWatcherLinux.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = FileWatcherLinux.h; path = ../../../addons/ofxIO/libs/FileWatcher/src/FileWatcherLinux.h; sourceTree = SOURCE_ROOT; };
 		84f6287fa54b66c746947875f6690182 /* ofApp.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofApp.h; path = src/ofApp.h; sourceTree = SOURCE_ROOT; };
 		983556a86d557f400fa10292a0e69abf /* FileWatcher.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = FileWatcher.cpp; path = ../../../addons/ofxIO/libs/FileWatcher/src/FileWatcher.cpp; sourceTree = SOURCE_ROOT; };
@@ -112,14 +114,14 @@
 		E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
 		E7E077E715D3B6510020DFD4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		E7F985F515E0DE99003869B5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
-		a62593b90606a9d4c9dc06f73617c1b2 /* DirectoryWatcher.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = DirectoryWatcher.cpp; path = ../../../addons/ofxIO/libs/ofx/IO/src/DirectoryWatcher.cpp; sourceTree = SOURCE_ROOT; };
 		acae10bc853a462f93e64df8bd9d41d4 /* DirectoryUtils.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = DirectoryUtils.cpp; path = ../../../addons/ofxIO/libs/ofx/IO/src/DirectoryUtils.cpp; sourceTree = SOURCE_ROOT; };
 		b67fd470c21d8e91f5e36bdd1be20a82 /* RecursiveDirectoryIterator.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = RecursiveDirectoryIterator.cpp; path = ../../../addons/ofxIO/libs/Poco/src/Foundation/RecursiveDirectoryIterator.cpp; sourceTree = SOURCE_ROOT; };
-		b77e24c84114d1ce4ae4f7c75c9d3c29 /* DirectoryWatcher.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = DirectoryWatcher.h; path = ../../../addons/ofxIO/libs/ofx/IO/include/DirectoryWatcher.h; sourceTree = SOURCE_ROOT; };
 		b894f0ed6d8f725f5327776aeb8fb566 /* FileWatcherLinux.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = FileWatcherLinux.cpp; path = ../../../addons/ofxIO/libs/FileWatcher/src/FileWatcherLinux.cpp; sourceTree = SOURCE_ROOT; };
 		c5c39ff55a075a757630595ea8357180 /* FileWatcherOSX.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = FileWatcherOSX.h; path = ../../../addons/ofxIO/libs/FileWatcher/src/FileWatcherOSX.h; sourceTree = SOURCE_ROOT; };
+		d47d97208ed6a10dc271cd84e86febef /* DirectoryWatcherManager.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = DirectoryWatcherManager.h; path = ../../../addons/ofxIO/libs/ofx/IO/include/DirectoryWatcherManager.h; sourceTree = SOURCE_ROOT; };
 		d756e6feac91cec877a0d9097fc90530 /* ByteBuffer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ByteBuffer.cpp; path = ../../../addons/ofxIO/libs/ofx/IO/src/ByteBuffer.cpp; sourceTree = SOURCE_ROOT; };
 		debb7e3316211912b727a06520f30f37 /* BasicFileFilters.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = BasicFileFilters.h; path = ../../../addons/ofxIO/libs/ofx/IO/include/BasicFileFilters.h; sourceTree = SOURCE_ROOT; };
+		e3d39f2080ca052e606ea84e7d169675 /* DirectoryWatcher.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = DirectoryWatcher.h; path = ../../../addons/ofxIO/libs/Poco/Foundation/include/Poco/DirectoryWatcher.h; sourceTree = SOURCE_ROOT; };
 		e4beaacce9b56d4ac20acb8cf5187fd0 /* FileWatcherOSX.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = FileWatcherOSX.cpp; path = ../../../addons/ofxIO/libs/FileWatcher/src/FileWatcherOSX.cpp; sourceTree = SOURCE_ROOT; };
 		ee900272727acb33a661bbd844c323c3 /* FileWatcherWin32.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = FileWatcherWin32.cpp; path = ../../../addons/ofxIO/libs/FileWatcher/src/FileWatcherWin32.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -177,7 +179,7 @@
 				d756e6feac91cec877a0d9097fc90530 /* ByteBuffer.cpp */,
 				06ae758b40442a847002f166b1ac0047 /* ByteBufferUtils.cpp */,
 				acae10bc853a462f93e64df8bd9d41d4 /* DirectoryUtils.cpp */,
-				a62593b90606a9d4c9dc06f73617c1b2 /* DirectoryWatcher.cpp */,
+				2cbd2011d5caa34b207ea857d2c0bc72 /* DirectoryWatcherManager.cpp */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -185,6 +187,7 @@
 		57cc27cf60ede1c9a52b66f3f8128939 /* Poco */ = {
 			isa = PBXGroup;
 			children = (
+				e3d39f2080ca052e606ea84e7d169675 /* DirectoryWatcher.h */,
 				120db29f900e26b84d1a44c860f7b354 /* RecursiveDirectoryIterator.h */,
 				5c1865536f5a04c28572a12452a77547 /* RecursiveDirectoryIteratorImpl.h */,
 				9ef95bb1b9e92753aaa87805f55412ed /* RecursiveDirectoryIteratorStategies.h */,
@@ -219,8 +222,7 @@
 				2ae0bb5b49278539dd311edd4943a32f /* ByteBuffer.h */,
 				9cfed1d70622bbbdf87789d839990006 /* ByteBufferUtils.h */,
 				2adc7fbb64c056f4ea32fc3d765507f8 /* DirectoryUtils.h */,
-				b77e24c84114d1ce4ae4f7c75c9d3c29 /* DirectoryWatcher.h */,
-				68f705b94f2f01b4e17de9e65afb8938 /* DirectoryWatcherEvents.h */,
+				d47d97208ed6a10dc271cd84e86febef /* DirectoryWatcherManager.h */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -372,6 +374,7 @@
 		c035519cb29970f9ff433954b687f244 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				22ac7a3a4fea81cd176b784bc721d17a /* DirectoryWatcher.cpp */,
 				b67fd470c21d8e91f5e36bdd1be20a82 /* RecursiveDirectoryIterator.cpp */,
 				9be123a8de40b299460131fa7bd2386d /* RecursiveDirectoryIteratorStategies.cpp */,
 			);
@@ -490,7 +493,8 @@
 				2c994e52018125a2ab4c66a72958c4f9 /* ByteBuffer.cpp in Sources */,
 				5f642c27577e6c04a03c93b07e59a283 /* ByteBufferUtils.cpp in Sources */,
 				80e8c80ee02b79fc1e7e22374d1dbf5f /* DirectoryUtils.cpp in Sources */,
-				00c224d098e2f7ddba622bb1ad2d60c0 /* DirectoryWatcher.cpp in Sources */,
+				61afd64cc88dc67292ae15e28c9b79f0 /* DirectoryWatcherManager.cpp in Sources */,
+				39306d6a544962c3faca02812db03099 /* DirectoryWatcher.cpp in Sources */,
 				368cdbdb0c09df8434984d536842bb9d /* RecursiveDirectoryIterator.cpp in Sources */,
 				4271204f695e67e468455b4455b8d5d7 /* RecursiveDirectoryIteratorStategies.cpp in Sources */,
 			);

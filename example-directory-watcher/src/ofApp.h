@@ -27,15 +27,16 @@
 
 
 #include <deque>
+#include "Poco/DirectoryWatcher.h"
 #include "ofMain.h"
-#include "DirectoryWatcher.h"
+#include "DirectoryWatcherManager.h"
 #include "BaseFileFilter.h"
 
 
+using Poco::DirectoryWatcher;
 using ofx::IO::BaseFileFilter;
-using ofx::IO::DirectoryWatcher;
-using ofx::IO::DirectoryWatcherEventArgs;
-using ofx::IO::DirectoryWatcherMoveEventArgs;
+using ofx::IO::DirectoryWatcherEvents;
+using ofx::IO::DirectoryWatcherManager;
 
 
 // a custom hidden file filter
@@ -65,40 +66,47 @@ public:
         TXT_HEIGHT = 14
     };
 
-    void exit();
     void setup();
     void draw();
 
     void gotMessage(ofMessage msg);
 
-    void onDirectoryWatcherItemAdded(const DirectoryWatcherEventArgs& evt)
+    void onDirectoryWatcherItemAdded(const Poco::DirectoryWatcher::DirectoryEvent& evt)
     {
         ofSendMessage("Added:    " + evt.item.path());
     }
     
-    void onDirectoryWatcherItemRemoved(const DirectoryWatcherEventArgs& evt)
+    void onDirectoryWatcherItemRemoved(const Poco::DirectoryWatcher::DirectoryEvent& evt)
     {
         ofSendMessage("Removed:  " + evt.item.path());
     }
     
-    void onDirectoryWatcherItemModified(const DirectoryWatcherEventArgs& evt)
+    void onDirectoryWatcherItemModified(const Poco::DirectoryWatcher::DirectoryEvent& evt)
     {
         ofSendMessage("Modified: " + evt.item.path());
     }
-    
-    void onDirectoryWatcherItemMoved(const DirectoryWatcherMoveEventArgs& evt)
+
+    void onDirectoryWatcherItemMovedFrom(const Poco::DirectoryWatcher::DirectoryEvent& evt)
     {
-        ofLogNotice("ofApp::onDirectoryWatcherItemMoved") << "Moved From: " << evt.item.path();
+        ofLogNotice("ofApp::onDirectoryWatcherItemMovedFrom") << "Moved From: " << evt.item.path();
     }
-        
-    void onDirectoryWatcherError(const Exception& exc)
+
+    void onDirectoryWatcherItemMovedTo(const Poco::DirectoryWatcher::DirectoryEvent& evt)
+    {
+        ofLogNotice("ofApp::onDirectoryWatcherItemMovedTo") << "Moved To: " << evt.item.path();
+    }
+
+    void onDirectoryWatcherError(const Poco::Exception& exc)
     {
         ofLogError("ofApp::onDirectoryWatcherError") << "Error: " << exc.displayText();
     }
 
-    
-    DirectoryWatcher watcher;
+
+    DirectoryWatcherManager watcher;
+
+
+//    DirectoryWatcherManager watcher;
     HiddenFileFilter fileFilter; // an example file filter
-    std::deque<string> messages;
+    std::deque<std::string> messages;
 
 };

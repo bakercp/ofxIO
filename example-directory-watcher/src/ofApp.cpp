@@ -27,23 +27,18 @@
 
 
 //------------------------------------------------------------------------------
-void ofApp::exit()
-{
-    watcher.UnregisterEvents(this);
-}
-
-//------------------------------------------------------------------------------
 void ofApp::setup()
 {
     ofSetWindowShape(ofGetScreenWidth(), 200);
     ofSetWindowPosition(0, 20);
 
-    watcher.RegisterEvents(this);
+    watcher.registerAllEvents(this);
 
     string folderToWatch = ofToDataPath("",true);
     bool   bListExistingItemsOnStart = true;
 
     watcher.addPath(folderToWatch,bListExistingItemsOnStart,&fileFilter);
+
 }
 
 //------------------------------------------------------------------------------
@@ -53,7 +48,7 @@ void ofApp::draw()
     ofFill();
 
     int y = TXT_HEIGHT;
-    for(size_t i = 0; i < messages.size(); i++)
+    for(std::size_t i = 0; i < messages.size(); i++)
     {
         ofSetColor(ofMap(i, 0, messages.size(), 255, 90));
         ofDrawBitmapString(messages[i], 10, y);
