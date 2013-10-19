@@ -268,44 +268,54 @@ public:
 	}
 	
 private:
-    // hack for Poco < 1.4.6
     void handleLastErrorImpl(const std::string& path)
     {
-        switch (errno)
+        DWORD err = GetLastError();
+        switch (err)
         {
-            case EIO:
-                throw IOException(path, errno);
-            case EPERM:
-                throw FileAccessDeniedException("insufficient permissions", path, errno);
-            case EACCES:
-                throw FileAccessDeniedException(path, errno);
-            case ENOENT:
-                throw FileNotFoundException(path, errno);
-            case ENOTDIR:
-                throw OpenFileException("not a directory", path, errno);
-            case EISDIR:
-                throw OpenFileException("not a file", path, errno);
-            case EROFS:
-                throw FileReadOnlyException(path, errno);
-            case EEXIST:
-                throw FileExistsException(path, errno);
-            case ENOSPC:
-                throw FileException("no space left on device", path, errno);
-            case EDQUOT:
-                throw FileException("disk quota exceeded", path, errno);
-#if !defined(_AIX)
-            case ENOTEMPTY:
-                throw FileException("directory not empty", path, errno);
-#endif
-            case ENAMETOOLONG:
-                throw PathSyntaxException(path, errno);
-            case ENFILE:
-            case EMFILE:
-                throw FileException("too many open files", path, errno);
+            case ERROR_FILE_NOT_FOUND:
+                throw FileNotFoundException(path, err);
+            case ERROR_PATH_NOT_FOUND:
+            case ERROR_BAD_NETPATH:
+            case ERROR_CANT_RESOLVE_FILENAME:
+            case ERROR_INVALID_DRIVE:
+                throw PathNotFoundException(path, err);
+            case ERROR_ACCESS_DENIED:
+                throw FileAccessDeniedException(path, err);
+            case ERROR_ALREADY_EXISTS:
+            case ERROR_FILE_EXISTS:
+                throw FileExistsException(path, err);
+            case ERROR_INVALID_NAME:
+            case ERROR_DIRECTORY:
+            case ERROR_FILENAME_EXCED_RANGE:
+            case ERROR_BAD_PATHNAME:
+                throw PathSyntaxException(path, err);
+            case ERROR_FILE_READ_ONLY:
+                throw FileReadOnlyException(path, err);
+            case ERROR_CANNOT_MAKE:
+                throw CreateFileException(path, err);
+            case ERROR_DIR_NOT_EMPTY:
+                throw FileException("directory not empty", path, err);
+            case ERROR_WRITE_FAULT:
+                throw WriteFileException(path, err);
+            case ERROR_READ_FAULT:
+                throw ReadFileException(path, err);
+            case ERROR_SHARING_VIOLATION:
+                throw FileException("sharing violation", path, err);
+            case ERROR_LOCK_VIOLATION:
+                throw FileException("lock violation", path, err);
+            case ERROR_HANDLE_EOF:
+                throw ReadFileException("EOF reached", path, err);
+            case ERROR_HANDLE_DISK_FULL:
+            case ERROR_DISK_FULL:
+                throw WriteFileException("disk is full", path, err);
+            case ERROR_NEGATIVE_SEEK:
+                throw FileException("negative seek", path, err);
             default:
-                throw FileException(std::strerror(errno), path, errno);
+                throw FileException(path, err);
         }
     }
+
 
 	HANDLE _hStopped;
 };
