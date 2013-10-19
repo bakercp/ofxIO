@@ -95,25 +95,40 @@ void DirectoryUtils::list(const std::string& directory,
                           bool sortAlphaNumeric,
                           BaseFileFilter* filterPtr)
 {
-	files.clear();
-
-    std::string _directory = ofToDataPath(directory,true);
-
-    Poco::DirectoryIterator iter(_directory);
-	Poco::DirectoryIterator endIter;
-	while (iter != endIter)
-	{
-        if(filterPtr == NULL || filterPtr->accept(*iter))
-        {
-            files.push_back(iter.path().toString());
-        }
-		++iter;
-	}
-
-    if(sortAlphaNumeric)
+    try
     {
-        // now sort the vector with the algorithm
-        std::sort(files.begin(), files.end(), doj::alphanum_less<std::string>());
+        files.clear();
+
+        std::string _directory = ofToDataPath(directory,true);
+
+        ofFile file(_directory);
+
+        if(!file.exists())
+        {
+            ofLogError("DirectoryUtils::list") << file.path() << " not found.";
+            return;
+        }
+
+        Poco::DirectoryIterator iter(_directory);
+        Poco::DirectoryIterator endIter;
+        while (iter != endIter)
+        {
+            if(filterPtr == NULL || filterPtr->accept(*iter))
+            {
+                files.push_back(iter.path().toString());
+            }
+            ++iter;
+        }
+
+        if(sortAlphaNumeric)
+        {
+            // now sort the vector with the algorithm
+            std::sort(files.begin(), files.end(), doj::alphanum_less<std::string>());
+        }
+    }
+    catch(Poco::Exception& exc)
+    {
+        ofLogError("DirectoryUtils::list") << exc.displayText();
     }
 
 }
