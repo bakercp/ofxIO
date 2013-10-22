@@ -23,7 +23,7 @@
 // =============================================================================
 
 
-#include "ByteBuffer.h"
+#include "ofx/IO/ByteBuffer.h"
 
 
 namespace ofx {

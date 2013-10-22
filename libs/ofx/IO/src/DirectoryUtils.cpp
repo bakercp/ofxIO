@@ -23,9 +23,9 @@
 // =============================================================================
 
 
-#include "DirectoryUtils.h"
+#include "ofx/IO/DirectoryUtils.h"
 #include "Poco/DirectoryIterator.h"
-#include "BaseFileFilter.h"
+#include "ofx/IO/BaseFileFilter.h"
 #include "ofUtils.h"
 #include "alphanum.hpp"
 

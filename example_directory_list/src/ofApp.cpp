@@ -36,7 +36,7 @@ void ofApp::setup()
 
     std::vector<std::string> files;
 
-    DirectoryUtils::list("",files,true,&fileFilter);
+    DirectoryUtils::list("../../..", files, true, &fileFilter);
 
     for(std::size_t i = 0; i < files.size(); i++)
     {
@@ -45,14 +45,14 @@ void ofApp::setup()
 
     ofSendMessage("-----------------Recursive List");
 
-    DirectoryUtils::listRecursive("",
+    DirectoryUtils::listRecursive("../..",
                                   files,
                                   true,
                                   &fileFilter,
                                   DirectoryUtils::INIFINITE_DEPTH,
                                   DirectoryUtils::SIBLINGS_FIRST);
 
-    for(std::size_t i = 0; i < files.size(); i++)
+    for(std::size_t i = 0; i < files.size(); ++i)
     {
         ofSendMessage(ofMessage(files[i]));
     }
@@ -66,7 +66,7 @@ void ofApp::draw()
     ofFill();
 
     int y = TXT_HEIGHT;
-    for(size_t i = 0; i < messages.size(); i++)
+    for(std::size_t i = 0; i < messages.size(); ++i)
     {
         ofSetColor(ofMap(i, 0, messages.size(), 255, 90));
         ofDrawBitmapString(messages[i], 10, y);

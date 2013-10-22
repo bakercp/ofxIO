@@ -23,7 +23,7 @@
 // =============================================================================
 
 
-#include "DirectoryWatcherManager.h"
+#include "ofx/IO/DirectoryWatcherManager.h"
 
 
 namespace ofx {
