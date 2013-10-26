@@ -24,6 +24,7 @@
 
 
 #include "ofx/IO/DirectoryUtils.h"
+#include "alphanum.hpp"
 
 
 namespace ofx {

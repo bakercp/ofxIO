@@ -27,35 +27,14 @@
 
 
 #include <deque>
-#include "Poco/DirectoryWatcher.h"
 #include "ofMain.h"
-#include "DirectoryWatcherManager.h"
-#include "BaseFileFilter.h"
+#include "ofxIO.h"
 
 
 using Poco::DirectoryWatcher;
-using ofx::IO::BaseFileFilter;
+using ofx::IO::HiddenFileFilter;
 using ofx::IO::DirectoryWatcherEvents;
 using ofx::IO::DirectoryWatcherManager;
-
-
-// a custom hidden file filter
-class HiddenFileFilter: public BaseFileFilter
-{
-public:
-    HiddenFileFilter()
-    {
-    }
-
-    virtual ~HiddenFileFilter()
-    {
-    }
-
-    bool accept(const Poco::File& file) const
-    {
-        return !file.isHidden();
-    }
-};
 
 
 class ofApp: public ofBaseApp
@@ -104,8 +83,6 @@ public:
 
     DirectoryWatcherManager watcher;
 
-
-//    DirectoryWatcherManager watcher;
     HiddenFileFilter fileFilter; // an example file filter
     std::deque<std::string> messages;
 

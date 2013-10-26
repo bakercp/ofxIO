@@ -34,6 +34,7 @@
 
 /* $Header: /code/doj/alphanum.hpp,v 1.3 2008/01/28 23:06:47 doj Exp $ */
 
+
 #include <cassert>
 #include <functional>
 #include <string>

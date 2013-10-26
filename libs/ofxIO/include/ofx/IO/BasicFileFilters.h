@@ -30,14 +30,15 @@
 #include "Poco/File.h"
 #include "Poco/Path.h"
 #include "Poco/String.h"
-#include "ofx/IO/BaseFileFilter.h"
+#include "Poco/UTF8String.h"
+#include "ofx/IO/AbstractTypes.h"
 
 
 namespace ofx {
 namespace IO {
 
 
-class FileFilterCollection: public BaseFileFilter
+class FileFilterCollection: public AbstractFileFilter
 {
 public:
     FileFilterCollection()
@@ -50,7 +51,7 @@ public:
 
     bool accept(const Poco::File& file) const
     {
-        std::set<BaseFileFilter*>::iterator iter = _filters.begin();
+        std::set<AbstractFileFilter*>::iterator iter = _filters.begin();
         while(iter != _filters.end())
         {
             if(!(*iter)->accept(file))
@@ -62,22 +63,22 @@ public:
         return true;
     }
 
-    void addFilter(BaseFileFilter* filter)
+    void addFilter(AbstractFileFilter* filter)
     {
         _filters.insert(filter);
     }
 
-    void removeFilter(BaseFileFilter* filter)
+    void removeFilter(AbstractFileFilter* filter)
     {
         _filters.erase(filter);
     }
 
 private:
-    std::set<BaseFileFilter*> _filters;
+    std::set<AbstractFileFilter*> _filters;
 };
 
 
-class FileExtensionFilter: public BaseFileFilter
+class FileExtensionFilter: public AbstractFileFilter
 {
 public:
 
@@ -86,8 +87,8 @@ public:
     }
 
     FileExtensionFilter(bool ignoreCase, bool includeMatches = true):
-        _bIgnoreCase(ignoreCase),
-        _bIncludeMatches(includeMatches)
+        _ignoreCase(ignoreCase),
+        _includeMatches(includeMatches)
     {
     }
 
@@ -138,14 +139,14 @@ public:
         _extensions.erase(extension);
     }
 
-    void setIgnoreCase(bool bIgnoreCase)
+    void setIgnoreCase(bool ignoreCase)
     {
-        _bIgnoreCase = bIgnoreCase;
+        _ignoreCase = ignoreCase;
     }
 
     bool getIgnoreCase() const
     {
-        return _bIgnoreCase;
+        return _ignoreCase;
     }
 
 private:
@@ -156,7 +157,7 @@ private:
 };
 
 
-class HiddenFileFilter: public BaseFileFilter
+class HiddenFileFilter: public AbstractFileFilter
 {
 public:
     HiddenFileFilter()

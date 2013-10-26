@@ -35,9 +35,9 @@ void ofApp::setup()
     watcher.registerAllEvents(this);
 
     string folderToWatch = ofToDataPath("",true);
-    bool   bListExistingItemsOnStart = true;
+    bool listExistingItemsOnStart = true;
 
-    watcher.addPath(folderToWatch,bListExistingItemsOnStart,&fileFilter);
+    watcher.addPath(folderToWatch,listExistingItemsOnStart,&fileFilter);
 
 }
 

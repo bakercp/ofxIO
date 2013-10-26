@@ -28,18 +28,16 @@
 
 #include <deque>
 #include "ofMain.h"
-#include "DirectoryUtils.h"
-#include "BaseFileFilter.h"
-#include "ByteBuffer.h"
+#include "ofxIO.h"
 
 
-using ofx::IO::BaseFileFilter;
+using ofx::IO::AbstractFileFilter;
 using ofx::IO::DirectoryUtils;
 using ofx::IO::ByteBuffer;
 
 
 // a custom hidden file filter
-class CustomFileFilter: public BaseFileFilter
+class CustomFileFilter: public AbstractFileFilter
 {
 public:
     CustomFileFilter()

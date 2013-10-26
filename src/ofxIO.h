@@ -30,3 +30,6 @@
 #include "Poco/RecursiveDirectoryIterator.h"
 #include "ofx/IO/DirectoryUtils.h"
 #include "ofx/IO/DirectoryWatcherManager.h"
+#include "ofx/IO/AbstractTypes.h"
+#include "ofx/IO/ByteBuffer.h"
+#include "ofx/IO/BasicFileFilters.h"
