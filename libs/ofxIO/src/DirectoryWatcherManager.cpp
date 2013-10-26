@@ -42,7 +42,7 @@ DirectoryWatcherManager::~DirectoryWatcherManager()
 void DirectoryWatcherManager::addPath(const Poco::Path& path,
                                       bool listExistingItemsOnStart,
                                       bool sortAlphaNumeric,
-                                      BaseFileFilter* fileFilterPtr,
+                                      AbstractFileFilter* fileFilterPtr,
                                       int eventMask,
                                       int scanInterval)
 {
@@ -187,7 +187,7 @@ bool DirectoryWatcherManager::isWatching(const Poco::Path& path) const
 //    }
 //}
 
-BaseFileFilter* DirectoryWatcherManager::getFilterForPath(const Poco::Path& path)
+AbstractFileFilter* DirectoryWatcherManager::getFilterForPath(const Poco::Path& path)
 {
     ofScopedLock lock(mutex);
     FilterListIter iter = filterList.find(path);

@@ -36,17 +36,18 @@ namespace IO {
 class ByteBufferUtils
 {
 public:
-
-    static ByteBuffer makeBuffer(uint8_t d0);
     static ByteBuffer makeBuffer(uint8_t d0,
                                  uint8_t d1);
+
     static ByteBuffer makeBuffer(uint8_t d0,
                                  uint8_t d1,
                                  uint8_t d2);
+
     static ByteBuffer makeBuffer(uint8_t d0,
                                  uint8_t d1,
                                  uint8_t d2,
                                  uint8_t d3);
+
     static ByteBuffer makeBuffer(uint8_t d0,
                                  uint8_t d1,
                                  uint8_t d2,

@@ -26,6 +26,10 @@
 #include <stdint.h>
 
 
+namespace ofx {
+namespace IO {
+
+
 class AbstractDataView
 {
 public:
@@ -78,3 +82,6 @@ public:
     bool readInt64(int64_t* destination, std::size_t size) const = 0;
 
 };
+
+
+} } // namespace ofx::IO

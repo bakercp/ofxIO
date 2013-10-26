@@ -206,14 +206,14 @@
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
-			<key>61afd64cc88dc67292ae15e28c9b79f0</key>
+			<key>be177617474f11f05e9260fc7f73d21c</key>
 			<dict>
 				<key>fileRef</key>
-				<string>2cbd2011d5caa34b207ea857d2c0bc72</string>
+				<string>0b6179498d0110bd2e161373d141a6c9</string>
 				<key>isa</key>
 				<string>PBXBuildFile</string>
 			</dict>
-			<key>2cbd2011d5caa34b207ea857d2c0bc72</key>
+			<key>0b6179498d0110bd2e161373d141a6c9</key>
 			<dict>
 				<key>explicitFileType</key>
 				<string>sourcecode.cpp.cpp</string>
@@ -224,18 +224,18 @@
 				<key>name</key>
 				<string>DirectoryWatcherManager.cpp</string>
 				<key>path</key>
-				<string>../../../addons/ofxIO/libs/ofx/IO/src/DirectoryWatcherManager.cpp</string>
+				<string>../../../addons/ofxIO/libs/ofxIO/src/DirectoryWatcherManager.cpp</string>
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
-			<key>80e8c80ee02b79fc1e7e22374d1dbf5f</key>
+			<key>cefd3ccab8b3251dfcaaa0ee9e26c62a</key>
 			<dict>
 				<key>fileRef</key>
-				<string>acae10bc853a462f93e64df8bd9d41d4</string>
+				<string>9a967d1fafa98a7cbbfa4f5530702894</string>
 				<key>isa</key>
 				<string>PBXBuildFile</string>
 			</dict>
-			<key>acae10bc853a462f93e64df8bd9d41d4</key>
+			<key>9a967d1fafa98a7cbbfa4f5530702894</key>
 			<dict>
 				<key>explicitFileType</key>
 				<string>sourcecode.cpp.cpp</string>
@@ -246,18 +246,18 @@
 				<key>name</key>
 				<string>DirectoryUtils.cpp</string>
 				<key>path</key>
-				<string>../../../addons/ofxIO/libs/ofx/IO/src/DirectoryUtils.cpp</string>
+				<string>../../../addons/ofxIO/libs/ofxIO/src/DirectoryUtils.cpp</string>
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
-			<key>5f642c27577e6c04a03c93b07e59a283</key>
+			<key>66a80fd312926deb8c9fe7f6f2faa063</key>
 			<dict>
 				<key>fileRef</key>
-				<string>06ae758b40442a847002f166b1ac0047</string>
+				<string>fe5b3b19544657b6f9ccca03b257d204</string>
 				<key>isa</key>
 				<string>PBXBuildFile</string>
 			</dict>
-			<key>06ae758b40442a847002f166b1ac0047</key>
+			<key>fe5b3b19544657b6f9ccca03b257d204</key>
 			<dict>
 				<key>explicitFileType</key>
 				<string>sourcecode.cpp.cpp</string>
@@ -268,18 +268,18 @@
 				<key>name</key>
 				<string>ByteBufferUtils.cpp</string>
 				<key>path</key>
-				<string>../../../addons/ofxIO/libs/ofx/IO/src/ByteBufferUtils.cpp</string>
+				<string>../../../addons/ofxIO/libs/ofxIO/src/ByteBufferUtils.cpp</string>
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
-			<key>3aa9600a55648dcdb652890237ca6928</key>
+			<key>827e879af9ec79a81a74cc6fcb42d0a0</key>
 			<dict>
 				<key>children</key>
 				<array>
-					<string>d756e6feac91cec877a0d9097fc90530</string>
-					<string>06ae758b40442a847002f166b1ac0047</string>
-					<string>acae10bc853a462f93e64df8bd9d41d4</string>
-					<string>2cbd2011d5caa34b207ea857d2c0bc72</string>
+					<string>93384835c77bd4299f8a7f9032e427d9</string>
+					<string>fe5b3b19544657b6f9ccca03b257d204</string>
+					<string>9a967d1fafa98a7cbbfa4f5530702894</string>
+					<string>0b6179498d0110bd2e161373d141a6c9</string>
 				</array>
 				<key>isa</key>
 				<string>PBXGroup</string>
@@ -288,14 +288,14 @@
 				<key>sourceTree</key>
 				<string>&lt;group&gt;</string>
 			</dict>
-			<key>2c994e52018125a2ab4c66a72958c4f9</key>
+			<key>d932a5a24fcf08ae510a265d01807a32</key>
 			<dict>
 				<key>fileRef</key>
-				<string>d756e6feac91cec877a0d9097fc90530</string>
+				<string>93384835c77bd4299f8a7f9032e427d9</string>
 				<key>isa</key>
 				<string>PBXBuildFile</string>
 			</dict>
-			<key>d756e6feac91cec877a0d9097fc90530</key>
+			<key>93384835c77bd4299f8a7f9032e427d9</key>
 			<dict>
 				<key>explicitFileType</key>
 				<string>sourcecode.cpp.cpp</string>
@@ -306,11 +306,11 @@
 				<key>name</key>
 				<string>ByteBuffer.cpp</string>
 				<key>path</key>
-				<string>../../../addons/ofxIO/libs/ofx/IO/src/ByteBuffer.cpp</string>
+				<string>../../../addons/ofxIO/libs/ofxIO/src/ByteBuffer.cpp</string>
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
-			<key>958b8cdfb4c58023b7c5e079fb2b616e</key>
+			<key>beffaa5b8275e0ae066fc2e31330dd5f</key>
 			<dict>
 				<key>explicitFileType</key>
 				<string>sourcecode.c.h</string>
@@ -321,11 +321,11 @@
 				<key>name</key>
 				<string>DirectoryWatcherManager.h</string>
 				<key>path</key>
-				<string>../../../addons/ofxIO/libs/ofx/IO/include/ofx/IO/DirectoryWatcherManager.h</string>
+				<string>../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/DirectoryWatcherManager.h</string>
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
-			<key>d02a8dccc3d670ee11107047989a2136</key>
+			<key>d1f82a94bd80bdc78e0b1922d8660de6</key>
 			<dict>
 				<key>explicitFileType</key>
 				<string>sourcecode.c.h</string>
@@ -336,11 +336,11 @@
 				<key>name</key>
 				<string>DirectoryUtils.h</string>
 				<key>path</key>
-				<string>../../../addons/ofxIO/libs/ofx/IO/include/ofx/IO/DirectoryUtils.h</string>
+				<string>../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/DirectoryUtils.h</string>
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
-			<key>2380359b8c7fa395845067ae994cd5d5</key>
+			<key>5d4c9d17e0c3f84ddb8885440dd67cb9</key>
 			<dict>
 				<key>explicitFileType</key>
 				<string>sourcecode.c.h</string>
@@ -351,11 +351,11 @@
 				<key>name</key>
 				<string>ByteBufferUtils.h</string>
 				<key>path</key>
-				<string>../../../addons/ofxIO/libs/ofx/IO/include/ofx/IO/ByteBufferUtils.h</string>
+				<string>../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/ByteBufferUtils.h</string>
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
-			<key>0dc983e3296ec29833a1dc13fdf28c66</key>
+			<key>2d170f102215cf0511959d79928d8bcb</key>
 			<dict>
 				<key>explicitFileType</key>
 				<string>sourcecode.c.h</string>
@@ -366,11 +366,11 @@
 				<key>name</key>
 				<string>ByteBuffer.h</string>
 				<key>path</key>
-				<string>../../../addons/ofxIO/libs/ofx/IO/include/ofx/IO/ByteBuffer.h</string>
+				<string>../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/ByteBuffer.h</string>
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
-			<key>a09233b18f5420168cf26c934bc50648</key>
+			<key>fa01b987a4952ae49bdd09d009442610</key>
 			<dict>
 				<key>explicitFileType</key>
 				<string>sourcecode.c.h</string>
@@ -381,26 +381,11 @@
 				<key>name</key>
 				<string>BasicFileFilters.h</string>
 				<key>path</key>
-				<string>../../../addons/ofxIO/libs/ofx/IO/include/ofx/IO/BasicFileFilters.h</string>
+				<string>../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/BasicFileFilters.h</string>
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
-			<key>4838be2c5bda14320b5670b9a47a7c22</key>
-			<dict>
-				<key>explicitFileType</key>
-				<string>sourcecode.c.h</string>
-				<key>fileEncoding</key>
-				<string>30</string>
-				<key>isa</key>
-				<string>PBXFileReference</string>
-				<key>name</key>
-				<string>BaseFileFilter.h</string>
-				<key>path</key>
-				<string>../../../addons/ofxIO/libs/ofx/IO/include/ofx/IO/BaseFileFilter.h</string>
-				<key>sourceTree</key>
-				<string>SOURCE_ROOT</string>
-			</dict>
-			<key>733eec6df14187755ef99a91190d1b6a</key>
+			<key>89b60fb247e1f64013c716dc5bc27ed6</key>
 			<dict>
 				<key>explicitFileType</key>
 				<string>sourcecode.c.h</string>
@@ -411,22 +396,21 @@
 				<key>name</key>
 				<string>AbstractTypes.h</string>
 				<key>path</key>
-				<string>../../../addons/ofxIO/libs/ofx/IO/include/ofx/IO/AbstractTypes.h</string>
+				<string>../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/AbstractTypes.h</string>
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
-			<key>cce2aaa3e5e2b8d0b5b8939c9c9aae59</key>
+			<key>81b9e335116a816ea1d2a2fa5313a664</key>
 			<dict>
 				<key>children</key>
 				<array>
-					<string>4f22e88d66ca0f1371d6c0bca77e5112</string>
-					<string>733eec6df14187755ef99a91190d1b6a</string>
-					<string>4838be2c5bda14320b5670b9a47a7c22</string>
-					<string>a09233b18f5420168cf26c934bc50648</string>
-					<string>0dc983e3296ec29833a1dc13fdf28c66</string>
-					<string>2380359b8c7fa395845067ae994cd5d5</string>
-					<string>d02a8dccc3d670ee11107047989a2136</string>
-					<string>958b8cdfb4c58023b7c5e079fb2b616e</string>
+					<string>f91843c45134fd7b696e0f136607fda5</string>
+					<string>89b60fb247e1f64013c716dc5bc27ed6</string>
+					<string>fa01b987a4952ae49bdd09d009442610</string>
+					<string>2d170f102215cf0511959d79928d8bcb</string>
+					<string>5d4c9d17e0c3f84ddb8885440dd67cb9</string>
+					<string>d1f82a94bd80bdc78e0b1922d8660de6</string>
+					<string>beffaa5b8275e0ae066fc2e31330dd5f</string>
 				</array>
 				<key>isa</key>
 				<string>PBXGroup</string>
@@ -435,11 +419,11 @@
 				<key>sourceTree</key>
 				<string>&lt;group&gt;</string>
 			</dict>
-			<key>76a3d6badca81d19071b02a5ab8ef55c</key>
+			<key>d1c382a37ee661f51aa773cc780a6144</key>
 			<dict>
 				<key>children</key>
 				<array>
-					<string>cce2aaa3e5e2b8d0b5b8939c9c9aae59</string>
+					<string>81b9e335116a816ea1d2a2fa5313a664</string>
 				</array>
 				<key>isa</key>
 				<string>PBXGroup</string>
@@ -448,11 +432,11 @@
 				<key>sourceTree</key>
 				<string>&lt;group&gt;</string>
 			</dict>
-			<key>7148236fbcdd37c97e0ae4dd76d8e724</key>
+			<key>3f13bf933566839ed4c7ccedeea89880</key>
 			<dict>
 				<key>children</key>
 				<array>
-					<string>76a3d6badca81d19071b02a5ab8ef55c</string>
+					<string>d1c382a37ee661f51aa773cc780a6144</string>
 				</array>
 				<key>isa</key>
 				<string>PBXGroup</string>
@@ -461,34 +445,21 @@
 				<key>sourceTree</key>
 				<string>&lt;group&gt;</string>
 			</dict>
-			<key>665f510b40b27f4645f65626d84abce2</key>
+			<key>92cf4367af54e202bcf9e084b4179b68</key>
 			<dict>
 				<key>children</key>
 				<array>
-					<string>7148236fbcdd37c97e0ae4dd76d8e724</string>
-					<string>3aa9600a55648dcdb652890237ca6928</string>
+					<string>3f13bf933566839ed4c7ccedeea89880</string>
+					<string>827e879af9ec79a81a74cc6fcb42d0a0</string>
 				</array>
 				<key>isa</key>
 				<string>PBXGroup</string>
 				<key>name</key>
-				<string>IO</string>
+				<string>ofxIO</string>
 				<key>sourceTree</key>
 				<string>&lt;group&gt;</string>
 			</dict>
-			<key>9ac126bd1c2d097cc56badd3fa0bf3fb</key>
-			<dict>
-				<key>children</key>
-				<array>
-					<string>665f510b40b27f4645f65626d84abce2</string>
-				</array>
-				<key>isa</key>
-				<string>PBXGroup</string>
-				<key>name</key>
-				<string>ofx</string>
-				<key>sourceTree</key>
-				<string>&lt;group&gt;</string>
-			</dict>
-			<key>4f22e88d66ca0f1371d6c0bca77e5112</key>
+			<key>f91843c45134fd7b696e0f136607fda5</key>
 			<dict>
 				<key>explicitFileType</key>
 				<string>sourcecode.c.h</string>
@@ -499,7 +470,7 @@
 				<key>name</key>
 				<string>AbstractDataView.h</string>
 				<key>path</key>
-				<string>../../../addons/ofxIO/libs/ofx/IO/include/ofx/IO/AbstractDataView.h</string>
+				<string>../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/AbstractDataView.h</string>
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
@@ -534,7 +505,7 @@
 				<key>children</key>
 				<array>
 					<string>b40d93e4e6198327d6da7bfa3cdb2462</string>
-					<string>9ac126bd1c2d097cc56badd3fa0bf3fb</string>
+					<string>92cf4367af54e202bcf9e084b4179b68</string>
 					<string>8fb24c0f711982136a83b4f2bc096d30</string>
 				</array>
 				<key>isa</key>
@@ -1059,12 +1030,11 @@
 						<string>../../../addons/ofxIO/libs/Poco/src</string>
 						<string>../../../addons/ofxIO/libs/alphanum</string>
 						<string>../../../addons/ofxIO/libs/alphanum/include</string>
-						<string>../../../addons/ofxIO/libs/ofx</string>
-						<string>../../../addons/ofxIO/libs/ofx/IO</string>
-						<string>../../../addons/ofxIO/libs/ofx/IO/include</string>
-						<string>../../../addons/ofxIO/libs/ofx/IO/include/ofx</string>
-						<string>../../../addons/ofxIO/libs/ofx/IO/include/ofx/IO</string>
-						<string>../../../addons/ofxIO/libs/ofx/IO/src</string>
+						<string>../../../addons/ofxIO/libs/ofxIO</string>
+						<string>../../../addons/ofxIO/libs/ofxIO/include</string>
+						<string>../../../addons/ofxIO/libs/ofxIO/include/ofx</string>
+						<string>../../../addons/ofxIO/libs/ofxIO/include/ofx/IO</string>
+						<string>../../../addons/ofxIO/libs/ofxIO/src</string>
 						<string>../../../addons/ofxIO/src</string>
 					</array>
 					<key>ARCHS</key>
@@ -1133,12 +1103,11 @@
 						<string>../../../addons/ofxIO/libs/Poco/src</string>
 						<string>../../../addons/ofxIO/libs/alphanum</string>
 						<string>../../../addons/ofxIO/libs/alphanum/include</string>
-						<string>../../../addons/ofxIO/libs/ofx</string>
-						<string>../../../addons/ofxIO/libs/ofx/IO</string>
-						<string>../../../addons/ofxIO/libs/ofx/IO/include</string>
-						<string>../../../addons/ofxIO/libs/ofx/IO/include/ofx</string>
-						<string>../../../addons/ofxIO/libs/ofx/IO/include/ofx/IO</string>
-						<string>../../../addons/ofxIO/libs/ofx/IO/src</string>
+						<string>../../../addons/ofxIO/libs/ofxIO</string>
+						<string>../../../addons/ofxIO/libs/ofxIO/include</string>
+						<string>../../../addons/ofxIO/libs/ofxIO/include/ofx</string>
+						<string>../../../addons/ofxIO/libs/ofxIO/include/ofx/IO</string>
+						<string>../../../addons/ofxIO/libs/ofxIO/src</string>
 						<string>../../../addons/ofxIO/src</string>
 					</array>
 					<key>ARCHS</key>
@@ -1200,10 +1169,10 @@
 					<string>E4B69E200A3A1BDC003C02F2</string>
 					<string>E4B69E210A3A1BDC003C02F2</string>
 					<string>4b14cedcc7195a4d1f8e28b4f9635a89</string>
-					<string>2c994e52018125a2ab4c66a72958c4f9</string>
-					<string>5f642c27577e6c04a03c93b07e59a283</string>
-					<string>80e8c80ee02b79fc1e7e22374d1dbf5f</string>
-					<string>61afd64cc88dc67292ae15e28c9b79f0</string>
+					<string>d932a5a24fcf08ae510a265d01807a32</string>
+					<string>66a80fd312926deb8c9fe7f6f2faa063</string>
+					<string>cefd3ccab8b3251dfcaaa0ee9e26c62a</string>
+					<string>be177617474f11f05e9260fc7f73d21c</string>
 					<string>51667194330cbd16f8345b692ff776f3</string>
 					<string>bfb6c2dabb7995e4e5a30dd41b942c7e</string>
 					<string>ca92728f8f4d9f34c80adc58ffe32cab</string>

@@ -33,7 +33,7 @@
 #include "ofTypes.h"
 #include "ofEvents.h"
 #include "ofx/IO/DirectoryUtils.h"
-#include "ofx/IO/BaseFileFilter.h"
+#include "ofx/IO/AbstractTypes.h"
 
 
 namespace ofx {
@@ -73,7 +73,7 @@ public:
     void addPath(const Poco::Path& path,
                  bool listExistingItemsOnStart = false,
                  bool sortAlphaNumeric         = false,
-                 BaseFileFilter* fileFilterPtr = NULL,
+                 AbstractFileFilter* fileFilterPtr = 0,
                  int  eventMask                = Poco::DirectoryWatcher::DW_FILTER_ENABLE_ALL,
                  int  scanInterval             = Poco::DirectoryWatcher::DW_DEFAULT_SCAN_INTERVAL);
 
@@ -137,13 +137,13 @@ public:
 
 
 protected:
-    BaseFileFilter* getFilterForPath(const Poco::Path& path);
+    AbstractFileFilter* getFilterForPath(const Poco::Path& path);
 
 private:
     typedef std::shared_ptr<Poco::DirectoryWatcher> DirectoryWatcherPtr;
     typedef std::map<Poco::File,DirectoryWatcherPtr> WatchList;
     typedef WatchList::iterator                  WatchListIter;
-    typedef std::map<Poco::File,BaseFileFilter*> FilterList;
+    typedef std::map<Poco::File,AbstractFileFilter*> FilterList;
     typedef FilterList::iterator                 FilterListIter;
 
     WatchList  watchList;

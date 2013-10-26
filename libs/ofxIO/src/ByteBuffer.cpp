@@ -34,60 +34,70 @@ ByteBuffer::ByteBuffer()
 {
 }
 
-ByteBuffer::ByteBuffer(const AbstractByteSource& buffer)
+
+ByteBuffer::ByteBuffer(uint8_t data)
+{
+    writeByte(data);
+}
+
+
+ByteBuffer::ByteBuffer(const uint8_t* buffer, std::size_t size)
+{
+    writeBytes(buffer, size);
+}
+
+
+ByteBuffer::ByteBuffer(const std::vector<uint8_t>& buffer)
 {
     writeBytes(buffer);
 }
 
-ByteBuffer::ByteBuffer(const std::vector<uint8_t>& data)
+
+ByteBuffer::ByteBuffer(const std::string& buffer)
 {
-    writeBytes(data);
+    writeBytes(buffer);
 }
 
-ByteBuffer::ByteBuffer(const std::string& data)
-{
-    writeBytes(data);
-}
-
-ByteBuffer::ByteBuffer(const uint8_t* buffer, std::size_t size)
-{
-    writeBytes(buffer,size);
-}
-
+    
 ByteBuffer::~ByteBuffer()
 {
 }
 
-std::size_t ByteBuffer::readBytes(std::string& buffer) const
-{
-    buffer.resize(_buffer.size());
-    buffer.insert(buffer.begin(), _buffer.begin(), _buffer.end());
-    return _buffer.size();
-}
-
-std::size_t ByteBuffer::readBytes(AbstractByteSink& buffer) const
-{
-    return buffer.writeBytes(_buffer);
-}
-
-std::size_t ByteBuffer::readBytes(std::vector<uint8_t>& buffer) const
-{
-    buffer.resize(_buffer.size());
-    buffer.insert(buffer.begin(), _buffer.begin(), _buffer.end());
-    return _buffer.size();
-}
 
 std::size_t ByteBuffer::readBytes(uint8_t* buffer, std::size_t size) const
 {
     std::size_t numBytesToCopy = std::min(size, _buffer.size());
-    std::copy(_buffer.begin(), _buffer.begin() + numBytesToCopy, buffer);
+    std::copy(_buffer.end(), _buffer.end() + numBytesToCopy, buffer);
     return numBytesToCopy;
 }
+
+
+std::size_t ByteBuffer::readBytes(std::vector<uint8_t>& buffer) const
+{
+    buffer.resize(_buffer.size()); // effectively clears
+    buffer.insert(buffer.begin(), _buffer.begin(), _buffer.end());
+    return buffer.size();
+}
+
+std::size_t ByteBuffer::readBytes(std::string& buffer) const
+{
+    buffer.resize(_buffer.size()); // effectively clears
+    buffer.insert(buffer.end(), _buffer.begin(), _buffer.end());
+    return buffer.size();
+}
+
+
+std::size_t ByteBuffer::readBytes(ByteBuffer& buffer) const
+{
+    return buffer.writeBytes(_buffer);
+}
+
 
 std::vector<uint8_t> ByteBuffer::readBytes() const
 {
     return _buffer;
 }
+
 
 std::size_t ByteBuffer::writeByte(uint8_t data)
 {
@@ -95,22 +105,6 @@ std::size_t ByteBuffer::writeByte(uint8_t data)
     return 1;
 }
 
-std::size_t ByteBuffer::writeBytes(const std::string& buffer)
-{
-    _buffer.insert(_buffer.end(), buffer.begin(), buffer.end());
-    return buffer.size();
-}
-
-std::size_t ByteBuffer::writeBytes(const AbstractByteSource& buffer)
-{
-    return writeBytes(buffer.readBytes());
-}
-
-std::size_t ByteBuffer::writeBytes(const std::vector<uint8_t>& buffer)
-{
-    _buffer.insert(_buffer.end(), buffer.begin(), buffer.end());
-    return buffer.size();
-}
 
 std::size_t ByteBuffer::writeBytes(const uint8_t* buffer, std::size_t size)
 {
@@ -118,20 +112,44 @@ std::size_t ByteBuffer::writeBytes(const uint8_t* buffer, std::size_t size)
     return size;
 }
 
+
+std::size_t ByteBuffer::writeBytes(const std::vector<uint8_t>& buffer)
+{
+    _buffer.insert(_buffer.end(), buffer.begin(), buffer.end());
+    return buffer.size();
+}
+
+
+std::size_t ByteBuffer::writeBytes(const std::string& buffer)
+{
+    _buffer.insert(_buffer.end(), buffer.begin(), buffer.end());
+    return buffer.size();
+}
+
+
+std::size_t ByteBuffer::writeBytes(const ByteBuffer& buffer)
+{
+    return writeBytes(buffer.getDataRef());
+}
+
+
 std::size_t ByteBuffer::size() const
 {
     return _buffer.size();
 }
+
 
 void ByteBuffer::clear()
 {
     _buffer.clear();
 }
 
+
 bool ByteBuffer::empty() const
 {
     return _buffer.empty();
 }
+
 
 std::size_t ByteBuffer::resize(std::size_t size)
 {
@@ -139,20 +157,24 @@ std::size_t ByteBuffer::resize(std::size_t size)
     return _buffer.size();
 }
 
+    
 const std::vector<uint8_t>& ByteBuffer::getDataRef() const
 {
     return _buffer;
 }
+
 
 uint8_t& ByteBuffer::operator [] (std::size_t n)
 {
     return _buffer[n];
 }
 
+
 uint8_t ByteBuffer::operator [] (std::size_t n) const
 {
     return _buffer[n];
 }
+    
 
 const uint8_t* ByteBuffer::getDataPtr() const
 {

@@ -30,14 +30,6 @@ namespace ofx {
 namespace IO {
 
 
-//------------------------------------------------------------------------------
-ByteBuffer ByteBufferUtils::makeBuffer(uint8_t d0)
-{
-    uint8_t bytes[] = { d0 };
-    return ByteBuffer(bytes, 1);
-}
-
-//------------------------------------------------------------------------------
 ByteBuffer ByteBufferUtils::makeBuffer(uint8_t d0,
                                        uint8_t d1)
 {
@@ -45,7 +37,7 @@ ByteBuffer ByteBufferUtils::makeBuffer(uint8_t d0,
     return ByteBuffer(bytes, 2);
 }
 
-//------------------------------------------------------------------------------
+
 ByteBuffer ByteBufferUtils::makeBuffer(uint8_t d0,
                                        uint8_t d1,
                                        uint8_t d2)
@@ -54,7 +46,7 @@ ByteBuffer ByteBufferUtils::makeBuffer(uint8_t d0,
     return ByteBuffer(bytes, 3);
 }
 
-//------------------------------------------------------------------------------
+
 ByteBuffer ByteBufferUtils::makeBuffer(uint8_t d0,
                                        uint8_t d1,
                                        uint8_t d2,
@@ -64,7 +56,7 @@ ByteBuffer ByteBufferUtils::makeBuffer(uint8_t d0,
     return ByteBuffer(bytes, 4);
 }
 
-//------------------------------------------------------------------------------
+
 ByteBuffer ByteBufferUtils::makeBuffer(uint8_t d0,
                                        uint8_t d1,
                                        uint8_t d2,

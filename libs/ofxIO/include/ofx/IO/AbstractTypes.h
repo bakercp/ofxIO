@@ -28,6 +28,7 @@
 
 #include <stdint.h>
 #include <vector>
+#include "Poco/File.h"
 
 
 namespace ofx {
@@ -36,7 +37,7 @@ namespace IO {
 
 class AbstractByteSink;
 
-    
+
 class AbstractByteSource
 {
 public:
@@ -48,13 +49,15 @@ public:
     {
     }
 
-    virtual std::size_t readBytes(std::string& buffer) const = 0;
-    virtual std::size_t readBytes(AbstractByteSink& buffer) const = 0;
-    virtual std::size_t readBytes(std::vector<uint8_t>& buffer) const = 0;
     virtual std::size_t readBytes(uint8_t* buffer, std::size_t size) const = 0;
-    virtual std::vector<uint8_t> readBytes() const = 0;
 
+private:
+    
 };
+
+
+class AbstractBufferedByteSource;
+
 
 
 class AbstractByteSink
@@ -69,28 +72,39 @@ public:
     }
 
     virtual std::size_t writeByte(uint8_t data) = 0;
-    virtual std::size_t writeBytes(const std::string& buffer) = 0;
-    virtual std::size_t writeBytes(const AbstractByteSource& buffer) = 0;
-    virtual std::size_t writeBytes(const std::vector<uint8_t>& buffer) = 0;
     virtual std::size_t writeBytes(const uint8_t* buffer, std::size_t size) = 0;
+
+private:
+
 };
 
 
-class AbstractConsumableByteSource: public AbstractByteSource
+class AbstractBufferedByteSource
 {
 public:
-    AbstractConsumableByteSource()
+    AbstractBufferedByteSource()
+    {
+    }
+    
+    virtual ~AbstractBufferedByteSource()
     {
     }
 
-    virtual ~AbstractConsumableByteSource()
-    {
-    }
-
-    virtual std::size_t readByte(uint8_t& d) = 0;
-    virtual std::size_t readBytes(std::vector<uint8_t>& buffer) = 0;
+    virtual std::size_t readByte(uint8_t& data) = 0;
     virtual std::size_t readBytes(uint8_t* buffer, std::size_t size) = 0;
     virtual std::size_t available() const = 0;
+    
+};
+
+
+class AbstractFileFilter {
+public:
+    virtual ~AbstractFileFilter()
+    {
+    }
+    
+    virtual bool accept(const Poco::File& file) const = 0;
+    
 };
 
 

@@ -40,30 +40,38 @@ class ByteBuffer: public AbstractByteSource, public AbstractByteSink
 {
 public:
     ByteBuffer();
+    explicit ByteBuffer(uint8_t data);
+    explicit ByteBuffer(const uint8_t* buffer, std::size_t size);
+    explicit ByteBuffer(const std::vector<uint8_t>& buffer);
     explicit ByteBuffer(const std::string& buffer);
     explicit ByteBuffer(const AbstractByteSource& buffer);
-    explicit ByteBuffer(const std::vector<uint8_t>& buffer);
-    explicit ByteBuffer(const uint8_t* buffer, std::size_t size);
 
     virtual ~ByteBuffer();
 
-    std::size_t readBytes(std::string& buffer) const;
-    std::size_t readBytes(AbstractByteSink& buffer) const;
+    // AbstractByteSource
+    virtual std::size_t readBytes(uint8_t* buffer, std::size_t size) const;
+
+    // source helper
     std::size_t readBytes(std::vector<uint8_t>& buffer) const;
-    std::size_t readBytes(uint8_t* buffer, std::size_t size) const;
+    std::size_t readBytes(std::string& buffer) const;
+    std::size_t readBytes(ByteBuffer& buffer) const;
     std::vector<uint8_t> readBytes() const;
 
-    std::size_t writeByte(uint8_t data);
-    std::size_t writeBytes(const std::string& buffer);
-    std::size_t writeBytes(const AbstractByteSource& buffer);
+    // AbstractByteSink
+    virtual std::size_t writeByte(uint8_t data);
+    virtual std::size_t writeBytes(const uint8_t* buffer, std::size_t size);
+
+    // sink helpers
     std::size_t writeBytes(const std::vector<uint8_t>& buffer);
-    std::size_t writeBytes(const uint8_t* buffer, std::size_t size);
+    std::size_t writeBytes(const std::string& buffer);
+    std::size_t writeBytes(const ByteBuffer& buffer);
 
     std::size_t size() const;
     bool empty() const;
     void clear();
 
     std::size_t resize(std::size_t size);
+    // slice();
 
 	uint8_t& operator [] (std::size_t n);
 	uint8_t operator [] (std::size_t n) const;
