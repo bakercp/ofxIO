@@ -28,6 +28,7 @@
 
 #include <stdint.h>
 #include <vector>
+#include <string>
 #include "Poco/File.h"
 
 
@@ -36,6 +37,8 @@ namespace IO {
 
 
 class AbstractByteSink;
+class AbstractBufferedByteSource;
+class ByteBuffer;
 
 
 class AbstractByteSource
@@ -50,13 +53,11 @@ public:
     }
 
     virtual std::size_t readBytes(uint8_t* buffer, std::size_t size) const = 0;
+    virtual std::size_t readBytes(std::vector<uint8_t>& buffer) const = 0;
+    virtual std::size_t readBytes(std::string& buffer) const = 0;
+    virtual std::size_t readBytes(ByteBuffer& buffer) const = 0;
 
-private:
-    
 };
-
-
-class AbstractBufferedByteSource;
 
 
 
@@ -73,8 +74,8 @@ public:
 
     virtual std::size_t writeByte(uint8_t data) = 0;
     virtual std::size_t writeBytes(const uint8_t* buffer, std::size_t size) = 0;
-
-private:
+    virtual std::size_t writeBytes(const std::vector<uint8_t>& buffer) = 0;
+    virtual std::size_t writeBytes(const std::string& buffer) = 0;
 
 };
 
@@ -92,6 +93,7 @@ public:
 
     virtual std::size_t readByte(uint8_t& data) = 0;
     virtual std::size_t readBytes(uint8_t* buffer, std::size_t size) = 0;
+
     virtual std::size_t available() const = 0;
     
 };
