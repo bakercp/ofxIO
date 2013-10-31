@@ -195,4 +195,23 @@ public:
 };
 
 
+class DeviceFilter: public AbstractFileFilter
+{
+public:
+    DeviceFilter()
+    {
+    }
+
+    virtual ~DeviceFilter()
+    {
+    }
+
+    bool accept(const Poco::File& file) const
+    {
+        return !file.isDevice();
+    }
+    
+};
+
+
 } } // namespace ofx::IO
