@@ -176,4 +176,23 @@ public:
 };
 
 
+class DirectoryFilter: public AbstractFileFilter
+{
+public:
+    DirectoryFilter()
+    {
+    }
+
+    virtual ~DirectoryFilter()
+    {
+    }
+
+    bool accept(const Poco::File& file) const
+    {
+        return !file.isDirectory();
+    }
+    
+};
+
+
 } } // namespace ofx::IO
