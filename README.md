@@ -5,7 +5,7 @@ A collection of I/O core utils.
 
 * `ofEvent`-based Directory Watcher
     * Watch for changes in your directories.
-    * _NOTE: `Poco::DirectoryWatcher` was added in Poco 1.5+.  This feature is currently implemented using https://code.google.com/p/simplefilewatcher.  This feature will be implemented with `Poco::DirectoryWatcher` when openFrameworks includes Poco 1.5+._
+    * _NOTE: `Poco::DirectoryWatcher` was added in Poco 1.5+.  These files are included for backward compatability._
 
 * Recursive File Listing `Poco::RecursiveDirectoryIterator`
     * List files and folders inside of directories.
