@@ -214,4 +214,24 @@ public:
 };
 
 
+class LinkFilter: public AbstractFileFilter
+{
+public:
+    LinkFilter()
+    {
+    }
+
+    virtual ~LinkFilter()
+    {
+    }
+
+    bool accept(const Poco::File& file) const
+    {
+        return !file.isLink();
+    }
+    
+};
+
+
+
 } } // namespace ofx::IO
