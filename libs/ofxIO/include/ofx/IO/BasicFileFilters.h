@@ -75,6 +75,7 @@ public:
 
 private:
     std::set<AbstractFileFilter*> _filters;
+    
 };
 
 
@@ -110,7 +111,7 @@ public:
 
             if(_ignoreCase)
             {
-                match = (Poco::UTF8::icompare(extension,*iter) == 0);
+                match = (0 == Poco::UTF8::icompare(extension,*iter));
             }
             else
             {
@@ -170,7 +171,7 @@ public:
 
     bool accept(const Poco::File& file) const
     {
-        return !file.isHidden();
+        return file.isHidden();
     }
     
 };
@@ -189,7 +190,7 @@ public:
 
     bool accept(const Poco::File& file) const
     {
-        return !file.isDirectory();
+        return file.isDirectory();
     }
     
 };
@@ -208,7 +209,7 @@ public:
 
     bool accept(const Poco::File& file) const
     {
-        return !file.isDevice();
+        return file.isDevice();
     }
     
 };
@@ -227,7 +228,7 @@ public:
 
     bool accept(const Poco::File& file) const
     {
-        return !file.isLink();
+        return file.isLink();
     }
     
 };
