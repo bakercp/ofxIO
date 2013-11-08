@@ -29,6 +29,7 @@
 #include <set>
 #include "Poco/File.h"
 #include "Poco/Path.h"
+#include "Poco/RegularExpression.h"
 #include "Poco/String.h"
 #include "Poco/UTF8String.h"
 #include "ofx/IO/AbstractTypes.h"
@@ -52,9 +53,10 @@ public:
     bool accept(const Poco::File& file) const
     {
         std::set<AbstractFileFilter*>::iterator iter = _filters.begin();
-        while(iter != _filters.end())
+
+        while (iter != _filters.end())
         {
-            if(!(*iter)->accept(file))
+            if (!(*iter)->accept(file))
             {
                 return false;
             }
@@ -230,6 +232,32 @@ public:
     {
         return file.isLink();
     }
+    
+};
+
+
+class RegexPathFilter: public AbstractFileFilter
+{
+public:
+    RegexPathFilter(const std::string& pattern,
+                    int options = 0,
+                    bool study = true):
+        _regex(new Poco::RegularExpression(pattern, options, study))
+    {
+    }
+
+    virtual ~RegexPathFilter()
+    {
+        delete _regex;
+    }
+
+    bool accept(const Poco::File& file) const
+    {
+        return _regex->match(file.path());
+    }
+
+private:
+    Poco::RegularExpression* _regex;
     
 };
 
