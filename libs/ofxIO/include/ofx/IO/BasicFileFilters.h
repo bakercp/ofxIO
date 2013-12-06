@@ -41,16 +41,24 @@ namespace IO {
 
 class FileFilterCollection: public AbstractFileFilter
 {
+    /// A collection of file filters to be executed as a single file filter.
 public:
     FileFilterCollection()
+        ///> Create a file filter collection.
     {
     }
 
     virtual ~FileFilterCollection()
+        ///> Destroy a file filter collection.
+        ///> This class does not take ownership of
+        ///> the pointers in the collection and does
+        ///> not manage their memory.
     {
     }
 
     bool accept(const Poco::File& file) const
+        ///> Returns true iff the all file filters
+        ///> in the collection return true.
     {
         std::set<AbstractFileFilter*>::iterator iter = _filters.begin();
 
@@ -62,21 +70,28 @@ public:
             }
             ++iter;
         }
+
         return true;
     }
 
     void addFilter(AbstractFileFilter* filter)
+        ///> Add a file filter to the collection. The owner of the filter
+        ///> must manage the memory of the filter and maintain the pointer's
+        ///> validity while used in this file filter collection.
     {
         _filters.insert(filter);
     }
 
     void removeFilter(AbstractFileFilter* filter)
+        ///> Remove a file filter from the collection.  This does not
+        ///> delete of free the filter's memory.  The original owner of the
+        ///> filter is responsible for managing the file filter's memeory.
     {
         _filters.erase(filter);
     }
 
 private:
-    std::set<AbstractFileFilter*> _filters;
+    std::set<AbstractFileFilter*> _filters; ///> A set of file filters.
     
 };
 
