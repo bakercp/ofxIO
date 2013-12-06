@@ -183,7 +183,7 @@ AbstractFileFilter* DirectoryWatcherManager::getFilterForPath(const Poco::Path& 
     if(iter != filterList.end()) {
         return (*iter).second;
     } else {
-        return NULL;
+        return 0;
     }
 }
 
