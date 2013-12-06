@@ -84,25 +84,25 @@ public:
     DirectoryWatcherEvents events;
 
     template<class ListenerClass>
-    void registerAllEvents(ListenerClass* listener)
+    void registerAllEvents(ListenerClass* listener, int order = OF_EVENT_ORDER_AFTER_APP)
     {
-        ofAddListener(events.onItemAdded,    listener, &ListenerClass::onDirectoryWatcherItemAdded);
-        ofAddListener(events.onItemRemoved,  listener, &ListenerClass::onDirectoryWatcherItemRemoved);
-        ofAddListener(events.onItemModified, listener, &ListenerClass::onDirectoryWatcherItemModified);
-        ofAddListener(events.onItemMovedFrom,listener, &ListenerClass::onDirectoryWatcherItemMovedFrom);
-        ofAddListener(events.onItemMovedTo,  listener, &ListenerClass::onDirectoryWatcherItemMovedTo);
-        ofAddListener(events.onScanError,    listener, &ListenerClass::onDirectoryWatcherError);
+        ofAddListener(events.onItemAdded, listener, &ListenerClass::onDirectoryWatcherItemAdded, order);
+        ofAddListener(events.onItemRemoved, listener, &ListenerClass::onDirectoryWatcherItemRemoved, order);
+        ofAddListener(events.onItemModified, listener, &ListenerClass::onDirectoryWatcherItemModified, order);
+        ofAddListener(events.onItemMovedFrom, listener, &ListenerClass::onDirectoryWatcherItemMovedFrom, order);
+        ofAddListener(events.onItemMovedTo, listener, &ListenerClass::onDirectoryWatcherItemMovedTo, order);
+        ofAddListener(events.onScanError,listener, &ListenerClass::onDirectoryWatcherError, order);
     }
 
     template<class ListenerClass>
     void unregisterAllEvents(ListenerClass* listener)
     {
-        ofRemoveListener(events.onItemAdded,    listener, &ListenerClass::onDirectoryWatcherItemAdded);
-        ofRemoveListener(events.onItemRemoved,  listener, &ListenerClass::onDirectoryWatcherItemRemoved);
+        ofRemoveListener(events.onItemAdded, listener, &ListenerClass::onDirectoryWatcherItemAdded);
+        ofRemoveListener(events.onItemRemoved, listener, &ListenerClass::onDirectoryWatcherItemRemoved);
         ofRemoveListener(events.onItemModified, listener, &ListenerClass::onDirectoryWatcherItemModified);
-        ofRemoveListener(events.onItemMovedFrom,listener, &ListenerClass::onDirectoryWatcherItemMovedFrom);
-        ofRemoveListener(events.onItemMovedTo,  listener, &ListenerClass::onDirectoryWatcherItemMovedTo);
-        ofRemoveListener(events.onScanError,    listener, &ListenerClass::onDirectoryWatcherError);
+        ofRemoveListener(events.onItemMovedFrom, listener, &ListenerClass::onDirectoryWatcherItemMovedFrom);
+        ofRemoveListener(events.onItemMovedTo, listener, &ListenerClass::onDirectoryWatcherItemMovedTo);
+        ofRemoveListener(events.onScanError, listener, &ListenerClass::onDirectoryWatcherError);
     }
 
     void onItemAdded(const Poco::DirectoryWatcher::DirectoryEvent& evt)
