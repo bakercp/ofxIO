@@ -39,6 +39,7 @@ DirectoryWatcherManager::~DirectoryWatcherManager()
 {
 }
 
+
 void DirectoryWatcherManager::addPath(const Poco::Path& path,
                                       bool listExistingItemsOnStart,
                                       bool sortAlphaNumeric,
@@ -106,6 +107,7 @@ void DirectoryWatcherManager::addPath(const Poco::Path& path,
     }
 }
 
+
 void DirectoryWatcherManager::removePath(const Poco::Path& path)
 {
     ofScopedLock lock(mutex);
@@ -134,11 +136,13 @@ void DirectoryWatcherManager::removePath(const Poco::Path& path)
     }
 }
 
+
 bool DirectoryWatcherManager::isWatching(const Poco::Path& path) const
 {
     ofScopedLock lock(mutex);
     return watchList.find(path) != watchList.end();
 }
+
 
 //void DirectoryWatcherManager::handleFileAction(WatchID watchid,
 //                                               const string& _path,
