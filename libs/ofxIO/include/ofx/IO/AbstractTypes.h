@@ -47,7 +47,7 @@ class AbstractByteSource
 {
 public:
     virtual ~AbstractByteSource()
-        ///< Destroys the byte source.
+        ///< \brief Destroys the byte source.
     {
     }
 
@@ -87,7 +87,7 @@ class AbstractByteSink
 {
 public:
     virtual ~AbstractByteSink()
-        ///< Destroys the byte sink.
+        ///< \brief Destroys the byte sink.
     {
     }
 
@@ -126,7 +126,7 @@ class AbstractBufferedByteSource
 {
 public:
     virtual ~AbstractBufferedByteSource()
-        ///< Destroys the buffered byte source.
+        ///< \brief Destroys the buffered byte source.
     {
     }
 
@@ -158,7 +158,7 @@ class AbstractFileFilter
 {
 public:
     virtual ~AbstractFileFilter()
-        ///< Destroys the file filter.
+        ///< \brief Destroys the file filter.
     {
     }
     
@@ -174,7 +174,7 @@ class AbstractSearchPath
 {
 public:
     virtual ~AbstractSearchPath()
-        ///< Destroys the resource.
+        ///< \brief Destroys the resource.
     {
     }
 
