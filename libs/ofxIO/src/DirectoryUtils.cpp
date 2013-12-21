@@ -31,18 +31,15 @@ namespace ofx {
 namespace IO {
 
 
-//------------------------------------------------------------------------------
 DirectoryUtils::DirectoryUtils()
 {
 }
 
 
-//------------------------------------------------------------------------------
 DirectoryUtils::~DirectoryUtils()
 {
 }
 
-//------------------------------------------------------------------------------
 void DirectoryUtils::list(const Poco::File& directory,
                           std::vector<Poco::File>& files,
                           bool sortAlphaNumeric,
@@ -64,7 +61,7 @@ void DirectoryUtils::list(const Poco::File& directory,
 
 }
 
-//------------------------------------------------------------------------------
+
 void DirectoryUtils::list(const ofFile& directory,
                           std::vector<ofFile>& files,
                           bool sortAlphaNumeric,
@@ -86,7 +83,7 @@ void DirectoryUtils::list(const ofFile& directory,
     
 }
 
-//------------------------------------------------------------------------------
+
 void DirectoryUtils::list(const std::string& directory,
                           std::vector<std::string>& files,
                           bool sortAlphaNumeric,
@@ -130,7 +127,7 @@ void DirectoryUtils::list(const std::string& directory,
 
 }
 
-//------------------------------------------------------------------------------
+
 void DirectoryUtils::listRecursive(const std::string& directory,
                                    std::vector<std::string>& files,
                                    bool sortAlphaNumeric,
@@ -182,7 +179,7 @@ void DirectoryUtils::listRecursive(const std::string& directory,
 
 }
 
-//------------------------------------------------------------------------------
+
 void DirectoryUtils::listRecursive(const ofFile& directory,
                                    std::vector<ofFile>& files,
                                    bool sortAlphaNumeric,
@@ -211,7 +208,7 @@ void DirectoryUtils::listRecursive(const ofFile& directory,
 
 }
 
-//------------------------------------------------------------------------------
+
 void DirectoryUtils::listRecursive(const Poco::File& directory,
                                    std::vector<Poco::File>& files,
                                    bool sortAlphaNumeric,
