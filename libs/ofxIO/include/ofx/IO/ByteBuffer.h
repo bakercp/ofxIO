@@ -79,7 +79,7 @@ public:
     const std::vector<uint8_t>& getDataRef() const;
     const uint8_t* getDataPtr() const;
 
-    friend std::ostream& operator << (std::ostream& os, const ByteBuffer& vec);
+    friend std::ostream& operator << (std::ostream& os, const ByteBuffer& buffer);
 
 private:
     std::vector<uint8_t> _buffer;
