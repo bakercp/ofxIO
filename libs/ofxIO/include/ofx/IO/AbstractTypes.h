@@ -166,7 +166,6 @@ public:
         ///< \brief Accept a file based on a defined criteria.
         ///< \returns true iff the file is accepted by the file filter.
 
-    
 };
 
 
