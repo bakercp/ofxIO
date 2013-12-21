@@ -106,6 +106,20 @@ public:
     }
     
     virtual bool accept(const Poco::File& file) const = 0;
+class AbstractSearchPath
+    /// \brief Represents the abstract notion of a search path.
+{
+public:
+    virtual ~AbstractSearchPath()
+        ///< Destroys the resource.
+    {
+    }
+
+    virtual bool isRecursive() const = 0;
+        ///< \returns true iff this search path should be searched recursively.
+
+    virtual Poco::Path getPath() const = 0;
+        ///< \returns the base search path.
     
 };
 
