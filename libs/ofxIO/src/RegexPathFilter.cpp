@@ -23,42 +23,35 @@
 // =============================================================================
 
 
-#include "ofx/IO/SearchPath.h"
+#include "ofx/IO/RegexPathFilter.h"
 
 
 namespace ofx {
 namespace IO {
 
 
-SearchPath::SearchPath():
-    _path(""),
-    _isRecursive(false)
+RegexPathFilter::RegexPathFilter(const std::string& pattern,
+                                 int options,
+                                 bool study):
+    _pRegex(new Poco::RegularExpression(pattern, options, study))
 {
 }
 
-
-SearchPath::SearchPath(const Poco::Path& path, bool isRecursive):
-    _path(path),
-    _isRecursive(isRecursive)
+    
+RegexPathFilter::~RegexPathFilter()
 {
+    if (_pRegex)
+    {
+        delete _pRegex;
+        _pRegex = 0;
+    }
 }
 
 
-SearchPath::~SearchPath()
+bool RegexPathFilter::accept(const Poco::Path& path) const
 {
+    return _pRegex->match(path.toString());
 }
 
 
-bool SearchPath::isRecursive() const
-{
-    return _isRecursive;
-}
-
-
-Poco::Path SearchPath::getPath() const
-{
-    return _path;
-}
-
-
-} } // namespace ofx::Assets
+} } // namespace ofx::IO

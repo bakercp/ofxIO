@@ -23,42 +23,27 @@
 // =============================================================================
 
 
-#include "ofx/IO/SearchPath.h"
+#include "ofx/IO/DeviceFilter.h"
 
 
 namespace ofx {
 namespace IO {
 
 
-SearchPath::SearchPath():
-    _path(""),
-    _isRecursive(false)
+DeviceFilter::DeviceFilter()
 {
 }
 
 
-SearchPath::SearchPath(const Poco::Path& path, bool isRecursive):
-    _path(path),
-    _isRecursive(isRecursive)
+DeviceFilter::~DeviceFilter()
 {
 }
 
 
-SearchPath::~SearchPath()
+bool DeviceFilter::accept(const Poco::Path& path) const
 {
+    return Poco::File(path).isDevice();
 }
 
 
-bool SearchPath::isRecursive() const
-{
-    return _isRecursive;
-}
-
-
-Poco::Path SearchPath::getPath() const
-{
-    return _path;
-}
-
-
-} } // namespace ofx::Assets
+} } // namespace ofx::IO

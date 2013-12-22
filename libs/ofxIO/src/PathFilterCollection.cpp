@@ -23,42 +23,49 @@
 // =============================================================================
 
 
-#include "ofx/IO/SearchPath.h"
+#include "ofx/IO/PathFilterCollection.h"
 
 
 namespace ofx {
 namespace IO {
 
 
-SearchPath::SearchPath():
-    _path(""),
-    _isRecursive(false)
+PathFilterCollection::PathFilterCollection()
+{
+}
+    
+
+PathFilterCollection::~PathFilterCollection()
 {
 }
 
 
-SearchPath::SearchPath(const Poco::Path& path, bool isRecursive):
-    _path(path),
-    _isRecursive(isRecursive)
+bool PathFilterCollection::accept(const Poco::Path& path) const
 {
+    std::set<AbstractPathFilter*>::const_iterator iter = _filters.begin();
+
+    while (iter != _filters.end())
+    {
+        if (!(*iter)->accept(path))
+        {
+            return false;
+        }
+        ++iter;
+    }
+
+    return true;
+}
+
+void PathFilterCollection::addFilter(AbstractPathFilter* filter)
+{
+    _filters.insert(filter);
 }
 
 
-SearchPath::~SearchPath()
+void PathFilterCollection::removeFilter(AbstractPathFilter* filter)
 {
+    _filters.erase(filter);
 }
 
 
-bool SearchPath::isRecursive() const
-{
-    return _isRecursive;
-}
-
-
-Poco::Path SearchPath::getPath() const
-{
-    return _path;
-}
-
-
-} } // namespace ofx::Assets
+} } // namespace ofx::IO

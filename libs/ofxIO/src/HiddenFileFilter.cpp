@@ -23,42 +23,27 @@
 // =============================================================================
 
 
-#include "ofx/IO/SearchPath.h"
+#include "ofx/IO/HiddenFileFilter.h"
 
 
 namespace ofx {
 namespace IO {
 
 
-SearchPath::SearchPath():
-    _path(""),
-    _isRecursive(false)
+HiddenFileFilter::HiddenFileFilter()
 {
 }
 
 
-SearchPath::SearchPath(const Poco::Path& path, bool isRecursive):
-    _path(path),
-    _isRecursive(isRecursive)
+HiddenFileFilter::~HiddenFileFilter()
 {
 }
 
 
-SearchPath::~SearchPath()
+bool HiddenFileFilter::accept(const Poco::Path& path) const
 {
+    return Poco::File(path).isHidden();
 }
 
 
-bool SearchPath::isRecursive() const
-{
-    return _isRecursive;
-}
-
-
-Poco::Path SearchPath::getPath() const
-{
-    return _path;
-}
-
-
-} } // namespace ofx::Assets
+} } // namespace ofx::IO

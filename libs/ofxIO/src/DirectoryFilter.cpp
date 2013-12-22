@@ -23,42 +23,25 @@
 // =============================================================================
 
 
-#include "ofx/IO/SearchPath.h"
+#include "ofx/IO/DirectoryFilter.h"
 
 
 namespace ofx {
 namespace IO {
 
 
-SearchPath::SearchPath():
-    _path(""),
-    _isRecursive(false)
+DirectoryFilter::DirectoryFilter()
 {
 }
 
-
-SearchPath::SearchPath(const Poco::Path& path, bool isRecursive):
-    _path(path),
-    _isRecursive(isRecursive)
+DirectoryFilter::~DirectoryFilter()
 {
 }
 
-
-SearchPath::~SearchPath()
+bool DirectoryFilter::accept(const Poco::Path& path) const
 {
+    return Poco::File(path).isDirectory();
 }
 
 
-bool SearchPath::isRecursive() const
-{
-    return _isRecursive;
-}
-
-
-Poco::Path SearchPath::getPath() const
-{
-    return _path;
-}
-
-
-} } // namespace ofx::Assets
+} } // namespace ofx::IO

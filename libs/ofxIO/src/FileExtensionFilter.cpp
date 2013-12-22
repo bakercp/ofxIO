@@ -23,42 +23,80 @@
 // =============================================================================
 
 
-#include "ofx/IO/SearchPath.h"
+#include "ofx/IO/FileExtensionFilter.h"
 
 
 namespace ofx {
 namespace IO {
 
 
-SearchPath::SearchPath():
-    _path(""),
-    _isRecursive(false)
+FileExtensionFilter::FileExtensionFilter():
+    _ignoreCase(true),
+    _acceptMatches(true)
 {
 }
 
-
-SearchPath::SearchPath(const Poco::Path& path, bool isRecursive):
-    _path(path),
-    _isRecursive(isRecursive)
+FileExtensionFilter::FileExtensionFilter(bool ignoreCase,
+                                         bool acceptMatches):
+    _ignoreCase(ignoreCase),
+    _acceptMatches(acceptMatches)
 {
 }
 
-
-SearchPath::~SearchPath()
+FileExtensionFilter::~FileExtensionFilter()
 {
 }
 
-
-bool SearchPath::isRecursive() const
+bool FileExtensionFilter::accept(const Poco::Path& path) const
 {
-    return _isRecursive;
+    std::string extension = path.getExtension();
+
+    std::set<std::string>::iterator iter = _extensions.begin();
+
+    while(iter != _extensions.end())
+    {
+        bool match = false;
+
+        if(_ignoreCase)
+        {
+            match = (0 == Poco::UTF8::icompare(extension,*iter));
+        }
+        else
+        {
+            match = (extension == *iter);
+        }
+
+        if(_acceptMatches && match)
+        {
+            return true;
+        }
+
+        ++iter;
+    }
+
+    return !_acceptMatches;
+
+}
+
+void FileExtensionFilter::addExtension(const std::string& extension)
+{
+    _extensions.insert(extension);
+}
+
+void FileExtensionFilter::removeExtension(const std::string& extension)
+{
+    _extensions.erase(extension);
+}
+
+void FileExtensionFilter::setIgnoreCase(bool ignoreCase)
+{
+    _ignoreCase = ignoreCase;
+}
+
+bool FileExtensionFilter::getIgnoreCase() const
+{
+    return _ignoreCase;
 }
 
 
-Poco::Path SearchPath::getPath() const
-{
-    return _path;
-}
-
-
-} } // namespace ofx::Assets
+} } // namespace ofx::IO
