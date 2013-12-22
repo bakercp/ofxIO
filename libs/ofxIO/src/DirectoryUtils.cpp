@@ -35,7 +35,9 @@ namespace IO {
 void DirectoryUtils::list(const AbstractSearchPath& path,
                           std::vector<Poco::Path>& paths,
                           bool sortAlphaNumeric,
-                          AbstractPathFilter* pFilter)
+                          AbstractPathFilter* pFilter,
+                          Poco::UInt16 maxDepth,
+                          TraversalOrder traversalOrder)
 {
     paths.clear();
 
@@ -46,7 +48,9 @@ void DirectoryUtils::list(const AbstractSearchPath& path,
         listRecursive(path.getPath().toString(),
                       _files,
                       sortAlphaNumeric,
-                      pFilter);
+                      pFilter,
+                      maxDepth,
+                      traversalOrder);
     }
     else
     {
