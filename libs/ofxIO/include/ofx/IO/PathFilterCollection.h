@@ -36,11 +36,11 @@ namespace IO {
 
 
 class PathFilterCollection: public AbstractPathFilter
-{
     /// \brief A collection of path filters that can be executed at once.
     /// \details In many cases functions are allowed to recieve a single
     /// AbstractPathFilter.  This class allows users to create a collection
     /// of AbstractPathFilters that will be treated as a single filter.
+{
 public:
     PathFilterCollection();
         ///< \brief Create an empty file filter collection.
@@ -66,7 +66,7 @@ public:
         ///< filter is responsible for managing the file filter's memeory.
 
 private:
-    std::set<AbstractPathFilter*> _filters; ///> A set of file filters.
+    std::set<AbstractPathFilter*> _filters; ///< A set of file filters.
     
 };
 

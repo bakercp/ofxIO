@@ -80,7 +80,6 @@ public:
         ///< \brief Return a copy of all bytes from this source.
         ///< \returns the contents of the byte source as a vector of bytes;
 
-
 };
 
 

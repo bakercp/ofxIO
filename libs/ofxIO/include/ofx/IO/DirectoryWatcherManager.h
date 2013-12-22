@@ -41,6 +41,11 @@ namespace IO {
 
 
 class DirectoryWatcherEvents
+    /// \brief A collection of directory watcher events.
+    /// \sa DirectoryWatcherManager::registerAllEvents()
+    /// \sa DirectoryWatcherManager::unregisterAllEvents()
+    /// \sa ofAddListener()
+    /// \sa ofRemoveListener()
 {
 public:
     typedef Poco::DirectoryWatcher::DirectoryEvent DirectoryEvent;

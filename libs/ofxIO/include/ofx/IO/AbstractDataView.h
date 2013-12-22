@@ -31,6 +31,7 @@ namespace IO {
 
 
 class AbstractDataView
+    /// \brief An interface for reading and writing data of various byte widths. 
 {
 public:
     virtual ~AbstractDataView()

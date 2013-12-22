@@ -42,38 +42,85 @@ class AbstractPathFilter;
 
 
 class DirectoryUtils
+    /// \brief A collection of utilities for interacting with directories.
 {
 public:
     enum
     {
         INIFINITE_DEPTH = Poco::SimpleRecursiveDirectoryIterator::D_INFINITE
+            ///< When recursively listing a directory, do not limit the dept.
     };
 
     enum TraversalOrder
     {
         SIBLINGS_FIRST = 0,
+            ///< When recursively listing a directory, list sibling directories first.
         CHILDREN_FIRST
+            ///< When recursively listing a directory, list child directories first.
     };
 
     static void list(const AbstractSearchPath& path,
                      std::vector<Poco::Path>& paths,
                      bool sortAlphaNumeric = false,
-                     AbstractPathFilter* pFilter = 0);
+                     AbstractPathFilter* pFilter = 0,
+                     Poco::UInt16 maxDepth = INIFINITE_DEPTH,
+                     TraversalOrder traversalOrder = CHILDREN_FIRST);
+        ///< \brief List the contents of a path.
+        ///< \param path is the path of the directory to list.  If enabled,
+        ///< the AbstractSearchPath will be searched recursively.
+        ///< \param paths is an empty vector of paths to be filled.
+        ///< \param sortAlphaNumeric enables alphanumeric sorting.  The
+        ///< Alphanum Algorithm is an improved sorting algorithm for strings
+        ///< containing numbers.  Instead of sorting numbers in ASCII order like
+        ///< a standard sort, this algorithm sorts numbers in numeric order.
+        ///< \param pFilter will allow only certain paths to be included
+        ///< in the results.
+        ///< \param maxDepth determines the depth of the recursion during
+        ///< recursive searches.
+        ///< \param traversalOrder determines the order of traversal during
+        ///< recursive searches.
 
     static void list(const Poco::File& directory,
                      std::vector<Poco::File>& files,
                      bool sortAlphaNumeric = false,
                      AbstractPathFilter* pFilter = 0);
+        ///< \brief List the contents of a directory.
+        ///< \param directory is the path of the directory to list.
+        ///< \param files is an empty vector of files to be filled.
+        ///< \param sortAlphaNumeric enables alphanumeric sorting.  The
+        ///< Alphanum Algorithm is an improved sorting algorithm for strings
+        ///< containing numbers.  Instead of sorting numbers in ASCII order like
+        ///< a standard sort, this algorithm sorts numbers in numeric order.
+        ///< \param pFilter will allow only certain paths to be included
+        ///< in the results.
 
     static void list(const ofFile& directory,
                      std::vector<ofFile>& files,
                      bool sortAlphaNumeric = false,
                      AbstractPathFilter* pFilter = 0);
+        ///< \brief List the contents of a directory.
+        ///< \param directory is the path of the directory to list.
+        ///< \param files is an empty vector of files to be filled.
+        ///< \param sortAlphaNumeric enables alphanumeric sorting.  The
+        ///< Alphanum Algorithm is an improved sorting algorithm for strings
+        ///< containing numbers.  Instead of sorting numbers in ASCII order like
+        ///< a standard sort, this algorithm sorts numbers in numeric order.
+        ///< \param pFilter will allow only certain paths to be included
+        ///< in the results.
 
     static void list(const std::string& directory,
                      std::vector<std::string>& files,
                      bool sortAlphaNumeric = false,
                      AbstractPathFilter* pFilter = 0);
+        ///< \brief List the contents of a path.
+        ///< \param directory is the path of the directory to list.
+        ///< \param files is an empty vector of path strings to be filled.
+        ///< \param sortAlphaNumeric enables alphanumeric sorting.  The
+        ///< Alphanum Algorithm is an improved sorting algorithm for strings
+        ///< containing numbers.  Instead of sorting numbers in ASCII order like
+        ///< a standard sort, this algorithm sorts numbers in numeric order.
+        ///< \param pFilter will allow only certain paths to be included
+        ///< in the results.
 
     static void listRecursive(const Poco::File& directory,
                               std::vector<Poco::File>& files,
@@ -81,6 +128,19 @@ public:
                               AbstractPathFilter* pFilter = 0,
                               Poco::UInt16 maxDepth = INIFINITE_DEPTH,
                               TraversalOrder traversalOrder = CHILDREN_FIRST);
+        ///< \brief Recursively list the contents of a path.
+        ///< \param directory is the path of the directory to list.
+        ///< \param files is an empty vector of path strings to be filled.
+        ///< \param sortAlphaNumeric enables alphanumeric sorting.  The
+        ///< Alphanum Algorithm is an improved sorting algorithm for strings
+        ///< containing numbers.  Instead of sorting numbers in ASCII order like
+        ///< a standard sort, this algorithm sorts numbers in numeric order.
+        ///< \param pFilter will allow only certain paths to be included
+        ///< in the results.
+        ///< \param maxDepth determines the depth of the recursion during
+        ///< recursive searches.
+        ///< \param traversalOrder determines the order of traversal during
+        ///< recursive searches.
 
     static void listRecursive(const ofFile& directory,
                               std::vector<ofFile>& files,
@@ -88,14 +148,38 @@ public:
                               AbstractPathFilter* pFilter = 0,
                               Poco::UInt16 maxDepth = INIFINITE_DEPTH,
                               TraversalOrder traversalOrder = CHILDREN_FIRST);
-
+        ///< \brief Recursively list the contents of a path.
+        ///< \param directory is the path of the directory to list.
+        ///< \param files is an empty vector of path strings to be filled.
+        ///< \param sortAlphaNumeric enables alphanumeric sorting.  The
+        ///< Alphanum Algorithm is an improved sorting algorithm for strings
+        ///< containing numbers.  Instead of sorting numbers in ASCII order like
+        ///< a standard sort, this algorithm sorts numbers in numeric order.
+        ///< \param pFilter will allow only certain paths to be included
+        ///< in the results.
+        ///< \param maxDepth determines the depth of the recursion during
+        ///< recursive searches.
+        ///< \param traversalOrder determines the order of traversal during
+        ///< recursive searches.
     static void listRecursive(const std::string& directory,
                               std::vector<std::string>& files,
                               bool sortAlphaNumeric = false,
                               AbstractPathFilter* pFilter = 0,
                               Poco::UInt16 maxDepth = INIFINITE_DEPTH,
                               TraversalOrder traversalOrder = CHILDREN_FIRST);
-
+        ///< \brief Recursively list the contents of a path.
+        ///< \param directory is the path of the directory to list.
+        ///< \param files is an empty vector of path strings to be filled.
+        ///< \param sortAlphaNumeric enables alphanumeric sorting.  The
+        ///< Alphanum Algorithm is an improved sorting algorithm for strings
+        ///< containing numbers.  Instead of sorting numbers in ASCII order like
+        ///< a standard sort, this algorithm sorts numbers in numeric order.
+        ///< \param pFilter will allow only certain paths to be included
+        ///< in the results.
+        ///< \param maxDepth determines the depth of the recursion during
+        ///< recursive searches.
+        ///< \param traversalOrder determines the order of traversal during
+        ///< recursive searches.
 };
 
 
