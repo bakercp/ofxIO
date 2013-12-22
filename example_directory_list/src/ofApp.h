@@ -31,27 +31,26 @@
 #include "ofxIO.h"
 
 
-using ofx::IO::AbstractFileFilter;
-using ofx::IO::DirectoryUtils;
-using ofx::IO::ByteBuffer;
+using namespace ofx::IO;
 
 
-// a custom hidden file filter
-class CustomFileFilter: public AbstractFileFilter
+// a custom hidden path filter
+class CustomPathFilter: public AbstractPathFilter
 {
 public:
-    CustomFileFilter()
+    CustomPathFilter()
     {
     }
 
-    virtual ~CustomFileFilter()
+    virtual ~CustomPathFilter()
     {
     }
 
-    bool accept(const Poco::File& file) const
+    bool accept(const Poco::Path& path) const
     {
         // don't return hidden files or files with names containing "FilterMeOut
-        return !file.isHidden() && !ofIsStringInString(file.path(),"FilterMeOut");
+        return !Poco::File(path).isHidden() &&
+               !ofIsStringInString(path.toString(), "FilterMeOut");
     }
 };
 
@@ -69,7 +68,7 @@ public:
 
     void gotMessage(ofMessage msg);
     
-    CustomFileFilter fileFilter; // an example file filter
+    CustomPathFilter pathFilter; // an example path filter
     std::deque<std::string> messages;
 
     ByteBuffer buffer;

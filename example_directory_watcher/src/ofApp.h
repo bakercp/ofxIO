@@ -31,10 +31,7 @@
 #include "ofxIO.h"
 
 
-using Poco::DirectoryWatcher;
-using ofx::IO::HiddenFileFilter;
-using ofx::IO::DirectoryWatcherEvents;
-using ofx::IO::DirectoryWatcherManager;
+using namespace ofx::IO;
 
 
 class ofApp: public ofBaseApp
@@ -50,27 +47,27 @@ public:
 
     void gotMessage(ofMessage msg);
 
-    void onDirectoryWatcherItemAdded(const Poco::DirectoryWatcher::DirectoryEvent& evt)
+    void onDirectoryWatcherItemAdded(const DirectoryWatcherManager::DirectoryEvent& evt)
     {
         ofSendMessage("Added:    " + evt.item.path());
     }
     
-    void onDirectoryWatcherItemRemoved(const Poco::DirectoryWatcher::DirectoryEvent& evt)
+    void onDirectoryWatcherItemRemoved(const DirectoryWatcherManager::DirectoryEvent& evt)
     {
         ofSendMessage("Removed:  " + evt.item.path());
     }
     
-    void onDirectoryWatcherItemModified(const Poco::DirectoryWatcher::DirectoryEvent& evt)
+    void onDirectoryWatcherItemModified(const DirectoryWatcherManager::DirectoryEvent& evt)
     {
         ofSendMessage("Modified: " + evt.item.path());
     }
 
-    void onDirectoryWatcherItemMovedFrom(const Poco::DirectoryWatcher::DirectoryEvent& evt)
+    void onDirectoryWatcherItemMovedFrom(const DirectoryWatcherManager::DirectoryEvent& evt)
     {
         ofLogNotice("ofApp::onDirectoryWatcherItemMovedFrom") << "Moved From: " << evt.item.path();
     }
 
-    void onDirectoryWatcherItemMovedTo(const Poco::DirectoryWatcher::DirectoryEvent& evt)
+    void onDirectoryWatcherItemMovedTo(const DirectoryWatcherManager::DirectoryEvent& evt)
     {
         ofLogNotice("ofApp::onDirectoryWatcherItemMovedTo") << "Moved To: " << evt.item.path();
     }
@@ -84,6 +81,7 @@ public:
     DirectoryWatcherManager watcher;
 
     HiddenFileFilter fileFilter; // an example file filter
+
     std::deque<std::string> messages;
 
 };

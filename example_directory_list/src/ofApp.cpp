@@ -36,7 +36,7 @@ void ofApp::setup()
 
     std::vector<std::string> files;
 
-    DirectoryUtils::list("../../..", files, true, &fileFilter);
+    DirectoryUtils::list("../../..", files, true, &pathFilter);
 
     for(std::size_t i = 0; i < files.size(); i++)
     {
@@ -48,7 +48,7 @@ void ofApp::setup()
     DirectoryUtils::listRecursive("../..",
                                   files,
                                   true,
-                                  &fileFilter,
+                                  &pathFilter,
                                   DirectoryUtils::INIFINITE_DEPTH,
                                   DirectoryUtils::SIBLINGS_FIRST);
 

@@ -5,14 +5,14 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>6050904B-E416-46F6-AF08-5F12285AB2E5</string>
+	<string>A28EDD31-E6F0-4B4D-A6D3-131489C8660F</string>
 	<key>IDESourceControlProjectName</key>
 	<string>example_directory_watcher</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>3B34514A-1075-456B-8AF0-DAEFD698200B</key>
 		<string>ssh://github.com/bakercp/openFrameworks.git</string>
-		<key>EE697087-E1D0-4308-8BB1-A584901F6D3A</key>
+		<key>F9CDDD62-DE69-4B49-A03C-784EDA348CB5</key>
 		<string>ssh://github.com/bakercp/ofxIO.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
@@ -21,7 +21,7 @@
 	<dict>
 		<key>3B34514A-1075-456B-8AF0-DAEFD698200B</key>
 		<string>../../../../..</string>
-		<key>EE697087-E1D0-4308-8BB1-A584901F6D3A</key>
+		<key>F9CDDD62-DE69-4B49-A03C-784EDA348CB5</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -36,7 +36,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>EE697087-E1D0-4308-8BB1-A584901F6D3A</string>
+			<string>F9CDDD62-DE69-4B49-A03C-784EDA348CB5</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxIO</string>
 		</dict>

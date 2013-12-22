@@ -34,10 +34,10 @@ void ofApp::setup()
 
     watcher.registerAllEvents(this);
 
-    string folderToWatch = ofToDataPath("",true);
+    std::string folderToWatch = ofToDataPath("", true);
     bool listExistingItemsOnStart = true;
 
-    watcher.addPath(folderToWatch,listExistingItemsOnStart,&fileFilter);
+    watcher.addPath(folderToWatch, listExistingItemsOnStart, &fileFilter);
 
 }
 
@@ -48,7 +48,8 @@ void ofApp::draw()
     ofFill();
 
     int y = TXT_HEIGHT;
-    for(std::size_t i = 0; i < messages.size(); i++)
+
+    for(std::size_t i = 0; i < messages.size(); ++i)
     {
         ofSetColor(ofMap(i, 0, messages.size(), 255, 90));
         ofDrawBitmapString(messages[i], 10, y);
@@ -59,7 +60,6 @@ void ofApp::draw()
 //------------------------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg)
 {
-
     int height = ofGetHeight();
     int numLines = (int)(height / TXT_HEIGHT);
 
