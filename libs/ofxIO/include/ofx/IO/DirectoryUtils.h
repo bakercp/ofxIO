@@ -38,16 +38,15 @@ namespace ofx {
 namespace IO {
 
 
-class AbstractFileFilter;
+class AbstractPathFilter;
 
 
 class DirectoryUtils
 {
 public:
-    
     enum
     {
-        INIFINITE_DEPTH = 0
+        INIFINITE_DEPTH = Poco::SimpleRecursiveDirectoryIterator::D_INFINITE
     };
 
     enum TraversalOrder
@@ -56,42 +55,44 @@ public:
         CHILDREN_FIRST
     };
 
-    DirectoryUtils();
-    virtual ~DirectoryUtils();
+    static void list(const AbstractSearchPath& path,
+                     std::vector<Poco::Path>& paths,
+                     bool sortAlphaNumeric = false,
+                     AbstractPathFilter* pFilter = 0);
 
     static void list(const Poco::File& directory,
                      std::vector<Poco::File>& files,
                      bool sortAlphaNumeric = false,
-                     AbstractFileFilter* filterPtr = NULL);
+                     AbstractPathFilter* pFilter = 0);
 
     static void list(const ofFile& directory,
                      std::vector<ofFile>& files,
                      bool sortAlphaNumeric = false,
-                     AbstractFileFilter* filterPtr = NULL);
+                     AbstractPathFilter* pFilter = 0);
 
     static void list(const std::string& directory,
                      std::vector<std::string>& files,
                      bool sortAlphaNumeric = false,
-                     AbstractFileFilter* filterPtr = NULL);
+                     AbstractPathFilter* pFilter = 0);
 
     static void listRecursive(const Poco::File& directory,
                               std::vector<Poco::File>& files,
                               bool sortAlphaNumeric = false,
-                              AbstractFileFilter* filterPtr = NULL,
+                              AbstractPathFilter* pFilter = 0,
                               Poco::UInt16 maxDepth = INIFINITE_DEPTH,
                               TraversalOrder traversalOrder = CHILDREN_FIRST);
 
     static void listRecursive(const ofFile& directory,
                               std::vector<ofFile>& files,
                               bool sortAlphaNumeric = false,
-                              AbstractFileFilter* filterPtr = NULL,
+                              AbstractPathFilter* pFilter = 0,
                               Poco::UInt16 maxDepth = INIFINITE_DEPTH,
                               TraversalOrder traversalOrder = CHILDREN_FIRST);
 
     static void listRecursive(const std::string& directory,
                               std::vector<std::string>& files,
                               bool sortAlphaNumeric = false,
-                              AbstractFileFilter* filterPtr = NULL,
+                              AbstractPathFilter* pFilter = 0,
                               Poco::UInt16 maxDepth = INIFINITE_DEPTH,
                               TraversalOrder traversalOrder = CHILDREN_FIRST);
 

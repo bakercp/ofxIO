@@ -23,41 +23,42 @@
 // =============================================================================
 
 
-#pragma once
-
-
-#include "Poco/Path.h"
-#include "ofx/IO/AbstractTypes.h"
+#include "ofx/IO/SearchPath.h"
 
 
 namespace ofx {
 namespace IO {
 
 
-class SearchPath: public AbstractSearchPath
-    /// \brief Represents a searchable path.
+SearchPath::SearchPath():
+    _path(""),
+    _isRecursive(false)
 {
-public:
-    SearchPath();
-        ///< \brief Construct an empty search path.
-
-    SearchPath(const Poco::Path& path, bool isRecursive = false);
-        ///< \brief Construct a search path.
-        ///< \param path is the search path.
-        ///< \param isRecursive enables recursive path searches.
-
-    virtual ~SearchPath();
-        ///< \brief Destroy a search path.
-
-    bool isRecursive() const;
-
-    Poco::Path getPath() const;
-    
-private:
-    Poco::Path _path;
-    bool _isRecursive;
-
-};
+}
 
 
-} } // namespace ofx::IO
+SearchPath::SearchPath(const Poco::Path& path, bool isRecursive):
+    _path(path),
+    _isRecursive(isRecursive)
+{
+}
+
+
+SearchPath::~SearchPath()
+{
+}
+
+
+bool SearchPath::isRecursive() const
+{
+    return _isRecursive;
+}
+
+
+Poco::Path SearchPath::getPath() const
+{
+    return _path;
+}
+
+
+} } // namespace ofx::Assets

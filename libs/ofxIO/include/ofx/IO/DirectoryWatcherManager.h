@@ -64,25 +64,83 @@ public:
 
 
 class DirectoryWatcherManager
+    /// \brief A thread-safe collection of directory watchers.
+    /// \sa Poco::DirectoryWatcher
 {
 public:
+    typedef Poco::DirectoryWatcher::DirectoryEvent DirectoryEvent;
+
+    enum DirectoryEventType
+	{
+		ITEM_ADDED = Poco::DirectoryWatcher::DW_ITEM_ADDED,
+            ///< A new item has been created and added to the directory.
+
+		ITEM_REMOVED = Poco::DirectoryWatcher::DW_ITEM_REMOVED,
+            ///< An item has been removed from the directory.
+
+		ITEM_MODIFIED = Poco::DirectoryWatcher::DW_ITEM_MODIFIED,
+            ///< An item has been modified.
+
+		ITEM_MOVED_FROM = Poco::DirectoryWatcher::DW_ITEM_MOVED_FROM,
+            ///< An item has been renamed or moved. This event delivers the old name.
+
+		ITEM_MOVED_TO = Poco::DirectoryWatcher::DW_ITEM_MOVED_TO,
+            ///< An item has been renamed or moved. This event delivers the new name.
+	};
+
+
+    enum DirectoryEventMask
+	{
+		FILTER_ENABLE_ALL = Poco::DirectoryWatcher::DW_FILTER_ENABLE_ALL,
+            ///< Enables all event types.
+
+		FILTER_DISABLE_ALL = Poco::DirectoryWatcher::DW_FILTER_DISABLE_ALL
+            ///< Disables all event types.
+	};
+
+	enum
+	{
+		DEFAULT_SCAN_INTERVAL = Poco::DirectoryWatcher::DW_DEFAULT_SCAN_INTERVAL
+            ///< Default scan interval for platforms that don't provide a native notification mechanism.
+	};
+
     DirectoryWatcherManager();
+        ///< \brief Create an empty DirectoryWatcherManager.
     
     virtual ~DirectoryWatcherManager();
+        ///< \brief Destroy a DirectoryWatcherManager.
 
     void addPath(const Poco::Path& path,
                  bool listExistingItemsOnStart = false,
                  bool sortAlphaNumeric         = false,
-                 AbstractFileFilter* fileFilterPtr = 0,
-                 int  eventMask                = Poco::DirectoryWatcher::DW_FILTER_ENABLE_ALL,
-                 int  scanInterval             = Poco::DirectoryWatcher::DW_DEFAULT_SCAN_INTERVAL);
+                 AbstractPathFilter* pFilter   = 0,
+                 int  eventMask                = FILTER_ENABLE_ALL,
+                 int  scanInterval             = DEFAULT_SCAN_INTERVAL);
+        ///< \brief Add a path to the watch list in order to receive related events.
+        ///< \param listExistingItemsOnStart
+        ///< \param sortAlphaNumeric
+        ///< \param pFilter is the path filter for this path.  The
+        ///< DirectoryWatcherManager does not take ownership of the pointer.
+        ///< \param eventMask
+        ///< \param scanInterval specifies the interval in seconds between scans.
 
     void removePath(const Poco::Path& path);
+        ///< \brief Remove a path from the watch list.
+        ///< \param path to be removed.
     
     bool isWatching(const Poco::Path& path) const;
+        ///< \brief Query if a path is on the watch list.
+        ///< \param path to be checked.
+        ///< \returns true iff the path is on the watch list.
 
     DirectoryWatcherEvents events;
+        ///< \brief An event object for Directory events.
+        ///< \sa ofAddListener()
+        ///< \sa ofRemoveListener()
+        ///< \sa registerAllEvents()
+        ///< \sa unregisterAllEvents()
 
+    /// Register a class to receive notifications for all events.
     template<class ListenerClass>
     void registerAllEvents(ListenerClass* listener, int order = OF_EVENT_ORDER_AFTER_APP)
     {
@@ -94,6 +152,7 @@ public:
         ofAddListener(events.onScanError,listener, &ListenerClass::onDirectoryWatcherError, order);
     }
 
+    /// Unregister a class to receive notifications for all events.
     template<class ListenerClass>
     void unregisterAllEvents(ListenerClass* listener)
     {
@@ -104,6 +163,9 @@ public:
         ofRemoveListener(events.onItemMovedTo, listener, &ListenerClass::onDirectoryWatcherItemMovedTo);
         ofRemoveListener(events.onScanError, listener, &ListenerClass::onDirectoryWatcherError);
     }
+
+protected:
+    AbstractPathFilter* getFilterForPath(const Poco::Path& path);
 
     void onItemAdded(const Poco::DirectoryWatcher::DirectoryEvent& evt)
     {
@@ -135,15 +197,11 @@ public:
         ofNotifyEvent(events.onScanError,exc,this);
     }
 
-
-protected:
-    AbstractFileFilter* getFilterForPath(const Poco::Path& path);
-
 private:
     typedef std::shared_ptr<Poco::DirectoryWatcher> DirectoryWatcherPtr;
     typedef std::map<Poco::File,DirectoryWatcherPtr> WatchList;
     typedef WatchList::iterator                  WatchListIter;
-    typedef std::map<Poco::File,AbstractFileFilter*> FilterList;
+    typedef std::map<Poco::File,AbstractPathFilter*> FilterList;
     typedef FilterList::iterator                 FilterListIter;
 
     WatchList  watchList;

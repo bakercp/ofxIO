@@ -39,26 +39,29 @@ namespace ofx {
 namespace IO {
 
 
-class FileFilterCollection: public AbstractFileFilter
+class PathFilterCollection: public AbstractPathFilter
 {
-    /// A collection of file filters to be executed as a single file filter.
+    /// \brief A collection of path filters that can be executed at once.
+    /// \details In many cases functions are allowed to recieve a single
+    /// AbstractPathFilter.  This class allows users to create a collection
+    /// of AbstractPathFilters that will be treated as a single filter.
 public:
-    FileFilterCollection()
-        ///> Create a file filter collection.
+    PathFilterCollection()
+        ///< \brief Create an empty file filter collection.
     {
     }
 
-    virtual ~FileFilterCollection()
-        ///> Destroy a file filter collection.
-        ///> This class does not take ownership of
-        ///> the pointers in the collection and does
-        ///> not manage their memory.
+    virtual ~PathFilterCollection()
+        ///< \brief Destroy a file filter collection.
+        ///< \warning This class does not take ownership of
+        ///< the pointers in the collection and does
+        ///< not manage their memory.
     {
     }
 
-    bool accept(const Poco::File& file) const
-        ///> Returns true iff the all file filters
-        ///> in the collection return true.
+    bool accept(const Poco::Path& path) const
+        ///< \returns true iff the all path filters
+        ///< in the collection also return true.
     {
         std::set<AbstractFileFilter*>::iterator iter = _filters.begin();
 
@@ -74,29 +77,29 @@ public:
         return true;
     }
 
-    void addFilter(AbstractFileFilter* filter)
-        ///> Add a file filter to the collection. The owner of the filter
-        ///> must manage the memory of the filter and maintain the pointer's
-        ///> validity while used in this file filter collection.
+    void addFilter(AbstractPathFilter* filter)
+        ///< Add a file filter to the collection. The owner of the filter
+        ///< must manage the memory of the filter and maintain the pointer's
+        ///< validity while used in this file filter collection.
     {
         _filters.insert(filter);
     }
 
-    void removeFilter(AbstractFileFilter* filter)
-        ///> Remove a file filter from the collection.  This does not
-        ///> delete of free the filter's memory.  The original owner of the
-        ///> filter is responsible for managing the file filter's memeory.
+    void removeFilter(AbstractPathFilter* filter)
+        ///< Remove a file filter from the collection.  This does not
+        ///< delete of free the filter's memory.  The original owner of the
+        ///< filter is responsible for managing the file filter's memeory.
     {
         _filters.erase(filter);
     }
 
 private:
-    std::set<AbstractFileFilter*> _filters; ///> A set of file filters.
+    std::set<AbstractPathFilter*> _filters; ///> A set of file filters.
     
 };
 
 
-class FileExtensionFilter: public AbstractFileFilter
+class FileExtensionFilter: public AbstractPathFilter
 {
 public:
 
@@ -114,10 +117,8 @@ public:
     {
     }
 
-    bool accept(const Poco::File& file) const
+    bool accept(const Poco::Path& path) const
     {
-        
-        Poco::Path path(file.path());
         std::string extension = path.getExtension();
 
         std::set<std::string>::iterator iter = _extensions.begin();
@@ -175,7 +176,7 @@ private:
 };
 
 
-class HiddenFileFilter: public AbstractFileFilter
+class HiddenFileFilter: public AbstractPathFilter
 {
 public:
     HiddenFileFilter()
@@ -186,7 +187,7 @@ public:
     {
     }
 
-    bool accept(const Poco::File& file) const
+    bool accept(const Poco::Path& file) const
     {
         return file.isHidden();
     }
@@ -194,7 +195,7 @@ public:
 };
 
 
-class DirectoryFilter: public AbstractFileFilter
+class DirectoryFilter: public AbstractPathFilter
 {
 public:
     DirectoryFilter()
@@ -205,7 +206,7 @@ public:
     {
     }
 
-    bool accept(const Poco::File& file) const
+    bool accept(const Poco::Path& file) const
     {
         return file.isDirectory();
     }
@@ -213,7 +214,7 @@ public:
 };
 
 
-class DeviceFilter: public AbstractFileFilter
+class DeviceFilter: public AbstractPathFilter
 {
 public:
     DeviceFilter()
@@ -224,7 +225,7 @@ public:
     {
     }
 
-    bool accept(const Poco::File& file) const
+    bool accept(const Poco::Path& path) const
     {
         return file.isDevice();
     }
@@ -232,7 +233,7 @@ public:
 };
 
 
-class LinkFilter: public AbstractFileFilter
+class LinkFilter: public AbstractPathFilter
 {
 public:
     LinkFilter()
@@ -243,7 +244,7 @@ public:
     {
     }
 
-    bool accept(const Poco::File& file) const
+    bool accept(const Poco::Path& path) const
     {
         return file.isLink();
     }
@@ -251,13 +252,14 @@ public:
 };
 
 
-class RegexPathFilter: public AbstractFileFilter
+class RegexPathFilter: public AbstractPathFilter
 {
 public:
     RegexPathFilter(const std::string& pattern,
                     int options = 0,
                     bool study = true):
         _regex(new Poco::RegularExpression(pattern, options, study))
+        ///< \param study is set to true when the user wants to  
     {
     }
 

@@ -43,15 +43,15 @@ DirectoryWatcherManager::~DirectoryWatcherManager()
 void DirectoryWatcherManager::addPath(const Poco::Path& path,
                                       bool listExistingItemsOnStart,
                                       bool sortAlphaNumeric,
-                                      AbstractFileFilter* fileFilterPtr,
+                                      AbstractPathFilter* pFilter,
                                       int eventMask,
                                       int scanInterval)
 {
 
     if(isWatching(path))
     {
-        Poco::Exception exc("Already Watching Exception",path.toString());
-        ofNotifyEvent(events.onScanError,exc,this);
+        Poco::Exception exc("Already Watching Exception", path.toString());
+        ofNotifyEvent(events.onScanError, exc, this);
         return;
     }
 
@@ -76,9 +76,9 @@ void DirectoryWatcherManager::addPath(const Poco::Path& path,
 
         mutex.lock();
 
-        if(0 != fileFilterPtr)
+        if(pFilter)
         {
-            filterList[path] = fileFilterPtr;
+            filterList[path] = pFilter;
         }
 
         watchList[path] = watcher;
@@ -89,7 +89,7 @@ void DirectoryWatcherManager::addPath(const Poco::Path& path,
         {
             std::vector<Poco::File> files;
             
-            DirectoryUtils::list(file, files, sortAlphaNumeric, fileFilterPtr);
+            DirectoryUtils::list(file, files, sortAlphaNumeric, pFilter);
 
             std::vector<Poco::File>::iterator iter = files.begin();
 
@@ -103,7 +103,7 @@ void DirectoryWatcherManager::addPath(const Poco::Path& path,
     }
     catch (const Poco::FileNotFoundException& exc)
     {
-        ofNotifyEvent(events.onScanError,exc,this);
+        ofNotifyEvent(events.onScanError, exc, this);
     }
 }
 
@@ -117,12 +117,12 @@ void DirectoryWatcherManager::removePath(const Poco::Path& path)
     {
         DirectoryWatcherPtr watcher = (*watchListIter).second;
 
-        watcher->itemAdded -= Poco::priorityDelegate(this,&DirectoryWatcherManager::onItemAdded,OF_EVENT_ORDER_AFTER_APP);
-        watcher->itemRemoved -= Poco::priorityDelegate(this,&DirectoryWatcherManager::onItemRemoved,OF_EVENT_ORDER_AFTER_APP);
-        watcher->itemModified -= Poco::priorityDelegate(this,&DirectoryWatcherManager::onItemModified,OF_EVENT_ORDER_AFTER_APP);
-        watcher->itemMovedFrom -= Poco::priorityDelegate(this,&DirectoryWatcherManager::onItemMovedFrom,OF_EVENT_ORDER_AFTER_APP);
-        watcher->itemMovedTo -= Poco::priorityDelegate(this,&DirectoryWatcherManager::onItemMovedTo,OF_EVENT_ORDER_AFTER_APP);
-        watcher->scanError -= Poco::priorityDelegate(this,&DirectoryWatcherManager::onScanError,OF_EVENT_ORDER_AFTER_APP);
+        watcher->itemAdded -= Poco::priorityDelegate(this, &DirectoryWatcherManager::onItemAdded, OF_EVENT_ORDER_AFTER_APP);
+        watcher->itemRemoved -= Poco::priorityDelegate(this, &DirectoryWatcherManager::onItemRemoved, OF_EVENT_ORDER_AFTER_APP);
+        watcher->itemModified -= Poco::priorityDelegate(this, &DirectoryWatcherManager::onItemModified, OF_EVENT_ORDER_AFTER_APP);
+        watcher->itemMovedFrom -= Poco::priorityDelegate(this, &DirectoryWatcherManager::onItemMovedFrom, OF_EVENT_ORDER_AFTER_APP);
+        watcher->itemMovedTo -= Poco::priorityDelegate(this, &DirectoryWatcherManager::onItemMovedTo, OF_EVENT_ORDER_AFTER_APP);
+        watcher->scanError -= Poco::priorityDelegate(this, &DirectoryWatcherManager::onScanError, OF_EVENT_ORDER_AFTER_APP);
 
         watchList.erase(watchListIter);
 
@@ -130,7 +130,6 @@ void DirectoryWatcherManager::removePath(const Poco::Path& path)
 
         if(filterListIter != filterList.end())
         {
-
             filterList.erase(filterListIter);
         }
     }
@@ -144,43 +143,7 @@ bool DirectoryWatcherManager::isWatching(const Poco::Path& path) const
 }
 
 
-//void DirectoryWatcherManager::handleFileAction(WatchID watchid,
-//                                               const string& _path,
-//                                               const string& _item,
-//                                               FileWatcher::Action action)
-//{
-//
-//    DirectoryWatcherEvents::Type evt = (DirectoryWatcherEvents::Type)0;
-//
-//    Poco::Path path(_path);
-//    Poco::File item(Poco::Path(_item).makeAbsolute());
-//
-//    BaseFileFilter* fileFilterPtr = getFilterForPath(path);
-//
-//    if(fileFilterPtr == NULL || fileFilterPtr->accept(item)) {
-//        // not all events are supported yet
-//        if(action == FileWatcher::Add) {
-//            evt = DirectoryWatcherEvents::ITEM_ADDED;
-//            DirectoryWatcherEventArgs args(path,item,evt);
-//            ofNotifyEvent(events.onItemAdded,args,this);
-//        } else if(action == FileWatcher::Delete) {
-//            evt = DirectoryWatcherEvents::ITEM_REMOVED;
-//            DirectoryWatcherEventArgs args(path,item,evt);
-//            ofNotifyEvent(events.onItemRemoved,args,this);
-//        } else if(action == FileWatcher::Modified) {
-//            evt = DirectoryWatcherEvents::ITEM_MODIFIED;
-//            DirectoryWatcherEventArgs args(path,item,evt);
-//            ofNotifyEvent(events.onItemModified,args,this);
-//        } else {
-//            Poco::IOException exc("Unknown FileWatcher::Action",action);
-//            ofNotifyEvent(events.onError,exc);
-//        }
-//    } else {
-//        // file was ignored based on the file filter
-//    }
-//}
-
-AbstractFileFilter* DirectoryWatcherManager::getFilterForPath(const Poco::Path& path)
+AbstractPathFilter* DirectoryWatcherManager::getFilterForPath(const Poco::Path& path)
 {
     ofScopedLock lock(mutex);
     FilterListIter iter = filterList.find(path);

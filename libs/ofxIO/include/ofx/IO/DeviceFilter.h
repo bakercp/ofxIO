@@ -26,7 +26,8 @@
 #pragma once
 
 
-#include "Poco/Path.h"
+#include <set>
+#include "Poco/File.h"
 #include "ofx/IO/AbstractTypes.h"
 
 
@@ -34,29 +35,18 @@ namespace ofx {
 namespace IO {
 
 
-class SearchPath: public AbstractSearchPath
-    /// \brief Represents a searchable path.
+class DeviceFilter: public AbstractPathFilter
+    /// \brief A path filter to accept device paths.
 {
 public:
-    SearchPath();
-        ///< \brief Construct an empty search path.
+    DeviceFilter();
+        ///< \brief Construct a device filter.
 
-    SearchPath(const Poco::Path& path, bool isRecursive = false);
-        ///< \brief Construct a search path.
-        ///< \param path is the search path.
-        ///< \param isRecursive enables recursive path searches.
+    virtual ~DeviceFilter();
+        ///< \brief Destroy a device filter.
 
-    virtual ~SearchPath();
-        ///< \brief Destroy a search path.
-
-    bool isRecursive() const;
-
-    Poco::Path getPath() const;
-    
-private:
-    Poco::Path _path;
-    bool _isRecursive;
-
+    bool accept(const Poco::Path& path) const;
+        ///< \returns true iff the path represents a device.
 };
 
 

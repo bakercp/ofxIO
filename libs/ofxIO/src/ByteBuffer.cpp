@@ -87,7 +87,7 @@ std::size_t ByteBuffer::readBytes(std::string& buffer) const
 }
 
 
-std::size_t ByteBuffer::readBytes(ByteBuffer& buffer) const
+std::size_t ByteBuffer::readBytes(AbstractByteSink& buffer) const
 {
     return buffer.writeBytes(_buffer);
 }
@@ -127,9 +127,9 @@ std::size_t ByteBuffer::writeBytes(const std::string& buffer)
 }
 
 
-std::size_t ByteBuffer::writeBytes(const ByteBuffer& buffer)
+std::size_t ByteBuffer::writeBytes(const AbstractByteSource& buffer)
 {
-    return writeBytes(buffer.getDataRef());
+    return writeBytes(buffer);
 }
 
 
@@ -151,9 +151,9 @@ bool ByteBuffer::empty() const
 }
 
 
-std::size_t ByteBuffer::resize(std::size_t size)
+std::size_t ByteBuffer::resize(std::size_t size, uint8_t fillByte)
 {
-    _buffer.resize(size);
+    _buffer.resize(size, fillByte);
     return _buffer.size();
 }
 

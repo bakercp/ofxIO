@@ -42,7 +42,7 @@ class ByteBuffer;
 
 
 class AbstractByteSource
-    /// \brief   Represents the abstract notion of a byte source.
+    /// \brief Represents the abstract notion of a byte source.
     /// \details An AbstractByteSource has bytes that can be read.
 {
 public:
@@ -70,11 +70,16 @@ public:
         ///< \returns the number of bytes that were successfully
         ///< written into the target buffer.
 
-    virtual std::size_t readBytes(ByteBuffer& buffer) const = 0;
+    virtual std::size_t readBytes(AbstractByteSink& buffer) const = 0;
         ///< \brief Read bytes from this source into a target buffer.
         ///< \param buffer is the target buffer to be filled with bytes.
         ///< \returns the number of bytes that were successfully
         ///< written into the target buffer.
+
+    virtual std::vector<uint8_t> readBytes() const = 0;
+        ///< \brief Return a copy of all bytes from this source.
+        ///< \returns the contents of the byte source as a vector of bytes;
+
 
 };
 
@@ -116,6 +121,12 @@ public:
         ///< \returns the number of bytes that were successfully
         ///< written into this byte sink.
 
+    virtual std::size_t writeBytes(const AbstractByteSource& buffer) = 0;
+        ///< \brief Write the contents of the buffer into this byte sink.
+        ///< \param buffer is the array of bytes to be written to this byte sink.
+        ///< \returns the number of bytes that were successfully
+        ///< written into this byte sink.
+
 };
 
 
@@ -151,20 +162,20 @@ public:
 };
 
 
-class AbstractFileFilter
-    /// \brief Represents the abstract notion of a file filter.
+class AbstractPathFilter
+    /// \brief Represents the abstract notion of a path filter.
     /// \details Subclasses implementing this interface can accept files
     /// based on a criteria defined in the accept() method.
 {
 public:
-    virtual ~AbstractFileFilter()
-        ///< \brief Destroys the file filter.
+    virtual ~AbstractPathFilter()
+        ///< \brief Destroys the path filter.
     {
     }
     
-    virtual bool accept(const Poco::File& file) const = 0;
-        ///< \brief Accept a file based on a defined criteria.
-        ///< \returns true iff the file is accepted by the file filter.
+    virtual bool accept(const Poco::Path& path) const = 0;
+        ///< \brief Accept a path based on a defined criteria.
+        ///< \returns true iff the path is accepted by the path filter.
 
 };
 
@@ -182,7 +193,7 @@ public:
         ///< \returns true iff this search path should be searched recursively.
 
     virtual Poco::Path getPath() const = 0;
-        ///< \returns the base search path.
+        ///< \returns the search path.
     
 };
 

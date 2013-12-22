@@ -26,7 +26,12 @@
 #pragma once
 
 
+#include <set>
+#include "Poco/File.h"
 #include "Poco/Path.h"
+#include "Poco/RegularExpression.h"
+#include "Poco/String.h"
+#include "Poco/UTF8String.h"
 #include "ofx/IO/AbstractTypes.h"
 
 
@@ -34,29 +39,22 @@ namespace ofx {
 namespace IO {
 
 
-class SearchPath: public AbstractSearchPath
-    /// \brief Represents a searchable path.
+class LinkFilter: public AbstractPathFilter
 {
 public:
-    SearchPath();
-        ///< \brief Construct an empty search path.
+    LinkFilter()
+    {
+    }
 
-    SearchPath(const Poco::Path& path, bool isRecursive = false);
-        ///< \brief Construct a search path.
-        ///< \param path is the search path.
-        ///< \param isRecursive enables recursive path searches.
+    virtual ~LinkFilter()
+    {
+    }
 
-    virtual ~SearchPath();
-        ///< \brief Destroy a search path.
-
-    bool isRecursive() const;
-
-    Poco::Path getPath() const;
+    bool accept(const Poco::Path& path) const
+    {
+        return file.isLink();
+    }
     
-private:
-    Poco::Path _path;
-    bool _isRecursive;
-
 };
 
 

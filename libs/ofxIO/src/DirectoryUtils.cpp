@@ -31,27 +31,53 @@ namespace ofx {
 namespace IO {
 
 
-DirectoryUtils::DirectoryUtils()
-{
-}
 
-
-DirectoryUtils::~DirectoryUtils()
+void DirectoryUtils::list(const AbstractSearchPath& path,
+                          std::vector<Poco::Path>& paths,
+                          bool sortAlphaNumeric,
+                          AbstractPathFilter* pFilter)
 {
+    paths.clear();
+
+    std::vector<std::string> _files;
+
+    if (path.isRecursive())
+    {
+        listRecursive(path.getPath().toString(),
+                      _files,
+                      sortAlphaNumeric,
+                      pFilter);
+    }
+    else
+    {
+        list(path.getPath().toString(),
+             _files,
+             sortAlphaNumeric,
+             pFilter);
+    }
+
+    std::vector<std::string>::const_iterator iter = _files.begin();
+
+    while(iter != _files.end())
+    {
+        paths.push_back(*iter);
+        ++iter;
+    }
+
 }
 
 void DirectoryUtils::list(const Poco::File& directory,
                           std::vector<Poco::File>& files,
                           bool sortAlphaNumeric,
-                          AbstractFileFilter* filterPtr)
+                          AbstractPathFilter* pFilter)
 {
 	files.clear();
 
     std::vector<std::string> _files;
 
-    list(directory.path(),_files,sortAlphaNumeric,filterPtr);
+    list(directory.path(), _files, sortAlphaNumeric, pFilter);
 
-    std::vector<std::string>::iterator iter = _files.begin();
+    std::vector<std::string>::const_iterator iter = _files.begin();
 
     while(iter != _files.end())
     {
@@ -65,15 +91,15 @@ void DirectoryUtils::list(const Poco::File& directory,
 void DirectoryUtils::list(const ofFile& directory,
                           std::vector<ofFile>& files,
                           bool sortAlphaNumeric,
-                          AbstractFileFilter* filterPtr)
+                          AbstractPathFilter* pFilter)
 {
     files.clear();
 
     std::vector<std::string> _files;
     
-    list(directory.path(),_files,sortAlphaNumeric,filterPtr);
+    list(directory.path(),_files,sortAlphaNumeric, pFilter);
 
-    std::vector<std::string>::iterator iter = _files.begin();
+    std::vector<std::string>::const_iterator iter = _files.begin();
 
     while(iter != _files.end())
     {
@@ -87,7 +113,7 @@ void DirectoryUtils::list(const ofFile& directory,
 void DirectoryUtils::list(const std::string& directory,
                           std::vector<std::string>& files,
                           bool sortAlphaNumeric,
-                          AbstractFileFilter* filterPtr)
+                          AbstractPathFilter* pFilter)
 {
     try
     {
@@ -105,9 +131,10 @@ void DirectoryUtils::list(const std::string& directory,
 
         Poco::DirectoryIterator iter(_directory);
         Poco::DirectoryIterator endIter;
+
         while (iter != endIter)
         {
-            if(filterPtr == NULL || filterPtr->accept(*iter))
+            if(!pFilter || pFilter->accept((*iter).path()))
             {
                 files.push_back(iter.path().toString());
             }
@@ -117,7 +144,9 @@ void DirectoryUtils::list(const std::string& directory,
         if(sortAlphaNumeric)
         {
             // now sort the vector with the algorithm
-            std::sort(files.begin(), files.end(), doj::alphanum_less<std::string>());
+            std::sort(files.begin(),
+                      files.end(),
+                      doj::alphanum_less<std::string>());
         }
     }
     catch(Poco::Exception& exc)
@@ -131,22 +160,22 @@ void DirectoryUtils::list(const std::string& directory,
 void DirectoryUtils::listRecursive(const std::string& directory,
                                    std::vector<std::string>& files,
                                    bool sortAlphaNumeric,
-                                   AbstractFileFilter* filterPtr,
+                                   AbstractPathFilter* pFilter,
                                    Poco::UInt16 maxDepth,
                                    TraversalOrder traversalOrder)
 {
     files.clear();
 
-    std::string _directory = ofToDataPath(directory,true);
+    std::string _directory = ofToDataPath(directory, true);
 
     if(traversalOrder == SIBLINGS_FIRST)
     {
-        Poco::SiblingsFirstRecursiveDirectoryIterator iter(_directory,maxDepth);
+        Poco::SiblingsFirstRecursiveDirectoryIterator iter(_directory, maxDepth);
         Poco::SiblingsFirstRecursiveDirectoryIterator endIter;
         
         while (iter != endIter)
         {
-            if(filterPtr == NULL || filterPtr->accept(*iter))
+            if(!pFilter || pFilter->accept((*iter).path()))
             {
                 files.push_back(iter.path().toString());
             }
@@ -156,12 +185,12 @@ void DirectoryUtils::listRecursive(const std::string& directory,
     }
     else if(traversalOrder == CHILDREN_FIRST)
     {
-        Poco::SimpleRecursiveDirectoryIterator iter(_directory,maxDepth);
+        Poco::SimpleRecursiveDirectoryIterator iter(_directory, maxDepth);
         Poco::SimpleRecursiveDirectoryIterator endIter;
 
         while (iter != endIter)
         {
-            if(filterPtr == NULL || filterPtr->accept(*iter))
+            if(!pFilter || pFilter->accept((*iter).path()))
             {
                 files.push_back(iter.path().toString());
             }
@@ -173,8 +202,10 @@ void DirectoryUtils::listRecursive(const std::string& directory,
 
     if(sortAlphaNumeric)
     {
-        // now sort the vector with the algorithm
-        std::sort(files.begin(), files.end(), doj::alphanum_less<std::string>());
+        // now sort the vector with the alpha numeric algorithm
+        std::sort(files.begin(),
+                  files.end(),
+                  doj::alphanum_less<std::string>());
     }
 
 }
@@ -183,7 +214,7 @@ void DirectoryUtils::listRecursive(const std::string& directory,
 void DirectoryUtils::listRecursive(const ofFile& directory,
                                    std::vector<ofFile>& files,
                                    bool sortAlphaNumeric,
-                                   AbstractFileFilter* filterPtr,
+                                   AbstractPathFilter* pFilter,
                                    Poco::UInt16 maxDepth,
                                    TraversalOrder traversalOrder)
 {
@@ -194,7 +225,7 @@ void DirectoryUtils::listRecursive(const ofFile& directory,
     listRecursive(directory.path(),
                   _files,
                   sortAlphaNumeric,
-                  filterPtr,
+                  pFilter,
                   maxDepth,
                   traversalOrder);
 
@@ -212,7 +243,7 @@ void DirectoryUtils::listRecursive(const ofFile& directory,
 void DirectoryUtils::listRecursive(const Poco::File& directory,
                                    std::vector<Poco::File>& files,
                                    bool sortAlphaNumeric,
-                                   AbstractFileFilter* filterPtr,
+                                   AbstractPathFilter* pFilter,
                                    Poco::UInt16 maxDepth,
                                    TraversalOrder traversalOrder)
 {
@@ -223,7 +254,7 @@ void DirectoryUtils::listRecursive(const Poco::File& directory,
     listRecursive(directory.path(),
                   _files,
                   sortAlphaNumeric,
-                  filterPtr,
+                  pFilter,
                   maxDepth,
                   traversalOrder);
 

@@ -33,10 +33,6 @@ namespace IO {
 class AbstractDataView
 {
 public:
-    AbstractDataView()
-    {
-    }
-
     virtual ~AbstractDataView()
     {
     }
