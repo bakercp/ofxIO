@@ -48,15 +48,15 @@ public:
         ///< \brief Construct a file extension filter.
         ///< \param ignoreCase will ingore case when comparing file extensions.
         ///< \param acceptMatches will accept matches. When acceptMatches is
-        ///< false, matching extensions are rejected.
+        ///<        false, matching extensions are rejected.
 
     virtual ~FileExtensionFilter();
         ///< \brief Destroy a file extension filter.
 
     bool accept(const Poco::Path& path) const;
         ///< \returns true iff the path extension matches one from the list
-        ///< and the additional match criteria (ignoreCase and acceptMatches)
-        ///< are also satisfied.
+        ///<        and the additional match criteria (ignoreCase and
+        ///<        acceptMatches) are also satisfied.
 
     void addExtension(const std::string& extension);
         ///< \brief Add an extension to the list of extensions.

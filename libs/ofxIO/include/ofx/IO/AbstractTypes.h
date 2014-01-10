@@ -54,31 +54,32 @@ public:
     virtual std::size_t readBytes(uint8_t* buffer, std::size_t size) const = 0;
         ///< \brief Read bytes from this source into a target buffer.
         ///< \param buffer is the target buffer to be filled with bytes.
-        ///< \param size is the number of bytes to be written into the target buffer.
+        ///< \param size is the number of bytes to be written into the
+        ///<        target buffer.
         ///< \returns the number of bytes that were successfully
-        ///< written into the target buffer.
+        ///<        written into the target buffer.
 
     virtual std::size_t readBytes(std::vector<uint8_t>& buffer) const = 0;
         ///< \brief Read bytes from this source into a target buffer.
         ///< \param buffer is the target buffer to be filled with bytes.
         ///< \returns the number of bytes that were successfully
-        ///< written into the target buffer.
+        ///<        written into the target buffer.
 
     virtual std::size_t readBytes(std::string& buffer) const = 0;
         ///< \brief Read bytes from this source into a target buffer.
         ///< \param buffer is the target buffer to be filled with bytes.
         ///< \returns the number of bytes that were successfully
-        ///< written into the target buffer.
+        ///<        written into the target buffer.
 
     virtual std::size_t readBytes(AbstractByteSink& buffer) const = 0;
         ///< \brief Read bytes from this source into a target buffer.
         ///< \param buffer is the target buffer to be filled with bytes.
         ///< \returns the number of bytes that were successfully
-        ///< written into the target buffer.
+        ///<        written into the target buffer.
 
     virtual std::vector<uint8_t> readBytes() const = 0;
         ///< \brief Return a copy of all bytes from this source.
-        ///< \returns the contents of the byte source as a vector of bytes;
+        ///< \returns the contents of the byte source as a vector of bytes.
 
 };
 
@@ -87,7 +88,7 @@ public:
 class AbstractByteSink
     /// \brief Represents the abstract notion of a byte sink.
     /// \details An AbstractByteSink can receive bytes written
-    /// from various sources.
+    ///         from various sources.
 {
 public:
     virtual ~AbstractByteSink()
@@ -99,32 +100,32 @@ public:
         ///< \brief Write a single byte into this byte sink.
         ///< \param data is the single byte to be written into this byte sink.
         ///< \returns the number of bytes that were successfully
-        ///< written into this byte sink.
+        ///<        written into this byte sink.
 
     virtual std::size_t writeBytes(const uint8_t* buffer, std::size_t size) = 0;
         ///< \brief Write the contents of the buffer into this byte sink.
         ///< \param buffer is the array of bytes to be written to this byte sink.
         ///< \param size is the number of bytes in the buffer.
         ///< \returns the number of bytes that were successfully
-        ///< written into this byte sink.
+        ///<        written into this byte sink.
 
     virtual std::size_t writeBytes(const std::vector<uint8_t>& buffer) = 0;
         ///< \brief Write the contents of the buffer into this byte sink.
         ///< \param buffer is the array of bytes to be written to this byte sink.
         ///< \returns the number of bytes that were successfully
-        ///< written into this byte sink.
+        ///<        written into this byte sink.
 
     virtual std::size_t writeBytes(const std::string& buffer) = 0;
         ///< \brief Write the contents of the buffer into this byte sink.
         ///< \param buffer is the array of bytes to be written to this byte sink.
         ///< \returns the number of bytes that were successfully
-        ///< written into this byte sink.
+        ///<        written into this byte sink.
 
     virtual std::size_t writeBytes(const AbstractByteSource& buffer) = 0;
         ///< \brief Write the contents of the buffer into this byte sink.
         ///< \param buffer is the array of bytes to be written to this byte sink.
         ///< \returns the number of bytes that were successfully
-        ///< written into this byte sink.
+        ///<        written into this byte sink.
 
 };
 
@@ -132,7 +133,7 @@ public:
 class AbstractBufferedByteSource
     /// \brief Represents the abstract notion a buffered byte source.
     /// \details Unlike a AbstractByteSource, a buffered byte source is
-    /// consumed as it is read.
+    ///         consumed as it is read.
 {
 public:
     virtual ~AbstractBufferedByteSource()
@@ -141,18 +142,20 @@ public:
     }
 
     virtual std::size_t readByte(uint8_t& data) = 0;
-        ///< \brief Read a single byte from this source into the referenced variable.
+        ///< \brief Read a single byte from this source into the
+        ///<        referenced variable.
         ///< \param data is referenced variable to be filled.
         ///< \returns the number of bytes that were successfully
-        ///< written into the referenced data variable.  The maxium
-        ///< return value is 1.
+        ///<        written into the referenced data variable.  The maxium
+        ///<        return value is 1.
 
     virtual std::size_t readBytes(uint8_t* buffer, std::size_t size) = 0;
         ///< \brief Read bytes from this source into a target buffer.
         ///< \param buffer is the target buffer to be filled with bytes.
-        ///< \param size is the number of bytes to be written into the target buffer.
+        ///< \param size is the number of bytes to be written into the
+        ///<        target buffer.
         ///< \returns the number of bytes that were successfully
-        ///< written into the target buffer.
+        ///<        written into the target buffer.
 
     virtual std::size_t available() const = 0;
         ///< \brief Query the number of buffered bytes.

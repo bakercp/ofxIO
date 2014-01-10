@@ -35,7 +35,7 @@ namespace IO {
 
 
 class SearchPath: public AbstractSearchPath
-    /// \brief Represents a searchable path.
+    /// \brief Represents a searchable path that can be recursive.
 {
 public:
     SearchPath();

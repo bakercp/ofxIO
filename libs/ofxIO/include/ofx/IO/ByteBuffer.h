@@ -117,7 +117,8 @@ public:
     const uint8_t* getDataPtr() const;
         ///< \returns a const pointer to the backing data vector.
 
-    friend std::ostream& operator << (std::ostream& os, const ByteBuffer& buffer);
+    friend std::ostream& operator << (std::ostream& os,
+                                      const ByteBuffer& buffer);
 
 private:
     std::vector<uint8_t> _buffer;
@@ -128,6 +129,7 @@ private:
 inline std::ostream& operator << (std::ostream& os, const ByteBuffer& buffer)
 {
     std::vector<uint8_t>::const_iterator iter = buffer._buffer.begin();
+
     while(iter != buffer._buffer.end())
     {
         os << (int)*iter; // cast to int so interpreted as numbers, not chars
