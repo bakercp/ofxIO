@@ -79,7 +79,7 @@ void ofApp::gotMessage(ofMessage msg)
 {
 
     int height = ofGetHeight();
-    int numLines = (int)(height / TXT_HEIGHT);
+    std::size_t numLines = (std::size_t)(height / TXT_HEIGHT);
 
     messages.push_front(msg.message);
 
