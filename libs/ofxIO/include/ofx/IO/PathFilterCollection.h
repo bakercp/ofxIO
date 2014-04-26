@@ -38,8 +38,9 @@ namespace IO {
 class PathFilterCollection: public AbstractPathFilter
     /// \brief A collection of path filters that can be executed at once.
     /// \details In many cases functions are allowed to recieve a single
-    /// AbstractPathFilter.  This class allows users to create a collection
-    /// of AbstractPathFilters that will be treated as a single filter.
+    ///         AbstractPathFilter.  This class allows users to create a
+    ///         collection of AbstractPathFilters that will be treated as a
+    ///         single filter.
 {
 public:
     PathFilterCollection();
@@ -48,25 +49,27 @@ public:
     virtual ~PathFilterCollection();
         ///< \brief Destroy a file filter collection.
         ///< \warning This class does not take ownership of
-        ///< the pointers in the collection and does
-        ///< not manage their memory.
+        ///<        the pointers in the collection and does
+        ///<        not manage their memory.
 
     bool accept(const Poco::Path& path) const;
         ///< \returns true iff the all path filters
-        ///< in the collection also return true.
+        ///<        in the collection also return true.
 
     void addFilter(AbstractPathFilter* filter);
-        ///< Add a file filter to the collection. The owner of the filter
-        ///< must manage the memory of the filter and maintain the pointer's
-        ///< validity while used in this file filter collection.
+        ///< \brief Add a file filter to the collection. The owner of the
+        ///<        filter must manage the memory of the filter and maintain
+        ///<        the pointer's validity while used in this file filter
+        ///<        collection.
 
     void removeFilter(AbstractPathFilter* filter);
-        ///< Remove a file filter from the collection.  This does not
-        ///< delete of free the filter's memory.  The original owner of the
-        ///< filter is responsible for managing the file filter's memeory.
+        ///< \brief Remove a file filter from the collection.  This does not
+        ///<        delete or otherwise free the filter's memory.  The original
+        ///<        owner of the filter is responsible for managing the
+        ///<        filter's memory.
 
 private:
-    std::set<AbstractPathFilter*> _filters; ///< A set of file filters.
+    std::set<AbstractPathFilter*> _filters; ///< \brief A set of file filters.
     
 };
 

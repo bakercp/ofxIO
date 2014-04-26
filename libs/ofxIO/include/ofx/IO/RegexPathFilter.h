@@ -49,11 +49,11 @@ public:
         ///< \brief Construct a new RegexPathFilter.
         ///< \param pattern is the regular expression pattern.
         ///< \param options for the regular expression.  Options
-        ///< are defined in the Poco::RegularExpression class.
+        ///<        are defined in the Poco::RegularExpression class.
         ///< \param optimize can be set to true when the Regex pattern
-        ///< should be analyzed and optimized.
+        ///<        should be analyzed and optimized.
         ///< \throws Poco::RegularExpressionException os thrown
-        ///< if the pattern cannot be compiled.
+        ///<        if the pattern cannot be compiled.
         ///< \sa Poco::RegularExpression
 
     virtual ~RegexPathFilter();

@@ -65,14 +65,16 @@ void DirectoryWatcherManager::addPath(const Poco::Path& path,
             throw exc;
         }
 
-        DirectoryWatcherPtr watcher = DirectoryWatcherPtr(new Poco::DirectoryWatcher(path.toString()));
+        DirectoryWatcherPtr watcher = DirectoryWatcherPtr(new Poco::DirectoryWatcher(path.toString(),
+                                                                                     eventMask,
+                                                                                     scanInterval));
 
-        watcher->itemAdded += Poco::priorityDelegate(this,&DirectoryWatcherManager::onItemAdded, OF_EVENT_ORDER_AFTER_APP);
-        watcher->itemRemoved += Poco::priorityDelegate(this,&DirectoryWatcherManager::onItemRemoved, OF_EVENT_ORDER_AFTER_APP);
-        watcher->itemModified += Poco::priorityDelegate(this,&DirectoryWatcherManager::onItemModified, OF_EVENT_ORDER_AFTER_APP);
-        watcher->itemMovedFrom += Poco::priorityDelegate(this,&DirectoryWatcherManager::onItemMovedFrom, OF_EVENT_ORDER_AFTER_APP);
-        watcher->itemMovedTo += Poco::priorityDelegate(this,&DirectoryWatcherManager::onItemMovedTo, OF_EVENT_ORDER_AFTER_APP);
-        watcher->scanError += Poco::priorityDelegate(this,&DirectoryWatcherManager::onScanError, OF_EVENT_ORDER_AFTER_APP);
+        watcher->itemAdded += Poco::priorityDelegate(this, &DirectoryWatcherManager::onItemAdded, OF_EVENT_ORDER_AFTER_APP);
+        watcher->itemRemoved += Poco::priorityDelegate(this, &DirectoryWatcherManager::onItemRemoved, OF_EVENT_ORDER_AFTER_APP);
+        watcher->itemModified += Poco::priorityDelegate(this, &DirectoryWatcherManager::onItemModified, OF_EVENT_ORDER_AFTER_APP);
+        watcher->itemMovedFrom += Poco::priorityDelegate(this, &DirectoryWatcherManager::onItemMovedFrom, OF_EVENT_ORDER_AFTER_APP);
+        watcher->itemMovedTo += Poco::priorityDelegate(this, &DirectoryWatcherManager::onItemMovedTo, OF_EVENT_ORDER_AFTER_APP);
+        watcher->scanError += Poco::priorityDelegate(this, &DirectoryWatcherManager::onScanError, OF_EVENT_ORDER_AFTER_APP);
 
         mutex.lock();
 
@@ -95,7 +97,7 @@ void DirectoryWatcherManager::addPath(const Poco::Path& path,
 
             while(iter != files.end())
             {
-                Poco::DirectoryWatcher::DirectoryEvent event(*iter,Poco::DirectoryWatcher::DW_ITEM_ADDED);
+                Poco::DirectoryWatcher::DirectoryEvent event(*iter, Poco::DirectoryWatcher::DW_ITEM_ADDED);
                 ofNotifyEvent(events.onItemAdded,event,this);
                 ++iter;
             }

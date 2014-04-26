@@ -180,7 +180,7 @@ const uint8_t* ByteBuffer::getDataPtr() const
 {
     if(!_buffer.empty())
     {
-        &_buffer[0];
+        return &_buffer[0];
     }
     else
     {

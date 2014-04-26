@@ -78,35 +78,38 @@ public:
     enum DirectoryEventType
 	{
 		ITEM_ADDED = Poco::DirectoryWatcher::DW_ITEM_ADDED,
-            ///< A new item has been created and added to the directory.
+            ///< \brief A new item has been created and added to the directory.
 
 		ITEM_REMOVED = Poco::DirectoryWatcher::DW_ITEM_REMOVED,
-            ///< An item has been removed from the directory.
+            ///< \brief An item has been removed from the directory.
 
 		ITEM_MODIFIED = Poco::DirectoryWatcher::DW_ITEM_MODIFIED,
             ///< An item has been modified.
 
 		ITEM_MOVED_FROM = Poco::DirectoryWatcher::DW_ITEM_MOVED_FROM,
-            ///< An item has been renamed or moved. This event delivers the old name.
+            ///< \brief An item has been renamed or moved.
+            ///<        This event delivers the old name.
 
 		ITEM_MOVED_TO = Poco::DirectoryWatcher::DW_ITEM_MOVED_TO,
-            ///< An item has been renamed or moved. This event delivers the new name.
+            ///< \brief An item has been renamed or moved.
+            ///<        This event delivers the new name.
 	};
 
 
     enum DirectoryEventMask
 	{
 		FILTER_ENABLE_ALL = Poco::DirectoryWatcher::DW_FILTER_ENABLE_ALL,
-            ///< Enables all event types.
+            ///< \brief Enables all event types.
 
 		FILTER_DISABLE_ALL = Poco::DirectoryWatcher::DW_FILTER_DISABLE_ALL
-            ///< Disables all event types.
+            ///< \brief Disables all event types.
 	};
 
 	enum
 	{
 		DEFAULT_SCAN_INTERVAL = Poco::DirectoryWatcher::DW_DEFAULT_SCAN_INTERVAL
-            ///< Default scan interval for platforms that don't provide a native notification mechanism.
+            ///< \brief Default scan interval for platforms that don't
+            ///<        provide a native notification mechanism.
 	};
 
     DirectoryWatcherManager();
@@ -121,13 +124,19 @@ public:
                  AbstractPathFilter* pFilter   = 0,
                  int  eventMask                = FILTER_ENABLE_ALL,
                  int  scanInterval             = DEFAULT_SCAN_INTERVAL);
-        ///< \brief Add a path to the watch list in order to receive related events.
-        ///< \param listExistingItemsOnStart
-        ///< \param sortAlphaNumeric
+        ///< \brief Add a path to the watch list in order to receive related
+        ///<        events.
+        ///< \param listExistingItemsOnStart will fire ITEM_ADDED events for
+        ///<        matching items in the directory upon startup.
+        ///< \param sortAlphaNumeric sorts all values alphanumerically.
         ///< \param pFilter is the path filter for this path.  The
-        ///< DirectoryWatcherManager does not take ownership of the pointer.
-        ///< \param eventMask
-        ///< \param scanInterval specifies the interval in seconds between scans.
+        ///<        DirectoryWatcherManager does not take  ownership
+        ///<        ownership of the pointer.
+        ///< \param eventMask defines the behavior of the
+        ///<        DirectoryWatcherManager for this Path.
+        ///< \param scanInterval specifies the interval in seconds between scans
+        ///<        for platforms that don't provide native notification
+        ///<        mechanisms.
 
     void removePath(const Poco::Path& path);
         ///< \brief Remove a path from the watch list.
