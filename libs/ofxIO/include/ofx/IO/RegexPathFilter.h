@@ -39,29 +39,29 @@ namespace ofx {
 namespace IO {
 
 
+/// \brief A regular expression-based path filter.
 class RegexPathFilter: public AbstractPathFilter
-    /// \brief A regular expression-based path filter.
 {
 public:
+    /// \brief Construct a new RegexPathFilter.
+    /// \param pattern is the regular expression pattern.
+    /// \param options for the regular expression.  Options
+    ///        are defined in the Poco::RegularExpression class.
+    /// \param optimize can be set to true when the Regex pattern
+    ///        should be analyzed and optimized.
+    /// \throws Poco::RegularExpressionException os thrown
+    ///        if the pattern cannot be compiled.
+    /// \sa Poco::RegularExpression
     RegexPathFilter(const std::string& pattern,
                     int options = 0,
                     bool optimize = true);
-        ///< \brief Construct a new RegexPathFilter.
-        ///< \param pattern is the regular expression pattern.
-        ///< \param options for the regular expression.  Options
-        ///<        are defined in the Poco::RegularExpression class.
-        ///< \param optimize can be set to true when the Regex pattern
-        ///<        should be analyzed and optimized.
-        ///< \throws Poco::RegularExpressionException os thrown
-        ///<        if the pattern cannot be compiled.
-        ///< \sa Poco::RegularExpression
 
+    /// \brief Destroys the regex path filter.
     virtual ~RegexPathFilter();
-        ///< \brief Destroys the regex path filter.
 
+    /// \brief Accept a path based on a regular expression.
+    /// \returns true iff the path is accepted by the path filter.
     bool accept(const Poco::Path& path) const;
-        ///< \brief Accept a path based on a regular expression.
-        ///< \returns true iff the path is accepted by the path filter.
 
 private:
     Poco::RegularExpression* _pRegex;

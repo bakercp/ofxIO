@@ -45,6 +45,8 @@ public:
     /// \brief Destroy a device filter.
     virtual ~DeviceFilter();
 
+    
+    /// \brief Accept a path based if it represents a device.
     /// \returns true iff the path represents a device.
     bool accept(const Poco::Path& path) const;
 };

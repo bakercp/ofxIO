@@ -36,37 +36,38 @@ namespace ofx {
 namespace IO {
 
 
+/// \brief A flexible byte buffer.
+///
+/// The ByteBuffer is a backed by a std::vector of bytes.
 class ByteBuffer: public AbstractByteSource, public AbstractByteSink
-    /// \brief A flexible byte buffer.
-    /// \details The ByteBuffer is a backed by a std::vector of bytes.
 {
 public:
+    /// \brief Construct an empty ByteBuffer.
     ByteBuffer();
-        ///< \brief Construct an empty ByteBuffer.
 
+    /// \brief Construct a ByteBuffer with a single byte.
+    /// \param data is a single inital byte.
     explicit ByteBuffer(uint8_t data);
-        ///< \brief Construct a ByteBuffer with a single byte.
-        ///< \param data is a single inital byte.
 
+    /// \brief Construct a ByteBuffer from a byte array.
+    /// \param buffer is an array of bytes.
+    /// \param size is the number of bytes in the buffer.
     explicit ByteBuffer(const uint8_t* buffer, std::size_t size);
-        ///< \brief Construct a ByteBuffer from a byte array.
-        ///< \param buffer is an array of bytes.
-        ///< \param size is the number of bytes in the buffer.
 
+    /// \brief Construct a ByteBuffer from a byte vector.
+    /// \param buffer is a vector of bytes.
     explicit ByteBuffer(const std::vector<uint8_t>& buffer);
-        ///< \brief Construct a ByteBuffer from a byte vector.
-        ///< \param buffer is a vector of bytes.
 
+    /// \brief Construct a ByteBuffer from a string.
+    /// \param buffer will be interpreted as raw bytes.
     explicit ByteBuffer(const std::string& buffer);
-        ///< \brief Construct a ByteBuffer from a string.
-        ///< \param buffer will be interpreted as raw bytes.
 
+    /// \brief Construct a ByteBuffer from a byte source.
+    /// \param buffer is a source of bytes.
     explicit ByteBuffer(const AbstractByteSource& buffer);
-        ///< \brief Construct a ByteBuffer from a byte source.
-        ///< \param buffer is a source of bytes.
 
+    ///< \brief Destroy the ByteBuffer.
     virtual ~ByteBuffer();
-        ///< \brief Destroy a ByteBuffer.
 
     virtual std::size_t readBytes(uint8_t* buffer, std::size_t size) const;
     virtual std::size_t readBytes(std::vector<uint8_t>& buffer) const;
@@ -80,48 +81,59 @@ public:
     virtual std::size_t writeBytes(const std::string& buffer);
     virtual std::size_t writeBytes(const AbstractByteSource& buffer);
 
+    /// \brief Query the number of bytes in the ByteBuffer.
+    /// \returns the number of bytes in the ByteBuffer.
     std::size_t size() const;
-        ///< \returns the number of bytes in the ByteBuffer.
 
+    /// \brief Determine if the ByteBuffer is empty.
+    /// \returns true iff the number of bytes in the ByteBuffer is 0.
     bool empty() const;
-        ///< \returns true iff the number of bytes in the ByteBuffer is 0.
 
+    ///< \brief Clears all bytes from the ByteBuffer.
     void clear();
-        ///< \brief Clears all bytes from the ByteBuffer.
 
+    /// \brief Resizes the ByteBuffer.
+    /// \param size is the new size. If size is less than size(), the
+    /// content is reduced to the first size elements.  If size is greater
+    /// than size(), the new entries are filled with fillByte.
+    /// \param fillByte is the value used to fill expanded buffer elements.
+    /// \returns the new size of the ByteBuffer.
     std::size_t resize(std::size_t size, uint8_t fillByte = 0);
-        ///< \brief Resizes the ByteBuffer.
-        ///< \param size is the new size. If size is less than size(), the
-        ///< content is reduced to the first size elements.  If size is greater
-        ///< than size(), the new entries are filled with fillByte.
-        ///< \param fillByte is the value used to fill expanded buffer elements.
-        ///< \returns the new size of the ByteBuffer.
 
-    // slice();
-
+    /// \param n is the element index in the ByteBuffer.
+    ///
+    /// The value of n should not exceed size() - 1.
+    ///
+    /// \returns a reference to the byte at position n in the ByteBuffer.
+    /// \note The first element has a position of 0 (not 1).
 	uint8_t& operator [] (std::size_t n);
-        ///< \param n is the element index in the ByteBuffer.
-        ///< The value of n should not exceed size() - 1.
-        ///< \returns a reference to the byte at position n in the ByteBuffer.
-        ///< \note The first element has a position of 0 (not 1).
 
+    /// \param n is the element index in the ByteBuffer.
+    ///
+    /// The value of n should not exceed size() - 1.
+    ///
+    /// \returns a copy of the byte at position n in the ByteBuffer.
+    /// \note The first element has a position of 0 (not 1).
 	uint8_t operator [] (std::size_t n) const;
-        ///< \param n is the element index in the ByteBuffer.
-        ///< The value of n should not exceed size() - 1.
-        ///< \returns a copy of the byte at position n in the ByteBuffer.
-        ///< \note The first element has a position of 0 (not 1).
 
+    /// \brief Get a const reference to the backing data vector.
+    /// \returns a const reference to the backing data vector.
     const std::vector<uint8_t>& getDataRef() const;
-        ///< \returns a const reference to the backing data vector.
 
+    /// \brief Get a const pointer to the backing data vector.
+    /// \returns a const pointer to the backing data vector.
     const uint8_t* getDataPtr() const;
-        ///< \returns a const pointer to the backing data vector.
 
+    /// \brief Write the buffer to an output stream.
+    /// \param os The std::ostream to write to.
+    /// \param buffer the ByteBuffer to write.
+    /// \returns the std::ostream that was written to.
     friend std::ostream& operator << (std::ostream& os,
                                       const ByteBuffer& buffer);
 
 private:
     std::vector<uint8_t> _buffer;
+        ///< \brief The backing byte buffer.
 
 };
 

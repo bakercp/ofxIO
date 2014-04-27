@@ -35,18 +35,19 @@ namespace ofx {
 namespace IO {
 
 
+/// \brief A path filter to accept directory paths.
 class DirectoryFilter: public AbstractPathFilter
-    /// \brief A path filter to accept directory paths.
 {
 public:
+    /// \brief Construct a directory filter.
     DirectoryFilter();
-        ///< \brief Construct a directory filter.
 
+    /// \brief Destroys a directory filter.
     virtual ~DirectoryFilter();
-        ///< \brief Destroys a directory filter.
 
+    /// \brief Accept a path based if it represents a directory.
+    /// \returns true iff the path represents a directory.
     bool accept(const Poco::Path& path) const;
-        ///< \returns true iff the path represents a directory.
 
 };
 

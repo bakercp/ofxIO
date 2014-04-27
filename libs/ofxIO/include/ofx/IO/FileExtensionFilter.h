@@ -37,45 +37,54 @@ namespace ofx {
 namespace IO {
 
 
+/// \brief A path filter to accept files with certain extensions.
 class FileExtensionFilter: public AbstractPathFilter
-    /// \brief A path filter to accept files with certain extensions.
 {
 public:
+    /// \brief Construct an empty file extension filter.
     FileExtensionFilter();
-        ///< \brief Construct an empty file extension filter.
 
+    /// \brief Construct a file extension filter.
+    /// \param ignoreCase will ingore case when comparing file extensions.
+    /// \param acceptMatches will accept matches. When acceptMatches is
+    ///        false, matching extensions are rejected.
     FileExtensionFilter(bool ignoreCase, bool acceptMatches = true);
-        ///< \brief Construct a file extension filter.
-        ///< \param ignoreCase will ingore case when comparing file extensions.
-        ///< \param acceptMatches will accept matches. When acceptMatches is
-        ///<        false, matching extensions are rejected.
 
     virtual ~FileExtensionFilter();
         ///< \brief Destroy a file extension filter.
 
+    /// \brief Accept a path based if it represents satisfies the file filter.
+    /// \returns true iff the path extension matches one from the list
+    ///        and the additional match criteria (ignoreCase and
+    ///        acceptMatches) are also satisfied.
     bool accept(const Poco::Path& path) const;
-        ///< \returns true iff the path extension matches one from the list
-        ///<        and the additional match criteria (ignoreCase and
-        ///<        acceptMatches) are also satisfied.
 
+    /// \brief Add an extension to the list of extensions.
+    /// \param extension to be added to the list (e.g. ".jpg").
     void addExtension(const std::string& extension);
-        ///< \brief Add an extension to the list of extensions.
-        ///< \param extension to be added to the list (e.g. ".jpg").
 
+    /// \brief Remove an extension from the list of extensions.
+    /// \param extension to be removed from the list (e.g. ".jpg").
     void removeExtension(const std::string& extension);
-        ///< \brief Remove an extension from the list of extensions.
-        ///< \param extension to be removed from the list (e.g. ".jpg").
 
+    /// \brief Set if the case should be ignored.
+    /// \param ignoreCase will ingore case when comparing file extensions.
     void setIgnoreCase(bool ignoreCase);
-        ///< \param ignoreCase will ingore case when comparing file extensions.
 
+    /// \brief Query if the case is ignored.
+    /// \returns true if the file extension case will be ignored.
     bool getIgnoreCase() const;
-        ///< \returns true if the file extension case will be ignored.
 
 private:
     bool _ignoreCase;
+        ///< \brief true iff the case should be ignored.
+
     bool _acceptMatches;
+        ///< \brief true iff matches should be accepted,
+        ///< otherwise false iff matches should be rejected.
+
     std::set<std::string> _extensions;
+        ///< \brief The list of file extensions to match.
     
 };
 

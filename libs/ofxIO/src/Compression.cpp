@@ -23,11 +23,11 @@
 // =============================================================================
 
 
-#include "ofx/IO/Compression.h"
-
-
-namespace ofx {
-namespace IO {
-
-
-} }  // namespace ofx::IO
+//#include "ofx/IO/Compression.h"
+//
+//
+//namespace ofx {
+//namespace IO {
+//
+//
+//} }  // namespace ofx::IO

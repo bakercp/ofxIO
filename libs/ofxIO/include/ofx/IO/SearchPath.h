@@ -34,20 +34,20 @@ namespace ofx {
 namespace IO {
 
 
+/// \brief Represents a searchable path that can be recursive.
 class SearchPath: public AbstractSearchPath
-    /// \brief Represents a searchable path that can be recursive.
 {
 public:
+    /// \brief Construct an empty search path.
     SearchPath();
-        ///< \brief Construct an empty search path.
 
+    /// \brief Construct a search path.
+    /// \param path is the search path.
+    /// \param isRecursive enables recursive path searches.
     SearchPath(const Poco::Path& path, bool isRecursive = false);
-        ///< \brief Construct a search path.
-        ///< \param path is the search path.
-        ///< \param isRecursive enables recursive path searches.
 
+    /// \brief Destroy a search path.
     virtual ~SearchPath();
-        ///< \brief Destroy a search path.
 
     bool isRecursive() const;
 
@@ -55,7 +55,10 @@ public:
     
 private:
     Poco::Path _path;
+        ///< \brief The path to search.
+
     bool _isRecursive;
+        ///< \brief True if the search path is recursive.
 
 };
 

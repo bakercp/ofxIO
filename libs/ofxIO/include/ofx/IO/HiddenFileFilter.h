@@ -39,18 +39,19 @@ namespace ofx {
 namespace IO {
 
 
+/// \brief A path filter to accept hidden files.
 class HiddenFileFilter: public AbstractPathFilter
-    /// \brief A path filter to accept hidden files.
 {
 public:
+    /// \brief Construct a hidden file filter.
     HiddenFileFilter();
-        ///< \brief Construct a hidden file filter.
 
+    /// \brief Destroys a hidden file filter.
     virtual ~HiddenFileFilter();
-        ///< \brief Destroys a hidden file filter.
 
+    /// \brief Accept a path based if it represents a hidden file.
+    /// \returns true iff the path represents a hidden file.
     bool accept(const Poco::Path& path) const;
-        ///< \returns true iff the path represents a hidden file.
 
 };
 

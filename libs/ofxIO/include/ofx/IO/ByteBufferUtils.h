@@ -33,49 +33,49 @@ namespace ofx {
 namespace IO {
 
 
+/// \brief Utilities for use with ByteBuffer.
 class ByteBufferUtils
-    /// \brief Utilities for use with ByteBuffer.
 {
 public:
+    /// \brief create a byte buffer from two bytes.
+    /// \param d0 is the first byte.
+    /// \param d1 is the second byte.
+    /// \returns a new ByteBuffer.
     static ByteBuffer makeBuffer(uint8_t d0,
                                  uint8_t d1);
-        ///< \brief create a byte buffer from two bytes.
-        ///< \param d0 is the first byte.
-        ///< \param d1 is the second byte.
-        ///< \returns a new ByteBuffer.
 
+    /// \brief create a byte buffer from three bytes.
+    /// \param d0 is the first byte.
+    /// \param d1 is the second byte.
+    /// \param d2 is the third byte.
+    /// \returns a new ByteBuffer.
     static ByteBuffer makeBuffer(uint8_t d0,
                                  uint8_t d1,
                                  uint8_t d2);
-        ///< \brief create a byte buffer from three bytes.
-        ///< \param d0 is the first byte.
-        ///< \param d1 is the second byte.
-        ///< \param d2 is the third byte.
-        ///< \returns a new ByteBuffer.
 
+    /// \brief create a byte buffer from four bytes.
+    /// \param d0 is the first byte.
+    /// \param d1 is the second byte.
+    /// \param d2 is the third byte.
+    /// \param d3 is the fouth byte.
+    /// \returns a new ByteBuffer.
     static ByteBuffer makeBuffer(uint8_t d0,
                                  uint8_t d1,
                                  uint8_t d2,
                                  uint8_t d3);
-        ///< \brief create a byte buffer from four bytes.
-        ///< \param d0 is the first byte.
-        ///< \param d1 is the second byte.
-        ///< \param d2 is the third byte.
-        ///< \param d3 is the fouth byte.
-        ///< \returns a new ByteBuffer.
 
+    /// \brief create a byte buffer from five bytes.
+    /// \param d0 is the first byte.
+    /// \param d1 is the second byte.
+    /// \param d2 is the third byte.
+    /// \param d3 is the fouth byte.
+    /// \param d4 is the fifth byte.
+    /// \returns a new ByteBuffer.
     static ByteBuffer makeBuffer(uint8_t d0,
                                  uint8_t d1,
                                  uint8_t d2,
                                  uint8_t d3,
                                  uint8_t d4);
-        ///< \brief create a byte buffer from five bytes.
-        ///< \param d0 is the first byte.
-        ///< \param d1 is the second byte.
-        ///< \param d2 is the third byte.
-        ///< \param d3 is the fouth byte.
-        ///< \param d4 is the fifth byte.
-        ///< \returns a new ByteBuffer.
 
 };
 

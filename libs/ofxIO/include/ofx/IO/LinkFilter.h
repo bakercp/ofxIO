@@ -39,19 +39,20 @@ namespace ofx {
 namespace IO {
 
 
+/// \brief A path filter to accept symbolic link paths.
 class LinkFilter: public AbstractPathFilter
-    /// \brief A path filter to accept symbolic link paths.
 {
 public:
+    /// \brief Construct a link filter.
     LinkFilter();
-        ///< \brief Construct a link filter.
 
+    /// \brief Destroy a link filter.
     virtual ~LinkFilter();
-        ///< \brief Destroy a link filter.
 
+    /// \brief Accept a path based if it represents a symbolic link.
+    /// \returns true iff the path represents a symbolic link.
     bool accept(const Poco::Path& path) const;
-        ///< \returns true iff the path represents a symbolic link.
-    
+
 };
 
 

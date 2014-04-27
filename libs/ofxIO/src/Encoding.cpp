@@ -30,16 +30,16 @@ namespace ofx {
 namespace IO {
 
 
-ByteBuffer Encoding::fromBase64(const std::string& buffer)
-{
-    
-}
+//ByteBuffer Encoding::fromBase64(const std::string& buffer)
+//{
+//    return buffer;
+//}
 
 
-ByteBuffer Encoding::fromHexBinary(const std::string& buffer)
-{
-
-}
+//ByteBuffer Encoding::fromHexBinary(const std::string& buffer)
+//{
+//
+//}
 
 
 

@@ -35,15 +35,13 @@ namespace ofx {
 namespace IO {
 
 
-class Encoding
-{
-public:
-    static ByteBuffer fromBase64(const std::string& buffer);
-    static ByteBuffer fromHexBinary(const std::string& buffer);
-
-
-
-};
+//class Encoding
+//{
+//public:
+//    static ByteBuffer fromBase64(const std::string& buffer);
+//    static ByteBuffer fromHexBinary(const std::string& buffer);
+//
+//};
 
 
 } } // namespace ofx::IO
