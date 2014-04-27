@@ -35,18 +35,18 @@ namespace ofx {
 namespace IO {
 
 
+/// \brief A path filter to accept device paths.
 class DeviceFilter: public AbstractPathFilter
-    /// \brief A path filter to accept device paths.
 {
 public:
+    /// \brief Construct a device filter.
     DeviceFilter();
-        ///< \brief Construct a device filter.
 
+    /// \brief Destroy a device filter.
     virtual ~DeviceFilter();
-        ///< \brief Destroy a device filter.
 
+    /// \returns true iff the path represents a device.
     bool accept(const Poco::Path& path) const;
-        ///< \returns true iff the path represents a device.
 };
 
 
