@@ -68,7 +68,7 @@ bool FileExtensionFilter::accept(const Poco::Path& path) const
         }
         else
         {
-            match = (extension == *iter);
+            match = (0 == extension.compare(*iter));
         }
 
         if(_acceptMatches && match)
