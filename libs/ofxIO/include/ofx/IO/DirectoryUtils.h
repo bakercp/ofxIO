@@ -52,6 +52,7 @@ public:
             ///<        directory, do not limit the dept.
     };
 
+    /// \brief The order of directory listing traversal.
     enum TraversalOrder
     {
         SIBLINGS_FIRST = 0,

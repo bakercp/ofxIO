@@ -89,7 +89,7 @@ public:
     /// \returns true iff the number of bytes in the ByteBuffer is 0.
     bool empty() const;
 
-    ///< \brief Clears all bytes from the ByteBuffer.
+    /// \brief Clears all bytes from the ByteBuffer.
     void clear();
 
     /// \brief Resizes the ByteBuffer.

@@ -48,6 +48,7 @@ namespace IO {
 class DirectoryWatcherEvents
 {
 public:
+    /// \brief A typedef for a Poco::DirectoryWatcher::DirectoryEvent.
     typedef Poco::DirectoryWatcher::DirectoryEvent DirectoryEvent;
 
     /// \brief Create a DirectoryWatcherEvents.
@@ -88,8 +89,10 @@ public:
 class DirectoryWatcherManager
 {
 public:
+    /// \brief A typedef for a Poco::DirectoryWatcher::DirectoryEvent.
     typedef Poco::DirectoryWatcher::DirectoryEvent DirectoryEvent;
 
+    /// \brief A directory type event.
     enum DirectoryEventType
 	{
 		ITEM_ADDED = Poco::DirectoryWatcher::DW_ITEM_ADDED,
@@ -110,7 +113,7 @@ public:
             ///<        This event delivers the new name.
 	};
 
-
+    /// \brief A collection of directory event masks.
     enum DirectoryEventMask
 	{
 		FILTER_ENABLE_ALL = Poco::DirectoryWatcher::DW_FILTER_ENABLE_ALL,
@@ -134,6 +137,7 @@ public:
     virtual ~DirectoryWatcherManager();
 
     /// \brief Add a path to the watch list in order to receive related events.
+    /// \param path The path to add and watch.
     /// \param listExistingItemsOnStart will fire ITEM_ADDED events for
     ///        matching items in the directory upon startup.
     /// \param sortAlphaNumeric sorts all values alphanumerically.
@@ -197,35 +201,49 @@ public:
 
 protected:
     /// \brief Get a matching filter for the given path.
-    /// \path The path to match.
+    /// \param path The path to match.
     /// \returns A pointer to the matching AbstractPathFilter.
     AbstractPathFilter* getFilterForPath(const Poco::Path& path);
 
+    /// \brief Called when an item is added.
+    /// \param evt A Poco::DirectoryWatcher::DirectoryEvent.
     void onItemAdded(const Poco::DirectoryWatcher::DirectoryEvent& evt)
     {
         ofNotifyEvent(events.onItemAdded,evt,this);
     }
 
+    /// \brief Called when an item is removed.
+    /// \param evt A Poco::DirectoryWatcher::DirectoryEvent.
     void onItemRemoved(const Poco::DirectoryWatcher::DirectoryEvent& evt)
     {
         ofNotifyEvent(events.onItemRemoved,evt,this);
     }
 
+    /// \brief Called when an item is modified.
+    /// \param evt A Poco::DirectoryWatcher::DirectoryEvent.
     void onItemModified(const Poco::DirectoryWatcher::DirectoryEvent& evt)
     {
         ofNotifyEvent(events.onItemModified,evt,this);
     }
 
+    /// \brief Called when an item is moved from one location to another.
+    /// \param evt A Poco::DirectoryWatcher::DirectoryEvent.
+    /// \note Not implemented on all platforms.
     void onItemMovedFrom(const Poco::DirectoryWatcher::DirectoryEvent& evt)
     {
         ofNotifyEvent(events.onItemMovedFrom,evt,this);
     }
 
+    /// \brief Called when an item is moved from one location to another.
+    /// \param evt A Poco::DirectoryWatcher::DirectoryEvent.
+    /// \note Not implemented on all platforms.
     void onItemMovedTo(const Poco::DirectoryWatcher::DirectoryEvent& evt)
     {
         ofNotifyEvent(events.onItemMovedTo,evt,this);
     }
 
+    /// \brief Called when a directory watcher error is detected.
+    /// \param exc A Poco::Exception.
     void onScanError(const Poco::Exception& exc)
     {
         ofNotifyEvent(events.onScanError,exc,this);
