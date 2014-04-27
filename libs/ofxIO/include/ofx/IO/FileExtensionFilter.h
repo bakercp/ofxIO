@@ -44,14 +44,17 @@ public:
     /// \brief Construct an empty file extension filter.
     FileExtensionFilter();
 
-    /// \brief Construct a file extension filter.
+    /// \brief Construct a simple file extension filter.
+    /// \param fileExtension a single file extension to add.
     /// \param ignoreCase will ingore case when comparing file extensions.
     /// \param acceptMatches will accept matches. When acceptMatches is
     ///        false, matching extensions are rejected.
-    FileExtensionFilter(bool ignoreCase, bool acceptMatches = true);
+    FileExtensionFilter(const std::string& fileExtension,
+                        bool ignoreCase = true,
+                        bool acceptMatches = true);
 
+    /// \brief Destroy the file extension filter.
     virtual ~FileExtensionFilter();
-        ///< \brief Destroy a file extension filter.
 
     /// \brief Accept a path based if it represents satisfies the file filter.
     /// \returns true iff the path extension matches one from the list

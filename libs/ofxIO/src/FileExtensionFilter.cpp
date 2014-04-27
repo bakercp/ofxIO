@@ -36,17 +36,22 @@ FileExtensionFilter::FileExtensionFilter():
 {
 }
 
-FileExtensionFilter::FileExtensionFilter(bool ignoreCase,
+
+FileExtensionFilter::FileExtensionFilter(const std::string& fileExtension,
+                                         bool ignoreCase,
                                          bool acceptMatches):
     _ignoreCase(ignoreCase),
     _acceptMatches(acceptMatches)
 {
+    addExtension(fileExtension);
 }
+
 
 FileExtensionFilter::~FileExtensionFilter()
 {
 }
 
+    
 bool FileExtensionFilter::accept(const Poco::Path& path) const
 {
     std::string extension = path.getExtension();
@@ -75,23 +80,26 @@ bool FileExtensionFilter::accept(const Poco::Path& path) const
     }
 
     return !_acceptMatches;
-
 }
 
+    
 void FileExtensionFilter::addExtension(const std::string& extension)
 {
     _extensions.insert(extension);
 }
+
 
 void FileExtensionFilter::removeExtension(const std::string& extension)
 {
     _extensions.erase(extension);
 }
 
+
 void FileExtensionFilter::setIgnoreCase(bool ignoreCase)
 {
     _ignoreCase = ignoreCase;
 }
+
 
 bool FileExtensionFilter::getIgnoreCase() const
 {
