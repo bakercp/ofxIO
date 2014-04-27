@@ -101,7 +101,7 @@ void DirectoryUtils::list(const ofFile& directory,
 
     std::vector<std::string> _files;
     
-    list(directory.path(),_files,sortAlphaNumeric, pFilter);
+    list(directory.path(),_files, sortAlphaNumeric, pFilter);
 
     std::vector<std::string>::const_iterator iter = _files.begin();
 
@@ -142,6 +142,7 @@ void DirectoryUtils::list(const std::string& directory,
             {
                 files.push_back(iter.path().toString());
             }
+
             ++iter;
         }
 
