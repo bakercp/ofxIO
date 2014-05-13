@@ -79,16 +79,16 @@ public:
     bool getIgnoreCase() const;
 
 private:
+    /// \brief true iff the case should be ignored.
     bool _ignoreCase;
-        ///< \brief true iff the case should be ignored.
 
+    /// \brief true iff matches should be accepted,
+    /// otherwise false iff matches should be rejected.
     bool _acceptMatches;
-        ///< \brief true iff matches should be accepted,
-        ///< otherwise false iff matches should be rejected.
 
+    /// \brief The list of file extensions to match.
     std::set<std::string> _extensions;
-        ///< \brief The list of file extensions to match.
-    
+
 };
 
 

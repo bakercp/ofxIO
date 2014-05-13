@@ -72,7 +72,8 @@ public:
     void removeFilter(AbstractPathFilter* filter);
 
 private:
-    std::set<AbstractPathFilter*> _filters; ///< \brief A set of file filters.
+    /// \brief A set of file filters.
+    std::set<AbstractPathFilter*> _filters;
     
 };
 

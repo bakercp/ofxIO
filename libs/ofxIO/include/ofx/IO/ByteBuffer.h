@@ -66,7 +66,7 @@ public:
     /// \param buffer is a source of bytes.
     explicit ByteBuffer(const AbstractByteSource& buffer);
 
-    ///< \brief Destroy the ByteBuffer.
+    /// \brief Destroy the ByteBuffer.
     virtual ~ByteBuffer();
 
     virtual std::size_t readBytes(uint8_t* buffer, std::size_t size) const;
@@ -132,8 +132,8 @@ public:
                                       const ByteBuffer& buffer);
 
 private:
+    /// \brief The backing byte buffer.
     std::vector<uint8_t> _buffer;
-        ///< \brief The backing byte buffer.
 
 };
 

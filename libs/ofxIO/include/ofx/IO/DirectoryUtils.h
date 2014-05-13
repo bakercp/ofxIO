@@ -47,20 +47,19 @@ class DirectoryUtils
 public:
     enum
     {
+        /// \brief When recursively listing a directory, do not limit the dept.
         INIFINITE_DEPTH = Poco::SimpleRecursiveDirectoryIterator::D_INFINITE
-            ///< \brief When recursively listing a
-            ///<        directory, do not limit the dept.
     };
 
     /// \brief The order of directory listing traversal.
     enum TraversalOrder
     {
+        /// \brief When recursively listing a directory, list sibling
+        ///     directories first.
         SIBLINGS_FIRST = 0,
-            ///< \brief When recursively listing a directory,
-            ///<        list sibling directories first.
+        /// \brief When recursively listing a directory,
+        ///     list child directories first.
         CHILDREN_FIRST
-            ///< \brief When recursively listing a directory,
-            ///<        list child directories first.
     };
 
     /// \brief List the contents of a path.

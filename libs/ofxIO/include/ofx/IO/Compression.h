@@ -37,13 +37,13 @@
 //public:
 //    enum Type
 //    {
+//        /// \brief Expect a zlib header, use Adler-32 checksum.
 //        ZLIB = Poco::InflatingStreamBuf::STREAM_ZLIB,
-//            ///< \brief Expect a zlib header, use Adler-32 checksum.
+//        /// \brief Expect a gzip header, use CRC-32 checksum.
 //		GZIP = Poco::InflatingStreamBuf::STREAM_GZIP,
-//            ///< \brief Expect a gzip header, use CRC-32 checksum.
+//        /// \brief STREAM_ZIP is handled as STREAM_ZLIB,
+//        /// except that we do not check the ADLER32 value (must be checked by caller)
 //		ZIP = Poco::InflatingStreamBuf::STREAM_ZIP
-//            ///< \brief STREAM_ZIP is handled as STREAM_ZLIB,
-//            ///< except that we do not check the ADLER32 value (must be checked by caller)
 //    };
 //
 //    static ByteBuffer uncompress(const ByteBuffer& buffer, Type type);

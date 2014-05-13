@@ -64,9 +64,9 @@ public:
     bool accept(const Poco::Path& path) const;
 
 private:
+    /// \brief the regular expression pointer.
     Poco::RegularExpression* _pRegex;
-        ///< \brief the regular expression pointer.
-    
+
 };
 
 

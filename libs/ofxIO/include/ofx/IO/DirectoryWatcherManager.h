@@ -61,25 +61,25 @@ public:
     {
     }
 
+    /// \brief Called when an item is added.
     ofEvent<const DirectoryEvent> onItemAdded;
-        ///< \brief Called when an item is added.
 
+    /// \brief Called when an item is removed.
     ofEvent<const DirectoryEvent> onItemRemoved;
-        ///< \brief Called when an item is removed.
 
+    /// \brief Called when an item is modified.
     ofEvent<const DirectoryEvent> onItemModified;
-        ///< \brief Called when an item is modified.
 
+    /// \brief Called when an item is moved from one place to another.
+    /// \note This is not active on all systems.
     ofEvent<const DirectoryEvent> onItemMovedFrom;
-        ///< \brief Called when an item is moved from one place to another.
-        ///< \note This is not active on all systems.
 
+    /// \brief Called when an item is move to another location.
+    /// \note This is not active on all systems.
     ofEvent<const DirectoryEvent> onItemMovedTo;
-        ///< \brief Called when an item is move to another location.
-        ///< \note This is not active on all systems.
 
+    /// \brief Called when a directory error is encountered.
     ofEvent<const Poco::Exception> onScanError;
-        ///< \brief Called when a directory error is encountered.
 
 };
 
@@ -95,39 +95,39 @@ public:
     /// \brief A directory type event.
     enum DirectoryEventType
 	{
+        /// \brief A new item has been created and added to the directory.
 		ITEM_ADDED = Poco::DirectoryWatcher::DW_ITEM_ADDED,
-            ///< \brief A new item has been created and added to the directory.
 
+        /// \brief An item has been removed from the directory.
 		ITEM_REMOVED = Poco::DirectoryWatcher::DW_ITEM_REMOVED,
-            ///< \brief An item has been removed from the directory.
 
+        /// An item has been modified.
 		ITEM_MODIFIED = Poco::DirectoryWatcher::DW_ITEM_MODIFIED,
-            ///< An item has been modified.
 
+        /// \brief An item has been renamed or moved.
+        ///        This event delivers the old name.
 		ITEM_MOVED_FROM = Poco::DirectoryWatcher::DW_ITEM_MOVED_FROM,
-            ///< \brief An item has been renamed or moved.
-            ///<        This event delivers the old name.
 
+        /// \brief An item has been renamed or moved.
+        ///        This event delivers the new name.
 		ITEM_MOVED_TO = Poco::DirectoryWatcher::DW_ITEM_MOVED_TO,
-            ///< \brief An item has been renamed or moved.
-            ///<        This event delivers the new name.
 	};
 
     /// \brief A collection of directory event masks.
     enum DirectoryEventMask
 	{
+        /// \brief Enables all event types.
 		FILTER_ENABLE_ALL = Poco::DirectoryWatcher::DW_FILTER_ENABLE_ALL,
-            ///< \brief Enables all event types.
 
+        /// \brief Disables all event types.
 		FILTER_DISABLE_ALL = Poco::DirectoryWatcher::DW_FILTER_DISABLE_ALL
-            ///< \brief Disables all event types.
 	};
 
 	enum
 	{
+        /// \brief Default scan interval for platforms that don't
+        ///        provide a native notification mechanism.
 		DEFAULT_SCAN_INTERVAL = Poco::DirectoryWatcher::DW_DEFAULT_SCAN_INTERVAL
-            ///< \brief Default scan interval for platforms that don't
-            ///<        provide a native notification mechanism.
 	};
 
     /// \brief Create an empty DirectoryWatcherManager.
@@ -256,15 +256,15 @@ private:
     typedef std::map<Poco::File, AbstractPathFilter*> FilterList;
     typedef FilterList::iterator FilterListIter;
 
+    /// \brief A map of the files and their associated watchers.
     WatchList  watchList;
-        ///< \brief A map of the files and their associated watchers.
 
+    /// \brief A collection of filters applied to the watching activities.
     FilterList filterList;
-        ///< \brief A collection of filters applied to the watching activities.
 
+    /// \brief A mutex for mutithreaded processing.
     mutable Poco::FastMutex mutex;
-        ///< \brief A mutex for mutithreaded processing.
-    
+
 };
 
 
