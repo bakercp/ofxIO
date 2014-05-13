@@ -54,11 +54,11 @@ public:
     Poco::Path getPath() const;
     
 private:
+    /// \brief The path to search.
     Poco::Path _path;
-        ///< \brief The path to search.
 
+    /// \brief True if the search path is recursive.
     bool _isRecursive;
-        ///< \brief True if the search path is recursive.
 
 };
 
