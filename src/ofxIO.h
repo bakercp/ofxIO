@@ -32,6 +32,7 @@
 #include "ofx/IO/DirectoryWatcherManager.h"
 #include "ofx/IO/AbstractTypes.h"
 #include "ofx/IO/ByteBuffer.h"
+#include "ofx/IO/ByteBufferUtils.h"
 #include "ofx/IO/DeviceFilter.h"
 #include "ofx/IO/FileExtensionFilter.h"
 #include "ofx/IO/DirectoryFilter.h"
