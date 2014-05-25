@@ -77,6 +77,28 @@ public:
                                  uint8_t d3,
                                  uint8_t d4);
 
+    /// \brief Create a ByteBuffer from an input stream.
+    /// \param istr The std::istream input stream.
+    /// \param bufferSize The size of the buffer used during copy.
+    /// \returns A new ByteBuffer with the contents of the input stream.
+    static ByteBuffer makeBuffer(std::istream& istr,
+                                 std::size_t bufferSize = DEFAULT_BUFFER_SIZE);
+
+    /// \brief Copy an input stream to a ByteBuffer.
+    /// \param istr The std::istream input stream.
+    /// \param byteBuffer the target ByteBuffer.
+    /// \param bufferSize The size of the buffer used during copy.
+    /// \returns The total number of bytes copied into the ByteBuffer.
+    static std::streamsize copyStreamToBuffer(std::istream& istr,
+                                              ByteBuffer& byteBuffer,
+                                              std::size_t bufferSize = DEFAULT_BUFFER_SIZE);
+
+    enum
+    {
+        /// \brief The default buffer size for use during buffered copies.
+        DEFAULT_BUFFER_SIZE = 8192
+    };
+
 };
 
 

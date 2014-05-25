@@ -24,6 +24,7 @@
 
 
 #include "ofx/IO/ByteBufferUtils.h"
+#include "Poco/Buffer.h"
 
 
 namespace ofx {
@@ -65,6 +66,44 @@ ByteBuffer ByteBufferUtils::makeBuffer(uint8_t d0,
 {
     uint8_t bytes[] = { d0, d1, d2, d3, d4 };
     return ByteBuffer(bytes, 5);
+}
+
+
+std::streamsize copyStreamToBuffer(std::istream& istr,
+                                   ByteBuffer& byteBuffer,
+                                   std::size_t bufferSize)
+{
+	poco_assert (bufferSize > 0);
+
+    Poco::Buffer<char> buffer(bufferSize);
+    std::streamsize len = 0;
+	istr.read(buffer.begin(), bufferSize);
+    std::streamsize n = istr.gcount();
+    while (n > 0)
+	{
+		len += n;
+        byteBuffer.writeBytes(reinterpret_cast<uint8_t*>(buffer.begin()), n);
+        if (istr)
+		{
+			istr.read(buffer.begin(), bufferSize);
+            n = istr.gcount();
+		}
+        else
+        {
+            n = 0;
+        }
+	}
+    
+	return len;
+}
+
+
+ByteBuffer ByteBufferUtils::makeBuffer(std::istream& istr,
+                                       std::size_t bufferSize)
+{
+    ByteBuffer buffer;
+    copyStreamToBuffer(istr, buffer, bufferSize);
+    return buffer;
 }
 
 
