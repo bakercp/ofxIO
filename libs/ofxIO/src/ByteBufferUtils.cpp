@@ -69,9 +69,9 @@ ByteBuffer ByteBufferUtils::makeBuffer(uint8_t d0,
 }
 
 
-std::streamsize copyStreamToBuffer(std::istream& istr,
-                                   ByteBuffer& byteBuffer,
-                                   std::size_t bufferSize)
+std::streamsize ByteBufferUtils::copyStreamToBuffer(std::istream& istr,
+                                                    ByteBuffer& byteBuffer,
+                                                    std::size_t bufferSize)
 {
 	poco_assert (bufferSize > 0);
 
