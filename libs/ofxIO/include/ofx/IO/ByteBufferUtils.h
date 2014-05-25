@@ -37,14 +37,14 @@ namespace IO {
 class ByteBufferUtils
 {
 public:
-    /// \brief create a byte buffer from two bytes.
+    /// \brief Create a ByteBuffer from two bytes.
     /// \param d0 is the first byte.
     /// \param d1 is the second byte.
     /// \returns a new ByteBuffer.
     static ByteBuffer makeBuffer(uint8_t d0,
                                  uint8_t d1);
 
-    /// \brief create a byte buffer from three bytes.
+    /// \brief Create a ByteBuffer from three bytes.
     /// \param d0 is the first byte.
     /// \param d1 is the second byte.
     /// \param d2 is the third byte.
@@ -53,7 +53,7 @@ public:
                                  uint8_t d1,
                                  uint8_t d2);
 
-    /// \brief create a byte buffer from four bytes.
+    /// \brief Create a ByteBuffer from four bytes.
     /// \param d0 is the first byte.
     /// \param d1 is the second byte.
     /// \param d2 is the third byte.
@@ -64,7 +64,7 @@ public:
                                  uint8_t d2,
                                  uint8_t d3);
 
-    /// \brief create a byte buffer from five bytes.
+    /// \brief Create a ByteBuffer from five bytes.
     /// \param d0 is the first byte.
     /// \param d1 is the second byte.
     /// \param d2 is the third byte.

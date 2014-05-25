@@ -85,7 +85,6 @@ public:
 };
 
 
-
 /// \brief Represents the abstract notion of a byte sink.
 ///
 /// An AbstractByteSink can receive bytes written from various sources.

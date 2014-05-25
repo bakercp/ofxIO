@@ -34,9 +34,11 @@ DirectoryFilter::DirectoryFilter()
 {
 }
 
+
 DirectoryFilter::~DirectoryFilter()
 {
 }
+
 
 bool DirectoryFilter::accept(const Poco::Path& path) const
 {
