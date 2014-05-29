@@ -41,9 +41,6 @@
 namespace Poco {
 
 
-    using namespace std;
-
-
     //
     // TraverseBase
     //
@@ -72,7 +69,7 @@ namespace Poco {
     }
 
 
-    const string
+    const std::string
     ChildrenFirstTraverse
     ::next(Stack* itStack, bool* isFinished)
     {
@@ -80,7 +77,7 @@ namespace Poco {
         poco_check_ptr(isFinished);
         poco_assert(!(*isFinished));
 
-        stack<DirectoryIterator> it;
+        std::stack<DirectoryIterator> it;
 
         //_depthDeterminer(it);
 
@@ -130,11 +127,11 @@ namespace Poco {
     ::SiblingsFirstTraverse(DepthFunPtr depthDeterminer, UInt16 maxDepth)
 	: TraverseBase(depthDeterminer, maxDepth)
     {
-        _dirsStack.push(queue<string>());
+        _dirsStack.push(std::queue<std::string>());
     }
 
 
-    const string
+    const std::string
     SiblingsFirstTraverse
     ::next(Stack* itStack, bool* isFinished)
     {
@@ -148,7 +145,7 @@ namespace Poco {
 		isFiniteDepth() && _depthDeterminer(*itStack) >= _maxDepth;
         if (!isDepthLimitReached && itStack->top()->isDirectory())
         {
-            const string& p = itStack->top()->path();
+            const std::string& p = itStack->top()->path();
             _dirsStack.top().push(p);
         }
 
@@ -161,7 +158,7 @@ namespace Poco {
             // try to find first not empty directory and go deeper
             while (!_dirsStack.top().empty())
             {
-                string dir = _dirsStack.top().front();
+                std::string dir = _dirsStack.top().front();
                 _dirsStack.top().pop();
                 DirectoryIterator child_it(dir);
                 
@@ -169,7 +166,7 @@ namespace Poco {
                 if (child_it != _itEnd)
                 {
                     itStack->push(child_it);
-                    _dirsStack.push(queue<string>());
+                    _dirsStack.push(std::queue<std::string>());
                     return child_it->path();
                 }
             }
