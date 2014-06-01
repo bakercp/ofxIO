@@ -26,8 +26,18 @@
 #pragma once
 
 
+#include <deque>
 #include "Poco/DirectoryWatcher.h"
 #include "Poco/RecursiveDirectoryIterator.h"
+#include "ofx/LRUCache.h"
+#include "ofx/ExpireCache.h"
+#include "ofx/UniqueExpireCache.h"
+#include "ofx/ExpireLRUCache.h"
+#include "ofx/UniqueExpireLRUCache.h"
+#include "ofx/AccessExpireCache.h"
+#include "ofx/AccessExpireLRUCache.h"
+#include "ofx/UniqueAccessExpireCache.h"
+#include "ofx/UniqueAccessExpireLRUCache.h"
 #include "ofx/IO/DirectoryUtils.h"
 #include "ofx/IO/DirectoryWatcherManager.h"
 #include "ofx/IO/AbstractTypes.h"
