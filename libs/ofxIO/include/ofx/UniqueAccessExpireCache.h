@@ -49,6 +49,7 @@ namespace ofx {
 /// An UniqueAccessExpireCache caches entries for a given time span. In contrast
 /// to ExpireCache which only allows to set a per cache expiration value, it allows to define
 /// expiration per CacheEntry.
+///
 /// Each TValue object must thus offer the following method:
 ///
 ///    const Poco::Timespan& getTimeout() const;
