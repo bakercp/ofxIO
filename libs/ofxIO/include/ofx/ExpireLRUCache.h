@@ -45,26 +45,26 @@
 #include "Poco/LRUStrategy.h"
 
 
-namespace Poco {
+namespace ofx {
 
 
-template < 
+/// An ExpireLRUCache combines LRU caching and time based expire caching.
+/// It cache entries for a fixed time period (per default 10 minutes)
+/// but also limits the size of the cache (per default: 1024).
+template <
 	class TKey,
 	class TValue,
 	class TMutex = Poco::FastMutex,
 	class TEventMutex = Poco::FastMutex
 >
 class ExpireLRUCache: public AbstractCache<TKey, TValue, Poco::StrategyCollection<TKey, TValue>, TMutex, TEventMutex>
-	/// An ExpireLRUCache combines LRU caching and time based expire caching.
-	/// It cache entries for a fixed time period (per default 10 minutes)
-	/// but also limits the size of the cache (per default: 1024).
 {
 public:
 	ExpireLRUCache(long cacheSize = 1024, Poco::Timestamp::TimeDiff expire = 600000):
-		AbstractCache<TKey, TValue, StrategyCollection<TKey, TValue>, TMutex, TEventMutex>(StrategyCollection<TKey, TValue>())
+        AbstractCache<TKey, TValue, Poco::StrategyCollection<TKey, TValue>, TMutex, TEventMutex>(Poco::StrategyCollection<TKey, TValue>())
 	{
-		this->_strategy.pushBack(new LRUStrategy<TKey, TValue>(cacheSize));
-		this->_strategy.pushBack(new ExpireStrategy<TKey, TValue>(expire));
+		this->_strategy.pushBack(new Poco::LRUStrategy<TKey, TValue>(cacheSize));
+		this->_strategy.pushBack(new Poco::ExpireStrategy<TKey, TValue>(expire));
 	}
 
 	~ExpireLRUCache()

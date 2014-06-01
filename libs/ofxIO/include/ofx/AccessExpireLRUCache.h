@@ -48,16 +48,16 @@
 namespace ofx {
 
 
-template < 
+/// An AccessExpireLRUCache combines LRU caching and time based expire caching.
+/// It cache entries for a fixed time period (per default 10 minutes)
+/// but also limits the size of the cache (per default: 1024).
+template <
 	class TKey,
 	class TValue,
 	class TMutex = Poco::FastMutex,
 	class TEventMutex = Poco::FastMutex
 >
 class AccessExpireLRUCache: public AbstractCache<TKey, TValue, Poco::StrategyCollection<TKey, TValue>, TMutex, TEventMutex>
-	/// An AccessExpireLRUCache combines LRU caching and time based expire caching.
-	/// It cache entries for a fixed time period (per default 10 minutes)
-	/// but also limits the size of the cache (per default: 1024).
 {
 public:
 	AccessExpireLRUCache(long cacheSize = 1024, Poco::Timestamp::TimeDiff expire = 600000):

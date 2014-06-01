@@ -46,6 +46,7 @@
 namespace ofx {
 
 
+/// An LRUCache implements Least Recently Used caching. The default size for a cache is 1024 entries.
 template <
 	class TKey, 
 	class TValue,
@@ -53,7 +54,6 @@ template <
 	class TEventMutex = Poco::FastMutex
 > 
 class LRUCache: public AbstractCache<TKey, TValue, Poco::LRUStrategy<TKey, TValue>, TMutex, TEventMutex>
-	/// An LRUCache implements Least Recently Used caching. The default size for a cache is 1024 entries.
 {
 public:
 	LRUCache(long size = 1024):

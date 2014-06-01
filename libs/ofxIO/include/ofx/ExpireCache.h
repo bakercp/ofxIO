@@ -46,6 +46,16 @@
 namespace ofx {
 
 
+/// An ExpireCache caches entries for a fixed time period (per default 10 minutes).
+/// Entries expire independently of the access pattern, i.e. after a constant time.
+/// If you require your objects to expire after they were not accessed for a given time
+/// period use a Poco::AccessExpireCache.
+///
+/// Be careful when using an ExpireCache. A cache is often used
+/// like cache.has(x) followed by cache.get x). Note that it could happen
+/// that the "has" call works, then the current execution thread gets descheduled, time passes,
+/// the entry gets invalid, thus leading to an empty SharedPtr being returned
+/// when "get" is invoked.
 template <
 	class TKey, 
 	class TValue, 
@@ -53,16 +63,6 @@ template <
 	class TEventMutex = Poco::FastMutex
 > 
 class ExpireCache: public AbstractCache<TKey, TValue, Poco::ExpireStrategy<TKey, TValue>, TMutex, TEventMutex>
-	/// An ExpireCache caches entries for a fixed time period (per default 10 minutes).
-	/// Entries expire independently of the access pattern, i.e. after a constant time.
-	/// If you require your objects to expire after they were not accessed for a given time
-	/// period use a Poco::AccessExpireCache.
-	///
-	/// Be careful when using an ExpireCache. A cache is often used
-	/// like cache.has(x) followed by cache.get x). Note that it could happen
-	/// that the "has" call works, then the current execution thread gets descheduled, time passes,
-	/// the entry gets invalid, thus leading to an empty SharedPtr being returned 
-	/// when "get" is invoked.
 {
 public:
 	ExpireCache(Poco::Timestamp::TimeDiff expire = 600000):
