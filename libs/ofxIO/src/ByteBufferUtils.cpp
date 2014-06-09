@@ -25,6 +25,9 @@
 
 #include "ofx/IO/ByteBufferUtils.h"
 #include "Poco/Buffer.h"
+#include "Poco/FileStream.h"
+#include <iostream> 
+#include "ofLog.h"
 
 
 namespace ofx {
@@ -69,6 +72,15 @@ ByteBuffer ByteBufferUtils::makeBuffer(uint8_t d0,
 }
 
 
+ByteBuffer ByteBufferUtils::makeBuffer(std::istream& istr,
+                                       std::size_t bufferSize)
+{
+    ByteBuffer buffer;
+    copyStreamToBuffer(istr, buffer, bufferSize);
+    return buffer;
+}
+
+
 std::streamsize ByteBufferUtils::copyStreamToBuffer(std::istream& istr,
                                                     ByteBuffer& byteBuffer,
                                                     std::size_t bufferSize)
@@ -98,12 +110,62 @@ std::streamsize ByteBufferUtils::copyStreamToBuffer(std::istream& istr,
 }
 
 
-ByteBuffer ByteBufferUtils::makeBuffer(std::istream& istr,
-                                       std::size_t bufferSize)
+std::streamsize ByteBufferUtils::copyBufferToStream(const ByteBuffer& byteBuffer,
+                                                    std::ostream& ostr)
 {
-    ByteBuffer buffer;
-    copyStreamToBuffer(istr, buffer, bufferSize);
-    return buffer;
+    if (!ostr.bad())
+    {
+    
+        std::cout << "writing byteBuff=" << byteBuffer.size() << std::endl;
+
+        ostr.write(byteBuffer.getCharPtr(), byteBuffer.size());
+
+        return byteBuffer.size();
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+
+std::streamsize ByteBufferUtils::loadFromFile(const std::string& path,
+                                              ByteBuffer& byteBuffer,
+                                              bool appendBuffer)
+{
+    Poco::FileInputStream fis(path);
+
+    if (fis.good())
+    {
+        if (!appendBuffer)
+        {
+            byteBuffer.clear();
+        }
+
+        return ofx::IO::ByteBufferUtils::copyStreamToBuffer(fis, byteBuffer);
+    }
+    else
+    {
+        ofLogError("ByteBufferUtils::copyFileToBuffer") << "Bad file input stream: " << path;
+        return 0;
+    }
+}
+
+
+std::streamsize ByteBufferUtils::saveToFile(const ByteBuffer& byteBuffer,
+                                            const std::string& path)
+{
+    Poco::FileOutputStream fos(path);
+
+    if (fos.good())
+    {
+        return ofx::IO::ByteBufferUtils::copyBufferToStream(byteBuffer, fos);
+    }
+    else
+    {
+        ofLogError("ByteBufferUtils::copyBufferToFile") << "Bad file output stream: " << path;
+        return 0;
+    }
 }
 
 

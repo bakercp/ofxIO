@@ -79,6 +79,7 @@ std::size_t ByteBuffer::readBytes(std::vector<uint8_t>& buffer) const
     return buffer.size();
 }
 
+
 std::size_t ByteBuffer::readBytes(std::string& buffer) const
 {
     buffer.resize(_buffer.size()); // effectively clears
@@ -176,11 +177,24 @@ uint8_t ByteBuffer::operator [] (std::size_t n) const
 }
     
 
-const uint8_t* ByteBuffer::getDataPtr() const
+const uint8_t* ByteBuffer::getPtr() const
 {
-    if(!_buffer.empty())
+    if (!_buffer.empty())
     {
         return &_buffer[0];
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+
+const char* ByteBuffer::getCharPtr() const
+{
+    if (!_buffer.empty())
+    {
+        return reinterpret_cast<const char*>(&_buffer[0]);
     }
     else
     {

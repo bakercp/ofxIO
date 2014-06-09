@@ -59,15 +59,21 @@ namespace ofx {
 /// \brief An AbstractCache is the interface of all caches.
 ///
 /// A temporary replacement for Poco::AbstractCache that uses std::shared_ptr.
-template <class TKey, class TValue, class TStrategy, class TMutex = Poco::FastMutex, class TEventMutex = Poco::FastMutex>
+template <
+    class TKey,
+    class TValue,
+    class TStrategy,
+    class TMutex = Poco::FastMutex,
+    class TEventMutex = Poco::FastMutex
+> 
 class AbstractCache
 {
 public:
 	Poco::BasicEvent<const Poco::KeyValueArgs<TKey, TValue >, TEventMutex > Add;
 	Poco::BasicEvent<const Poco::KeyValueArgs<TKey, TValue >, TEventMutex > Update;
-	Poco::BasicEvent<const TKey, TEventMutex>                         Remove;
-	Poco::BasicEvent<const TKey, TEventMutex>                         Get;
-	Poco::BasicEvent<const Poco::EventArgs, TEventMutex>                    Clear;
+	Poco::BasicEvent<const TKey, TEventMutex> Remove;
+	Poco::BasicEvent<const TKey, TEventMutex> Get;
+	Poco::BasicEvent<const Poco::EventArgs, TEventMutex> Clear;
 
 	typedef std::map<TKey, std::shared_ptr<TValue> > DataHolder;
 	typedef typename DataHolder::iterator       Iterator;
