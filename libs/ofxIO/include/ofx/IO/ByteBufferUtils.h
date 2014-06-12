@@ -93,6 +93,34 @@ public:
                                               ByteBuffer& byteBuffer,
                                               std::size_t bufferSize = DEFAULT_BUFFER_SIZE);
 
+    /// \brief Copy a ByteBuffer to an output stream.
+    /// \param byteBuffer the ByteBuffer to copy.
+    /// \param ostr the target output stream.
+    /// \returns The passed output stream.
+    static std::ostream& copyBufferToStream(const ByteBuffer& byteBuffer,
+                                            std::ostream& ostr);
+
+    /// \brief Load a ByteBuffer from a file.
+    /// \path The absolute path of the file to load.
+    /// \param byteBuffer the target ByteBuffer to fill.
+    /// \param append false if the ByteBuffer should be cleared.
+    /// \returns The total number of bytes loaded.
+    /// \throws A Poco::FileNotFoundException (or a similar exception) if the
+    ///         file does not exist or is not accessible for other reasons.
+    static std::streamsize loadFromFile(const std::string& path,
+                                        ByteBuffer& buffer,
+                                        bool appendBuffer = false);
+
+    /// \brief Save a ByteBuffer as a file.
+    /// \param byteBuffer the target ByteBuffer to save.
+    /// \path The absolute path of the file to save.
+    /// \param append false if the ByteBuffer should be cleared.
+    /// \returns True iff the file was saved successfully.
+    /// \throws A Poco::FileNotFoundException (or a similar exception) if the
+    ///         file does not exist or is not accessible for other reasons.
+    static bool saveToFile(const ByteBuffer& buffer,
+                           const std::string& path);
+
     enum
     {
         /// \brief The default buffer size for use during buffered copies.

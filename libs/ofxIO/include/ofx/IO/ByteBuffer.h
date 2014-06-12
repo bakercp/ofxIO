@@ -120,9 +120,13 @@ public:
     /// \returns a const reference to the backing data vector.
     const std::vector<uint8_t>& getDataRef() const;
 
-    /// \brief Get a const pointer to the backing data vector.
+    /// \brief Get a const pointer to the backing unsigned char data vector.
     /// \returns a const pointer to the backing data vector.
-    const uint8_t* getDataPtr() const;
+    const uint8_t* getPtr() const;
+
+    /// \brief Get a const pointer to the char data vector.
+    /// \returns a const pointer to the backing data vector.
+    const char* getCharPtr() const;
 
     /// \brief Write the buffer to an output stream.
     /// \param os The std::ostream to write to.
