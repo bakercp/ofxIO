@@ -67,14 +67,14 @@ ByteBuffer::~ByteBuffer()
 std::size_t ByteBuffer::readBytes(uint8_t* buffer, std::size_t size) const
 {
     std::size_t numBytesToCopy = std::min(size, _buffer.size());
-    std::copy(_buffer.end(), _buffer.end() + numBytesToCopy, buffer);
+    std::copy(_buffer.begin(), _buffer.begin() + numBytesToCopy, buffer);
     return numBytesToCopy;
 }
 
 
 std::size_t ByteBuffer::readBytes(std::vector<uint8_t>& buffer) const
 {
-    buffer.resize(_buffer.size()); // effectively clears
+    buffer.resize(_buffer.size());
     buffer.insert(buffer.begin(), _buffer.begin(), _buffer.end());
     return buffer.size();
 }
@@ -82,8 +82,8 @@ std::size_t ByteBuffer::readBytes(std::vector<uint8_t>& buffer) const
 
 std::size_t ByteBuffer::readBytes(std::string& buffer) const
 {
-    buffer.resize(_buffer.size()); // effectively clears
-    buffer.insert(buffer.end(), _buffer.begin(), _buffer.end());
+    buffer.resize(_buffer.size());
+    buffer.insert(buffer.begin(), _buffer.begin(), _buffer.end());
     return buffer.size();
 }
 
@@ -109,6 +109,7 @@ std::size_t ByteBuffer::writeByte(uint8_t data)
 
 std::size_t ByteBuffer::writeBytes(const uint8_t* buffer, std::size_t size)
 {
+    _buffer.reserve(_buffer.size() + size);
     _buffer.insert(_buffer.end(), buffer, buffer + size);
     return size;
 }
@@ -116,6 +117,7 @@ std::size_t ByteBuffer::writeBytes(const uint8_t* buffer, std::size_t size)
 
 std::size_t ByteBuffer::writeBytes(const std::vector<uint8_t>& buffer)
 {
+    _buffer.reserve(_buffer.size() + buffer.size());
     _buffer.insert(_buffer.end(), buffer.begin(), buffer.end());
     return buffer.size();
 }
@@ -123,6 +125,7 @@ std::size_t ByteBuffer::writeBytes(const std::vector<uint8_t>& buffer)
 
 std::size_t ByteBuffer::writeBytes(const std::string& buffer)
 {
+    _buffer.reserve(_buffer.size() + buffer.size());
     _buffer.insert(_buffer.end(), buffer.begin(), buffer.end());
     return buffer.size();
 }
@@ -137,6 +140,12 @@ std::size_t ByteBuffer::writeBytes(const AbstractByteSource& buffer)
 std::size_t ByteBuffer::size() const
 {
     return _buffer.size();
+}
+
+
+std::size_t ByteBuffer::capacity() const
+{
+    return _buffer.capacity();
 }
 
 
@@ -156,6 +165,13 @@ std::size_t ByteBuffer::resize(std::size_t size, uint8_t fillByte)
 {
     _buffer.resize(size, fillByte);
     return _buffer.size();
+}
+
+
+std::size_t ByteBuffer::reserve(std::size_t capacity)
+{
+    _buffer.reserve(capacity);
+    return _buffer.capacity();
 }
 
     
