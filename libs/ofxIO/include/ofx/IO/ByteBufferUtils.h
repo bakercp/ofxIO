@@ -105,6 +105,8 @@ public:
     /// \param byteBuffer the target ByteBuffer to fill.
     /// \param append false if the ByteBuffer should be cleared.
     /// \returns The total number of bytes loaded.
+    /// \throws A Poco::FileNotFoundException (or a similar exception) if the
+    ///         file does not exist or is not accessible for other reasons.
     static std::streamsize loadFromFile(const std::string& path,
                                         ByteBuffer& buffer,
                                         bool appendBuffer = false);
@@ -114,6 +116,8 @@ public:
     /// \path The absolute path of the file to save.
     /// \param append false if the ByteBuffer should be cleared.
     /// \returns True iff the file was saved successfully.
+    /// \throws A Poco::FileNotFoundException (or a similar exception) if the
+    ///         file does not exist or is not accessible for other reasons.
     static bool saveToFile(const ByteBuffer& buffer,
                            const std::string& path);
 
