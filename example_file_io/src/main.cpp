@@ -24,10 +24,12 @@
 
 
 #include "ofApp.h"
+#include "ofAppNowindow.h"
 
 
 int main()
 {
-	ofSetupOpenGL(1000, 300, OF_WINDOW);
+    ofAppNoWindow window;
+	ofSetupOpenGL(&window, 0, 0, OF_WINDOW);
 	ofRunApp(new ofApp());
 }

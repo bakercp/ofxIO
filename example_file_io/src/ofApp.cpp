@@ -30,17 +30,15 @@ void ofApp::setup()
 {
     std::string path = ofToDataPath("openFrameworks.png", true);
 
-    std::cout << path << std::endl;
-
     ofx::IO::ByteBuffer byteBuffer;
 
     try
     {
-        std::streamsize in = ofx::IO::ByteBufferUtils::copyFileToBuffer(path, byteBuffer);
+        std::streamsize in = ofx::IO::ByteBufferUtils::loadFromFile(path, byteBuffer);
 
         std::string newPath = ofToDataPath("openFrameworks_copy.png", true);
 
-        std::streamsize out = ofx::IO::ByteBufferUtils::copyBufferToFile(byteBuffer, newPath);
+        std::streamsize out = ofx::IO::ByteBufferUtils::saveToFile(byteBuffer, newPath);
 
     }
     catch (Poco::Exception& exception)
