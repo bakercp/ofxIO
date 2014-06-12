@@ -85,6 +85,10 @@ public:
     /// \returns the number of bytes in the ByteBuffer.
     std::size_t size() const;
 
+    /// \brief Query the capacity of the backing data vector.
+    /// \returns the capacity of the backing data vector.
+    std::size_t capacity() const;
+
     /// \brief Determine if the ByteBuffer is empty.
     /// \returns true iff the number of bytes in the ByteBuffer is 0.
     bool empty() const;
@@ -99,6 +103,16 @@ public:
     /// \param fillByte is the value used to fill expanded buffer elements.
     /// \returns the new size of the ByteBuffer.
     std::size_t resize(std::size_t size, uint8_t fillByte = 0);
+
+    /// \brief Ensures that the backing vector has allocated bytes.
+    ///
+    /// This simply pre-allocates needed bytes, which can speed up the copy
+    /// process by reducing the number of reallocations and copies during large
+    /// byte inserts or copies.
+    ///
+    /// \param capacity is the new capacity.
+    /// \returns the new capacity of the ByteBuffer.
+    std::size_t reserve(std::size_t capacity);
 
     /// \param n is the element index in the ByteBuffer.
     ///
