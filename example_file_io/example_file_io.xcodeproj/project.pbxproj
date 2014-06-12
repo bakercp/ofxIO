@@ -15,12 +15,12 @@
 		66a80fd312926deb8c9fe7f6f2faa063 /* ByteBufferUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = fe5b3b19544657b6f9ccca03b257d204 /* ByteBufferUtils.cpp */; };
 		84fed53b4ceb4c25c00e172b77176df1 /* DirectoryFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = e362e12547978ab05aba9c571e8283c4 /* DirectoryFilter.cpp */; };
 		86b56e23d787a5f24641398fd393657d /* LinkFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 370da13018950e5bff8cf171337edd91 /* LinkFilter.cpp */; };
+		93640c223a2f5bead6da2e35071b167e /* Compression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2fc8e2266fe2f5545775a16df2f8d514 /* Compression.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
 		E45BE97D0E8CC7DD009D7055 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9730E8CC7DD009D7055 /* AudioToolbox.framework */; };
-		E45BE97E0E8CC7DD009D7055 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9740E8CC7DD009D7055 /* Carbon.framework */; };
 		E45BE97F0E8CC7DD009D7055 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9750E8CC7DD009D7055 /* CoreAudio.framework */; };
 		E45BE9800E8CC7DD009D7055 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9760E8CC7DD009D7055 /* CoreFoundation.framework */; };
 		E45BE9810E8CC7DD009D7055 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9770E8CC7DD009D7055 /* CoreServices.framework */; };
@@ -34,8 +34,6 @@
 		E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */; };
 		E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E715D3B6510020DFD4 /* QTKit.framework */; };
 		E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
-		FD685DF618F110DE00419D6C /* Compression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD685DF418F110DE00419D6C /* Compression.cpp */; };
-		FD685DF718F110DE00419D6C /* Encoding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD685DF518F110DE00419D6C /* Encoding.cpp */; };
 		b3e6d60405574847412d7441c2743467 /* HiddenFileFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = fcaf85b857266c511db50341e61e807d /* HiddenFileFilter.cpp */; };
 		b7e0003b826cba379a3f66e51f36f6b8 /* PathFilterCollection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5114d2af276e4e6e9a67b34240f124de /* PathFilterCollection.cpp */; };
 		be177617474f11f05e9260fc7f73d21c /* DirectoryWatcherManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0b6179498d0110bd2e161373d141a6c9 /* DirectoryWatcherManager.cpp */; };
@@ -44,6 +42,7 @@
 		cdb5b1d2d12f42502906f30f46736926 /* DeviceFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00f3330a5debd082cee0c12cf6dab546 /* DeviceFilter.cpp */; };
 		cefd3ccab8b3251dfcaaa0ee9e26c62a /* DirectoryUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9a967d1fafa98a7cbbfa4f5530702894 /* DirectoryUtils.cpp */; };
 		d932a5a24fcf08ae510a265d01807a32 /* ByteBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 93384835c77bd4299f8a7f9032e427d9 /* ByteBuffer.cpp */; };
+		ee3a0581bc0ed0fb1041c3be8237891e /* Encoding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 362d5b0e0ebec0da6710a4301fc8ce18 /* Encoding.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +77,7 @@
 
 /* Begin PBXFileReference section */
 		00f3330a5debd082cee0c12cf6dab546 /* DeviceFilter.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = DeviceFilter.cpp; path = ../../../addons/ofxIO/libs/ofxIO/src/DeviceFilter.cpp; sourceTree = SOURCE_ROOT; };
+		038270da6aca13e6c027a07225dbc257 /* UniqueExpireCache.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = UniqueExpireCache.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/UniqueExpireCache.h; sourceTree = SOURCE_ROOT; };
 		06ed1882d0056fb439aab3e70e86d912 /* RecursiveDirectoryIterator.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = RecursiveDirectoryIterator.cpp; path = ../../../addons/ofxIO/libs/Poco/src/RecursiveDirectoryIterator.cpp; sourceTree = SOURCE_ROOT; };
 		0b6179498d0110bd2e161373d141a6c9 /* DirectoryWatcherManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = DirectoryWatcherManager.cpp; path = ../../../addons/ofxIO/libs/ofxIO/src/DirectoryWatcherManager.cpp; sourceTree = SOURCE_ROOT; };
 		0fc82546c315d104cc8178d758f34945 /* PathFilterCollection.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = PathFilterCollection.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/PathFilterCollection.h; sourceTree = SOURCE_ROOT; };
@@ -86,9 +86,15 @@
 		14290ed8de68778ae3023fbc92cbe43d /* LinkFilter.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = LinkFilter.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/LinkFilter.h; sourceTree = SOURCE_ROOT; };
 		19c22cd05d10f78b32ff80c6be3a9385 /* ofApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofApp.cpp; path = src/ofApp.cpp; sourceTree = SOURCE_ROOT; };
 		1c011da756ff131fc46a2907c62f2414 /* FileExtensionFilter.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = FileExtensionFilter.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/FileExtensionFilter.h; sourceTree = SOURCE_ROOT; };
+		290e7a250dc94d9adb967fcc414ee964 /* Encoding.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = Encoding.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/Encoding.h; sourceTree = SOURCE_ROOT; };
 		2d170f102215cf0511959d79928d8bcb /* ByteBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ByteBuffer.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/ByteBuffer.h; sourceTree = SOURCE_ROOT; };
+		2f6c7f53a990035eb21ac78cfe46884b /* LRUCache.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = LRUCache.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/LRUCache.h; sourceTree = SOURCE_ROOT; };
+		2fc8e2266fe2f5545775a16df2f8d514 /* Compression.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = Compression.cpp; path = ../../../addons/ofxIO/libs/ofxIO/src/Compression.cpp; sourceTree = SOURCE_ROOT; };
+		3538d5a40c024d14f3f273bf69ce89c3 /* UniqueExpireLRUCache.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = UniqueExpireLRUCache.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/UniqueExpireLRUCache.h; sourceTree = SOURCE_ROOT; };
+		362d5b0e0ebec0da6710a4301fc8ce18 /* Encoding.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = Encoding.cpp; path = ../../../addons/ofxIO/libs/ofxIO/src/Encoding.cpp; sourceTree = SOURCE_ROOT; };
 		370da13018950e5bff8cf171337edd91 /* LinkFilter.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = LinkFilter.cpp; path = ../../../addons/ofxIO/libs/ofxIO/src/LinkFilter.cpp; sourceTree = SOURCE_ROOT; };
 		4593838c4b4bce40284aae073af1a51f /* ofxIO.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxIO.h; path = ../../../addons/ofxIO/src/ofxIO.h; sourceTree = SOURCE_ROOT; };
+		4aa726a6feda3fbe35b34e19177d679b /* ExpireCache.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ExpireCache.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/ExpireCache.h; sourceTree = SOURCE_ROOT; };
 		4d38898647bbfeebb89c1569bf8791b4 /* alphanum.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = alphanum.hpp; path = ../../../addons/ofxIO/libs/alphanum/include/alphanum.hpp; sourceTree = SOURCE_ROOT; };
 		5114d2af276e4e6e9a67b34240f124de /* PathFilterCollection.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = PathFilterCollection.cpp; path = ../../../addons/ofxIO/libs/ofxIO/src/PathFilterCollection.cpp; sourceTree = SOURCE_ROOT; };
 		557678eeff0d0c6d692d0dec7c68ae95 /* DeviceFilter.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = DeviceFilter.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/DeviceFilter.h; sourceTree = SOURCE_ROOT; };
@@ -97,6 +103,9 @@
 		5c1865536f5a04c28572a12452a77547 /* RecursiveDirectoryIteratorImpl.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = RecursiveDirectoryIteratorImpl.h; path = ../../../addons/ofxIO/libs/Poco/Foundation/include/Poco/RecursiveDirectoryIteratorImpl.h; sourceTree = SOURCE_ROOT; };
 		5d4c9d17e0c3f84ddb8885440dd67cb9 /* ByteBufferUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ByteBufferUtils.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/ByteBufferUtils.h; sourceTree = SOURCE_ROOT; };
 		6bd291fb03292c6d352c26fe68f15269 /* FileExtensionFilter.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = FileExtensionFilter.cpp; path = ../../../addons/ofxIO/libs/ofxIO/src/FileExtensionFilter.cpp; sourceTree = SOURCE_ROOT; };
+		7fed5533ba07c2da03f0abc9d29a1122 /* UniqueAccessExpireLRUCache.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = UniqueAccessExpireLRUCache.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/UniqueAccessExpireLRUCache.h; sourceTree = SOURCE_ROOT; };
+		8425d8f4b3e525c269fbbd9060b4cdc1 /* ExpireLRUCache.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ExpireLRUCache.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/ExpireLRUCache.h; sourceTree = SOURCE_ROOT; };
+		84e9ce5123d831ac5ea325a15b0d0e9f /* AccessExpireLRUCache.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = AccessExpireLRUCache.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/AccessExpireLRUCache.h; sourceTree = SOURCE_ROOT; };
 		84f6287fa54b66c746947875f6690182 /* ofApp.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofApp.h; path = src/ofApp.h; sourceTree = SOURCE_ROOT; };
 		8760f716adafe5917959d49831f489ec /* RecursiveDirectoryIteratorStategies.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = RecursiveDirectoryIteratorStategies.cpp; path = ../../../addons/ofxIO/libs/Poco/src/RecursiveDirectoryIteratorStategies.cpp; sourceTree = SOURCE_ROOT; };
 		89b60fb247e1f64013c716dc5bc27ed6 /* AbstractTypes.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = AbstractTypes.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/AbstractTypes.h; sourceTree = SOURCE_ROOT; };
@@ -109,13 +118,12 @@
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
 		E45BE9730E8CC7DD009D7055 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
-		E45BE9740E8CC7DD009D7055 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		E45BE9750E8CC7DD009D7055 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = /System/Library/Frameworks/CoreAudio.framework; sourceTree = "<absolute>"; };
 		E45BE9760E8CC7DD009D7055 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		E45BE9770E8CC7DD009D7055 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		E45BE9790E8CC7DD009D7055 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
-		E4B69B5B0A3A1756003C02F2 /* example_directory_listDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = example_directory_listDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4B69B5B0A3A1756003C02F2 /* example_file_ioDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = example_file_ioDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
 		E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = "openFrameworks-Info.plist"; sourceTree = "<group>"; };
 		E4C2424410CC5A17004149E2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -126,13 +134,13 @@
 		E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
 		E7E077E715D3B6510020DFD4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		E7F985F515E0DE99003869B5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
-		FD685DF218F110C800419D6C /* Compression.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Compression.h; path = ../libs/ofxIO/include/ofx/IO/Compression.h; sourceTree = "<group>"; };
-		FD685DF318F110C800419D6C /* Encoding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Encoding.h; path = ../libs/ofxIO/include/ofx/IO/Encoding.h; sourceTree = "<group>"; };
-		FD685DF418F110DE00419D6C /* Compression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Compression.cpp; path = ../libs/ofxIO/src/Compression.cpp; sourceTree = "<group>"; };
-		FD685DF518F110DE00419D6C /* Encoding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Encoding.cpp; path = ../libs/ofxIO/src/Encoding.cpp; sourceTree = "<group>"; };
+		a3b73248cebebb4479b4f1bbd9dcddfc /* AccessExpireCache.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = AccessExpireCache.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/AccessExpireCache.h; sourceTree = SOURCE_ROOT; };
 		beffaa5b8275e0ae066fc2e31330dd5f /* DirectoryWatcherManager.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = DirectoryWatcherManager.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/DirectoryWatcherManager.h; sourceTree = SOURCE_ROOT; };
+		bf304715448041cabdb6f49ed18c4f9b /* UniqueAccessExpireCache.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = UniqueAccessExpireCache.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/UniqueAccessExpireCache.h; sourceTree = SOURCE_ROOT; };
+		c8f2762f4cce12d7c1022daa5fcd76a8 /* Compression.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = Compression.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/Compression.h; sourceTree = SOURCE_ROOT; };
 		cece089d24f272db22504892bba91629 /* DirectoryFilter.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = DirectoryFilter.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/DirectoryFilter.h; sourceTree = SOURCE_ROOT; };
 		d1f82a94bd80bdc78e0b1922d8660de6 /* DirectoryUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = DirectoryUtils.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/DirectoryUtils.h; sourceTree = SOURCE_ROOT; };
+		de22ff0057c30d5ddc12b349e00b78e1 /* AbstractCache.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = AbstractCache.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/AbstractCache.h; sourceTree = SOURCE_ROOT; };
 		e362e12547978ab05aba9c571e8283c4 /* DirectoryFilter.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = DirectoryFilter.cpp; path = ../../../addons/ofxIO/libs/ofxIO/src/DirectoryFilter.cpp; sourceTree = SOURCE_ROOT; };
 		e3d39f2080ca052e606ea84e7d169675 /* DirectoryWatcher.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = DirectoryWatcher.h; path = ../../../addons/ofxIO/libs/Poco/Foundation/include/Poco/DirectoryWatcher.h; sourceTree = SOURCE_ROOT; };
 		e8af8381484827a10a418b2651d0d7d7 /* SearchPath.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SearchPath.h; path = ../../../addons/ofxIO/libs/ofxIO/include/ofx/IO/SearchPath.h; sourceTree = SOURCE_ROOT; };
@@ -154,7 +162,6 @@
 				E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */,
 				E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */,
 				E45BE97D0E8CC7DD009D7055 /* AudioToolbox.framework in Frameworks */,
-				E45BE97E0E8CC7DD009D7055 /* Carbon.framework in Frameworks */,
 				E45BE97F0E8CC7DD009D7055 /* CoreAudio.framework in Frameworks */,
 				E45BE9800E8CC7DD009D7055 /* CoreFoundation.framework in Frameworks */,
 				E45BE9810E8CC7DD009D7055 /* CoreServices.framework in Frameworks */,
@@ -210,16 +217,16 @@
 		81b9e335116a816ea1d2a2fa5313a664 /* IO */ = {
 			isa = PBXGroup;
 			children = (
-				FD685DF218F110C800419D6C /* Compression.h */,
-				FD685DF318F110C800419D6C /* Encoding.h */,
 				f91843c45134fd7b696e0f136607fda5 /* AbstractDataView.h */,
 				89b60fb247e1f64013c716dc5bc27ed6 /* AbstractTypes.h */,
 				2d170f102215cf0511959d79928d8bcb /* ByteBuffer.h */,
 				5d4c9d17e0c3f84ddb8885440dd67cb9 /* ByteBufferUtils.h */,
+				c8f2762f4cce12d7c1022daa5fcd76a8 /* Compression.h */,
 				557678eeff0d0c6d692d0dec7c68ae95 /* DeviceFilter.h */,
 				cece089d24f272db22504892bba91629 /* DirectoryFilter.h */,
 				d1f82a94bd80bdc78e0b1922d8660de6 /* DirectoryUtils.h */,
 				beffaa5b8275e0ae066fc2e31330dd5f /* DirectoryWatcherManager.h */,
+				290e7a250dc94d9adb967fcc414ee964 /* Encoding.h */,
 				1c011da756ff131fc46a2907c62f2414 /* FileExtensionFilter.h */,
 				57e858fcdf1ab73089f1a9f080435007 /* HiddenFileFilter.h */,
 				14290ed8de68778ae3023fbc92cbe43d /* LinkFilter.h */,
@@ -233,14 +240,14 @@
 		827e879af9ec79a81a74cc6fcb42d0a0 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				FD685DF418F110DE00419D6C /* Compression.cpp */,
-				FD685DF518F110DE00419D6C /* Encoding.cpp */,
 				93384835c77bd4299f8a7f9032e427d9 /* ByteBuffer.cpp */,
 				fe5b3b19544657b6f9ccca03b257d204 /* ByteBufferUtils.cpp */,
+				2fc8e2266fe2f5545775a16df2f8d514 /* Compression.cpp */,
 				00f3330a5debd082cee0c12cf6dab546 /* DeviceFilter.cpp */,
 				e362e12547978ab05aba9c571e8283c4 /* DirectoryFilter.cpp */,
 				9a967d1fafa98a7cbbfa4f5530702894 /* DirectoryUtils.cpp */,
 				0b6179498d0110bd2e161373d141a6c9 /* DirectoryWatcherManager.cpp */,
+				362d5b0e0ebec0da6710a4301fc8ce18 /* Encoding.cpp */,
 				6bd291fb03292c6d352c26fe68f15269 /* FileExtensionFilter.cpp */,
 				fcaf85b857266c511db50341e61e807d /* HiddenFileFilter.cpp */,
 				370da13018950e5bff8cf171337edd91 /* LinkFilter.cpp */,
@@ -297,7 +304,6 @@
 				E45BE9710E8CC7DD009D7055 /* AGL.framework */,
 				E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */,
 				E45BE9730E8CC7DD009D7055 /* AudioToolbox.framework */,
-				E45BE9740E8CC7DD009D7055 /* Carbon.framework */,
 				E45BE9750E8CC7DD009D7055 /* CoreAudio.framework */,
 				E45BE9760E8CC7DD009D7055 /* CoreFoundation.framework */,
 				E45BE9770E8CC7DD009D7055 /* CoreServices.framework */,
@@ -343,7 +349,7 @@
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
-				E4B69B5B0A3A1756003C02F2 /* example_directory_listDebug.app */,
+				E4B69B5B0A3A1756003C02F2 /* example_file_ioDebug.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -394,7 +400,17 @@
 		d1c382a37ee661f51aa773cc780a6144 /* ofx */ = {
 			isa = PBXGroup;
 			children = (
+				de22ff0057c30d5ddc12b349e00b78e1 /* AbstractCache.h */,
+				a3b73248cebebb4479b4f1bbd9dcddfc /* AccessExpireCache.h */,
+				84e9ce5123d831ac5ea325a15b0d0e9f /* AccessExpireLRUCache.h */,
+				4aa726a6feda3fbe35b34e19177d679b /* ExpireCache.h */,
+				8425d8f4b3e525c269fbbd9060b4cdc1 /* ExpireLRUCache.h */,
 				81b9e335116a816ea1d2a2fa5313a664 /* IO */,
+				2f6c7f53a990035eb21ac78cfe46884b /* LRUCache.h */,
+				bf304715448041cabdb6f49ed18c4f9b /* UniqueAccessExpireCache.h */,
+				7fed5533ba07c2da03f0abc9d29a1122 /* UniqueAccessExpireLRUCache.h */,
+				038270da6aca13e6c027a07225dbc257 /* UniqueExpireCache.h */,
+				3538d5a40c024d14f3f273bf69ce89c3 /* UniqueExpireLRUCache.h */,
 			);
 			name = ofx;
 			sourceTree = "<group>";
@@ -418,9 +434,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E4B69B5A0A3A1756003C02F2 /* example_directory_list */ = {
+		E4B69B5A0A3A1756003C02F2 /* example_file_io */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "example_directory_list" */;
+			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "example_file_io" */;
 			buildPhases = (
 				E4B69B580A3A1756003C02F2 /* Sources */,
 				E4B69B590A3A1756003C02F2 /* Frameworks */,
@@ -432,9 +448,9 @@
 			dependencies = (
 				E4EEB9AC138B136A00A80321 /* PBXTargetDependency */,
 			);
-			name = example_directory_list;
+			name = example_file_io;
 			productName = myOFApp;
-			productReference = E4B69B5B0A3A1756003C02F2 /* example_directory_listDebug.app */;
+			productReference = E4B69B5B0A3A1756003C02F2 /* example_file_ioDebug.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -445,7 +461,7 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 			};
-			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "example_directory_list" */;
+			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "example_file_io" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -466,7 +482,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				E4B69B5A0A3A1756003C02F2 /* example_directory_list */,
+				E4B69B5A0A3A1756003C02F2 /* example_file_io */,
 			);
 		};
 /* End PBXProject section */
@@ -506,12 +522,12 @@
 				4b14cedcc7195a4d1f8e28b4f9635a89 /* ofApp.cpp in Sources */,
 				d932a5a24fcf08ae510a265d01807a32 /* ByteBuffer.cpp in Sources */,
 				66a80fd312926deb8c9fe7f6f2faa063 /* ByteBufferUtils.cpp in Sources */,
+				93640c223a2f5bead6da2e35071b167e /* Compression.cpp in Sources */,
 				cdb5b1d2d12f42502906f30f46736926 /* DeviceFilter.cpp in Sources */,
 				84fed53b4ceb4c25c00e172b77176df1 /* DirectoryFilter.cpp in Sources */,
-				FD685DF718F110DE00419D6C /* Encoding.cpp in Sources */,
 				cefd3ccab8b3251dfcaaa0ee9e26c62a /* DirectoryUtils.cpp in Sources */,
-				FD685DF618F110DE00419D6C /* Compression.cpp in Sources */,
 				be177617474f11f05e9260fc7f73d21c /* DirectoryWatcherManager.cpp in Sources */,
+				ee3a0581bc0ed0fb1041c3be8237891e /* Encoding.cpp in Sources */,
 				5bb82711925a3764235c2ceb757c45d5 /* FileExtensionFilter.cpp in Sources */,
 				b3e6d60405574847412d7441c2743467 /* HiddenFileFilter.cpp in Sources */,
 				86b56e23d787a5f24641398fd393657d /* LinkFilter.cpp in Sources */,
@@ -826,7 +842,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "example_directory_list" */ = {
+		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "example_file_io" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B4E0A3A1720003C02F2 /* Debug */,
@@ -835,7 +851,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "example_directory_list" */ = {
+		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "example_file_io" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B600A3A1757003C02F2 /* Debug */,
