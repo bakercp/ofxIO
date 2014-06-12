@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-               BuildableName = "example_directory_list.app"
-               BlueprintName = "example_directory_list"
-               ReferencedContainer = "container:example_directory_list.xcodeproj">
+               BuildableName = "example_file_io.app"
+               BlueprintName = "example_file_io"
+               ReferencedContainer = "container:example_file_io.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "example_directory_list.app"
-            BlueprintName = "example_directory_list"
-            ReferencedContainer = "container:example_directory_list.xcodeproj">
+            BuildableName = "example_file_io.app"
+            BlueprintName = "example_file_io"
+            ReferencedContainer = "container:example_file_io.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "example_directory_list.app"
-            BlueprintName = "example_directory_list"
-            ReferencedContainer = "container:example_directory_list.xcodeproj">
+            BuildableName = "example_file_io.app"
+            BlueprintName = "example_file_io"
+            ReferencedContainer = "container:example_file_io.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "example_directory_list.app"
-            BlueprintName = "example_directory_list"
-            ReferencedContainer = "container:example_directory_list.xcodeproj">
+            BuildableName = "example_file_io.app"
+            BlueprintName = "example_file_io"
+            ReferencedContainer = "container:example_file_io.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
