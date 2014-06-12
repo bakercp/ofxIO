@@ -96,15 +96,15 @@ public:
     /// \brief Copy a ByteBuffer to an output stream.
     /// \param byteBuffer the ByteBuffer to copy.
     /// \param ostr the target output stream.
-    /// \returns The total number of bytes copied.
-    static std::streamsize copyBufferToStream(const ByteBuffer& byteBuffer,
-                                              std::ostream& ostr);
+    /// \returns The passed output stream.
+    static std::ostream& copyBufferToStream(const ByteBuffer& byteBuffer,
+                                            std::ostream& ostr);
 
     /// \brief Load a ByteBuffer from a file.
     /// \path The absolute path of the file to load.
     /// \param byteBuffer the target ByteBuffer to fill.
     /// \param append false if the ByteBuffer should be cleared.
-    /// \returns The total number of bytes copied.
+    /// \returns The total number of bytes loaded.
     static std::streamsize loadFromFile(const std::string& path,
                                         ByteBuffer& buffer,
                                         bool appendBuffer = false);
@@ -113,9 +113,9 @@ public:
     /// \param byteBuffer the target ByteBuffer to save.
     /// \path The absolute path of the file to save.
     /// \param append false if the ByteBuffer should be cleared.
-    /// \returns The total number of bytes copied.
-    static std::streamsize saveToFile(const ByteBuffer& buffer,
-                                      const std::string& path);
+    /// \returns True iff the file was saved successfully.
+    static bool saveToFile(const ByteBuffer& buffer,
+                           const std::string& path);
 
     enum
     {

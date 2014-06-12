@@ -110,22 +110,19 @@ std::streamsize ByteBufferUtils::copyStreamToBuffer(std::istream& istr,
 }
 
 
-std::streamsize ByteBufferUtils::copyBufferToStream(const ByteBuffer& byteBuffer,
-                                                    std::ostream& ostr)
+std::ostream& ByteBufferUtils::copyBufferToStream(const ByteBuffer& byteBuffer,
+                                                 std::ostream& ostr)
 {
     if (!ostr.bad())
     {
-    
-        std::cout << "writing byteBuff=" << byteBuffer.size() << std::endl;
-
         ostr.write(byteBuffer.getCharPtr(), byteBuffer.size());
-
-        return byteBuffer.size();
     }
     else
     {
-        return 0;
+        ofLogError("ByteBufferUtils::copyBufferToStream") << "Bad output stream.";
     }
+
+    return ostr;
 }
 
 
@@ -142,7 +139,7 @@ std::streamsize ByteBufferUtils::loadFromFile(const std::string& path,
             byteBuffer.clear();
         }
 
-        return ofx::IO::ByteBufferUtils::copyStreamToBuffer(fis, byteBuffer);
+        return copyStreamToBuffer(fis, byteBuffer);
     }
     else
     {
@@ -152,19 +149,20 @@ std::streamsize ByteBufferUtils::loadFromFile(const std::string& path,
 }
 
 
-std::streamsize ByteBufferUtils::saveToFile(const ByteBuffer& byteBuffer,
-                                            const std::string& path)
+bool ByteBufferUtils::saveToFile(const ByteBuffer& byteBuffer,
+                                 const std::string& path)
 {
     Poco::FileOutputStream fos(path);
 
     if (fos.good())
     {
-        return ofx::IO::ByteBufferUtils::copyBufferToStream(byteBuffer, fos);
+        copyBufferToStream(byteBuffer, fos);
+        return true;
     }
     else
     {
         ofLogError("ByteBufferUtils::copyBufferToFile") << "Bad file output stream: " << path;
-        return 0;
+        return false;
     }
 }
 
