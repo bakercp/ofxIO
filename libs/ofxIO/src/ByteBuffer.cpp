@@ -67,14 +67,14 @@ ByteBuffer::~ByteBuffer()
 std::size_t ByteBuffer::readBytes(uint8_t* buffer, std::size_t size) const
 {
     std::size_t numBytesToCopy = std::min(size, _buffer.size());
-    std::copy(_buffer.end(), _buffer.end() + numBytesToCopy, buffer);
+    std::copy(_buffer.begin(), _buffer.begin() + numBytesToCopy, buffer);
     return numBytesToCopy;
 }
 
 
 std::size_t ByteBuffer::readBytes(std::vector<uint8_t>& buffer) const
 {
-    buffer.resize(_buffer.size()); // effectively clears
+    buffer.resize(_buffer.size());
     buffer.insert(buffer.begin(), _buffer.begin(), _buffer.end());
     return buffer.size();
 }
@@ -82,8 +82,8 @@ std::size_t ByteBuffer::readBytes(std::vector<uint8_t>& buffer) const
 
 std::size_t ByteBuffer::readBytes(std::string& buffer) const
 {
-    buffer.resize(_buffer.size()); // effectively clears
-    buffer.insert(buffer.end(), _buffer.begin(), _buffer.end());
+    buffer.resize(_buffer.size());
+    buffer.insert(buffer.begin(), _buffer.begin(), _buffer.end());
     return buffer.size();
 }
 
