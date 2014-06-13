@@ -244,5 +244,13 @@ char* ByteBuffer::getCharPtr()
     }
 }
 
+std::string ByteBuffer::toString() const
+{
+    std::stringstream ss;
+    ss << (*this);
+    return ss.str();
+}
+
+
 
 } }  // namespace ofx::IO
