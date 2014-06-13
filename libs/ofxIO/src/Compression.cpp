@@ -24,8 +24,12 @@
 
 
 #include "ofx/IO/Compression.h"
+#include "Poco/Buffer.h"
+#include "Poco/DeflatingStream.h"
+#include "Poco/InflatingStream.h"
 #include "snappy.h"
 #include "lz4.h"
+#include "ofLog.h"
 
 
 namespace ofx {
@@ -39,18 +43,15 @@ std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
 
     switch (type)
     {
-            //        case ZLIB:
-            //        {
-            //            break;
-            //        }
-            //        case GZIP:
-            //        {
-            //            break;
-            //        }
-            //        case ZIP:
-            //        {
-            //            break;
-            //        }
+        case ZLIB:
+            ofLogWarning("Compression::uncompress") << "Not implemented.";
+            return 0;
+        case GZIP:
+            ofLogWarning("Compression::uncompress") << "Not implemented.";
+            return 0;
+        case ZIP:
+            ofLogWarning("Compression::uncompress") << "Not implemented.";
+            return 0;
         case SNAPPY:
         {
             std::size_t size = 0;
@@ -61,9 +62,9 @@ std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
             {
                 uncompressedBuffer.resize(size);
 
-                if (!snappy::RawUncompress(compressedBuffer.getCharPtr(),
-                                           compressedBuffer.size(),
-                                           uncompressedBuffer.getCharPtr()))
+                if (snappy::RawUncompress(compressedBuffer.getCharPtr(),
+                                          compressedBuffer.size(),
+                                          uncompressedBuffer.getCharPtr()))
                 {
                     return size;
                 }
@@ -79,26 +80,18 @@ std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
         }
         case LZ4:
         {
-            int maximumUncompressedSize = LZ4_compressBound(compressedBuffer.size());
+            // TODO: Abritrary 4 x buffer.
+            uncompressedBuffer.resize(compressedBuffer.size() * 4);
 
-            uncompressedBuffer.resize(maximumUncompressedSize);
+            int result = LZ4_decompress_safe(compressedBuffer.getCharPtr(),
+                                             uncompressedBuffer.getCharPtr(),
+                                             compressedBuffer.size(),
+                                             uncompressedBuffer.size());
 
-            if (maximumUncompressedSize > 0)
+            if (result >= 0)
             {
-                int result = LZ4_decompress_safe(compressedBuffer.getCharPtr(),
-                                                 uncompressedBuffer.getCharPtr(),
-                                                 compressedBuffer.size(),
-                                                 uncompressedBuffer.size());
-
-                if (result > 0)
-                {
-                    uncompressedBuffer.resize(result);
-                    return result;
-                }
-                else
-                {
-                    return 0;
-                }
+                uncompressedBuffer.resize(result);
+                return result;
             }
             else
             {
@@ -106,8 +99,6 @@ std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
             }
         }
     }
-
-    return 0;
 }
 
 
@@ -118,22 +109,19 @@ std::size_t Compression::compress(const ByteBuffer& uncompressedBuffer,
     std::size_t size = 0;
 
     // Reserve as many as needed.
-    compressedBuffer.reserve(uncompressedBuffer.size());
+    compressedBuffer.resize(uncompressedBuffer.size());
 
     switch (type)
     {
-//        case ZLIB:
-//        {
-//            break;
-//        }
-//        case GZIP:
-//        {
-//            break;
-//        }
-//        case ZIP:
-//        {
-//            break;
-//        }
+        case ZLIB:
+            ofLogWarning("Compression::compress") << "Not implemented.";
+            break;
+        case GZIP:
+            ofLogWarning("Compression::compress") << "Not implemented.";
+            break;
+        case ZIP:
+            ofLogWarning("Compression::compress") << "Not implemented.";
+            break;
         case SNAPPY:
         {
             snappy::RawCompress(uncompressedBuffer.getCharPtr(),
@@ -155,6 +143,53 @@ std::size_t Compression::compress(const ByteBuffer& uncompressedBuffer,
 
     return size;
 }
+
+
+std::string Compression::version(Type type)
+{
+    switch (type)
+    {
+        case ZLIB:
+            ofLogWarning("Compression::version") << "Not implemented.";
+            return "?";
+        case GZIP:
+            ofLogWarning("Compression::version") << "Not implemented.";
+            return "?";
+        case ZIP:
+            ofLogWarning("Compression::version") << "Not implemented.";
+            return "?";
+        case SNAPPY:
+        {
+            std::stringstream ss;
+            ss << SNAPPY_MAJOR << "." << SNAPPY_MINOR << "." << SNAPPY_PATCHLEVEL;
+            return ss.str();
+        }
+        case LZ4:
+        {
+            std::stringstream ss;
+            ss << LZ4_VERSION_MAJOR << "." << LZ4_VERSION_MINOR << "." << LZ4_VERSION_RELEASE;
+            return ss.str();
+        }
+    }
+}
+
+std::string Compression::toString(Type type)
+{
+    switch (type)
+    {
+        case ZLIB:
+            return "ZLIB";
+        case GZIP:
+            return "GZIP";
+        case ZIP:
+            return "ZIP";
+        case SNAPPY:
+            return "SNAPPY";
+        case LZ4:
+            return "LZ4";
+    }
+}
+
 
 
 } }  // namespace ofx::IO

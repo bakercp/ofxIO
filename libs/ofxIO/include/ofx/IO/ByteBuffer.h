@@ -28,6 +28,7 @@
 
 #include <vector>
 #include <string>
+#include <sstream>
 #include <iostream>
 #include "ofx/IO/AbstractTypes.h"
 #include "ofx/IO/ByteBufferUtils.h"
@@ -150,6 +151,10 @@ public:
     /// \brief Get a pointer to the char data vector.
     /// \returns a pointer to the backing data vector.
     char* getCharPtr();
+
+    /// \brief get the ByteBuffer as a std::string;
+    /// \returns the std::string representation of the ByteBuffer.
+    std::string toString() const;
 
     /// \brief Write the buffer to an output stream.
     /// \param ostr The std::ostream to write to.
