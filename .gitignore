@@ -1,6 +1,12 @@
 docs/html
 docs/tagfile.xml
 
+raw/
+
+example_cache/
+example_directory_watcher_poco_error/
+example_json/
+
 *.mode1v3
 
 # xcode
