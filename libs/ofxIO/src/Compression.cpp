@@ -23,11 +23,138 @@
 // =============================================================================
 
 
-//#include "ofx/IO/Compression.h"
-//
-//
-//namespace ofx {
-//namespace IO {
-//
-//
-//} }  // namespace ofx::IO
+#include "ofx/IO/Compression.h"
+#include "snappy.h"
+#include "lz4.h"
+
+
+namespace ofx {
+namespace IO {
+
+
+std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
+                                    ByteBuffer& uncompressedBuffer,
+                                    Type type)
+{
+
+    switch (type)
+    {
+            //        case ZLIB:
+            //        {
+            //            break;
+            //        }
+            //        case GZIP:
+            //        {
+            //            break;
+            //        }
+            //        case ZIP:
+            //        {
+            //            break;
+            //        }
+        case SNAPPY:
+        {
+            std::size_t size = 0;
+
+            if (snappy::GetUncompressedLength(compressedBuffer.getCharPtr(),
+                                              compressedBuffer.size(),
+                                              &size))
+            {
+                uncompressedBuffer.resize(size);
+
+                if (!snappy::RawUncompress(compressedBuffer.getCharPtr(),
+                                           compressedBuffer.size(),
+                                           uncompressedBuffer.getCharPtr()))
+                {
+                    return size;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        case LZ4:
+        {
+            int maximumUncompressedSize = LZ4_compressBound(compressedBuffer.size());
+
+            uncompressedBuffer.resize(maximumUncompressedSize);
+
+            if (maximumUncompressedSize > 0)
+            {
+                int result = LZ4_decompress_safe(compressedBuffer.getCharPtr(),
+                                                 uncompressedBuffer.getCharPtr(),
+                                                 compressedBuffer.size(),
+                                                 uncompressedBuffer.size());
+
+                if (result > 0)
+                {
+                    uncompressedBuffer.resize(result);
+                    return result;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    }
+
+    return 0;
+}
+
+
+std::size_t Compression::compress(const ByteBuffer& uncompressedBuffer,
+                                  ByteBuffer& compressedBuffer,
+                                  Type type)
+{
+    std::size_t size = 0;
+
+    // Reserve as many as needed.
+    compressedBuffer.reserve(uncompressedBuffer.size());
+
+    switch (type)
+    {
+//        case ZLIB:
+//        {
+//            break;
+//        }
+//        case GZIP:
+//        {
+//            break;
+//        }
+//        case ZIP:
+//        {
+//            break;
+//        }
+        case SNAPPY:
+        {
+            snappy::RawCompress(uncompressedBuffer.getCharPtr(),
+                                uncompressedBuffer.size(),
+                                compressedBuffer.getCharPtr(),
+                                &size);
+            break;
+        }
+        case LZ4:
+        {
+            size = LZ4_compress(uncompressedBuffer.getCharPtr(),
+                                compressedBuffer.getCharPtr(),
+                                uncompressedBuffer.size());
+            break;
+        }
+    }
+
+    compressedBuffer.resize(size);
+
+    return size;
+}
+
+
+} }  // namespace ofx::IO

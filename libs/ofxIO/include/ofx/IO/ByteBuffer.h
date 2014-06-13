@@ -30,6 +30,7 @@
 #include <string>
 #include <iostream>
 #include "ofx/IO/AbstractTypes.h"
+#include "ofx/IO/ByteBufferUtils.h"
 
 
 namespace ofx {
@@ -138,16 +139,32 @@ public:
     /// \returns a const pointer to the backing data vector.
     const uint8_t* getPtr() const;
 
+    /// \brief Get a pointer to the backing unsigned char data vector.
+    /// \returns a pointer to the backing data vector.
+    uint8_t* getPtr();
+
     /// \brief Get a const pointer to the char data vector.
     /// \returns a const pointer to the backing data vector.
     const char* getCharPtr() const;
 
+    /// \brief Get a pointer to the char data vector.
+    /// \returns a pointer to the backing data vector.
+    char* getCharPtr();
+
     /// \brief Write the buffer to an output stream.
-    /// \param os The std::ostream to write to.
+    /// \param ostr The std::ostream to write to.
     /// \param buffer the ByteBuffer to write.
     /// \returns the std::ostream that was written to.
-    friend std::ostream& operator << (std::ostream& os,
-                                      const ByteBuffer& buffer);
+    friend std::ostream& operator << (std::ostream& ostr,
+                                      const ByteBuffer& byteBuffer);
+
+    /// \brief Read into the buffer from an input stream.
+    /// \param istr The std::istream to read from.
+    /// \param buffer the ByteBuffer to read into.
+    /// \returns the std::istream that was read from.
+	friend std::istream& operator >> (std::istream& istr,
+                                      ByteBuffer& byteBuffer);
+
 
 private:
     /// \brief The backing byte buffer.
@@ -156,20 +173,18 @@ private:
 };
 
 
-inline std::ostream& operator << (std::ostream& os, const ByteBuffer& buffer)
+inline std::ostream& operator << (std::ostream& ostr,
+                                  const ByteBuffer& byteBuffer)
 {
-    std::vector<uint8_t>::const_iterator iter = buffer._buffer.begin();
+    return ByteBufferUtils::copyBufferToStream(byteBuffer, ostr);
+}
 
-    while(iter != buffer._buffer.end())
-    {
-        os << (int)*iter; // cast to int so interpreted as numbers, not chars
-        ++iter;
-        if(iter != buffer._buffer.end())
-        {
-            os << " ";
-        }
-    }
-    return os;
+
+inline std::istream& operator >> (std::istream& istr, ByteBuffer& byteBuffer)
+{
+    ByteBufferUtils::copyStreamToBuffer(istr, byteBuffer);
+
+    return istr;
 }
 
 

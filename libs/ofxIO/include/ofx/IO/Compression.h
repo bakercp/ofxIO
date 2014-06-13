@@ -23,33 +23,47 @@
 // =============================================================================
 
 
-//#include <stdint.h>
-//#include "Poco/InflatingStream.h"
-//#include "ofx/IO/ByteBuffer.h"
-//
-//
-//namespace ofx {
-//namespace IO {
-//
-//
-//class Compression
-//{
-//public:
-//    enum Type
-//    {
+#include <stdint.h>
+#include "Poco/InflatingStream.h"
+#include "Poco/DeflatingStream.h"
+#include "ofx/IO/ByteBuffer.h"
+
+
+namespace ofx {
+namespace IO {
+
+
+class Compression
+{
+public:
+    enum Type
+    {
 //        /// \brief Expect a zlib header, use Adler-32 checksum.
 //        ZLIB = Poco::InflatingStreamBuf::STREAM_ZLIB,
+//
 //        /// \brief Expect a gzip header, use CRC-32 checksum.
 //		GZIP = Poco::InflatingStreamBuf::STREAM_GZIP,
+//
 //        /// \brief STREAM_ZIP is handled as STREAM_ZLIB,
 //        /// except that we do not check the ADLER32 value (must be checked by caller)
-//		ZIP = Poco::InflatingStreamBuf::STREAM_ZIP
-//    };
+//		ZIP = Poco::InflatingStreamBuf::STREAM_ZIP,
 //
-//    static ByteBuffer uncompress(const ByteBuffer& buffer, Type type);
-//    static ByteBuffer compress(const ByteBuffer& buffer, Type type);
-//
-//};
-//
-//
-//} } // namespace ofx::IO
+        /// \brief Use the snappy compression algorithm.
+        SNAPPY,
+
+        /// \brief Use the LZ4 compression algorithm .
+        LZ4
+    };
+
+    static std::size_t uncompress(const ByteBuffer& compressedBuffer,
+                                  ByteBuffer& uncompressedBuffer,
+                                  Type type);
+
+    static std::size_t compress(const ByteBuffer& uncompressedBuffer,
+                                ByteBuffer& compressedBuffer,
+                                Type type);
+
+};
+
+
+} } // namespace ofx::IO
