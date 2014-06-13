@@ -3,6 +3,8 @@ ofxIO
 
 A collection of I/O core utils.
 
+Generate all project files using the openFrameworks Project Generator.
+
 * `ofEvent`-based Directory Watcher
     * Watch for changes in your directories.
     * _NOTE: `Poco::DirectoryWatcher` was added in Poco 1.5+.  These files are included for backward compatability._
