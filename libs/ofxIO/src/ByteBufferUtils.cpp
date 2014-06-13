@@ -24,6 +24,7 @@
 
 
 #include "ofx/IO/ByteBufferUtils.h"
+#include "ofx/IO/ByteBuffer.h"
 #include "Poco/Buffer.h"
 #include "Poco/FileStream.h"
 #include <iostream> 
@@ -111,7 +112,7 @@ std::streamsize ByteBufferUtils::copyStreamToBuffer(std::istream& istr,
 
 
 std::ostream& ByteBufferUtils::copyBufferToStream(const ByteBuffer& byteBuffer,
-                                                 std::ostream& ostr)
+                                                  std::ostream& ostr)
 {
     if (!ostr.bad())
     {
@@ -139,12 +140,13 @@ std::streamsize ByteBufferUtils::loadFromFile(const std::string& path,
             byteBuffer.clear();
         }
 
-        return copyStreamToBuffer(fis, byteBuffer);
+        std::streamsize n = copyStreamToBuffer(fis, byteBuffer);
+        fis.close();
+        return n;
     }
     else
     {
-        ofLogError("ByteBufferUtils::copyFileToBuffer") << "Bad file input stream: " << path;
-        return 0;
+        throw Poco::IOException("Bad file input stream.");
     }
 }
 
@@ -157,12 +159,12 @@ bool ByteBufferUtils::saveToFile(const ByteBuffer& byteBuffer,
     if (fos.good())
     {
         copyBufferToStream(byteBuffer, fos);
+        fos.close();
         return true;
     }
     else
     {
-        ofLogError("ByteBufferUtils::copyBufferToFile") << "Bad file output stream: " << path;
-        return false;
+        throw Poco::IOException("Bad file output stream.");
     }
 }
 

@@ -23,33 +23,61 @@
 // =============================================================================
 
 
-//#include <stdint.h>
-//#include "Poco/InflatingStream.h"
-//#include "ofx/IO/ByteBuffer.h"
-//
-//
-//namespace ofx {
-//namespace IO {
-//
-//
-//class Compression
-//{
-//public:
-//    enum Type
-//    {
-//        /// \brief Expect a zlib header, use Adler-32 checksum.
-//        ZLIB = Poco::InflatingStreamBuf::STREAM_ZLIB,
-//        /// \brief Expect a gzip header, use CRC-32 checksum.
-//		GZIP = Poco::InflatingStreamBuf::STREAM_GZIP,
-//        /// \brief STREAM_ZIP is handled as STREAM_ZLIB,
-//        /// except that we do not check the ADLER32 value (must be checked by caller)
-//		ZIP = Poco::InflatingStreamBuf::STREAM_ZIP
-//    };
-//
-//    static ByteBuffer uncompress(const ByteBuffer& buffer, Type type);
-//    static ByteBuffer compress(const ByteBuffer& buffer, Type type);
-//
-//};
-//
-//
-//} } // namespace ofx::IO
+#include <stdint.h>
+#include "ofx/IO/ByteBuffer.h"
+
+
+namespace ofx {
+namespace IO {
+
+
+class Compression
+{
+public:
+    enum Type
+    {
+        /// \brief Expect a zlib header, use Adler-32 checksum.
+        ZLIB,
+        /// \brief Expect a gzip header, use CRC-32 checksum.
+		GZIP,
+        /// \brief STREAM_ZIP is handled as STREAM_ZLIB,
+        /// except that we do not check the ADLER32 value (must be checked by caller)
+		ZIP,
+        /// \brief Use the snappy compression algorithm.
+        SNAPPY,
+        /// \brief Use the LZ4 compression algorithm .
+        LZ4
+    };
+
+    /// \brief Uncompress a ByteBuffer.
+    /// \param compressedBuffer The buffer compressed with `type` compression.
+    /// \param uncompressedBuffer The buffer to fill with uncompressed bytes.
+    /// \param type the compression Type.
+    /// \returns the number of bytes uncompressed or 0 if error.
+    static std::size_t uncompress(const ByteBuffer& compressedBuffer,
+                                  ByteBuffer& uncompressedBuffer,
+                                  Type type);
+
+    /// \brief Compress a ByteBuffer.
+    /// \param uncompressedBuffer The buffer to compress with `type` compression.
+    /// \param compressedBuffer The buffer to fill with compressed bytes.
+    /// \param type the compression Type.
+    /// \returns the number of compressed bytes or 0 if error.
+    static std::size_t compress(const ByteBuffer& uncompressedBuffer,
+                                ByteBuffer& compressedBuffer,
+                                Type type);
+
+    /// \brief Query the string representation of the compression lib version.
+    /// \param type The compression type.
+    /// \returns the string representation of the compression lib version.
+    static std::string version(Type type);
+
+    /// \brief Query the string representation of the compression type.
+    /// \param type The compression type.
+    /// \returns the string representation of the compression type.
+    static std::string toString(Type type);
+
+};
+
+
+} } // namespace ofx::IO

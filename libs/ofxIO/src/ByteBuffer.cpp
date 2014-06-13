@@ -206,6 +206,19 @@ const uint8_t* ByteBuffer::getPtr() const
 }
 
 
+uint8_t* ByteBuffer::getPtr()
+{
+    if (!_buffer.empty())
+    {
+        return &_buffer[0];
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+
 const char* ByteBuffer::getCharPtr() const
 {
     if (!_buffer.empty())
@@ -217,6 +230,27 @@ const char* ByteBuffer::getCharPtr() const
         return 0;
     }
 }
+
+
+char* ByteBuffer::getCharPtr()
+{
+    if (!_buffer.empty())
+    {
+        return reinterpret_cast<char*>(&_buffer[0]);
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+std::string ByteBuffer::toString() const
+{
+    std::stringstream ss;
+    ss << (*this);
+    return ss.str();
+}
+
 
 
 } }  // namespace ofx::IO

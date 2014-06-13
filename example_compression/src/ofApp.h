@@ -23,13 +23,20 @@
 // =============================================================================
 
 
-#include "ofApp.h"
-#include "ofAppNoWindow.h"
+#pragma once
 
 
-int main()
+#include "ofMain.h"
+#include "ofxIO.h"
+
+
+class ofApp: public ofBaseApp
 {
-	ofAppNoWindow window;
-	ofSetupOpenGL(&window, 0, 0, OF_WINDOW);
-	ofRunApp(new ofApp());
-}
+public:
+    void setup();
+
+    void test(ofx::IO::Compression::Type type);
+
+
+    static const std::string LOREM_IPSUM;
+};
