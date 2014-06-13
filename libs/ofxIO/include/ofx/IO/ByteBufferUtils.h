@@ -26,11 +26,15 @@
 #pragma once
 
 
-#include "ofx/IO/ByteBuffer.h"
+#include <iostream>
+#include <stdint.h>
 
 
 namespace ofx {
 namespace IO {
+
+
+class ByteBuffer;
 
 
 /// \brief Utilities for use with ByteBuffer.

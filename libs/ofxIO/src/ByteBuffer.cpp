@@ -206,11 +206,37 @@ const uint8_t* ByteBuffer::getPtr() const
 }
 
 
+uint8_t* ByteBuffer::getPtr()
+{
+    if (!_buffer.empty())
+    {
+        return &_buffer[0];
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+
 const char* ByteBuffer::getCharPtr() const
 {
     if (!_buffer.empty())
     {
         return reinterpret_cast<const char*>(&_buffer[0]);
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+
+char* ByteBuffer::getCharPtr()
+{
+    if (!_buffer.empty())
+    {
+        return reinterpret_cast<char*>(&_buffer[0]);
     }
     else
     {
