@@ -43,7 +43,7 @@
 #include "Poco/ValidArgs.h" 
 #include "Poco/Mutex.h"
 #include "Poco/Exception.h"
-#include "Poco/FIFOEvent.h"
+#include "Poco/BasicEvent.h"
 #include "Poco/EventArgs.h"
 #include "Poco/Delegate.h"
 #include "Poco/SharedPtr.h"
