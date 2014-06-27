@@ -41,6 +41,7 @@
 
 
 #include "Poco/Foundation.h"
+#include "Poco/Exception.h"
 #include "Poco/File.h"
 #include "Poco/BasicEvent.h"
 #include "Poco/Runnable.h"
