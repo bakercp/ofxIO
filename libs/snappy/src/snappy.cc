@@ -37,6 +37,12 @@
 #include <vector>
 
 
+#if defined(_MSC_VER) || defined( __WIN32__ ) || defined( _WIN32 )
+#include <BaseTsd.h>
+typedef SSIZE_T ssize_t;
+#endif
+
+
 namespace snappy {
 
 // Any hash function will produce a valid compressed bitstream, but a good
