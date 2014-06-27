@@ -120,7 +120,7 @@ public:
     ///
     /// If for the key already an entry exists, it will be overwritten, ie. first a remove event
     /// is thrown, then a add event
-	void add(const TKey& key, std::shared_ptr<TValue > val)
+	void add(const TKey& key, std::shared_ptr<TValue> val)
 	{
 		typename TMutex::ScopedLock lock(_mutex);
 		doAdd(key, val);
@@ -132,7 +132,7 @@ public:
     /// The difference to add is that no remove or add events are thrown in this case,
     /// just an Update is thrown
     /// If the key doesnot exist the behavior is equal to add, ie. an add event is thrown
-	void update(const TKey& key, std::shared_ptr<TValue > val)
+	void update(const TKey& key, std::shared_ptr<TValue> val)
 	{
 		typename TMutex::ScopedLock lock(_mutex);
 		doUpdate(key, val);
