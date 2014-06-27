@@ -27,7 +27,7 @@
 
 
 #include "Poco/DirectoryIterator.h"
-#include "Poco/RecursiveDirectoryIterator.h"
+#include "ofx/RecursiveDirectoryIterator.h"
 #include "Poco/File.h"
 #include "ofFileUtils.h"
 #include "ofUtils.h"
@@ -48,7 +48,7 @@ public:
     enum
     {
         /// \brief When recursively listing a directory, do not limit the dept.
-        INIFINITE_DEPTH = Poco::SimpleRecursiveDirectoryIterator::D_INFINITE
+        INIFINITE_DEPTH = SimpleRecursiveDirectoryIterator::D_INFINITE
     };
 
     /// \brief The order of directory listing traversal.

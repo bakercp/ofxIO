@@ -48,27 +48,27 @@
 #include <functional>
 
 
-namespace Poco {
+namespace ofx {
 
 
     class TraverseBase
     {
     public:
-        typedef std::stack<DirectoryIterator> Stack;
-        typedef std::pointer_to_unary_function<const Stack&, UInt16> DepthFunPtr;
+        typedef std::stack<Poco::DirectoryIterator> Stack;
+        typedef std::pointer_to_unary_function<const Stack&, Poco::UInt16> DepthFunPtr;
 
         enum { D_INFINITE = 0 };
         /// Constant for infinite traverse depth.
 
-        TraverseBase(DepthFunPtr depthDeterminer, UInt16 maxDepth = D_INFINITE);
+        TraverseBase(DepthFunPtr depthDeterminer, Poco::UInt16 maxDepth = D_INFINITE);
 
     protected:
         bool isFiniteDepth();
 
         DepthFunPtr _depthDeterminer;
-        UInt16 _maxDepth;
+        Poco::UInt16 _maxDepth;
 
-        DirectoryIterator _itEnd;
+        Poco::DirectoryIterator _itEnd;
 
     private:
         TraverseBase();
@@ -80,7 +80,7 @@ namespace Poco {
     class ChildrenFirstTraverse : public TraverseBase
     {
     public:
-        ChildrenFirstTraverse(DepthFunPtr depthDeterminer, UInt16 maxDepth = D_INFINITE);
+        ChildrenFirstTraverse(DepthFunPtr depthDeterminer, Poco::UInt16 maxDepth = D_INFINITE);
 
         const std::string next(Stack* itStack, bool* isFinished);
 
@@ -95,7 +95,7 @@ namespace Poco {
     {
     public:
         SiblingsFirstTraverse(
-                              DepthFunPtr depthDeterminer, UInt16 maxDepth = D_INFINITE);
+                              DepthFunPtr depthDeterminer, Poco::UInt16 maxDepth = D_INFINITE);
 
         const std::string next(Stack* itStack, bool* isFinished);
         

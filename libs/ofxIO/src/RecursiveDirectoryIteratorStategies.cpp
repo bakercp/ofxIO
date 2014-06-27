@@ -35,17 +35,17 @@
 //
 
 
-#include "Poco/RecursiveDirectoryIteratorStategies.h"
+#include "ofx/RecursiveDirectoryIteratorStategies.h"
 
 
-namespace Poco {
+namespace ofx {
 
 
     //
     // TraverseBase
     //
     TraverseBase
-    ::TraverseBase(DepthFunPtr depthDeterminer, UInt16 maxDepth)
+    ::TraverseBase(DepthFunPtr depthDeterminer, Poco::UInt16 maxDepth)
 	: _depthDeterminer(depthDeterminer),
 	_maxDepth(maxDepth)
     {
@@ -63,7 +63,7 @@ namespace Poco {
     // ChildrenFirstTraverse
     //
     ChildrenFirstTraverse
-    ::ChildrenFirstTraverse(DepthFunPtr depthDeterminer, UInt16 maxDepth)
+    ::ChildrenFirstTraverse(DepthFunPtr depthDeterminer, Poco::UInt16 maxDepth)
 	: TraverseBase(depthDeterminer, maxDepth)
     {
     }
@@ -77,7 +77,7 @@ namespace Poco {
         poco_check_ptr(isFinished);
         poco_assert(!(*isFinished));
 
-        std::stack<DirectoryIterator> it;
+        std::stack<Poco::DirectoryIterator> it;
 
         //_depthDeterminer(it);
 
@@ -87,7 +87,7 @@ namespace Poco {
 		isFiniteDepth() && _depthDeterminer(*itStack) >= _maxDepth;
         if (!isDepthLimitReached && itStack->top()->isDirectory())
         {
-            DirectoryIterator child_it(itStack->top().path());
+            Poco::DirectoryIterator child_it(itStack->top().path());
             // check if directory is empty
             if (child_it != _itEnd)
             {
@@ -124,7 +124,7 @@ namespace Poco {
     // SiblingsFirstTraverse
     //
     SiblingsFirstTraverse
-    ::SiblingsFirstTraverse(DepthFunPtr depthDeterminer, UInt16 maxDepth)
+    ::SiblingsFirstTraverse(DepthFunPtr depthDeterminer, Poco::UInt16 maxDepth)
 	: TraverseBase(depthDeterminer, maxDepth)
     {
         _dirsStack.push(std::queue<std::string>());
@@ -160,7 +160,7 @@ namespace Poco {
             {
                 std::string dir = _dirsStack.top().front();
                 _dirsStack.top().pop();
-                DirectoryIterator child_it(dir);
+                Poco::DirectoryIterator child_it(dir);
                 
                 // check if directory is empty
                 if (child_it != _itEnd)

@@ -48,13 +48,13 @@
 #include "Poco/AtomicCounter.h"
 
 
-namespace Poco {
+namespace ofx {
 
 
 class DirectoryWatcherStrategy;
 
 
-class Foundation_API DirectoryWatcher: protected Runnable
+class Foundation_API DirectoryWatcher: protected Poco::Runnable
 	/// This class is used to get notifications about changes
 	/// to the filesystem, more specifically, to a specific
 	/// directory. Changes to a directory are reported via
@@ -121,32 +121,32 @@ public:
 	
 	struct DirectoryEvent
 	{
-		DirectoryEvent(const File& f, DirectoryEventType ev):
+		DirectoryEvent(const Poco::File& f, DirectoryEventType ev):
 			item(f),
 			event(ev)
 		{
 		}
 
-		const File& item;          /// The directory or file that has been changed.
+		const Poco::File& item;          /// The directory or file that has been changed.
 		DirectoryEventType event;  /// The kind of event.
 	};
 	
-	BasicEvent<const DirectoryEvent> itemAdded;
+	Poco::BasicEvent<const DirectoryEvent> itemAdded;
 		/// Fired when a file or directory has been created or added to the directory.
 		
-	BasicEvent<const DirectoryEvent> itemRemoved;
+	Poco::BasicEvent<const DirectoryEvent> itemRemoved;
 		/// Fired when a file or directory has been removed from the directory.
 		
-	BasicEvent<const DirectoryEvent> itemModified;
+	Poco::BasicEvent<const DirectoryEvent> itemModified;
 		/// Fired when a file or directory has been modified.
 
-	BasicEvent<const DirectoryEvent> itemMovedFrom;
+	Poco::BasicEvent<const DirectoryEvent> itemMovedFrom;
 		/// Fired when a file or directory has been renamed. This event delivers the old name.
 
-	BasicEvent<const DirectoryEvent> itemMovedTo;
+	Poco::BasicEvent<const DirectoryEvent> itemMovedTo;
 		/// Fired when a file or directory has been moved. This event delivers the new name.
 		
-	BasicEvent<const Exception> scanError;
+	Poco::BasicEvent<const Poco::Exception> scanError;
 		/// Fired when an error occurs while scanning for changes.
 	
 	DirectoryWatcher(const std::string& path, int eventMask = DW_FILTER_ENABLE_ALL, int scanInterval = DW_DEFAULT_SCAN_INTERVAL);
@@ -157,7 +157,7 @@ public:
 		/// scanInterval specifies the interval in seconds between scans
 		/// of the directory.
 		
-	DirectoryWatcher(const File& directory, int eventMask = DW_FILTER_ENABLE_ALL, int scanInterval = DW_DEFAULT_SCAN_INTERVAL);
+	DirectoryWatcher(const Poco::File& directory, int eventMask = DW_FILTER_ENABLE_ALL, int scanInterval = DW_DEFAULT_SCAN_INTERVAL);
 		/// Creates a DirectoryWatcher for the specified directory
 		/// To enable only specific events, an eventMask can be specified by
 		/// OR-ing the desired event IDs (e.g., DW_ITEM_ADDED | DW_ITEM_MODIFIED).
@@ -184,7 +184,7 @@ public:
 	int scanInterval() const;
 		/// Returns the scan interval in seconds.
 		
-	const File& directory() const;
+	const Poco::File& directory() const;
 		/// Returns the directory being watched.
 		
 	bool supportsMoveEvents() const;
@@ -203,10 +203,10 @@ private:
 	DirectoryWatcher(const DirectoryWatcher&);
 	DirectoryWatcher& operator = (const DirectoryWatcher&);
 
-	Thread _thread;
-	File _directory;
+	Poco::Thread _thread;
+	Poco::File _directory;
 	int _eventMask;
-	AtomicCounter _eventsSuspended;
+	Poco::AtomicCounter _eventsSuspended;
 	int _scanInterval;
 	DirectoryWatcherStrategy* _pStrategy;
 };
@@ -235,7 +235,7 @@ inline int DirectoryWatcher::scanInterval() const
 }
 
 
-inline const File& DirectoryWatcher::directory() const
+inline const Poco::File& DirectoryWatcher::directory() const
 {
 	return _directory;
 }

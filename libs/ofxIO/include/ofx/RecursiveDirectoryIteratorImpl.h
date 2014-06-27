@@ -42,12 +42,12 @@
 
 
 #include "Poco/Foundation.h"
-#include "Poco/RecursiveDirectoryIteratorStategies.h"
+#include "ofx/RecursiveDirectoryIteratorStategies.h"
 #include <stack>
 #include <functional>
 
 
-namespace Poco {
+namespace ofx {
 
 
     class ChildrenFirstTraverse;
@@ -62,25 +62,25 @@ namespace Poco {
         /// Constant for infinite traverse depth.
 
         RecursiveDirectoryIteratorImpl(
-                                       const std::string& path, UInt16 maxDepth = D_INFINITE);
+                                       const std::string& path, Poco::UInt16 maxDepth = D_INFINITE);
         ~RecursiveDirectoryIteratorImpl();
 
         void duplicate();
         void release();
-        UInt16 depth() const;
-        UInt16 maxDepth() const;
+        Poco::UInt16 depth() const;
+        Poco::UInt16 maxDepth() const;
 
         const std::string& get() const;
         const std::string& next();
 
     private:
-        typedef std::stack<DirectoryIterator> Stack;
+        typedef std::stack<Poco::DirectoryIterator> Stack;
 
-        static UInt16 depthFun(const Stack& stack);
+        static Poco::UInt16 depthFun(const Stack& stack);
 		/// Function which implements the logic of determining
 		/// recursion depth.
 
-        UInt16 _maxDepth;
+        Poco::UInt16 _maxDepth;
         TTraverseStrategy _traverseStrategy;
 
         bool _isFinished;
@@ -112,7 +112,7 @@ namespace Poco {
 
 
     template <class TTraverseStrategy>
-    inline UInt16
+    inline Poco::UInt16
     RecursiveDirectoryIteratorImpl<TTraverseStrategy>::depth() const
     {
         return depthFun(_itStack);
@@ -120,7 +120,7 @@ namespace Poco {
 
 
     template <class TTraverseStrategy>
-    inline UInt16
+    inline Poco::UInt16
     RecursiveDirectoryIteratorImpl<TTraverseStrategy>::maxDepth() const
     {
         return _maxDepth;
@@ -136,7 +136,7 @@ namespace Poco {
 
 
     template <class TTraverseStrategy>
-    inline UInt16
+    inline Poco::UInt16
     RecursiveDirectoryIteratorImpl<TTraverseStrategy>::depthFun(const Stack& stack)
     {
         return stack.size();
@@ -148,12 +148,12 @@ namespace Poco {
     //
     template <class TTraverseStrategy>
     RecursiveDirectoryIteratorImpl<TTraverseStrategy>
-    ::RecursiveDirectoryIteratorImpl(const std::string& path, UInt16 maxDepth)
+    ::RecursiveDirectoryIteratorImpl(const std::string& path, Poco::UInt16 maxDepth)
 	: _maxDepth(maxDepth),
 	_traverseStrategy(std::ptr_fun(depthFun), _maxDepth),
 	_isFinished(false)
     {
-        _itStack.push(DirectoryIterator(path));
+        _itStack.push(Poco::DirectoryIterator(path));
         _current = _itStack.top()->path();
     }
     

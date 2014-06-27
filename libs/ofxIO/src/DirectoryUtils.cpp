@@ -175,8 +175,8 @@ void DirectoryUtils::listRecursive(const std::string& directory,
 
     if(traversalOrder == SIBLINGS_FIRST)
     {
-        Poco::SiblingsFirstRecursiveDirectoryIterator iter(_directory, maxDepth);
-        Poco::SiblingsFirstRecursiveDirectoryIterator endIter;
+        SiblingsFirstRecursiveDirectoryIterator iter(_directory, maxDepth);
+        SiblingsFirstRecursiveDirectoryIterator endIter;
         
         while (iter != endIter)
         {
@@ -190,8 +190,8 @@ void DirectoryUtils::listRecursive(const std::string& directory,
     }
     else if(traversalOrder == CHILDREN_FIRST)
     {
-        Poco::SimpleRecursiveDirectoryIterator iter(_directory, maxDepth);
-        Poco::SimpleRecursiveDirectoryIterator endIter;
+        SimpleRecursiveDirectoryIterator iter(_directory, maxDepth);
+        SimpleRecursiveDirectoryIterator endIter;
 
         while (iter != endIter)
         {

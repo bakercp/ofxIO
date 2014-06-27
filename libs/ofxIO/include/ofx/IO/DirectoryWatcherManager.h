@@ -27,7 +27,7 @@
 
 
 #include <map>
-#include "Poco/DirectoryWatcher.h"
+#include "ofx/DirectoryWatcher.h"
 #include "Poco/Exception.h"
 #include "Poco/Path.h"
 #include "ofTypes.h"
@@ -49,7 +49,7 @@ class DirectoryWatcherEvents
 {
 public:
     /// \brief A typedef for a Poco::DirectoryWatcher::DirectoryEvent.
-    typedef Poco::DirectoryWatcher::DirectoryEvent DirectoryEvent;
+    typedef DirectoryWatcher::DirectoryEvent DirectoryEvent;
 
     /// \brief Create a DirectoryWatcherEvents.
     DirectoryWatcherEvents()
@@ -90,44 +90,44 @@ class DirectoryWatcherManager
 {
 public:
     /// \brief A typedef for a Poco::DirectoryWatcher::DirectoryEvent.
-    typedef Poco::DirectoryWatcher::DirectoryEvent DirectoryEvent;
+    typedef DirectoryWatcher::DirectoryEvent DirectoryEvent;
 
     /// \brief A directory type event.
     enum DirectoryEventType
 	{
         /// \brief A new item has been created and added to the directory.
-		ITEM_ADDED = Poco::DirectoryWatcher::DW_ITEM_ADDED,
+		ITEM_ADDED = DirectoryWatcher::DW_ITEM_ADDED,
 
         /// \brief An item has been removed from the directory.
-		ITEM_REMOVED = Poco::DirectoryWatcher::DW_ITEM_REMOVED,
+		ITEM_REMOVED = DirectoryWatcher::DW_ITEM_REMOVED,
 
         /// An item has been modified.
-		ITEM_MODIFIED = Poco::DirectoryWatcher::DW_ITEM_MODIFIED,
+		ITEM_MODIFIED = DirectoryWatcher::DW_ITEM_MODIFIED,
 
         /// \brief An item has been renamed or moved.
         ///        This event delivers the old name.
-		ITEM_MOVED_FROM = Poco::DirectoryWatcher::DW_ITEM_MOVED_FROM,
+		ITEM_MOVED_FROM = DirectoryWatcher::DW_ITEM_MOVED_FROM,
 
         /// \brief An item has been renamed or moved.
         ///        This event delivers the new name.
-		ITEM_MOVED_TO = Poco::DirectoryWatcher::DW_ITEM_MOVED_TO,
+		ITEM_MOVED_TO = DirectoryWatcher::DW_ITEM_MOVED_TO,
 	};
 
     /// \brief A collection of directory event masks.
     enum DirectoryEventMask
 	{
         /// \brief Enables all event types.
-		FILTER_ENABLE_ALL = Poco::DirectoryWatcher::DW_FILTER_ENABLE_ALL,
+		FILTER_ENABLE_ALL = DirectoryWatcher::DW_FILTER_ENABLE_ALL,
 
         /// \brief Disables all event types.
-		FILTER_DISABLE_ALL = Poco::DirectoryWatcher::DW_FILTER_DISABLE_ALL
+		FILTER_DISABLE_ALL = DirectoryWatcher::DW_FILTER_DISABLE_ALL
 	};
 
 	enum
 	{
         /// \brief Default scan interval for platforms that don't
         ///        provide a native notification mechanism.
-		DEFAULT_SCAN_INTERVAL = Poco::DirectoryWatcher::DW_DEFAULT_SCAN_INTERVAL
+		DEFAULT_SCAN_INTERVAL = DirectoryWatcher::DW_DEFAULT_SCAN_INTERVAL
 	};
 
     /// \brief Create an empty DirectoryWatcherManager.
@@ -207,21 +207,21 @@ protected:
 
     /// \brief Called when an item is added.
     /// \param evt A Poco::DirectoryWatcher::DirectoryEvent.
-    void onItemAdded(const Poco::DirectoryWatcher::DirectoryEvent& evt)
+    void onItemAdded(const DirectoryWatcher::DirectoryEvent& evt)
     {
         ofNotifyEvent(events.onItemAdded,evt,this);
     }
 
     /// \brief Called when an item is removed.
     /// \param evt A Poco::DirectoryWatcher::DirectoryEvent.
-    void onItemRemoved(const Poco::DirectoryWatcher::DirectoryEvent& evt)
+    void onItemRemoved(const DirectoryWatcher::DirectoryEvent& evt)
     {
         ofNotifyEvent(events.onItemRemoved,evt,this);
     }
 
     /// \brief Called when an item is modified.
     /// \param evt A Poco::DirectoryWatcher::DirectoryEvent.
-    void onItemModified(const Poco::DirectoryWatcher::DirectoryEvent& evt)
+    void onItemModified(const DirectoryWatcher::DirectoryEvent& evt)
     {
         ofNotifyEvent(events.onItemModified,evt,this);
     }
@@ -229,7 +229,7 @@ protected:
     /// \brief Called when an item is moved from one location to another.
     /// \param evt A Poco::DirectoryWatcher::DirectoryEvent.
     /// \note Not implemented on all platforms.
-    void onItemMovedFrom(const Poco::DirectoryWatcher::DirectoryEvent& evt)
+    void onItemMovedFrom(const DirectoryWatcher::DirectoryEvent& evt)
     {
         ofNotifyEvent(events.onItemMovedFrom,evt,this);
     }
@@ -237,7 +237,7 @@ protected:
     /// \brief Called when an item is moved from one location to another.
     /// \param evt A Poco::DirectoryWatcher::DirectoryEvent.
     /// \note Not implemented on all platforms.
-    void onItemMovedTo(const Poco::DirectoryWatcher::DirectoryEvent& evt)
+    void onItemMovedTo(const DirectoryWatcher::DirectoryEvent& evt)
     {
         ofNotifyEvent(events.onItemMovedTo,evt,this);
     }
@@ -250,7 +250,7 @@ protected:
     }
 
 private:
-    typedef std::shared_ptr<Poco::DirectoryWatcher> DirectoryWatcherPtr;
+    typedef std::shared_ptr<DirectoryWatcher> DirectoryWatcherPtr;
     typedef std::map<Poco::File, DirectoryWatcherPtr> WatchList;
     typedef WatchList::iterator WatchListIter;
     typedef std::map<Poco::File, AbstractPathFilter*> FilterList;

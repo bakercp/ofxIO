@@ -65,7 +65,7 @@ void DirectoryWatcherManager::addPath(const Poco::Path& path,
             throw exc;
         }
 
-        DirectoryWatcherPtr watcher = DirectoryWatcherPtr(new Poco::DirectoryWatcher(path.toString(),
+        DirectoryWatcherPtr watcher = DirectoryWatcherPtr(new DirectoryWatcher(path.toString(),
                                                                                      eventMask,
                                                                                      scanInterval));
 
@@ -97,7 +97,7 @@ void DirectoryWatcherManager::addPath(const Poco::Path& path,
 
             while(iter != files.end())
             {
-                Poco::DirectoryWatcher::DirectoryEvent event(*iter, Poco::DirectoryWatcher::DW_ITEM_ADDED);
+                DirectoryWatcher::DirectoryEvent event(*iter, DirectoryWatcher::DW_ITEM_ADDED);
                 ofNotifyEvent(events.onItemAdded,event,this);
                 ++iter;
             }

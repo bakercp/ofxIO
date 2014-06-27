@@ -27,9 +27,9 @@
 
 
 #include <deque>
-#include "Poco/DirectoryWatcher.h"
 #include "Poco/FileStream.h"
-#include "Poco/RecursiveDirectoryIterator.h"
+#include "ofx/DirectoryWatcher.h"
+#include "ofx/RecursiveDirectoryIterator.h"
 #include "ofx/AccessExpireCache.h"
 #include "ofx/AccessExpireLRUCache.h"
 #include "ofx/ExpireCache.h"

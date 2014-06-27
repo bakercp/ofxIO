@@ -34,7 +34,7 @@
 //
 
 
-#include "Poco/DirectoryWatcher.h"
+#include "ofx/DirectoryWatcher.h"
 #include "Poco/Path.h"
 #include "Poco/Glob.h"
 #include "Poco/DirectoryIterator.h"
@@ -62,7 +62,7 @@
 #include <map>
 
 
-namespace Poco {
+namespace ofx {
 
 
 class DirectoryWatcherStrategy
@@ -101,7 +101,7 @@ protected:
 		{
 		}
 		
-		explicit ItemInfo(const File& f):
+		explicit ItemInfo(const Poco::File& f):
 			path(f.path()),
 			size(f.isFile() ? f.getSize() : 0),
 			lastModified(f.getLastModified())
@@ -109,15 +109,15 @@ protected:
 		}
 		
 		std::string path;
-		File::FileSize size;
-		Timestamp lastModified;
+		Poco::File::FileSize size;
+		Poco::Timestamp lastModified;
 	};
 	typedef std::map<std::string, ItemInfo> ItemInfoMap;
 
 	void scan(ItemInfoMap& entries)
 	{
-		DirectoryIterator it(owner().directory());
-		DirectoryIterator end;
+		Poco::DirectoryIterator it(owner().directory());
+		Poco::DirectoryIterator end;
 		while (it != end)
 		{
 			entries[it.path().getFileName()] = ItemInfo(*it);
@@ -576,36 +576,36 @@ private:
         switch (errno)
         {
             case EIO:
-                throw IOException(path, errno);
+                throw Poco::IOException(path, errno);
             case EPERM:
-                throw FileAccessDeniedException("insufficient permissions", path, errno);
+                throw Poco::FileAccessDeniedException("insufficient permissions", path, errno);
             case EACCES:
-                throw FileAccessDeniedException(path, errno);
+                throw Poco::FileAccessDeniedException(path, errno);
             case ENOENT:
-                throw FileNotFoundException(path, errno);
+                throw Poco::FileNotFoundException(path, errno);
             case ENOTDIR:
-                throw OpenFileException("not a directory", path, errno);
+                throw Poco::OpenFileException("not a directory", path, errno);
             case EISDIR:
-                throw OpenFileException("not a file", path, errno);
+                throw Poco::OpenFileException("not a file", path, errno);
             case EROFS:
-                throw FileReadOnlyException(path, errno);
+                throw Poco::FileReadOnlyException(path, errno);
             case EEXIST:
-                throw FileExistsException(path, errno);
+                throw Poco::FileExistsException(path, errno);
             case ENOSPC:
-                throw FileException("no space left on device", path, errno);
+                throw Poco::FileException("no space left on device", path, errno);
             case EDQUOT:
-                throw FileException("disk quota exceeded", path, errno);
+                throw Poco::FileException("disk quota exceeded", path, errno);
 #if !defined(_AIX)
             case ENOTEMPTY:
-                throw FileException("directory not empty", path, errno);
+                throw Poco::FileException("directory not empty", path, errno);
 #endif
             case ENAMETOOLONG:
-                throw PathSyntaxException(path, errno);
+                throw Poco::PathSyntaxException(path, errno);
             case ENFILE:
             case EMFILE:
-                throw FileException("too many open files", path, errno);
+                throw Poco::FileException("too many open files", path, errno);
             default:
-                throw FileException(std::strerror(errno), path, errno);
+                throw Poco::FileException(std::strerror(errno), path, errno);
         }
     }
 

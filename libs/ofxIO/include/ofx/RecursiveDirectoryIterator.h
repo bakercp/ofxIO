@@ -44,11 +44,11 @@
 #include "Poco/Foundation.h"
 #include "Poco/File.h"
 #include "Poco/Path.h"
-#include "Poco/RecursiveDirectoryIteratorImpl.h"
-#include "Poco/RecursiveDirectoryIteratorStategies.h"
+#include "ofx/RecursiveDirectoryIteratorImpl.h"
+#include "ofx/RecursiveDirectoryIteratorStategies.h"
 
 
-namespace Poco {
+namespace ofx {
 
 
     class DirectoryIterator;
@@ -91,23 +91,23 @@ namespace Poco {
 		/// Creates the end iterator.
 
         RecursiveDirectoryIterator(const std::string& path,
-                                   UInt16 maxDepth = D_INFINITE);
+                                   Poco::UInt16 maxDepth = D_INFINITE);
 		/// Creates a recursive directory iterator for the given path.
 
         RecursiveDirectoryIterator(const MyType& iterator);
 		/// Creates a copy of another recursive directory iterator.
 
-        RecursiveDirectoryIterator(const DirectoryIterator& iterator,
-                                   UInt16 maxDepth = D_INFINITE);
+        RecursiveDirectoryIterator(const Poco::DirectoryIterator& iterator,
+                                   Poco::UInt16 maxDepth = D_INFINITE);
 		/// Creates a recursive directory iterator for the path of
 		/// non-recursive directory iterator.
 
-        RecursiveDirectoryIterator(const File& file,
-                                   UInt16 maxDepth = D_INFINITE);
+        RecursiveDirectoryIterator(const Poco::File& file,
+                                   Poco::UInt16 maxDepth = D_INFINITE);
 		/// Creates a recursive directory iterator for the given path.
 
-        RecursiveDirectoryIterator(const Path& path,
-                                   UInt16 maxDepth = D_INFINITE);
+        RecursiveDirectoryIterator(const Poco::Path& path,
+                                   Poco::UInt16 maxDepth = D_INFINITE);
 		/// Creates a recursive directory iterator for the given path.
 
         ~RecursiveDirectoryIterator();
@@ -119,23 +119,23 @@ namespace Poco {
         const Poco::Path& path() const;
 		/// Returns the current path.
 
-        UInt16 depth() const;
+        Poco::UInt16 depth() const;
 		/// Depth of recursion (counting from 1).
 
-        UInt16 maxDepth() const;
+        Poco::UInt16 maxDepth() const;
 		/// Max depth of recursion (counting from 1).
 
         MyType& operator = (const MyType& it);
-        MyType& operator = (const File& file);
-        MyType& operator = (const Path& path);
+        MyType& operator = (const Poco::File& file);
+        MyType& operator = (const Poco::Path& path);
         MyType& operator = (const std::string& path);
 
         MyType& operator ++ ();
 
-        const File& operator * () const;
-        File& operator * ();
-        const File* operator -> () const;
-        File* operator -> ();
+        const Poco::File& operator * () const;
+        Poco::File& operator * ();
+        const Poco::File* operator -> () const;
+        Poco::File* operator -> ();
 
         template <class T1, class T2>
         friend inline bool operator == (const RecursiveDirectoryIterator<T1>& a,
@@ -148,8 +148,8 @@ namespace Poco {
         typedef RecursiveDirectoryIteratorImpl<TTravStr> ImplType;
 
         ImplType* _pImpl;
-        Path _path;
-        File _file;
+        Poco::Path _path;
+        Poco::File _file;
     };
 
 
@@ -187,7 +187,7 @@ namespace Poco {
 
 
     template <class TTravStr>
-    inline const Path&
+    inline const Poco::Path&
     RecursiveDirectoryIterator<TTravStr>
     ::path() const
     {
@@ -196,7 +196,7 @@ namespace Poco {
 
 
     template <class TTravStr>
-    inline UInt16
+    inline Poco::UInt16
     RecursiveDirectoryIterator<TTravStr>
     ::depth() const
     {
@@ -205,7 +205,7 @@ namespace Poco {
 
 
     template <class TTravStr>
-    inline UInt16
+    inline Poco::UInt16
     RecursiveDirectoryIterator<TTravStr>
     ::maxDepth() const
     {
@@ -214,7 +214,7 @@ namespace Poco {
 
 
     template <class TTravStr>
-    inline const File&
+    inline const Poco::File&
     RecursiveDirectoryIterator<TTravStr>
     ::operator * () const
     {
@@ -223,7 +223,7 @@ namespace Poco {
 
 
     template <class TTravStr>
-    inline File&
+    inline Poco::File&
     RecursiveDirectoryIterator<TTravStr>
     ::operator * ()
     {
@@ -232,7 +232,7 @@ namespace Poco {
 
 
     template <class TTravStr>
-    inline const File*
+    inline const Poco::File*
     RecursiveDirectoryIterator<TTravStr>
     ::operator -> () const
     {
@@ -241,7 +241,7 @@ namespace Poco {
 
 
     template <class TTravStr>
-    inline File*
+    inline Poco::File*
     RecursiveDirectoryIterator<TTravStr>
     ::operator -> ()
     {
@@ -262,9 +262,9 @@ namespace Poco {
 
     template <class TTravStr>
     RecursiveDirectoryIterator<TTravStr>
-    ::RecursiveDirectoryIterator(const std::string& path, UInt16 maxDepth)
+    ::RecursiveDirectoryIterator(const std::string& path, Poco::UInt16 maxDepth)
 	: _pImpl(new ImplType(path, maxDepth)),
-	_path(Path(_pImpl->get())),
+	_path(Poco::Path(_pImpl->get())),
 	_file(_path)
     {
     }
@@ -282,9 +282,9 @@ namespace Poco {
 
     template <class TTravStr>
     RecursiveDirectoryIterator<TTravStr>
-    ::RecursiveDirectoryIterator(const DirectoryIterator& iterator, UInt16 maxDepth)
+    ::RecursiveDirectoryIterator(const Poco::DirectoryIterator& iterator, Poco::UInt16 maxDepth)
 	: _pImpl(new ImplType(iterator->path(), maxDepth)),
-	_path(Path(_pImpl->get())),
+	_path(Poco::Path(_pImpl->get())),
 	_file(_path)
     {
     }
@@ -292,9 +292,9 @@ namespace Poco {
 
     template <class TTravStr>
     RecursiveDirectoryIterator<TTravStr>
-    ::RecursiveDirectoryIterator(const File& file, UInt16 maxDepth)
+    ::RecursiveDirectoryIterator(const Poco::File& file, Poco::UInt16 maxDepth)
 	: _pImpl(new ImplType(file.path(), maxDepth)),
-	_path(Path(_pImpl->get())),
+	_path(Poco::Path(_pImpl->get())),
 	_file(_path)
     {
     }
@@ -302,9 +302,9 @@ namespace Poco {
 
     template <class TTravStr>
     RecursiveDirectoryIterator<TTravStr>
-    ::RecursiveDirectoryIterator(const Path& path, UInt16 maxDepth)
+    ::RecursiveDirectoryIterator(const Poco::Path& path, Poco::UInt16 maxDepth)
 	: _pImpl(new ImplType(path.toString(), maxDepth)),
-	_path(Path(_pImpl->get())),
+	_path(Poco::Path(_pImpl->get())),
 	_file(_path)
     {
     }
@@ -340,12 +340,12 @@ namespace Poco {
     template <class TTravStr>
     RecursiveDirectoryIterator<TTravStr>&
     RecursiveDirectoryIterator<TTravStr>
-    ::operator = (const File& file)
+    ::operator = (const Poco::File& file)
     {
         if (_pImpl)
             _pImpl->release();
         _pImpl = new ImplType(file.path());
-        _path = Path(_pImpl->get());
+        _path = Poco::Path(_pImpl->get());
         _file = _path;
         return *this;
     }
@@ -354,12 +354,12 @@ namespace Poco {
     template <class TTravStr>
     RecursiveDirectoryIterator<TTravStr>&
     RecursiveDirectoryIterator<TTravStr>
-    ::operator = (const Path& path)
+    ::operator = (const Poco::Path& path)
     {
         if (_pImpl)
             _pImpl->release();
         _pImpl = new ImplType(path.toString());
-        _path = Path(_pImpl->get());
+        _path = Poco::Path(_pImpl->get());
         _file = _path;
         return *this;
     }
@@ -373,7 +373,7 @@ namespace Poco {
         if (_pImpl)
             _pImpl->release();
         _pImpl = new ImplType(path);
-        _path = Path(_pImpl->get());
+        _path = Poco::Path(_pImpl->get());
         _file = _path;
         return *this;
     }
@@ -386,7 +386,7 @@ namespace Poco {
     {
         if (_pImpl)
         {
-            _path = Path(_pImpl->next());
+            _path = Poco::Path(_pImpl->next());
             _file = _path;
         }
         return *this;
@@ -411,7 +411,7 @@ namespace Poco {
 	SiblingsFirstRecursiveDirectoryIterator;
     
     
-} // namespace Poco
+} // namespace ofx
 
 
 #endif // Foundation_RecursiveDirectoryIterator_INCLUDE
