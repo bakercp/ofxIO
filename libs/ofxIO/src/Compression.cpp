@@ -170,7 +170,10 @@ std::string Compression::version(Type type)
             ss << LZ4_VERSION_MAJOR << "." << LZ4_VERSION_MINOR << "." << LZ4_VERSION_RELEASE;
             return ss.str();
         }
+        default:
+            return "UNKNOWN";
     }
+
 }
 
 std::string Compression::toString(Type type)
@@ -187,6 +190,8 @@ std::string Compression::toString(Type type)
             return "SNAPPY";
         case LZ4:
             return "LZ4";
+        default:
+            return "UNKNOWN";
     }
 }
 
