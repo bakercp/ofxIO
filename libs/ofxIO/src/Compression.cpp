@@ -40,7 +40,6 @@ std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
                                     ByteBuffer& uncompressedBuffer,
                                     Type type)
 {
-
     switch (type)
     {
         case ZLIB:
@@ -99,6 +98,8 @@ std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
             }
         }
     }
+
+    return 0;
 }
 
 
