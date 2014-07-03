@@ -164,6 +164,96 @@ public:
 };
 
 
+/// \brief Represents the abstract notion of a byte encoder.
+///
+/// Subclasses implementing this interface can a collection of bytes and return
+/// the encoded version of those bytes.
+class AbstractByteEncoder
+{
+public:
+    /// \brief Destroys the byte encoder.
+    virtual ~AbstractByteEncoder()
+    {
+    }
+
+    /// \brief Encode the contents of the buffer.
+    /// \param buffer is the array of bytes to be encoded.
+    /// \param size is the number of bytes in the buffer.
+    /// \param encodedBuffer the target buffer.
+    /// \param encodedSize the number of bytes in the target buffer.
+    /// \returns true iff the encoding was successful.
+    virtual bool encode(const uint8_t* buffer, std::size_t size,
+                        uint8_t* encodedBuffer, std::size_t& encodedSize) = 0;
+
+    /// \brief Encode the contents of the buffer.
+    /// \param buffer is the array of bytes to be encoded.
+    /// \param encodedBuffer the target buffer.
+    /// \returns true iff the encoding was successful.
+    virtual bool encode(const std::vector<uint8_t>& buffer,
+                        std::vector<uint8_t>& encodedBuffer) = 0;
+
+    /// \brief Encode the contents of the buffer.
+    /// \param buffer is the array of bytes to be encoded.
+    /// \param encodedBuffer the target buffer.
+    /// \returns true iff the encoding was successful.
+    virtual bool encode(const std::string& buffer,
+                        std::string& encodedBuffer) = 0;
+
+    /// \brief Encode the contents of the buffer.
+    /// \param buffer is the array of bytes to be encoded.
+    /// \param encodedBuffer the target buffer.
+    /// \returns true iff the encoding was successful.
+    virtual bool encode(const AbstractByteSource& buffer,
+                        AbstractByteSource& encodedBuffer) = 0;
+
+};
+
+
+/// \brief Represents the abstract notion of a byte deencoder.
+///
+/// Subclasses implementing this interface can a collection of encoded bytes and
+/// return the decoded version of those bytes.
+class AbstractByteDecoder
+{
+public:
+    /// \brief Destroys the byte decoder.
+    virtual ~AbstractByteDecoder()
+    {
+    }
+
+    /// \brief Decode the contents of the buffer.
+    /// \param buffer is the array of bytes to be decoded.
+    /// \param size is the number of bytes in the buffer.
+    /// \param decodedBuffer the target buffer.
+    /// \param decodedSize the number of bytes in the target buffer.
+    /// \returns true iff the decoding was successful.
+    virtual bool decode(const uint8_t* buffer, std::size_t size,
+                        uint8_t* decodedBuffer, std::size_t& decodedSize) = 0;
+
+    /// \brief Decode the contents of the buffer.
+    /// \param buffer is the array of bytes to be decoded.
+    /// \param decodedBuffer the target buffer.
+    /// \returns true iff the decoding was successful.
+    virtual bool decode(const std::vector<uint8_t>& buffer,
+                        std::vector<uint8_t>& decodedBuffer) = 0;
+
+    /// \brief Decode the contents of the buffer.
+    /// \param buffer is the array of bytes to be decoded.
+    /// \param decodedBuffer the target buffer.
+    /// \returns true iff the decoding was successful.
+    virtual bool decode(const std::string& buffer,
+                        std::string& decodedBuffer) = 0;
+
+    /// \brief Decode the contents of the buffer.
+    /// \param buffer is the array of bytes to be decoded.
+    /// \param decodedBuffer the target buffer.
+    /// \returns true iff the decoding was successful.
+    virtual bool decode(const AbstractByteSource& buffer,
+                        AbstractByteSource& decodedBuffer) = 0;
+                        
+};
+
+
 /// \brief Represents the abstract notion of a path filter.
 ///
 /// Subclasses implementing this interface can accept files based on a criteria
