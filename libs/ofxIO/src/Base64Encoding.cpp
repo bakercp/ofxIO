@@ -24,6 +24,10 @@
 
 
 #include "ofx/IO/Base64Encoding.h"
+#include <stdint.h>
+#include "Poco/Base64Encoder.h"
+#include "Poco/Base64Decoder.h"
+#include "ofx/IO/ByteBuffer.h"
 
 
 namespace ofx {

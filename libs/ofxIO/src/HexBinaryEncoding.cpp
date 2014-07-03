@@ -24,6 +24,10 @@
 
 
 #include "ofx/IO/HexBinaryEncoding.h"
+#include <stdint.h>
+#include "Poco/HexBinaryEncoder.h"
+#include "Poco/HexBinaryDecoder.h"
+#include "ofx/IO/ByteBuffer.h"
 
 
 namespace ofx {

@@ -23,22 +23,22 @@
 // =============================================================================
 
 
-#include <stdint.h>
-#include "Poco/Base64Encoder.h"
-#include "Poco/Base64Decoder.h"
 #include "ofx/IO/AbstractTypes.h"
-#include "ofx/IO/ByteBuffer.h"
 
 
 namespace ofx {
 namespace IO {
 
 
+/// \brief Encodes and decodes bytes using Base64 encoding.
+/// \sa http://en.wikipedia.org/wiki/Base64
 class Base64Encoding: public AbstractByteEncoderDecoder
 {
 public:
+    /// \brief Create a Base64 Encoding.
     Base64Encoding();
 
+    /// \brief Destroy the Base64 Encoding.
     virtual ~Base64Encoding();
 
     bool encode(const AbstractByteSource& buffer,
