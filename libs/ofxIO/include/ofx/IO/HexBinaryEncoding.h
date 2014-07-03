@@ -23,21 +23,22 @@
 // =============================================================================
 
 
-#include <stdint.h>
-#include "Poco/HexBinaryEncoder.h"
-#include "Poco/HexBinaryDecoder.h"
-#include "ofx/IO/ByteBuffer.h"
+#include "ofx/IO/AbstractTypes.h"
 
 
 namespace ofx {
 namespace IO {
 
 
+/// \brief Encodes and decodes bytes using Hexadecimal Binary encoding.
+/// \sa http://en.wikipedia.org/wiki/Hexadecimal
 class HexBinaryEncoding: public AbstractByteEncoderDecoder
 {
 public:
+    /// \brief Create a HexBinary Encoding.
     HexBinaryEncoding();
 
+    /// \brief Destroy a HexBinary Encoding.
     virtual ~HexBinaryEncoding();
 
     bool encode(const AbstractByteSource& buffer,
