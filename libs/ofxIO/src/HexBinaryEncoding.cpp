@@ -23,24 +23,47 @@
 // =============================================================================
 
 
-#include "ofx/IO/Encoding.h"
+#include "ofx/IO/HexBinaryEncoding.h"
 
 
 namespace ofx {
 namespace IO {
 
 
-//ByteBuffer Encoding::fromBase64(const std::string& buffer)
-//{
-//    return buffer;
-//}
+HexBinaryEncoding::HexBinaryEncoding()
+{
+}
 
 
-//ByteBuffer Encoding::fromHexBinary(const std::string& buffer)
-//{
-//
-//}
+HexBinaryEncoding::~HexBinaryEncoding()
+{
+}
 
+
+bool HexBinaryEncoding::encode(const AbstractByteSource& buffer,
+                              AbstractByteSink& encodedBuffer)
+{
+    std::stringstream ss;
+    Poco::HexBinaryEncoder _encoder(ss);
+    ByteBuffer byteBuffer(buffer.readBytes());
+    ByteBufferUtils::copyBufferToStream(byteBuffer, _encoder);
+    _encoder.close(); // Flush bytes.
+    encodedBuffer.writeBytes(ss.str());
+    return true;
+}
+
+bool HexBinaryEncoding::decode(const AbstractByteSource& buffer,
+                               AbstractByteSink& decodedBuffer)
+{
+    ByteBuffer byteBuffer(buffer.readBytes());
+    std::stringstream ss;
+    ss << byteBuffer;
+    Poco::HexBinaryDecoder _decoder(ss);
+    ByteBuffer decoded;
+    ByteBufferUtils::copyStreamToBuffer(_decoder, decoded);
+    decodedBuffer.writeBytes(decoded);
+    return true;
+}
 
 
 } }  // namespace ofx::IO

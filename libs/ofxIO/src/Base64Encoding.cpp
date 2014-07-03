@@ -23,24 +23,47 @@
 // =============================================================================
 
 
-#include "ofx/IO/Encoding.h"
+#include "ofx/IO/Base64Encoding.h"
 
 
 namespace ofx {
 namespace IO {
 
 
-//ByteBuffer Encoding::fromBase64(const std::string& buffer)
-//{
-//    return buffer;
-//}
+Base64Encoding::Base64Encoding()
+{
+}
 
 
-//ByteBuffer Encoding::fromHexBinary(const std::string& buffer)
-//{
-//
-//}
+Base64Encoding::~Base64Encoding()
+{
+}
 
+
+bool Base64Encoding::encode(const AbstractByteSource& buffer,
+                            AbstractByteSink& encodedBuffer)
+{
+    std::ostringstream ss;
+    Poco::Base64Encoder _encoder(ss);
+    ByteBuffer byteBuffer(buffer.readBytes());
+    ByteBufferUtils::copyBufferToStream(byteBuffer, _encoder);
+    _encoder.close(); // Flush bytes.
+    encodedBuffer.writeBytes(ss.str());
+    return true;
+}
+
+bool Base64Encoding::decode(const AbstractByteSource& buffer,
+                            AbstractByteSink& decodedBuffer)
+{
+    ByteBuffer byteBuffer(buffer.readBytes());
+    std::stringstream ss;
+    ss << byteBuffer;
+    Poco::Base64Decoder _decoder(ss);
+    ByteBuffer decoded;
+    ByteBufferUtils::copyStreamToBuffer(_decoder, decoded);
+    decodedBuffer.writeBytes(decoded);
+    return true;
+}
 
 
 } }  // namespace ofx::IO

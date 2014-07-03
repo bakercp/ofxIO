@@ -26,22 +26,28 @@
 #include <stdint.h>
 #include "Poco/Base64Encoder.h"
 #include "Poco/Base64Decoder.h"
-#include "Poco/HexBinaryEncoder.h"
-#include "Poco/HexBinaryDecoder.h"
-#include "ByteBuffer.h"
+#include "ofx/IO/AbstractTypes.h"
+#include "ofx/IO/ByteBuffer.h"
 
 
 namespace ofx {
 namespace IO {
 
 
-//class Encoding
-//{
-//public:
-//    static ByteBuffer fromBase64(const std::string& buffer);
-//    static ByteBuffer fromHexBinary(const std::string& buffer);
-//
-//};
+class Base64Encoding: public AbstractByteEncoderDecoder
+{
+public:
+    Base64Encoding();
+
+    virtual ~Base64Encoding();
+
+    bool encode(const AbstractByteSource& buffer,
+                AbstractByteSink& encodedBuffer);
+
+    bool decode(const AbstractByteSource& buffer,
+                AbstractByteSink& decodedBuffer);
+
+};
 
 
 } } // namespace ofx::IO

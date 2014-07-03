@@ -1,6 +1,10 @@
 // =============================================================================
 //
-// Copyright (c) 2010-2013 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2010-2014 Christopher Baker <http://christopherbaker.net>
+//
+// Portions:
+//  Copyright (c) 2011, Jacques Fortier. All rights reserved.
+//  https://github.com/jacquesf/COBS-Consistent-Overhead-Byte-Stuffing
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,24 +28,47 @@
 
 
 #include <stdint.h>
-#include "Poco/Base64Encoder.h"
-#include "Poco/Base64Decoder.h"
-#include "Poco/HexBinaryEncoder.h"
-#include "Poco/HexBinaryDecoder.h"
 #include "ByteBuffer.h"
 
 
 namespace ofx {
 namespace IO {
 
+/// COBS guarantees in the worst case to add no more than one byte in 254
+/// to any packet.
+/// \sa https://github.com/jacquesf/COBS-Consistent-Overhead-Byte-Stuffing
+/// \sa http://www.jacquesf.com/2011/03/consistent-overhead-byte-stuffing/
+class COBSEncoding: public AbstractByteEncoderDecoder
+{
+public:
+    COBSEncoding();
 
-//class Encoding
-//{
-//public:
-//    static ByteBuffer fromBase64(const std::string& buffer);
-//    static ByteBuffer fromHexBinary(const std::string& buffer);
-//
-//};
+    virtual ~COBSEncoding();
+
+    bool encode(const AbstractByteSource& buffer,
+                AbstractByteSink& encodedBuffer);
+
+    bool decode(const AbstractByteSource& buffer,
+                AbstractByteSink& decodedBuffer);
+                
+    /// Stuffs "size" bytes of data at the location pointed to by
+    /// "src", writing the output to the location pointed to by
+    /// "dest". Returns the number of bytes written to "dest".
+    static std::size_t encode(const uint8_t* buffer,
+                              std::size_t size,
+                              uint8_t* encodedBuffer);
+
+
+    /// Unstuffs "size" bytes of data at the location pointed to by
+    /// "src", writing the output * to the location pointed to by
+    /// "dest". Returns the number of bytes written to "dest" if
+    /// "src" was successfully unstuffed, and 0 if there was an
+    /// error unstuffing "src".
+    static std::size_t decode(const uint8_t* buffer,
+                              std::size_t size,
+                              uint8_t* decodedBuffer);
+
+};
 
 
 } } // namespace ofx::IO
