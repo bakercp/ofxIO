@@ -35,8 +35,9 @@ class ofApp: public ofBaseApp
 public:
     void setup();
 
-    void test(ofx::IO::Compression::Type type);
+    bool test(ofx::IO::AbstractByteEncoderDecoder& encoder);
 
+    void test(ofx::IO::Compression::Type type);
 
     static const std::string LOREM_IPSUM;
 };

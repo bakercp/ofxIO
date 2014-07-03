@@ -61,6 +61,61 @@ void ofApp::setup()
 //    test(ofx::IO::Compression::ZIP);
     test(ofx::IO::Compression::SNAPPY);
     test(ofx::IO::Compression::LZ4);
+
+    ofx::IO::Base64Encoding base64Encoding;
+    if (test(base64Encoding))
+    {
+        ofLogNotice("ofApp::test()") << "ofx::IO::Base64Encoding: SUCCESS";
+    }
+    else
+    {
+        ofLogNotice("ofApp::test()") << "ofx::IO::Base64Encoding: FAILURE";
+    }
+
+    ofx::IO::HexBinaryEncoding hexBinaryEncoding;
+    if (test(hexBinaryEncoding))
+    {
+        ofLogNotice("ofApp::test()") << "ofx::IO::HexBinaryEncoding: SUCCESS";
+    }
+    else
+    {
+        ofLogNotice("ofApp::test()") << "ofx::IO::HexBinaryEncoding: FAILURE";
+    }
+
+    ofx::IO::COBSEncoding cobsEncoding;
+    if (test(cobsEncoding))
+    {
+        ofLogNotice("ofApp::test()") << "ofx::IO::COBSEncoding: SUCCESS";
+    }
+    else
+    {
+        ofLogNotice("ofApp::test()") << "ofx::IO::COBSEncoding: FAILURE";
+    }
+
+
+}
+
+
+bool ofApp::test(ofx::IO::AbstractByteEncoderDecoder& encoderDecoder)
+{
+    ofx::IO::ByteBuffer original(LOREM_IPSUM + LOREM_IPSUM);
+    ofx::IO::ByteBuffer encoded;
+    ofx::IO::ByteBuffer decoded;
+
+    if (encoderDecoder.encode(original, encoded) &&
+        encoderDecoder.decode(encoded, decoded) &&
+        decoded.toString() == original.toString())
+    {
+        return true;
+    }
+    else
+    {
+        std::cout << original << endl;
+        std::cout << encoded << endl;
+        std::cout << decoded << endl;
+
+        return false;
+    }
 }
 
 void ofApp::test(ofx::IO::Compression::Type type)
