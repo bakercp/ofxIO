@@ -133,7 +133,7 @@ std::size_t ByteBuffer::writeBytes(const std::string& buffer)
 
 std::size_t ByteBuffer::writeBytes(const AbstractByteSource& buffer)
 {
-    return writeBytes(buffer);
+    return writeBytes(buffer.readBytes());
 }
 
 
