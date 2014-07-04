@@ -209,21 +209,21 @@ protected:
     /// \param evt A Poco::DirectoryWatcher::DirectoryEvent.
     void onItemAdded(const DirectoryWatcher::DirectoryEvent& evt)
     {
-        ofNotifyEvent(events.onItemAdded,evt,this);
+        ofNotifyEvent(events.onItemAdded, evt, this);
     }
 
     /// \brief Called when an item is removed.
     /// \param evt A Poco::DirectoryWatcher::DirectoryEvent.
     void onItemRemoved(const DirectoryWatcher::DirectoryEvent& evt)
     {
-        ofNotifyEvent(events.onItemRemoved,evt,this);
+        ofNotifyEvent(events.onItemRemoved, evt, this);
     }
 
     /// \brief Called when an item is modified.
     /// \param evt A Poco::DirectoryWatcher::DirectoryEvent.
     void onItemModified(const DirectoryWatcher::DirectoryEvent& evt)
     {
-        ofNotifyEvent(events.onItemModified,evt,this);
+        ofNotifyEvent(events.onItemModified, evt, this);
     }
 
     /// \brief Called when an item is moved from one location to another.
@@ -231,7 +231,7 @@ protected:
     /// \note Not implemented on all platforms.
     void onItemMovedFrom(const DirectoryWatcher::DirectoryEvent& evt)
     {
-        ofNotifyEvent(events.onItemMovedFrom,evt,this);
+        ofNotifyEvent(events.onItemMovedFrom, evt, this);
     }
 
     /// \brief Called when an item is moved from one location to another.
@@ -239,14 +239,14 @@ protected:
     /// \note Not implemented on all platforms.
     void onItemMovedTo(const DirectoryWatcher::DirectoryEvent& evt)
     {
-        ofNotifyEvent(events.onItemMovedTo,evt,this);
+        ofNotifyEvent(events.onItemMovedTo, evt, this);
     }
 
     /// \brief Called when a directory watcher error is detected.
     /// \param exc A Poco::Exception.
     void onScanError(const Poco::Exception& exc)
     {
-        ofNotifyEvent(events.onScanError,exc,this);
+        ofNotifyEvent(events.onScanError, exc, this);
     }
 
 private:
