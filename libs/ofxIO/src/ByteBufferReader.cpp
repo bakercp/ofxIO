@@ -1,6 +1,6 @@
 // =============================================================================
 //
-// Copyright (c) 2010-2013 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2013 Christopher Baker <http://christopherbaker.net>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,38 +23,57 @@
 // =============================================================================
 
 
-#pragma once
-
-
-#include <deque>
-#include "Poco/FileStream.h"
-#include "ofx/DirectoryWatcher.h"
-#include "ofx/RecursiveDirectoryIterator.h"
-#include "ofx/AccessExpireCache.h"
-#include "ofx/AccessExpireLRUCache.h"
-#include "ofx/ExpireCache.h"
-#include "ofx/ExpireLRUCache.h"
-#include "ofx/LRUCache.h"
-#include "ofx/UniqueExpireCache.h"
-#include "ofx/UniqueExpireLRUCache.h"
-#include "ofx/UniqueAccessExpireCache.h"
-#include "ofx/UniqueAccessExpireLRUCache.h"
-#include "ofx/IO/AbstractTypes.h"
-#include "ofx/IO/Base64Encoding.h"
-#include "ofx/IO/ByteBuffer.h"
 #include "ofx/IO/ByteBufferReader.h"
-#include "ofx/IO/ByteBufferUtils.h"
-#include "ofx/IO/ByteBufferWriter.h"
-#include "ofx/IO/COBSEncoding.h"
-#include "ofx/IO/Compression.h"
-#include "ofx/IO/DeviceFilter.h"
-#include "ofx/IO/DirectoryUtils.h"
-#include "ofx/IO/DirectoryFilter.h"
-#include "ofx/IO/DirectoryWatcherManager.h"
-#include "ofx/IO/FileExtensionFilter.h"
-#include "ofx/IO/HexBinaryEncoding.h"
-#include "ofx/IO/HiddenFileFilter.h"
-#include "ofx/IO/LinkFilter.h"
-#include "ofx/IO/PathFilterCollection.h"
-#include "ofx/IO/RegexPathFilter.h"
-#include "ofx/IO/SearchPath.h"
+
+
+namespace ofx {
+namespace IO {
+
+
+ByteBufferReader::ByteBufferReader(const ByteBuffer& buffer, std::size_t offset):
+    _buffer(buffer),
+    _offset(offset)
+{
+}
+
+
+std::size_t ByteBufferReader::_read(void* destination, std::size_t size) const
+{
+    if(_offset + size <= _buffer.size())
+    {
+        memcpy(destination, _buffer.getPtr() + _offset, size);
+        _offset += size;
+        return size;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+
+void ByteBufferReader::setOffset(std::size_t offset)
+{
+    if (offset < _buffer.size()) _offset = offset;
+}
+
+
+std::size_t ByteBufferReader::getOffset() const
+{
+    return _offset;
+}
+
+
+std::size_t ByteBufferReader::size() const
+{
+    return _buffer.size();
+}
+
+
+std::size_t ByteBufferReader::remaining() const
+{
+    return _buffer.size() - _offset;
+}
+
+
+} }  // namespace ofx::IO
