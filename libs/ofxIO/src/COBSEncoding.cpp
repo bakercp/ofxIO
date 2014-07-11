@@ -28,6 +28,7 @@
 
 
 #include "ofx/IO/COBSEncoding.h"
+#include "Poco/Buffer.h"
 
 
 namespace ofx {
@@ -48,10 +49,15 @@ bool COBSEncoding::encode(const AbstractByteSource& buffer,
                           AbstractByteSink& encodedBuffer)
 {
     std::vector<uint8_t> bytes = buffer.readBytes();
+
     const std::size_t encodedMax = bytes.size() + (bytes.size() / 254) + 1;
-    uint8_t encoded[encodedMax];
-    std::size_t size = encode(&bytes[0], bytes.size(), encoded);
-    encodedBuffer.writeBytes(encoded, size);
+
+    Poco::Buffer<uint8_t> encoded(encodedMax);
+
+    std::size_t size = encode(&bytes[0], bytes.size(), encoded.begin());
+
+    encodedBuffer.writeBytes(encoded.begin(), size);
+
     return true;
 }
 
@@ -60,9 +66,13 @@ bool COBSEncoding::decode(const AbstractByteSource& buffer,
                           AbstractByteSink& decodedBuffer)
 {
     std::vector<uint8_t> bytes = buffer.readBytes();
-    uint8_t decoded[bytes.size()];
-    std::size_t size = decode(&bytes[0], bytes.size(), decoded);
-    decodedBuffer.writeBytes(decoded, size);
+
+    Poco::Buffer<uint8_t> decoded(bytes.size());
+
+    std::size_t size = decode(&bytes[0], bytes.size(), decoded.begin());
+
+    decodedBuffer.writeBytes(decoded.begin(), size);
+
     return true;
 }
 
