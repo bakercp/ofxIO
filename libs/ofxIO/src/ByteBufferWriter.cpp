@@ -24,6 +24,7 @@
 
 
 #include "ofx/IO/ByteBufferWriter.h"
+#include <string.h>
 
 
 namespace ofx {
