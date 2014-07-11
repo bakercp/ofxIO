@@ -34,6 +34,7 @@ class ofApp: public ofBaseApp
 {
 public:
     void setup();
+    void draw();
 
     bool test(ofx::IO::AbstractByteEncoderDecoder& encoder);
 
