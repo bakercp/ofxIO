@@ -1,6 +1,6 @@
 // =============================================================================
 //
-// Copyright (c) 2009-2013 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2014 Christopher Baker <http://christopherbaker.net>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,12 +24,10 @@
 
 
 #include "ofApp.h"
-#include "ofAppNoWindow.h"
 
 
 int main()
 {
-    ofAppNoWindow window;
-	ofSetupOpenGL(&window, 0, 0, OF_WINDOW);
+	ofSetupOpenGL(250, 50, OF_WINDOW);
 	ofRunApp(new ofApp());
 }
