@@ -54,6 +54,8 @@ public:
 
     void setOffset(std::size_t offset);
 
+    void skip(std::size_t offset);
+
     std::size_t getOffset() const;
 
     std::size_t size() const;

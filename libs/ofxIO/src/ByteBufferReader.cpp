@@ -58,6 +58,12 @@ void ByteBufferReader::setOffset(std::size_t offset)
 }
 
 
+void ByteBufferReader::skip(std::size_t offset)
+{
+    if (_offset + offset < _buffer.size()) _offset += offset;
+}
+
+
 std::size_t ByteBufferReader::getOffset() const
 {
     return _offset;
