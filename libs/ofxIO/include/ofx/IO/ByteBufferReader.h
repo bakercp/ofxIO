@@ -23,6 +23,9 @@
 // =============================================================================
 
 
+#include "ofx/IO/ByteBuffer.h"
+
+
 #if (_MSC_VER) || defined(__EMSCRIPTEN__)
 #include <type_traits>
 #else
@@ -32,9 +35,6 @@ namespace std {
 }
 #endif
 // http://stackoverflow.com/questions/19154080/restricting-c-template-usage-to-pod-types
-
-
-#include "ofx/IO/ByteBuffer.h"
 
 
 namespace ofx {
@@ -66,7 +66,7 @@ private:
     ByteBufferReader(const ByteBufferReader& that);
     ByteBufferReader& operator = (const ByteBufferReader& that);
 
-    std::size_t _read(void* destination, size_t size) const;
+    std::size_t _read(void* destination, std::size_t size) const;
 
     const ByteBuffer& _buffer;
 
