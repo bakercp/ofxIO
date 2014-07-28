@@ -23,6 +23,9 @@
 // =============================================================================
 
 
+#pragma once
+
+
 #if (_MSC_VER) || defined(__EMSCRIPTEN__)
 #include <type_traits>
 #else
@@ -45,15 +48,15 @@ namespace IO {
 class ByteBufferWriter
 {
 public:
-    ByteBufferWriter(ByteBuffer& buffer, size_t offset = 0);
+    ByteBufferWriter(ByteBuffer& buffer, std::size_t offset = 0);
 
     template <typename Type>
     std::size_t write(const Type& data);
 
     template <typename Type>
-    std::size_t write(const Type* data, size_t size);
+    std::size_t write(const Type* data, std::size_t size);
 
-    void setOffset(size_t offset);
+    void setOffset(std::size_t offset);
     std::size_t getOffset() const;
 
     std::size_t size() const;
@@ -64,11 +67,11 @@ private:
     ByteBufferWriter(const ByteBufferWriter& that);
     ByteBufferWriter& operator = (const ByteBufferWriter& that);
 
-    size_t _write(const void* source, size_t size);
+    std::size_t _write(const void* source, std::size_t size);
 
     ByteBuffer& _buffer;
 
-    size_t _offset;
+    std::size_t _offset;
     
 };
 
@@ -82,7 +85,7 @@ std::size_t ByteBufferWriter::write(const Type& data)
 
 
 template <typename Type>
-std::size_t ByteBufferWriter::write(const Type* data, size_t size)
+std::size_t ByteBufferWriter::write(const Type* data, std::size_t size)
 {
     static char Type_must_be_pod[std::is_pod<Type>::value ? 1 : -1];
     return _write(data, sizeof(Type) * size);

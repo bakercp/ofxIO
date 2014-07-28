@@ -31,16 +31,16 @@ namespace ofx {
 namespace IO {
 
 
-ByteBufferWriter::ByteBufferWriter(ByteBuffer& buffer, size_t offset):
+ByteBufferWriter::ByteBufferWriter(ByteBuffer& buffer, std::size_t offset):
     _buffer(buffer),
     _offset(offset)
 {
 }
 
 
-size_t ByteBufferWriter::_write(const void* source, size_t size)
+std::size_t ByteBufferWriter::_write(const void* source, std::size_t size)
 {
-    if(_offset + size <= _buffer.size())
+    if (_offset + size <= _buffer.size())
     {
         memcpy(_buffer.getPtr() + _offset, source, size);
         _offset += size;
