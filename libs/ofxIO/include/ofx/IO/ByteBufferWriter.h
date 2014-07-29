@@ -26,7 +26,11 @@
 #pragma once
 
 
-#if (_MSC_VER) || defined(__EMSCRIPTEN__)
+#include "ofConstants.h"
+#include "ofx/IO/ByteBuffer.h"
+
+
+#if (_MSC_VER) || defined(TARGET_EMSCRIPTEN) || defined(TARGET_LINUX)
 #include <type_traits>
 #else
 #include <tr1/type_traits>
@@ -35,9 +39,6 @@ namespace std {
 }
 #endif
 // http://stackoverflow.com/questions/19154080/restricting-c-template-usage-to-pod-types
-
-
-#include "ofx/IO/ByteBuffer.h"
 
 
 namespace ofx {

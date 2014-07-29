@@ -23,10 +23,14 @@
 // =============================================================================
 
 
+#pragma once
+
+
+#include "ofConstants.h"
 #include "ofx/IO/ByteBuffer.h"
 
 
-#if (_MSC_VER) || defined(__EMSCRIPTEN__)
+#if (_MSC_VER) || defined(TARGET_EMSCRIPTEN) || defined(TARGET_LINUX)
 #include <type_traits>
 #else
 #include <tr1/type_traits>
