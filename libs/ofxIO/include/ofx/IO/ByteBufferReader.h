@@ -30,7 +30,7 @@
 #include "ofx/IO/ByteBuffer.h"
 
 
-#if (_MSC_VER) || defined(TARGET_EMSCRIPTEN) || defined(TARGET_LINUX)
+#if __cplusplus>=201103L
 #include <type_traits>
 #else
 #include <tr1/type_traits>
