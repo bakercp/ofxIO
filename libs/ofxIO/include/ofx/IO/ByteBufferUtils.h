@@ -106,8 +106,8 @@ public:
 
     /// \brief Load a ByteBuffer from a file.
     /// \path The absolute path of the file to load.
-    /// \param byteBuffer the target ByteBuffer to fill.
-    /// \param append false if the ByteBuffer should be cleared.
+    /// \param buffer the target ByteBuffer to fill.
+    /// \param appendBuffer false if the ByteBuffer should be cleared.
     /// \returns The total number of bytes loaded.
     /// \throws A Poco::FileNotFoundException (or a similar exception) if the
     ///         file does not exist or is not accessible for other reasons.
@@ -116,9 +116,8 @@ public:
                                         bool appendBuffer = false);
 
     /// \brief Save a ByteBuffer as a file.
-    /// \param byteBuffer the target ByteBuffer to save.
+    /// \param buffer the target ByteBuffer to save.
     /// \path The absolute path of the file to save.
-    /// \param append false if the ByteBuffer should be cleared.
     /// \returns True iff the file was saved successfully.
     /// \throws A Poco::FileNotFoundException (or a similar exception) if the
     ///         file does not exist or is not accessible for other reasons.

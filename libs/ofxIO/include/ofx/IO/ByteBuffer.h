@@ -158,14 +158,14 @@ public:
 
     /// \brief Write the buffer to an output stream.
     /// \param ostr The std::ostream to write to.
-    /// \param buffer the ByteBuffer to write.
+    /// \param byteBuffer the ByteBuffer to write.
     /// \returns the std::ostream that was written to.
     friend std::ostream& operator << (std::ostream& ostr,
                                       const ByteBuffer& byteBuffer);
 
     /// \brief Read into the buffer from an input stream.
     /// \param istr The std::istream to read from.
-    /// \param buffer the ByteBuffer to read into.
+    /// \param byteBuffer the ByteBuffer to read into.
     /// \returns the std::istream that was read from.
 	friend std::istream& operator >> (std::istream& istr,
                                       ByteBuffer& byteBuffer);
