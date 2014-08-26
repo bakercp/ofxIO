@@ -129,9 +129,10 @@ std::ostream& ByteBufferUtils::copyBufferToStream(const ByteBuffer& byteBuffer,
 
 std::streamsize ByteBufferUtils::loadFromFile(const std::string& path,
                                               ByteBuffer& byteBuffer,
-                                              bool appendBuffer)
+                                              bool appendBuffer,
+                                              std::ios::openmode openMode)
 {
-    Poco::FileInputStream fis(path);
+    Poco::FileInputStream fis(path, openMode);
 
     if (fis.good())
     {
@@ -152,9 +153,10 @@ std::streamsize ByteBufferUtils::loadFromFile(const std::string& path,
 
 
 bool ByteBufferUtils::saveToFile(const ByteBuffer& byteBuffer,
-                                 const std::string& path)
+                                 const std::string& path,
+                                 std::ios::openmode mode)
 {
-    Poco::FileOutputStream fos(path);
+    Poco::FileOutputStream fos(path, mode);
 
     if (fos.good())
     {
