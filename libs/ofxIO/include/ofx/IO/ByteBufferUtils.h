@@ -105,24 +105,36 @@ public:
                                             std::ostream& ostr);
 
     /// \brief Load a ByteBuffer from a file.
-    /// \path The absolute path of the file to load.
+    ///
+	/// Files are always opened in binary mode, a text mode with CR-LF
+    /// translation is not supported. Thus, the file is always opened as if the
+    /// std::ios::binary flag was specified. Use a
+    /// Poco::InputLineEndingConverter if you require CR-LF translation.
+    ///
+    /// \param path The absolute path of the file to load.
     /// \param buffer the target ByteBuffer to fill.
     /// \param appendBuffer false if the ByteBuffer should be cleared.
+    /// \param openMode the std::ios::in is always set.
     /// \returns The total number of bytes loaded.
     /// \throws A Poco::FileNotFoundException (or a similar exception) if the
     ///         file does not exist or is not accessible for other reasons.
     static std::streamsize loadFromFile(const std::string& path,
                                         ByteBuffer& buffer,
-                                        bool appendBuffer = false);
+                                        bool appendBuffer = false,
+                                        std::ios::openmode openMode = std::ios::in);
+
 
     /// \brief Save a ByteBuffer as a file.
     /// \param buffer the target ByteBuffer to save.
-    /// \path The absolute path of the file to save.
+    /// \param path The absolute path of the file to save.
+    /// \param openMode The std::ios::out is always set, regardless of the
+    ///        actual value specified for mode.
     /// \returns True iff the file was saved successfully.
     /// \throws A Poco::FileNotFoundException (or a similar exception) if the
     ///         file does not exist or is not accessible for other reasons.
     static bool saveToFile(const ByteBuffer& buffer,
-                           const std::string& path);
+                           const std::string& path,
+                           std::ios::openmode mode = std::ios::out | std::ios::trunc);
 
     enum
     {
