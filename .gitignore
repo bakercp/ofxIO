@@ -7,6 +7,11 @@ example_cache/
 example_directory_watcher_poco_error/
 example_json/
 
+*.sln
+*.vcxproj
+*.vcxproj.filters
+icon.rc
+
 *.mode1v3
 
 # xcode
