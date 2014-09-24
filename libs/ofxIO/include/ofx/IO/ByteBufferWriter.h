@@ -30,7 +30,7 @@
 #include "ofx/IO/ByteBuffer.h"
 
 
-#if __cplusplus>=201103L
+#if __cplusplus>=201103L || defined(_MSC_VER)
 #include <type_traits>
 #else
 #include <tr1/type_traits>
