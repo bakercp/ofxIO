@@ -54,8 +54,18 @@ Aliquam non justo nibh. Suspendisse ut tellus orci. Interdum et malesuada fames 
 \
 Integer rhoncus suscipit urna a feugiat. Curabitur faucibus sit amet ipsum vitae mattis. Proin rhoncus ullamcorper enim, id euismod eros consequat ac. Nam iaculis convallis nunc vel venenatis. Cras venenatis sem id nisl varius, ut luctus dolor bibendum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eu aliquet ante, ut tincidunt tellus metus.";
 
+#include "Poco/Zip/Decompress.h"
+
 void ofApp::setup()
 {
+	ifstream ifs;
+	ifs.open(ofToDataPath("ZLib.zip"), ios::binary);
+	Poco::Zip::Decompress decompressor(ifs, ofToDataPath("out/"));
+	decompressor.decompressAllFiles();
+
+
+
+
 //    test(ofx::IO::Compression::ZLIB);
 //    test(ofx::IO::Compression::GZIP);
 //    test(ofx::IO::Compression::ZIP);
