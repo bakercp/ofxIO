@@ -37,7 +37,7 @@
 #include <vector>
 
 
-#if defined(_MSC_VER) || defined( __WIN32__ ) || defined( _WIN32 )
+#if defined(_MSC_VER) //|| defined( __WIN32__ ) || defined( _WIN32 )
 #include <BaseTsd.h>
 typedef SSIZE_T ssize_t;
 #endif
