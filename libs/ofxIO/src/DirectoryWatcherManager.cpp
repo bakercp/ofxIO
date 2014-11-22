@@ -48,7 +48,7 @@ void DirectoryWatcherManager::addPath(const Poco::Path& path,
                                       int scanInterval)
 {
 
-    if(isWatching(path))
+    if (isWatching(path))
     {
         Poco::Exception exc("Already Watching Exception", path.toString());
         ofNotifyEvent(events.onScanError, exc, this);
@@ -59,7 +59,7 @@ void DirectoryWatcherManager::addPath(const Poco::Path& path,
     {
         Poco::File file(path);
 
-        if(!file.exists())
+        if (!file.exists())
         {
             Poco::FileNotFoundException exc(path.toString());
             throw exc;
@@ -87,7 +87,7 @@ void DirectoryWatcherManager::addPath(const Poco::Path& path,
 
         mutex.unlock();
 
-        if(listExistingItemsOnStart)
+        if (listExistingItemsOnStart)
         {
             std::vector<Poco::File> files;
             
@@ -115,7 +115,7 @@ void DirectoryWatcherManager::removePath(const Poco::Path& path)
     ofScopedLock lock(mutex);
     WatchListIter watchListIter = watchList.find(path);
 
-    if(watchListIter != watchList.end())
+    if (watchListIter != watchList.end())
     {
         DirectoryWatcherPtr watcher = (*watchListIter).second;
 
@@ -130,7 +130,7 @@ void DirectoryWatcherManager::removePath(const Poco::Path& path)
 
         FilterListIter filterListIter = filterList.find(path);
 
-        if(filterListIter != filterList.end())
+        if (filterListIter != filterList.end())
         {
             filterList.erase(filterListIter);
         }
@@ -149,7 +149,9 @@ AbstractPathFilter* DirectoryWatcherManager::getFilterForPath(const Poco::Path& 
 {
     ofScopedLock lock(mutex);
     FilterListIter iter = filterList.find(path);
-    if(iter != filterList.end()) {
+
+    if (iter != filterList.end())
+    {
         return (*iter).second;
     } else {
         return 0;
