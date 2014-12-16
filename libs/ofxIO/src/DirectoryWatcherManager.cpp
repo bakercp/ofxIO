@@ -66,8 +66,8 @@ void DirectoryWatcherManager::addPath(const Poco::Path& path,
         }
 
         DirectoryWatcherPtr watcher = DirectoryWatcherPtr(new DirectoryWatcher(path.toString(),
-                                                                                     eventMask,
-                                                                                     scanInterval));
+                                                                               eventMask,
+                                                                               scanInterval));
 
         watcher->itemAdded += Poco::priorityDelegate(this, &DirectoryWatcherManager::onItemAdded, OF_EVENT_ORDER_AFTER_APP);
         watcher->itemRemoved += Poco::priorityDelegate(this, &DirectoryWatcherManager::onItemRemoved, OF_EVENT_ORDER_AFTER_APP);
@@ -149,9 +149,13 @@ AbstractPathFilter* DirectoryWatcherManager::getFilterForPath(const Poco::Path& 
 {
     ofScopedLock lock(mutex);
     FilterListIter iter = filterList.find(path);
-    if(iter != filterList.end()) {
+
+    if(iter != filterList.end())
+    {
         return (*iter).second;
-    } else {
+    }
+    else
+    {
         return 0;
     }
 }

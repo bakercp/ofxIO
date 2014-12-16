@@ -152,7 +152,7 @@ public:
     /// \returns a pointer to the backing data vector.
     char* getCharPtr();
 
-    /// \brief get the ByteBuffer as a std::string;
+    /// \brief get the ByteBuffer as a std::string.
     /// \returns the std::string representation of the ByteBuffer.
     std::string toString() const;
 
