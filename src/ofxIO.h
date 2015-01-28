@@ -1,6 +1,6 @@
 // =============================================================================
 //
-// Copyright (c) 2010-2013 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2010-2015 Christopher Baker <http://christopherbaker.net>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -46,6 +46,7 @@
 #include "ofx/IO/ByteBufferUtils.h"
 #include "ofx/IO/ByteBufferWriter.h"
 #include "ofx/IO/COBSEncoding.h"
+#include "ofx/IO/SLIPEncoding.h"
 #include "ofx/IO/Compression.h"
 #include "ofx/IO/DeviceFilter.h"
 #include "ofx/IO/DirectoryUtils.h"
