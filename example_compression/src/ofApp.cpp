@@ -102,7 +102,15 @@ void ofApp::setup()
         ofLogNotice("ofApp::test()") << "ofx::IO::COBSEncoding: FAILURE";
     }
 
-
+    ofx::IO::SLIPEncoding slipEncoding;
+    if (test(slipEncoding))
+    {
+        ofLogNotice("ofApp::test()") << "ofx::IO::SLIPEncoding: SUCCESS";
+    }
+    else
+    {
+        ofLogNotice("ofApp::test()") << "ofx::IO::SLIPEncoding: FAILURE";
+    }
 }
 
 
