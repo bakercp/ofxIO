@@ -1,11 +1,12 @@
 docs/html
 docs/tagfile.xml
+docs/*.tag
 
 raw/
 
-example_cache/
-example_directory_watcher_poco_error/
-example_json/
+Project.xcconfig
+*.xcodeproj
+*.plist
 
 *.sln
 *.vcxproj
