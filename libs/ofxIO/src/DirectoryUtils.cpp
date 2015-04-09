@@ -127,7 +127,7 @@ void DirectoryUtils::list(const std::string& directory,
 
         ofFile file(_directory);
 
-        if(!file.exists())
+        if (!file.exists())
         {
             ofLogError("DirectoryUtils::list") << file.path() << " not found.";
             return;
@@ -146,7 +146,7 @@ void DirectoryUtils::list(const std::string& directory,
             ++iter;
         }
 
-        if(sortAlphaNumeric)
+        if (sortAlphaNumeric)
         {
             // now sort the vector with the algorithm
             std::sort(files.begin(),
@@ -154,7 +154,7 @@ void DirectoryUtils::list(const std::string& directory,
                       doj::alphanum_less<std::string>());
         }
     }
-    catch(Poco::Exception& exc)
+    catch (Poco::Exception& exc)
     {
         ofLogError("DirectoryUtils::list") << exc.displayText();
     }
@@ -173,14 +173,14 @@ void DirectoryUtils::listRecursive(const std::string& directory,
 
     std::string _directory = ofToDataPath(directory, true);
 
-    if(traversalOrder == SIBLINGS_FIRST)
+    if (traversalOrder == SIBLINGS_FIRST)
     {
         SiblingsFirstRecursiveDirectoryIterator iter(_directory, maxDepth);
         SiblingsFirstRecursiveDirectoryIterator endIter;
         
         while (iter != endIter)
         {
-            if(!pFilter || pFilter->accept((*iter).path()))
+            if (!pFilter || pFilter->accept((*iter).path()))
             {
                 files.push_back(iter.path().toString());
             }
@@ -188,7 +188,7 @@ void DirectoryUtils::listRecursive(const std::string& directory,
             ++iter;
         }
     }
-    else if(traversalOrder == CHILDREN_FIRST)
+    else if (traversalOrder == CHILDREN_FIRST)
     {
         SimpleRecursiveDirectoryIterator iter(_directory, maxDepth);
         SimpleRecursiveDirectoryIterator endIter;
@@ -205,7 +205,7 @@ void DirectoryUtils::listRecursive(const std::string& directory,
     }
 
 
-    if(sortAlphaNumeric)
+    if (sortAlphaNumeric)
     {
         // now sort the vector with the alpha numeric algorithm
         std::sort(files.begin(),
@@ -236,7 +236,7 @@ void DirectoryUtils::listRecursive(const ofFile& directory,
 
     std::vector<std::string>::iterator iter = _files.begin();
 
-    while(iter != _files.end())
+    while (iter != _files.end())
     {
         files.push_back(ofFile(*iter));
         ++iter;
@@ -265,7 +265,7 @@ void DirectoryUtils::listRecursive(const Poco::File& directory,
 
     std::vector<std::string>::iterator iter = _files.begin();
 
-    while(iter != _files.end())
+    while (iter != _files.end())
     {
         files.push_back(Poco::File(*iter));
         ++iter;
