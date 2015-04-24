@@ -183,7 +183,7 @@ std::size_t ByteBuffer::reserve(std::size_t capacity)
 }
 
     
-const std::vector<uint8_t>& ByteBuffer::getDataRef() const
+const std::vector<uint8_t>& ByteBuffer::getData() const
 {
     return _buffer;
 }

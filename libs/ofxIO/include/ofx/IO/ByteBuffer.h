@@ -134,7 +134,7 @@ public:
 
     /// \brief Get a const reference to the backing data vector.
     /// \returns a const reference to the backing data vector.
-    const std::vector<uint8_t>& getDataRef() const;
+    const std::vector<uint8_t>& getData() const;
 
     /// \brief Get a const pointer to the backing unsigned char data vector.
     /// \returns a const pointer to the backing data vector.
