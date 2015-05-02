@@ -40,7 +40,7 @@ ByteBufferReader::ByteBufferReader(const ByteBuffer& buffer, std::size_t offset)
 
 std::size_t ByteBufferReader::_read(void* destination, std::size_t size) const
 {
-    if(_offset + size <= _buffer.size())
+    if (_offset + size <= _buffer.size())
     {
         memcpy(destination, _buffer.getPtr() + _offset, size);
         _offset += size;

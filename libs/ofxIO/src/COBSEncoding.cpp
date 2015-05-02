@@ -100,7 +100,7 @@ std::size_t COBSEncoding::encode(const uint8_t* buffer,
             encoded[write_index++] = buffer[read_index++];
             code++;
 
-            if(code == 0xFF)
+            if (code == 0xFF)
             {
                 encoded[code_index] = code;
                 code = 1;
@@ -127,7 +127,7 @@ std::size_t COBSEncoding::decode(const uint8_t* buffer,
     {
         code = buffer[read_index];
 
-        if(read_index + code > size && code != 1)
+        if (read_index + code > size && code != 1)
         {
             return 0;
         }
