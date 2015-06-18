@@ -263,7 +263,7 @@ private:
     FilterList filterList;
 
     /// \brief A mutex for mutithreaded processing.
-    mutable Poco::FastMutex mutex;
+    mutable std::mutex _mutex;
 
 };
 

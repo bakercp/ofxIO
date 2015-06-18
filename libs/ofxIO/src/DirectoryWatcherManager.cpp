@@ -77,7 +77,7 @@ void DirectoryWatcherManager::addPath(const Poco::Path& path,
         watcher->itemMovedTo += Poco::priorityDelegate(this, &DirectoryWatcherManager::onItemMovedTo, OF_EVENT_ORDER_AFTER_APP);
         watcher->scanError += Poco::priorityDelegate(this, &DirectoryWatcherManager::onScanError, OF_EVENT_ORDER_AFTER_APP);
 
-        mutex.lock();
+        _mutex.lock();
 
         if(pFilter)
         {
@@ -86,7 +86,7 @@ void DirectoryWatcherManager::addPath(const Poco::Path& path,
 
         watchList[path] = watcher;
 
-        mutex.unlock();
+        _mutex.unlock();
 
         if (listExistingItemsOnStart)
         {
@@ -113,7 +113,7 @@ void DirectoryWatcherManager::addPath(const Poco::Path& path,
 
 void DirectoryWatcherManager::removePath(const Poco::Path& path)
 {
-    Poco::FastMutex::ScopedLock lock(mutex);
+    std::unique_lock<std::mutex> lock(_mutex);
     WatchListIter watchListIter = watchList.find(path);
 
     if (watchListIter != watchList.end())
@@ -141,14 +141,14 @@ void DirectoryWatcherManager::removePath(const Poco::Path& path)
 
 bool DirectoryWatcherManager::isWatching(const Poco::Path& path) const
 {
-    Poco::FastMutex::ScopedLock lock(mutex);
+    std::unique_lock<std::mutex> lock(_mutex);
     return watchList.find(path) != watchList.end();
 }
 
 
 AbstractPathFilter* DirectoryWatcherManager::getFilterForPath(const Poco::Path& path)
 {
-    Poco::FastMutex::ScopedLock lock(mutex);
+    std::unique_lock<std::mutex> lock(_mutex);
     FilterListIter iter = filterList.find(path);
 
     if (iter != filterList.end())
