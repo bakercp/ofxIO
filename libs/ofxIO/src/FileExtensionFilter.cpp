@@ -58,7 +58,7 @@ bool FileExtensionFilter::accept(const Poco::Path& path) const
 
     std::set<std::string>::iterator iter = _extensions.begin();
 
-    while(iter != _extensions.end())
+    while (iter != _extensions.end())
     {
         bool match = false;
 

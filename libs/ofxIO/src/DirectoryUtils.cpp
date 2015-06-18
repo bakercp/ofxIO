@@ -24,6 +24,7 @@
 
 
 #include "ofx/IO/DirectoryUtils.h"
+#include "Poco/Exception.h"
 #include "alphanum.hpp"
 
 
@@ -62,7 +63,7 @@ void DirectoryUtils::list(const AbstractSearchPath& path,
 
     std::vector<std::string>::const_iterator iter = _files.begin();
 
-    while(iter != _files.end())
+    while (iter != _files.end())
     {
         paths.push_back(*iter);
         ++iter;
@@ -83,7 +84,7 @@ void DirectoryUtils::list(const Poco::File& directory,
 
     std::vector<std::string>::const_iterator iter = _files.begin();
 
-    while(iter != _files.end())
+    while (iter != _files.end())
     {
         files.push_back(Poco::File(*iter));
         ++iter;
@@ -105,7 +106,7 @@ void DirectoryUtils::list(const ofFile& directory,
 
     std::vector<std::string>::const_iterator iter = _files.begin();
 
-    while(iter != _files.end())
+    while (iter != _files.end())
     {
         files.push_back(ofFile(*iter));
         ++iter;

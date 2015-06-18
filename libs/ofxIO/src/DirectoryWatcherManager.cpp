@@ -24,6 +24,7 @@
 
 
 #include "ofx/IO/DirectoryWatcherManager.h"
+#include "Poco/PriorityDelegate.h"
 
 
 namespace ofx {
@@ -95,7 +96,7 @@ void DirectoryWatcherManager::addPath(const Poco::Path& path,
 
             std::vector<Poco::File>::iterator iter = files.begin();
 
-            while(iter != files.end())
+            while (iter != files.end())
             {
                 DirectoryWatcher::DirectoryEvent event(*iter, DirectoryWatcher::DW_ITEM_ADDED);
                 ofNotifyEvent(events.onItemAdded,event,this);
@@ -112,7 +113,7 @@ void DirectoryWatcherManager::addPath(const Poco::Path& path,
 
 void DirectoryWatcherManager::removePath(const Poco::Path& path)
 {
-    ofScopedLock lock(mutex);
+    Poco::FastMutex::ScopedLock lock(mutex);
     WatchListIter watchListIter = watchList.find(path);
 
     if (watchListIter != watchList.end())
@@ -140,14 +141,14 @@ void DirectoryWatcherManager::removePath(const Poco::Path& path)
 
 bool DirectoryWatcherManager::isWatching(const Poco::Path& path) const
 {
-    ofScopedLock lock(mutex);
+    Poco::FastMutex::ScopedLock lock(mutex);
     return watchList.find(path) != watchList.end();
 }
 
 
 AbstractPathFilter* DirectoryWatcherManager::getFilterForPath(const Poco::Path& path)
 {
-    ofScopedLock lock(mutex);
+    Poco::FastMutex::ScopedLock lock(mutex);
     FilterListIter iter = filterList.find(path);
 
     if (iter != filterList.end())
