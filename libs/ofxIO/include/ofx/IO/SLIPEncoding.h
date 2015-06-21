@@ -60,8 +60,7 @@ public:
     /// \param size The size of the buffer to encode.
     /// \param encodedBuffer The target buffer for the encoded bytes.
     /// \returns The number of bytes in the encoded buffer.
-    /// \warning encodedBuffer must have a minimum capacity of
-    ///     (size + 1).
+    /// \warning encodedBuffer must have a minimum capacity of (size + 1).
     static std::size_t encode(const uint8_t* buffer,
                               std::size_t size,
                               uint8_t* encodedBuffer);
@@ -72,8 +71,7 @@ public:
     /// \param size The size of the SLIP-encoded buffer.
     /// \param decodedBuffer The target buffer for the decoded bytes.
     /// \returns The number of bytes in the decoded buffer.
-    /// \warning decodedBuffer must have a minimum capacity of
-    ///     size.
+    /// \warning decodedBuffer must have a minimum capacity of size.
     static std::size_t decode(const uint8_t* buffer,
                               std::size_t size,
                               uint8_t* decodedBuffer);
