@@ -90,15 +90,16 @@ std::streamsize ByteBufferUtils::copyStreamToBuffer(std::istream& istr,
 
     Poco::Buffer<char> buffer(bufferSize);
     std::streamsize len = 0;
-	istr.read(buffer.begin(), bufferSize);
+    istr.read(buffer.begin(), static_cast<std::streamsize>(bufferSize));
     std::streamsize n = istr.gcount();
+
     while (n > 0)
 	{
 		len += n;
-        byteBuffer.writeBytes(reinterpret_cast<uint8_t*>(buffer.begin()), n);
+        byteBuffer.writeBytes(reinterpret_cast<uint8_t*>(buffer.begin()), static_cast<std::size_t>(n));
         if (istr)
 		{
-			istr.read(buffer.begin(), bufferSize);
+			istr.read(buffer.begin(), static_cast<std::streamsize>(bufferSize));
             n = istr.gcount();
 		}
         else
@@ -116,7 +117,7 @@ std::ostream& ByteBufferUtils::copyBufferToStream(const ByteBuffer& byteBuffer,
 {
     if (!ostr.bad())
     {
-        ostr.write(byteBuffer.getCharPtr(), byteBuffer.size());
+        ostr.write(byteBuffer.getCharPtr(), static_cast<std::streamsize>(byteBuffer.size()));
     }
     else
     {

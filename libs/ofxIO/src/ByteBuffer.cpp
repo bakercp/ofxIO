@@ -75,7 +75,7 @@ ByteBuffer::~ByteBuffer()
 std::size_t ByteBuffer::readBytes(uint8_t* buffer, std::size_t size) const
 {
     std::size_t numBytesToCopy = std::min(size, _buffer.size());
-    std::copy(_buffer.begin(), _buffer.begin() + numBytesToCopy, buffer);
+    std::copy(_buffer.begin(), _buffer.begin() + static_cast<ptrdiff_t>(numBytesToCopy), buffer);
     return numBytesToCopy;
 }
 
