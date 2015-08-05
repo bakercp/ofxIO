@@ -127,7 +127,7 @@ public:
     /// \brief Save a ByteBuffer as a file.
     /// \param buffer the target ByteBuffer to save.
     /// \param path The absolute path of the file to save.
-    /// \param openMode The std::ios::out is always set, regardless of the
+    /// \param mode The std::ios::out is always set, regardless of the
     ///        actual value specified for mode.
     /// \returns True iff the file was saved successfully.
     /// \throws A Poco::FileNotFoundException (or a similar exception) if the
