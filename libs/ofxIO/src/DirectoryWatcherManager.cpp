@@ -79,7 +79,7 @@ void DirectoryWatcherManager::addPath(const Poco::Path& path,
 
         _mutex.lock();
 
-        if(pFilter)
+        if (pFilter)
         {
             filterList[path] = pFilter;
         }
