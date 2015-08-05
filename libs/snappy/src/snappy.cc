@@ -570,6 +570,12 @@ static uint16 MakeEntry(unsigned int extra,
   return len | (copy_offset << 8) | (extra << 11);
 }
 
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-function"
+// https://code.google.com/p/snappy/issues/detail?id=96
+    
+
 static void ComputeTable() {
   uint16 dst[256];
 
@@ -654,7 +660,12 @@ static void ComputeTable() {
     }
   }
 }
+
+#pragma clang diagnostic pop
+
 #endif /* !NDEBUG */
+
+
 
 // Helper class for decompression
 class SnappyDecompressor {
