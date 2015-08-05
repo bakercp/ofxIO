@@ -26,7 +26,6 @@
 #include "ofApp.h"
 
 
-//------------------------------------------------------------------------------
 void ofApp::setup()
 {
     ofSetWindowShape(ofGetScreenWidth(), 200);
@@ -41,7 +40,7 @@ void ofApp::setup()
 
 }
 
-//------------------------------------------------------------------------------
+
 void ofApp::draw()
 {
     ofBackground(0);
@@ -57,15 +56,16 @@ void ofApp::draw()
     }
 }
 
-//------------------------------------------------------------------------------
+
 void ofApp::gotMessage(ofMessage msg)
 {
     int height = ofGetHeight();
-    std::size_t numLines = (std::size_t)(height / TXT_HEIGHT);
+    
+    std::size_t numLines = static_cast<std::size_t>(height / TXT_HEIGHT);
 
     messages.push_front(msg.message);
 
-    while(messages.size() > numLines)
+    while (messages.size() > numLines)
     {
         messages.pop_back();
     }
