@@ -30,6 +30,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <algorithm>
 #include "ofx/IO/AbstractTypes.h"
 #include "ofx/IO/ByteBufferUtils.h"
 
