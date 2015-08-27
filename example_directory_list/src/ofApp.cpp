@@ -26,7 +26,6 @@
 #include "ofApp.h"
 
 
-//------------------------------------------------------------------------------
 void ofApp::setup()
 {
     ofSetWindowShape(ofGetScreenWidth(), 200);
@@ -59,7 +58,7 @@ void ofApp::setup()
 
 }
 
-//------------------------------------------------------------------------------
+
 void ofApp::draw()
 {
     ofBackground(0);
@@ -74,7 +73,7 @@ void ofApp::draw()
     }
 }
 
-//------------------------------------------------------------------------------
+
 void ofApp::gotMessage(ofMessage msg)
 {
 
