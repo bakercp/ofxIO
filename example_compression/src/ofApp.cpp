@@ -58,13 +58,16 @@ Integer rhoncus suscipit urna a feugiat. Curabitur faucibus sit amet ipsum vitae
 
 void ofApp::setup()
 {
-	ifstream ifs;
-	ifs.open(ofToDataPath("ZLib.zip"), ios::binary);
-	Poco::Zip::Decompress decompressor(ifs, ofToDataPath("out/"));
-	decompressor.decompressAllFiles();
-
-
-
+	try
+	{
+		Poco::FileInputStream fis(ofToDataPath("ZLib.zip"), ios::binary);
+		Poco::Zip::Decompress decompressor(fis, ofToDataPath("out/"));
+		decompressor.decompressAllFiles();
+	}
+	catch (const Poco::FileNotFoundException& e)
+	{
+		ofLogError() << e.displayText();
+	}
 
 //    test(ofx::IO::Compression::ZLIB);
 //    test(ofx::IO::Compression::GZIP);
