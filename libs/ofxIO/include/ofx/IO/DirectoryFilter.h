@@ -40,7 +40,7 @@ class DirectoryFilter: public AbstractPathFilter
 {
 public:
     /// \brief Construct a directory filter.
-    DirectoryFilter();
+    DirectoryFilter(bool acceptMatches = true);
 
     /// \brief Destroys a directory filter.
     virtual ~DirectoryFilter();
@@ -48,6 +48,11 @@ public:
     /// \brief Accept a path based if it represents a directory.
     /// \returns true iff the path represents a directory.
     bool accept(const Poco::Path& path) const;
+
+private:
+	/// \brief true iff matches should be accepted,
+	/// otherwise false iff matches should be rejected.
+	bool _acceptMatches;
 
 };
 

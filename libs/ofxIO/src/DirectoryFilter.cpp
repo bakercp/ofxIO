@@ -30,7 +30,8 @@ namespace ofx {
 namespace IO {
 
 
-DirectoryFilter::DirectoryFilter()
+DirectoryFilter::DirectoryFilter(bool acceptMatches):
+	_acceptMatches(acceptMatches)
 {
 }
 
@@ -42,7 +43,9 @@ DirectoryFilter::~DirectoryFilter()
 
 bool DirectoryFilter::accept(const Poco::Path& path) const
 {
-    return Poco::File(path).isDirectory();
+	bool isDirectory = Poco::File(path).isDirectory();
+
+	return _acceptMatches ? isDirectory : !isDirectory;
 }
 
 

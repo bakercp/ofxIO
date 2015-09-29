@@ -64,7 +64,7 @@ bool FileExtensionFilter::accept(const Poco::Path& path) const
 
         if(_ignoreCase)
         {
-            match = (0 == Poco::UTF8::icompare(extension,*iter));
+            match = (0 == Poco::UTF8::icompare(extension, *iter));
         }
         else
         {

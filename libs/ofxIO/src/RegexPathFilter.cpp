@@ -32,25 +32,20 @@ namespace IO {
 
 RegexPathFilter::RegexPathFilter(const std::string& pattern,
                                  int options,
-                                 bool study):
-    _pRegex(new Poco::RegularExpression(pattern, options, study))
+                                 bool optimize):
+	_regex(pattern, options, optimize)
 {
 }
 
     
 RegexPathFilter::~RegexPathFilter()
 {
-    if (_pRegex)
-    {
-        delete _pRegex;
-        _pRegex = 0;
-    }
 }
 
 
 bool RegexPathFilter::accept(const Poco::Path& path) const
 {
-    return _pRegex->match(path.toString());
+    return _regex.match(path.toString());
 }
 
 

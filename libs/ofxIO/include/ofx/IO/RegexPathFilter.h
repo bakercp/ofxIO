@@ -65,7 +65,7 @@ public:
 
 private:
     /// \brief the regular expression pointer.
-    Poco::RegularExpression* _pRegex;
+	Poco::RegularExpression _regex;
 
 };
 
