@@ -52,7 +52,7 @@ bool SLIPEncoding::encode(const AbstractByteSource& buffer,
 {
     std::vector<uint8_t> bytes = buffer.readBytes();
 
-    const std::size_t encodedMax = 2 * bytes.size() + 1;
+    const std::size_t encodedMax = 2 * bytes.size() + 2;
 
     Poco::Buffer<uint8_t> encoded(encodedMax);
 
@@ -69,7 +69,7 @@ bool SLIPEncoding::decode(const AbstractByteSource& buffer,
 {
     std::vector<uint8_t> bytes = buffer.readBytes();
 
-    Poco::Buffer<uint8_t> decoded(bytes.size());
+    Poco::Buffer<uint8_t> decoded(bytes.size() - 1);
 
     std::size_t size = decode(&bytes[0], bytes.size(), decoded.begin());
 
@@ -86,7 +86,7 @@ std::size_t SLIPEncoding::encode(const uint8_t* buffer,
     std::size_t read_index  = 0;
     std::size_t write_index = 0;
 
-    // flush any data that may have accumulated due to line noise
+    // double-ENDed, flush any data that may have accumulated due to line noise
     encoded[write_index++] = END;
 
     while (read_index < size)

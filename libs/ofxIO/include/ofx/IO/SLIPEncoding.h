@@ -61,7 +61,7 @@ public:
     /// \param encodedBuffer The target buffer for the encoded bytes.
     /// \returns The number of bytes in the encoded buffer.
     /// \warning encodedBuffer must have a minimum capacity of
-    ///     (size + 1).
+    ///     (2 * size + 2).
     static std::size_t encode(const uint8_t* buffer,
                               std::size_t size,
                               uint8_t* encodedBuffer);
@@ -73,7 +73,7 @@ public:
     /// \param decodedBuffer The target buffer for the decoded bytes.
     /// \returns The number of bytes in the decoded buffer.
     /// \warning decodedBuffer must have a minimum capacity of
-    ///     size.
+    ///     (size - 1).
     static std::size_t decode(const uint8_t* buffer,
                               std::size_t size,
                               uint8_t* decodedBuffer);
