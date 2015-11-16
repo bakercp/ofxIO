@@ -5,10 +5,16 @@ A collection of I/O core utils.
 
 Generate all project files using the openFrameworks Project Generator.
 
+## Features
 * `ofEvent`-based Directory Watcher
     * Watch for changes in your directories.
     * _NOTE: `Poco::DirectoryWatcher` was added in Poco 1.5+.  These files are included for backward compatability._
 
+* File filters.
+* Compression
+    * Zip, GZip, COBS, SLIP, etc.
+* ByteBuffer
+    * Tools for interacting with raw byte buffers.
 * Recursive File Listing `Poco::RecursiveDirectoryIterator`
     * List files and folders inside of directories.
     * Use custom file filters to return relevant results.
@@ -17,3 +23,4 @@ Generate all project files using the openFrameworks Project Generator.
     * _Note: Implemented using http://www.davekoelle.com/files/alphanum.hpp_
 
 See the examples!
+
