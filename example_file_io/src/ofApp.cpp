@@ -38,8 +38,16 @@ void ofApp::setup()
 
         std::string newPath = ofToDataPath("openFrameworks_copy.png", true);
 
-        std::streamsize out = ofx::IO::ByteBufferUtils::saveToFile(byteBuffer, newPath);
+        bool result = ofx::IO::ByteBufferUtils::saveToFile(byteBuffer, newPath);
 
+        if (result)
+        {
+            ofLogNotice("ofApp::setup") << "File written.";
+        }
+        else
+        {
+            ofLogError("ofApp::setup") << "File not written bytes written.";
+        }
     }
     catch (Poco::Exception& exception)
     {

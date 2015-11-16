@@ -31,9 +31,6 @@
 #include "ofxIO.h"
 
 
-using namespace ofx::IO;
-
-
 class ofApp: public ofBaseApp
 {
 public:
@@ -47,27 +44,27 @@ public:
 
     void gotMessage(ofMessage msg);
 
-    void onDirectoryWatcherItemAdded(const DirectoryWatcherManager::DirectoryEvent& evt)
+    void onDirectoryWatcherItemAdded(const ofx::IO::DirectoryWatcherManager::DirectoryEvent& evt)
     {
         ofSendMessage("Added:    " + evt.item.path());
     }
     
-    void onDirectoryWatcherItemRemoved(const DirectoryWatcherManager::DirectoryEvent& evt)
+    void onDirectoryWatcherItemRemoved(const ofx::IO::DirectoryWatcherManager::DirectoryEvent& evt)
     {
         ofSendMessage("Removed:  " + evt.item.path());
     }
     
-    void onDirectoryWatcherItemModified(const DirectoryWatcherManager::DirectoryEvent& evt)
+    void onDirectoryWatcherItemModified(const ofx::IO::DirectoryWatcherManager::DirectoryEvent& evt)
     {
         ofSendMessage("Modified: " + evt.item.path());
     }
 
-    void onDirectoryWatcherItemMovedFrom(const DirectoryWatcherManager::DirectoryEvent& evt)
+    void onDirectoryWatcherItemMovedFrom(const ofx::IO::DirectoryWatcherManager::DirectoryEvent& evt)
     {
         ofLogNotice("ofApp::onDirectoryWatcherItemMovedFrom") << "Moved From: " << evt.item.path();
     }
 
-    void onDirectoryWatcherItemMovedTo(const DirectoryWatcherManager::DirectoryEvent& evt)
+    void onDirectoryWatcherItemMovedTo(const ofx::IO::DirectoryWatcherManager::DirectoryEvent& evt)
     {
         ofLogNotice("ofApp::onDirectoryWatcherItemMovedTo") << "Moved To: " << evt.item.path();
     }
@@ -78,9 +75,9 @@ public:
     }
 
 
-    DirectoryWatcherManager watcher;
+    ofx::IO::DirectoryWatcherManager watcher;
 
-    HiddenFileFilter fileFilter; // an example file filter
+    ofx::IO::HiddenFileFilter fileFilter; // an example file filter
 
     std::deque<std::string> messages;
 

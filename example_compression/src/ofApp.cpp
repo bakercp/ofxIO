@@ -147,6 +147,7 @@ bool ofApp::test(ofx::IO::AbstractByteEncoderDecoder& encoderDecoder)
     }
 }
 
+
 void ofApp::test(ofx::IO::Compression::Type type)
 {
     ofx::IO::ByteBuffer raw(LOREM_IPSUM);

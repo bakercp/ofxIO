@@ -31,5 +31,5 @@ int main()
 {
 	ofAppNoWindow window;
 	ofSetupOpenGL(&window, 0, 0, OF_WINDOW);
-	ofRunApp(new ofApp());
+    ofRunApp(std::make_shared<ofApp>());
 }

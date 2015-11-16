@@ -48,7 +48,7 @@ void ofApp::draw()
 
     int y = TXT_HEIGHT;
 
-    for(std::size_t i = 0; i < messages.size(); ++i)
+    for (std::size_t i = 0; i < messages.size(); ++i)
     {
         ofSetColor(ofMap(i, 0, messages.size(), 255, 90));
         ofDrawBitmapString(messages[i], 10, y);

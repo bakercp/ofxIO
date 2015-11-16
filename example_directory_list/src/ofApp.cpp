@@ -37,7 +37,7 @@ void ofApp::setup()
 
     DirectoryUtils::list("../../..", files, true, &pathFilter);
 
-    for(std::size_t i = 0; i < files.size(); i++)
+    for (std::size_t i = 0; i < files.size(); ++i)
     {
         ofSendMessage(ofMessage(files[i]));
     }
@@ -51,7 +51,7 @@ void ofApp::setup()
                                   DirectoryUtils::INIFINITE_DEPTH,
                                   DirectoryUtils::SIBLINGS_FIRST);
 
-    for(std::size_t i = 0; i < files.size(); ++i)
+    for (std::size_t i = 0; i < files.size(); ++i)
     {
         ofSendMessage(ofMessage(files[i]));
     }
@@ -65,7 +65,7 @@ void ofApp::draw()
     ofFill();
 
     int y = TXT_HEIGHT;
-    for(std::size_t i = 0; i < messages.size(); ++i)
+    for (std::size_t i = 0; i < messages.size(); ++i)
     {
         ofSetColor(ofMap(i, 0, messages.size(), 255, 90));
         ofDrawBitmapString(messages[i], 10, y);
@@ -78,11 +78,12 @@ void ofApp::gotMessage(ofMessage msg)
 {
 
     int height = ofGetHeight();
-    std::size_t numLines = (std::size_t)(height / TXT_HEIGHT);
+
+    std::size_t numLines = static_cast<std::size_t>(height / TXT_HEIGHT);
 
     messages.push_front(msg.message);
 
-    while(messages.size() > numLines)
+    while (messages.size() > numLines)
     {
         messages.pop_back();
     }
