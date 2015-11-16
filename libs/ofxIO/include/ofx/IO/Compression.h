@@ -31,6 +31,7 @@ namespace ofx {
 namespace IO {
 
 
+/// \brief A class for compressing and uncompressing ByteBuffers.
 class Compression
 {
 public:
