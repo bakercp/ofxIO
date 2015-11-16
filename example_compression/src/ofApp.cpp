@@ -58,6 +58,10 @@ Integer rhoncus suscipit urna a feugiat. Curabitur faucibus sit amet ipsum vitae
 
 void ofApp::setup()
 {
+
+
+// Currently, there is a bug in the linux64 poco library.
+#if !defined(TARGET_LINUX)
 	try
 	{
 		Poco::FileInputStream fis(ofToDataPath("ZLib.zip"), ios::binary);
@@ -68,6 +72,8 @@ void ofApp::setup()
 	{
 		ofLogError() << e.displayText();
 	}
+#endif
+
 
 //    test(ofx::IO::Compression::ZLIB);
 //    test(ofx::IO::Compression::GZIP);
