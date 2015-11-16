@@ -24,6 +24,7 @@
 
 
 #include "ofApp.h"
+#include "Poco/Zip/Decompress.h"
 
 
 const std::string ofApp::LOREM_IPSUM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis laoreet magna. Proin rutrum congue vulputate. Nulla aliquet, leo nec viverra dapibus, sapien tellus porttitor justo, sit amet luctus mi mauris non metus. Phasellus placerat convallis quam a malesuada. Sed rutrum quam in dictum auctor. Fusce orci lectus, porttitor vitae consectetur sit amet, mollis vitae mi. Nulla ante diam, aliquam id ante ut, hendrerit commodo dolor. Nunc lacinia sodales sollicitudin. Integer sollicitudin neque ac diam commodo venenatis.\
@@ -54,7 +55,6 @@ Aliquam non justo nibh. Suspendisse ut tellus orci. Interdum et malesuada fames 
 \
 Integer rhoncus suscipit urna a feugiat. Curabitur faucibus sit amet ipsum vitae mattis. Proin rhoncus ullamcorper enim, id euismod eros consequat ac. Nam iaculis convallis nunc vel venenatis. Cras venenatis sem id nisl varius, ut luctus dolor bibendum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eu aliquet ante, ut tincidunt tellus metus.";
 
-#include "Poco/Zip/Decompress.h"
 
 void ofApp::setup()
 {
@@ -76,6 +76,7 @@ void ofApp::setup()
     test(ofx::IO::Compression::LZ4);
 
     ofx::IO::Base64Encoding base64Encoding;
+
     if (test(base64Encoding))
     {
         ofLogNotice("ofApp::test()") << "ofx::IO::Base64Encoding: SUCCESS";
@@ -86,6 +87,7 @@ void ofApp::setup()
     }
 
     ofx::IO::HexBinaryEncoding hexBinaryEncoding;
+    
     if (test(hexBinaryEncoding))
     {
         ofLogNotice("ofApp::test()") << "ofx::IO::HexBinaryEncoding: SUCCESS";
@@ -96,6 +98,7 @@ void ofApp::setup()
     }
 
     ofx::IO::COBSEncoding cobsEncoding;
+
     if (test(cobsEncoding))
     {
         ofLogNotice("ofApp::test()") << "ofx::IO::COBSEncoding: SUCCESS";
@@ -106,6 +109,7 @@ void ofApp::setup()
     }
 
     ofx::IO::SLIPEncoding slipEncoding;
+
     if (test(slipEncoding))
     {
         ofLogNotice("ofApp::test()") << "ofx::IO::SLIPEncoding: SUCCESS";

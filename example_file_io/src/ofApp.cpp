@@ -36,13 +36,15 @@ void ofApp::setup()
     {
         std::streamsize in = ofx::IO::ByteBufferUtils::loadFromFile(path, byteBuffer);
 
+        ofLogNotice("ofApp::setup") << in << " bytes read.";
+
         std::string newPath = ofToDataPath("openFrameworks_copy.png", true);
 
         bool result = ofx::IO::ByteBufferUtils::saveToFile(byteBuffer, newPath);
 
         if (result)
         {
-            ofLogNotice("ofApp::setup") << "File written.";
+            ofLogNotice("ofApp::setup") << "File written to " << newPath;
         }
         else
         {
@@ -53,5 +55,7 @@ void ofApp::setup()
     {
         ofLogError("ofApp::setup") << "Exception: " << exception.displayText();
     }
+
+    ofExit();
 
 }
