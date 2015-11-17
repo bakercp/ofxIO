@@ -61,7 +61,7 @@ public:
 
     /// \brief Accept a path based on a regular expression.
     /// \returns true iff the path is accepted by the path filter.
-    bool accept(const Poco::Path& path) const;
+    bool accept(const Poco::Path& path) const override;
 
 private:
     /// \brief the regular expression pointer.

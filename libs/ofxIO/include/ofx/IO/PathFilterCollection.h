@@ -51,7 +51,7 @@ public:
     /// collection and does not manage their memory.
     virtual ~PathFilterCollection();
 
-    bool accept(const Poco::Path& path) const;
+    bool accept(const Poco::Path& path) const override;
 
     /// \brief Add a file filter to the collection.
     ///

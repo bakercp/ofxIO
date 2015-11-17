@@ -72,17 +72,17 @@ public:
     /// \brief Destroy the ByteBuffer.
     virtual ~ByteBuffer();
 
-    virtual std::size_t readBytes(uint8_t* buffer, std::size_t size) const;
-    virtual std::size_t readBytes(std::vector<uint8_t>& buffer) const;
-    virtual std::size_t readBytes(std::string& buffer) const;
-    virtual std::size_t readBytes(AbstractByteSink& buffer) const;
-    virtual std::vector<uint8_t> readBytes() const;
+    virtual std::size_t readBytes(uint8_t* buffer, std::size_t size) const override;
+    virtual std::size_t readBytes(std::vector<uint8_t>& buffer) const override;
+    virtual std::size_t readBytes(std::string& buffer) const override;
+    virtual std::size_t readBytes(AbstractByteSink& buffer) const override;
+    virtual std::vector<uint8_t> readBytes() const override;
 
-    virtual std::size_t writeByte(uint8_t data);
-    virtual std::size_t writeBytes(const uint8_t* buffer, std::size_t size);
-    virtual std::size_t writeBytes(const std::vector<uint8_t>& buffer);
-    virtual std::size_t writeBytes(const std::string& buffer);
-    virtual std::size_t writeBytes(const AbstractByteSource& buffer);
+    virtual std::size_t writeByte(uint8_t data) override;
+    virtual std::size_t writeBytes(const uint8_t* buffer, std::size_t size) override;
+    virtual std::size_t writeBytes(const std::vector<uint8_t>& buffer) override;
+    virtual std::size_t writeBytes(const std::string& buffer) override;
+    virtual std::size_t writeBytes(const AbstractByteSource& buffer) override;
 
     /// \brief Query the number of bytes in the ByteBuffer.
     /// \returns the number of bytes in the ByteBuffer.

@@ -49,9 +49,9 @@ public:
     /// \brief Destroy a search path.
     virtual ~SearchPath();
 
-    bool isRecursive() const;
+    bool isRecursive() const override;
 
-    Poco::Path getPath() const;
+    Poco::Path getPath() const override;
     
 private:
     /// \brief The path to search.

@@ -42,10 +42,10 @@ public:
     virtual ~Base64Encoding();
 
     bool encode(const AbstractByteSource& buffer,
-                AbstractByteSink& encodedBuffer);
+                AbstractByteSink& encodedBuffer) override;
 
     bool decode(const AbstractByteSource& buffer,
-                AbstractByteSink& decodedBuffer);
+                AbstractByteSink& decodedBuffer) override;
 
 };
 

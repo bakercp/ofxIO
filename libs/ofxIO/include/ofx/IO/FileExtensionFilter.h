@@ -60,7 +60,7 @@ public:
     /// \returns true iff the path extension matches one from the list
     ///        and the additional match criteria (ignoreCase and
     ///        acceptMatches) are also satisfied.
-    bool accept(const Poco::Path& path) const;
+    bool accept(const Poco::Path& path) const override;
 
     /// \brief Add an extension to the list of extensions.
     /// \param extension to be added to the list (e.g. ".jpg").
