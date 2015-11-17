@@ -61,10 +61,10 @@ public:
     virtual ~COBSEncoding();
 
     bool encode(const AbstractByteSource& buffer,
-                AbstractByteSink& encodedBuffer);
+                AbstractByteSink& encodedBuffer) override;
 
     bool decode(const AbstractByteSource& buffer,
-                AbstractByteSink& decodedBuffer);
+                AbstractByteSink& decodedBuffer) override;
 
     /// \brief Encode a byte buffer with the COBS encoder.
     /// \param buffer The buffer to encode.
