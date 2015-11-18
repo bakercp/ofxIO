@@ -68,7 +68,7 @@ void ofApp::setup()
 		Poco::Zip::Decompress decompressor(fis, ofToDataPath("out/"));
 		decompressor.decompressAllFiles();
 	}
-	catch (const Poco::FileNotFoundException& e)
+	catch (const Poco::Exception& e)
 	{
 		ofLogError() << e.displayText();
 	}
