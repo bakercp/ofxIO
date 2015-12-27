@@ -42,7 +42,7 @@ std::size_t ByteBufferWriter::_write(const void* source, std::size_t size)
 {
     if (_offset + size <= _buffer.size())
     {
-        memcpy(_buffer.getPtr() + _offset, source, size);
+        std::memcpy(_buffer.getPtr() + _offset, source, size);
         _offset += size;
         return size;
     }
