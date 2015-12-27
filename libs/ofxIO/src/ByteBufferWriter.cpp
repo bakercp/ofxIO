@@ -65,6 +65,12 @@ std::size_t ByteBufferWriter::getOffset() const
 }
 
 
+std::size_t ByteBufferWriter::size() const
+{
+    return _buffer.size();
+}
+
+
 std::size_t ByteBufferWriter::remaining() const
 {
     return _buffer.size() - _offset;
