@@ -34,6 +34,7 @@
 namespace ofx {
 namespace IO {
 
+
 /// \brief A Consistent Overhead Byte Stuffing (COBS) Encoder.
 ///
 /// Consistent Overhead Byte Stuffing (COBS) is an encoding that removes all 0
@@ -77,14 +78,13 @@ public:
                               std::size_t size,
                               uint8_t* encodedBuffer);
 
-
     /// \brief Decode a COBS-encoded buffer.
     /// \param buffer The COBS-encoded buffer to decode.
     /// \param size The size of the COBS-encoded buffer.
     /// \param decodedBuffer The target buffer for the decoded bytes.
     /// \returns The number of bytes in the decoded buffer.
     /// \warning decodedBuffer must have a minimum capacity of
-    ///     size
+    ///     size.
     static std::size_t decode(const uint8_t* buffer,
                               std::size_t size,
                               uint8_t* decodedBuffer);
