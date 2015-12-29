@@ -1,6 +1,6 @@
 // =============================================================================
 //
-// Copyright (c) 2010-2015 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2013-2015 Christopher Baker <http://christopherbaker.net>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,40 +23,62 @@
 // =============================================================================
 
 
-#pragma once
-
-
-#include <deque>
-#include "Poco/FileStream.h"
-#include "ofx/DirectoryWatcher.h"
-#include "ofx/RecursiveDirectoryIterator.h"
-#include "ofx/AccessExpireCache.h"
-#include "ofx/AccessExpireLRUCache.h"
-#include "ofx/ExpireCache.h"
-#include "ofx/ExpireLRUCache.h"
-#include "ofx/LRUCache.h"
-#include "ofx/UniqueExpireCache.h"
-#include "ofx/UniqueExpireLRUCache.h"
-#include "ofx/UniqueAccessExpireCache.h"
-#include "ofx/UniqueAccessExpireLRUCache.h"
-#include "ofx/IO/AbstractTypes.h"
-#include "ofx/IO/Base64Encoding.h"
-#include "ofx/IO/ByteBuffer.h"
-#include "ofx/IO/ByteBufferReader.h"
 #include "ofx/IO/ByteBufferStream.h"
-#include "ofx/IO/ByteBufferUtils.h"
-#include "ofx/IO/ByteBufferWriter.h"
-#include "ofx/IO/COBSEncoding.h"
-#include "ofx/IO/SLIPEncoding.h"
-#include "ofx/IO/Compression.h"
-#include "ofx/IO/DeviceFilter.h"
-#include "ofx/IO/DirectoryUtils.h"
-#include "ofx/IO/DirectoryFilter.h"
-#include "ofx/IO/DirectoryWatcherManager.h"
-#include "ofx/IO/FileExtensionFilter.h"
-#include "ofx/IO/HexBinaryEncoding.h"
-#include "ofx/IO/HiddenFileFilter.h"
-#include "ofx/IO/LinkFilter.h"
-#include "ofx/IO/PathFilterCollection.h"
-#include "ofx/IO/RegexPathFilter.h"
-#include "ofx/IO/SearchPath.h"
+
+
+namespace ofx {
+namespace IO {
+
+
+ByteBufferInputStreamBuf::ByteBufferInputStreamBuf(const ByteBuffer& buffer,
+                                                   std::size_t offset):
+    _bufferReader(buffer, offset)
+{
+}
+
+
+ByteBufferInputStreamBuf::~ByteBufferInputStreamBuf()
+{
+}
+
+
+int ByteBufferInputStreamBuf::readFromDevice()
+{
+    char byte;
+
+    if (_bufferReader.read(byte) > 0)
+    {
+        return charToInt(byte);
+    }
+    else
+    {
+        return char_traits::eof();
+    }
+}
+
+
+ByteBufferOutputStreamBuf::ByteBufferOutputStreamBuf(ByteBuffer& buffer):
+    _buffer(buffer)
+{
+}
+
+
+ByteBufferOutputStreamBuf::~ByteBufferOutputStreamBuf()
+{
+}
+
+
+int ByteBufferOutputStreamBuf::writeToDevice(char byte)
+{
+    if (_buffer.writeByte(byte) > 0)
+    {
+        return charToInt(byte);
+    }
+    else
+    {
+        return char_traits::eof();
+    }
+}
+
+
+} }  // namespace ofx::IO

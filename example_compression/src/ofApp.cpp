@@ -60,24 +60,23 @@ void ofApp::setup()
 {
 
 
-// Currently, there is a bug in the linux64 poco library.
-#if !defined(TARGET_LINUX)
-	try
-	{
-		Poco::FileInputStream fis(ofToDataPath("ZLib.zip"), ios::binary);
-		Poco::Zip::Decompress decompressor(fis, ofToDataPath("out/"));
-		decompressor.decompressAllFiles();
-	}
-	catch (const Poco::Exception& e)
-	{
-		ofLogError() << e.displayText();
-	}
-#endif
+//// Currently, there is a bug in the linux64 poco library.
+//#if !defined(TARGET_LINUX)
+//	try
+//	{
+//		Poco::FileInputStream fis(ofToDataPath("ZLib.zip"), ios::binary);
+//		Poco::Zip::Decompress decompressor(fis, ofToDataPath("out/"));
+//		decompressor.decompressAllFiles();
+//	}
+//	catch (const Poco::Exception& e)
+//	{
+//		ofLogError() << e.displayText();
+//	}
+//#endif
 
 
-//    test(ofx::IO::Compression::ZLIB);
-//    test(ofx::IO::Compression::GZIP);
-//    test(ofx::IO::Compression::ZIP);
+    test(ofx::IO::Compression::GZIP);
+    test(ofx::IO::Compression::ZLIB);
     test(ofx::IO::Compression::SNAPPY);
     test(ofx::IO::Compression::LZ4);
 

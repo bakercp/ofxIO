@@ -41,32 +41,64 @@ public:
         ZLIB,
         /// \brief Expect a gzip header, use CRC-32 checksum.
 		GZIP,
-        /// \brief STREAM_ZIP is handled as STREAM_ZLIB,
-        /// except that we do not check the ADLER32 value (must be checked by caller)
-		ZIP,
         /// \brief Use the snappy compression algorithm.
         SNAPPY,
-        /// \brief Use the LZ4 compression algorithm .
+        /// \brief Use the LZ4 compression algorithm.
         LZ4
     };
 
     /// \brief Uncompress a ByteBuffer.
     /// \param compressedBuffer The buffer compressed with `type` compression.
     /// \param uncompressedBuffer The buffer to fill with uncompressed bytes.
-    /// \param type the compression Type.
+    /// \param type The compression Type.
     /// \returns the number of bytes uncompressed or 0 if error.
     static std::size_t uncompress(const ByteBuffer& compressedBuffer,
                                   ByteBuffer& uncompressedBuffer,
                                   Type type);
 
+    /// \brief Uncomress a ByteBuffer using Type::ZLIB.
+    /// \param compressedBuffer The compressed buffer.
+    /// \param uncompressedBuffer The empty buffer to decompress with `zlib`.
+    /// \param windowBits See deflateInit2() for more informtion.
+    /// \returns the number of bytes uncompressed or 0 if error.
+    /// \sa http://www.zlib.net/manual.html
+    std::size_t uncompress(const ByteBuffer& compressedBuffer,
+                           ByteBuffer& uncompressedBuffer,
+                           int windowBits);
+
     /// \brief Compress a ByteBuffer.
     /// \param uncompressedBuffer The buffer to compress with `type` compression.
     /// \param compressedBuffer The buffer to fill with compressed bytes.
-    /// \param type the compression Type.
+    /// \param type The compression Type.
     /// \returns the number of compressed bytes or 0 if error.
     static std::size_t compress(const ByteBuffer& uncompressedBuffer,
                                 ByteBuffer& compressedBuffer,
                                 Type type);
+
+    /// \brief Compress a ByteBuffer.
+    /// \param uncompressedBuffer The buffer to compress with `type` compression.
+    /// \param compressedBuffer The buffer to fill with compressed bytes.
+    /// \param type The compression Type.
+    /// \param level The compression level (0 - 9).
+    ///        Only valid for Type::ZLIB and Type::GZIP.
+    /// \returns the number of compressed bytes or 0 if error.
+    /// \sa http://www.zlib.net/manual.html
+    static std::size_t compress(const ByteBuffer& uncompressedBuffer,
+                                ByteBuffer& compressedBuffer,
+                                Type type,
+                                int level);
+
+    /// \brief Compress a ByteBuffer using Type::ZLIB.
+    /// \param uncompressedBuffer The buffer to compress with `zlib` compression.
+    /// \param compressedBuffer The buffer to fill with compressed bytes.
+    /// \param level The compression level (0 - 9).
+    /// \param windowBits See deflateInit2() for more informtion.
+    /// \returns the number of compressed bytes or 0 if error.
+    /// \sa http://www.zlib.net/manual.html
+    static std::size_t compress(const ByteBuffer& uncompressedBuffer,
+                                ByteBuffer& compressedBuffer,
+                                int level,
+                                int windowBits);
 
     /// \brief Query the string representation of the compression lib version.
     /// \param type The compression type.

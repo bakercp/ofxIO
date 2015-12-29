@@ -24,9 +24,11 @@
 
 
 #include "ofx/IO/Compression.h"
+#include "ofx/IO/ByteBufferStream.h"
 #include "Poco/Buffer.h"
 #include "Poco/DeflatingStream.h"
 #include "Poco/InflatingStream.h"
+#include "Poco/Version.h"
 #include "snappy.h"
 #include "lz4.h"
 #include "ofLog.h"
@@ -42,16 +44,36 @@ std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
 {
     switch (type)
     {
-        case ZLIB:
-            ofLogWarning("Compression::uncompress") << "Not implemented.";
-            return 0;
         case GZIP:
-            ofLogWarning("Compression::uncompress") << "Not implemented.";
-            return 0;
-        case ZIP:
-            ofLogWarning("Compression::uncompress") << "Not implemented.";
-            return 0;
-        case SNAPPY:
+        case ZLIB:
+        {
+            Poco::InflatingStreamBuf::StreamType streamType;
+
+            if (type == ZLIB)
+            {
+                streamType = Poco::InflatingStreamBuf::StreamType::STREAM_ZLIB;
+            }
+            else if (type == GZIP)
+            {
+                streamType = Poco::InflatingStreamBuf::StreamType::STREAM_GZIP;
+            }
+
+            try
+            {
+                uncompressedBuffer.clear();
+                uncompressedBuffer.reserve(compressedBuffer.size() * 4);
+                ByteBufferInputStream istr(compressedBuffer);
+                Poco::InflatingInputStream inflater(istr, streamType);
+                inflater >> uncompressedBuffer;
+                return uncompressedBuffer.size();
+            }
+            catch (const Poco::Exception& exc)
+            {
+                ofLogError("Compression::uncompress") << exc.displayText();
+                return 0;
+            }
+        }
+        case Type::SNAPPY:
         {
             std::size_t size = 0;
 
@@ -77,7 +99,7 @@ std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
                 return 0;
             }
         }
-        case LZ4:
+        case Type::LZ4:
         {
             // TODO: Abritrary 4 x buffer.
             uncompressedBuffer.resize(compressedBuffer.size() * 4);
@@ -98,8 +120,6 @@ std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
             }
         }
     }
-
-    return 0;
 }
 
 
@@ -107,42 +127,127 @@ std::size_t Compression::compress(const ByteBuffer& uncompressedBuffer,
                                   ByteBuffer& compressedBuffer,
                                   Type type)
 {
-    std::size_t size = 0;
-
-    // Reserve as many as needed.
-    compressedBuffer.resize(uncompressedBuffer.size());
-
     switch (type)
     {
         case ZLIB:
-            ofLogWarning("Compression::compress") << "Not implemented.";
-            break;
         case GZIP:
-            ofLogWarning("Compression::compress") << "Not implemented.";
-            break;
-        case ZIP:
-            ofLogWarning("Compression::compress") << "Not implemented.";
-            break;
+        {
+            return compress(uncompressedBuffer,
+                            compressedBuffer,
+                            type,
+                            Z_DEFAULT_COMPRESSION);
+        }
         case SNAPPY:
         {
+            std::size_t size = 0;
+            // Allocate as many as needed.
+            compressedBuffer.resize(uncompressedBuffer.size());
             snappy::RawCompress(uncompressedBuffer.getCharPtr(),
                                 uncompressedBuffer.size(),
                                 compressedBuffer.getCharPtr(),
                                 &size);
-            break;
+            compressedBuffer.resize(size);
+            return size;
         }
         case LZ4:
         {
+            std::size_t size = 0;
+            // Allocate as many as needed.
+            compressedBuffer.resize(uncompressedBuffer.size());
             size = LZ4_compress(uncompressedBuffer.getCharPtr(),
                                 compressedBuffer.getCharPtr(),
                                 uncompressedBuffer.size());
-            break;
+            compressedBuffer.resize(size);
+            return size;
         }
     }
+}
 
-    compressedBuffer.resize(size);
 
-    return size;
+std::size_t Compression::compress(const ByteBuffer& uncompressedBuffer,
+                                  ByteBuffer& compressedBuffer,
+                                  Type type,
+                                  int level)
+{
+    Poco::DeflatingStreamBuf::StreamType streamType;
+
+    if (type == ZLIB)
+    {
+        streamType = Poco::DeflatingStreamBuf::STREAM_ZLIB;
+    }
+    else if (type == GZIP)
+    {
+        streamType = Poco::DeflatingStreamBuf::STREAM_GZIP;
+    }
+    else
+    {
+        ofLogWarning("Compression::compress") << "Ignoring 'level' for type: " << toString(type);
+        return compress(uncompressedBuffer, compressedBuffer, type);
+    }
+
+    try
+    {
+        compressedBuffer.clear();
+        compressedBuffer.reserve(uncompressedBuffer.size());
+
+        ByteBufferOutputStream ostr(compressedBuffer);
+        Poco::DeflatingOutputStream deflater(ostr, streamType, level);
+        deflater << uncompressedBuffer;
+        deflater.close();
+
+        return compressedBuffer.size();
+    }
+    catch (const Poco::Exception& exc)
+    {
+        ofLogError("Compression::compress") << exc.displayText();
+        return 0;
+    }
+}
+
+
+std::size_t Compression::compress(const ByteBuffer& uncompressedBuffer,
+                                  ByteBuffer& compressedBuffer,
+                                  int level,
+                                  int windowBits)
+{
+    try
+    {
+        compressedBuffer.clear();
+        compressedBuffer.reserve(uncompressedBuffer.size());
+
+        ByteBufferOutputStream ostr(compressedBuffer);
+        Poco::DeflatingOutputStream deflater(ostr, level, windowBits);
+        deflater << uncompressedBuffer;
+        deflater.close();
+
+        return compressedBuffer.size();
+    }
+    catch (const Poco::Exception& exc)
+    {
+        ofLogError("Compression::uncompress") << exc.displayText();
+        return 0;
+    }
+}
+
+
+std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
+                                    ByteBuffer& uncompressedBuffer,
+                                    int windowBits)
+{
+    try
+    {
+        uncompressedBuffer.clear();
+        uncompressedBuffer.reserve(compressedBuffer.size() * 4);
+        ByteBufferInputStream istr(compressedBuffer);
+        Poco::InflatingInputStream inflater(istr, windowBits);
+        inflater >> uncompressedBuffer;
+        return uncompressedBuffer.size();
+    }
+    catch (const Poco::Exception& exc)
+    {
+        ofLogError("Compression::uncompress") << exc.displayText();
+        return 0;
+    }
 }
 
 
@@ -151,14 +256,13 @@ std::string Compression::version(Type type)
     switch (type)
     {
         case ZLIB:
-            ofLogWarning("Compression::version") << "Not implemented.";
-            return "?";
         case GZIP:
-            ofLogWarning("Compression::version") << "Not implemented.";
-            return "?";
-        case ZIP:
-            ofLogWarning("Compression::version") << "Not implemented.";
-            return "?";
+        {
+            std::stringstream ss;
+            ss << "POCO_";
+            ss << POCO_VERSION;
+            return ss.str();
+        }
         case SNAPPY:
         {
             std::stringstream ss;
@@ -171,10 +275,7 @@ std::string Compression::version(Type type)
             ss << LZ4_VERSION_MAJOR << "." << LZ4_VERSION_MINOR << "." << LZ4_VERSION_RELEASE;
             return ss.str();
         }
-        default:
-            return "UNKNOWN";
     }
-
 }
 
 std::string Compression::toString(Type type)
@@ -185,14 +286,10 @@ std::string Compression::toString(Type type)
             return "ZLIB";
         case GZIP:
             return "GZIP";
-        case ZIP:
-            return "ZIP";
         case SNAPPY:
             return "SNAPPY";
         case LZ4:
             return "LZ4";
-        default:
-            return "UNKNOWN";
     }
 }
 
