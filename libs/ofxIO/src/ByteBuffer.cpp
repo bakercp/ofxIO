@@ -209,7 +209,7 @@ const uint8_t* ByteBuffer::getPtr() const
     }
     else
     {
-        return 0;
+        return nullptr;
     }
 }
 
@@ -222,7 +222,7 @@ uint8_t* ByteBuffer::getPtr()
     }
     else
     {
-        return 0;
+        return nullptr;
     }
 }
 
@@ -235,7 +235,7 @@ const char* ByteBuffer::getCharPtr() const
     }
     else
     {
-        return 0;
+        return nullptr;
     }
 }
 
@@ -248,7 +248,7 @@ char* ByteBuffer::getCharPtr()
     }
     else
     {
-        return 0;
+        return nullptr;
     }
 }
 

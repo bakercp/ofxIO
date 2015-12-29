@@ -157,7 +157,7 @@ AbstractPathFilter* DirectoryWatcherManager::getFilterForPath(const Poco::Path& 
     }
     else
     {
-        return 0;
+        return nullptr;
     }
 }
 
