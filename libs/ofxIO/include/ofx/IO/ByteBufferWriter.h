@@ -45,7 +45,7 @@ namespace ofx {
 namespace IO {
 
 
-/// \brief An interface for reading and writing data of various byte widths.
+/// \brief An interface for writing data of various byte widths.
 class ByteBufferWriter
 {
 public:
