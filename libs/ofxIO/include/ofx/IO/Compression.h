@@ -62,9 +62,9 @@ public:
     /// \param windowBits See deflateInit2() for more informtion.
     /// \returns the number of bytes uncompressed or 0 if error.
     /// \sa http://www.zlib.net/manual.html
-    std::size_t uncompress(const ByteBuffer& compressedBuffer,
-                           ByteBuffer& uncompressedBuffer,
-                           int windowBits);
+    static std::size_t uncompress(const ByteBuffer& compressedBuffer,
+                                  ByteBuffer& uncompressedBuffer,
+                                  int windowBits);
 
     /// \brief Compress a ByteBuffer.
     /// \param uncompressedBuffer The buffer to compress with `type` compression.
