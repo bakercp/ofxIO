@@ -26,19 +26,8 @@
 #pragma once
 
 
-#include "ofConstants.h"
-#include "ofx/IO/ByteBuffer.h"
-
-
-#if __cplusplus>=201103L || defined(_MSC_VER)
 #include <type_traits>
-#else
-#include <tr1/type_traits>
-namespace std {
-	using std::tr1::is_pod;
-}
-#endif
-// http://stackoverflow.com/questions/19154080/restricting-c-template-usage-to-pod-types
+#include "ofx/IO/ByteBuffer.h"
 
 
 namespace ofx {
@@ -121,7 +110,7 @@ private:
 template <typename Type>
 std::size_t ByteBufferWriter::write(const Type& data)
 {
-    static char Type_must_be_pod[std::is_pod<Type>::value ? 1 : -1];
+    static_assert(std::is_pod<Type>::value, "Type must be POD.");
     return _write(&data, sizeof(Type));
 }
 
@@ -129,7 +118,7 @@ std::size_t ByteBufferWriter::write(const Type& data)
 template <typename Type>
 std::size_t ByteBufferWriter::write(const Type* data, std::size_t size)
 {
-    static char Type_must_be_pod[std::is_pod<Type>::value ? 1 : -1];
+    static_assert(std::is_pod<Type>::value, "Type must be POD.");
     return _write(data, sizeof(Type) * size);
 }
 

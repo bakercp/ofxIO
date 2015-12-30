@@ -26,19 +26,8 @@
 #pragma once
 
 
-#include "ofConstants.h"
-#include "ofx/IO/ByteBuffer.h"
-
-
-#if __cplusplus>=201103L || defined(_MSC_VER)
 #include <type_traits>
-#else
-#include <tr1/type_traits>
-namespace std {
-	using std::tr1::is_pod;
-}
-#endif
-// http://stackoverflow.com/questions/19154080/restricting-c-template-usage-to-pod-types
+#include "ofx/IO/ByteBuffer.h"
 
 
 namespace ofx {
@@ -111,7 +100,7 @@ private:
 template <typename Type>
 std::size_t ByteBufferReader::read(Type& value) const
 {
-    static char Type_must_be_pod[std::is_pod<Type>::value ? 1 : -1];
+    static_assert(std::is_pod<Type>::value, "Type must be POD.");
     return _read(&value, sizeof(Type));
 }
 
@@ -119,7 +108,7 @@ std::size_t ByteBufferReader::read(Type& value) const
 template <typename Type>
 std::size_t ByteBufferReader::read(Type* destination, std::size_t size) const
 {   
-    static char Type_must_be_pod[std::is_pod<Type>::value ? 1 : -1];
+    static_assert(std::is_pod<Type>::value, "Type must be POD.");
     return _read(destination, sizeof(Type) * size);
 }
 
