@@ -37,7 +37,7 @@ public:
     void draw();
 
     bool test(ofx::IO::AbstractByteEncoderDecoder& encoder);
-    void test(ofx::IO::Compression::Type type);
+    void test(ofx::IO::Compression::Type type, int level = -1, int windowBits = -1);
 
     static const std::string LOREM_IPSUM;
 };

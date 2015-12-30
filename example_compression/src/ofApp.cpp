@@ -80,6 +80,18 @@ void ofApp::setup()
     test(ofx::IO::Compression::SNAPPY);
     test(ofx::IO::Compression::LZ4);
 
+    // window bits can be range [8, 15] includsive.
+    // level must be [1, 8] inclusive.
+    for (int windowBits = 8; windowBits < 16; ++windowBits)
+    {
+        for (int level = 1; level < 9; ++level)
+        {
+            std::cout << "level=" << level << " windowBits=" << windowBits << std::endl;
+            test(ofx::IO::Compression::ZLIB, level, windowBits);
+        }
+    }
+
+
     ofx::IO::Base64Encoding base64Encoding;
 
     if (test(base64Encoding))
@@ -157,7 +169,7 @@ bool ofApp::test(ofx::IO::AbstractByteEncoderDecoder& encoderDecoder)
 }
 
 
-void ofApp::test(ofx::IO::Compression::Type type)
+void ofApp::test(ofx::IO::Compression::Type type, int level, int windowBits)
 {
     ofx::IO::ByteBuffer raw(LOREM_IPSUM);
 
@@ -165,7 +177,21 @@ void ofApp::test(ofx::IO::Compression::Type type)
 
     std::size_t result = 0;
 
-    result = ofx::IO::Compression::compress(raw, compressed, type);
+    if (level != -1)
+    {
+        if (windowBits != -1)
+        {
+            result = ofx::IO::Compression::compress(raw, compressed, windowBits, level);
+        }
+        else
+        {
+            result = ofx::IO::Compression::compress(raw, compressed, type, level);
+        }
+    }
+    else
+    {
+        result = ofx::IO::Compression::compress(raw, compressed, type);
+    }
 
     if (result <= 0)
     {
@@ -182,7 +208,14 @@ void ofApp::test(ofx::IO::Compression::Type type)
 
     ofx::IO::ByteBuffer uncompressed;
 
-    result = ofx::IO::Compression::uncompress(compressed, uncompressed, type);
+    if (windowBits != -1 && type == ofx::IO::Compression::ZLIB)
+    {
+        result = ofx::IO::Compression::uncompress(compressed, uncompressed, windowBits);
+    }
+    else
+    {
+        result = ofx::IO::Compression::uncompress(compressed, uncompressed, type);
+    }
 
     if (result <= 0)
     {

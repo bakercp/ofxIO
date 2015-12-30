@@ -60,6 +60,7 @@ public:
     /// \param compressedBuffer The compressed buffer.
     /// \param uncompressedBuffer The empty buffer to decompress with `zlib`.
     /// \param windowBits See deflateInit2() for more informtion.
+    ///                   Must be in range (8 - 15) inclusive.
     /// \returns the number of bytes uncompressed or 0 if error.
     /// \sa http://www.zlib.net/manual.html
     static std::size_t uncompress(const ByteBuffer& compressedBuffer,
@@ -79,7 +80,7 @@ public:
     /// \param uncompressedBuffer The buffer to compress with `type` compression.
     /// \param compressedBuffer The buffer to fill with compressed bytes.
     /// \param type The compression Type.
-    /// \param level The compression level (0 - 9).
+    /// \param level The compression level (1 - 8) inclusive.
     ///        Only valid for Type::ZLIB and Type::GZIP.
     /// \returns the number of compressed bytes or 0 if error.
     /// \sa http://www.zlib.net/manual.html
@@ -91,14 +92,15 @@ public:
     /// \brief Compress a ByteBuffer using Type::ZLIB.
     /// \param uncompressedBuffer The buffer to compress with `zlib` compression.
     /// \param compressedBuffer The buffer to fill with compressed bytes.
-    /// \param level The compression level (0 - 9).
     /// \param windowBits See deflateInit2() for more informtion.
+    ///                   Must be in range (8 - 15) inclusive.
+    /// \param level The compression level (1 - 8) inclusive.
     /// \returns the number of compressed bytes or 0 if error.
     /// \sa http://www.zlib.net/manual.html
     static std::size_t compress(const ByteBuffer& uncompressedBuffer,
                                 ByteBuffer& compressedBuffer,
-                                int level,
-                                int windowBits);
+                                int windowBits,
+                                int level);
 
     /// \brief Query the string representation of the compression lib version.
     /// \param type The compression type.

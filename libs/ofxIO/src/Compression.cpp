@@ -207,8 +207,8 @@ std::size_t Compression::compress(const ByteBuffer& uncompressedBuffer,
 
 std::size_t Compression::compress(const ByteBuffer& uncompressedBuffer,
                                   ByteBuffer& compressedBuffer,
-                                  int level,
-                                  int windowBits)
+                                  int windowBits,
+                                  int level)
 {
     try
     {
@@ -216,7 +216,9 @@ std::size_t Compression::compress(const ByteBuffer& uncompressedBuffer,
         compressedBuffer.reserve(uncompressedBuffer.size());
 
         ByteBufferOutputStream ostr(compressedBuffer);
-        Poco::DeflatingOutputStream deflater(ostr, level, windowBits);
+
+        Poco::DeflatingOutputStream deflater(ostr, windowBits, level);
+
         deflater << uncompressedBuffer;
         deflater.close();
 
