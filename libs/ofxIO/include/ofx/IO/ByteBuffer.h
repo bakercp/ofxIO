@@ -86,7 +86,7 @@ public:
 
     /// \brief Query the number of bytes in the ByteBuffer.
     /// \returns the number of bytes in the ByteBuffer.
-    std::size_t size() const;
+    std::size_t size() const override;
 
     /// \brief Query the capacity of the backing data vector.
     /// \returns the capacity of the backing data vector.

@@ -82,6 +82,9 @@ public:
     /// \returns the contents of the byte source as a vector of bytes.
     virtual std::vector<uint8_t> readBytes() const = 0;
 
+    /// \returns the number of bytes available to read.
+    virtual std::size_t size() const = 0;
+
 };
 
 
@@ -179,9 +182,9 @@ public:
     /// \brief Encode the contents of the buffer.
     /// \param buffer is the array of bytes to be encoded.
     /// \param encodedBuffer the target buffer.
-    /// \returns true iff the encoding was successful.
-    virtual bool encode(const AbstractByteSource& buffer,
-                        AbstractByteSink& encodedBuffer) = 0;
+    /// \returns the number of encoded bytes or 0 if error.
+    virtual std::size_t encode(const ByteBuffer& buffer,
+                               ByteBuffer& encodedBuffer) = 0;
 
 };
 
@@ -201,9 +204,9 @@ public:
     /// \brief Decode the contents of the buffer.
     /// \param buffer is the array of bytes to be decoded.
     /// \param decodedBuffer the target buffer.
-    /// \returns true iff the decoding was successful.
-    virtual bool decode(const AbstractByteSource& buffer,
-                        AbstractByteSink& decodedBuffer) = 0;
+    /// \returns the number of decoded bytes or 0 if error.
+    virtual std::size_t decode(const ByteBuffer& buffer,
+                               ByteBuffer& decodedBuffer) = 0;
                         
 };
 

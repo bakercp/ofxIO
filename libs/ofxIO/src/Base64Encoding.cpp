@@ -44,8 +44,8 @@ Base64Encoding::~Base64Encoding()
 }
 
 
-bool Base64Encoding::encode(const AbstractByteSource& buffer,
-                            AbstractByteSink& encodedBuffer)
+std::size_t Base64Encoding::encode(const ByteBuffer& buffer,
+                                   ByteBuffer& encodedBuffer)
 {
     std::ostringstream ss;
     Poco::Base64Encoder _encoder(ss);
@@ -53,11 +53,11 @@ bool Base64Encoding::encode(const AbstractByteSource& buffer,
     ByteBufferUtils::copyBufferToStream(byteBuffer, _encoder);
     _encoder.close(); // Flush bytes.
     encodedBuffer.writeBytes(ss.str());
-    return true;
+    return encodedBuffer.size();
 }
 
-bool Base64Encoding::decode(const AbstractByteSource& buffer,
-                            AbstractByteSink& decodedBuffer)
+std::size_t Base64Encoding::decode(const ByteBuffer& buffer,
+                                   ByteBuffer& decodedBuffer)
 {
     ByteBuffer byteBuffer(buffer.readBytes());
     std::stringstream ss;
@@ -66,7 +66,7 @@ bool Base64Encoding::decode(const AbstractByteSource& buffer,
     ByteBuffer decoded;
     ByteBufferUtils::copyStreamToBuffer(_decoder, decoded);
     decodedBuffer.writeBytes(decoded);
-    return true;
+    return decodedBuffer.size();
 }
 
 

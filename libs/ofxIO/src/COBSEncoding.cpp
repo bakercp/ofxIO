@@ -45,8 +45,8 @@ COBSEncoding::~COBSEncoding()
 }
 
 
-bool COBSEncoding::encode(const AbstractByteSource& buffer,
-                          AbstractByteSink& encodedBuffer)
+std::size_t COBSEncoding::encode(const ByteBuffer& buffer,
+                                 ByteBuffer& encodedBuffer)
 {
     std::vector<uint8_t> bytes = buffer.readBytes();
 
@@ -58,12 +58,12 @@ bool COBSEncoding::encode(const AbstractByteSource& buffer,
 
     encodedBuffer.writeBytes(encoded.begin(), size);
 
-    return true;
+    return encodedBuffer.size();
 }
 
 
-bool COBSEncoding::decode(const AbstractByteSource& buffer,
-                          AbstractByteSink& decodedBuffer)
+std::size_t COBSEncoding::decode(const ByteBuffer& buffer,
+                                 ByteBuffer& decodedBuffer)
 {
     std::vector<uint8_t> bytes = buffer.readBytes();
 
@@ -73,7 +73,7 @@ bool COBSEncoding::decode(const AbstractByteSource& buffer,
 
     decodedBuffer.writeBytes(decoded.begin(), size);
 
-    return true;
+    return decodedBuffer.size();
 }
 
 

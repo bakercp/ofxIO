@@ -31,10 +31,10 @@ namespace ofx {
 namespace IO {
 
 
-static const uint8_t END = 0300;
-static const uint8_t ESC = 0333;
-static const uint8_t ESC_END = 0334;
-static const uint8_t ESC_ESC = 0335;
+const uint8_t SLIPEncoding::END = 0300;
+const uint8_t SLIPEncoding::ESC = 0333;
+const uint8_t SLIPEncoding::ESC_END = 0334;
+const uint8_t SLIPEncoding::ESC_ESC = 0335;
 
 
 SLIPEncoding::SLIPEncoding()
@@ -47,8 +47,8 @@ SLIPEncoding::~SLIPEncoding()
 }
 
 
-bool SLIPEncoding::encode(const AbstractByteSource& buffer,
-                          AbstractByteSink& encodedBuffer)
+std::size_t SLIPEncoding::encode(const ByteBuffer& buffer,
+                                 ByteBuffer& encodedBuffer)
 {
     std::vector<uint8_t> bytes = buffer.readBytes();
 
@@ -60,12 +60,12 @@ bool SLIPEncoding::encode(const AbstractByteSource& buffer,
 
     encodedBuffer.writeBytes(encoded.begin(), size);
 
-    return true;
+    return encodedBuffer.size();
 }
 
 
-bool SLIPEncoding::decode(const AbstractByteSource& buffer,
-                          AbstractByteSink& decodedBuffer)
+std::size_t SLIPEncoding::decode(const ByteBuffer& buffer,
+                                 ByteBuffer& decodedBuffer)
 {
     std::vector<uint8_t> bytes = buffer.readBytes();
 
@@ -75,7 +75,7 @@ bool SLIPEncoding::decode(const AbstractByteSource& buffer,
 
     decodedBuffer.writeBytes(decoded.begin(), size);
 
-    return true;
+    return decodedBuffer.size();
 }
 
 

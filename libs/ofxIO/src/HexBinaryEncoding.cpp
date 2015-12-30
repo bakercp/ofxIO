@@ -44,8 +44,8 @@ HexBinaryEncoding::~HexBinaryEncoding()
 }
 
 
-bool HexBinaryEncoding::encode(const AbstractByteSource& buffer,
-                              AbstractByteSink& encodedBuffer)
+std::size_t HexBinaryEncoding::encode(const ByteBuffer& buffer,
+                                      ByteBuffer& encodedBuffer)
 {
     std::stringstream ss;
     Poco::HexBinaryEncoder _encoder(ss);
@@ -53,11 +53,11 @@ bool HexBinaryEncoding::encode(const AbstractByteSource& buffer,
     ByteBufferUtils::copyBufferToStream(byteBuffer, _encoder);
     _encoder.close(); // Flush bytes.
     encodedBuffer.writeBytes(ss.str());
-    return true;
+    return encodedBuffer.size();
 }
 
-bool HexBinaryEncoding::decode(const AbstractByteSource& buffer,
-                               AbstractByteSink& decodedBuffer)
+std::size_t HexBinaryEncoding::decode(const ByteBuffer& buffer,
+                                      ByteBuffer& decodedBuffer)
 {
     ByteBuffer byteBuffer(buffer.readBytes());
     std::stringstream ss;
@@ -66,7 +66,7 @@ bool HexBinaryEncoding::decode(const AbstractByteSource& buffer,
     ByteBuffer decoded;
     ByteBufferUtils::copyStreamToBuffer(_decoder, decoded);
     decodedBuffer.writeBytes(decoded);
-    return true;
+    return decodedBuffer.size();
 }
 
 

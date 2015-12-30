@@ -33,7 +33,7 @@ namespace IO {
 /// \brief A Serial Line IP (SLIP) Encoder.
 ///
 /// Serial Line IP (SLIP) is a packet framing protocol: SLIP defines a
-/// sequence of characters that frame IP packets on a serial line, and
+/// sequence of characters that frame IP packets on a serial line and
 /// nothing more. It provides no addressing, packet type identification,
 /// error detection/correction or compression mechanisms.  Because the
 /// protocol does so little, though, it is usually very easy to
@@ -49,11 +49,11 @@ public:
     /// \brief Destroy a SLIPEncoding.
     virtual ~SLIPEncoding();
 
-    bool encode(const AbstractByteSource& buffer,
-                AbstractByteSink& encodedBuffer) override;
+    std::size_t encode(const ByteBuffer& buffer,
+                       ByteBuffer& encodedBuffer) override;
 
-    bool decode(const AbstractByteSource& buffer,
-                AbstractByteSink& decodedBuffer) override;
+    std::size_t decode(const ByteBuffer& buffer,
+                ByteBuffer& decodedBuffer) override;
 
     /// \brief Encode a byte buffer with the SLIP encoder.
     /// \param buffer The buffer to encode.
@@ -75,7 +75,13 @@ public:
     static std::size_t decode(const uint8_t* buffer,
                               std::size_t size,
                               uint8_t* decodedBuffer);
-    
+
+private:
+    static const uint8_t END;
+    static const uint8_t ESC;
+    static const uint8_t ESC_END;
+    static const uint8_t ESC_ESC;
+
 };
 
 

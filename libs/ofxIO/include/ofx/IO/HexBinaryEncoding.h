@@ -41,11 +41,11 @@ public:
     /// \brief Destroy a HexBinary Encoding.
     virtual ~HexBinaryEncoding();
 
-    bool encode(const AbstractByteSource& buffer,
-                AbstractByteSink& encodedBuffer) override;
+    std::size_t encode(const ByteBuffer& buffer,
+                       ByteBuffer& encodedBuffer) override;
 
-    bool decode(const AbstractByteSource& buffer,
-                AbstractByteSink& decodedBuffer) override;
+    std::size_t decode(const ByteBuffer& buffer,
+                       ByteBuffer& decodedBuffer) override;
     
 };
 
