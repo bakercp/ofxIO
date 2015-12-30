@@ -15,9 +15,15 @@ Generate all project files using the openFrameworks Project Generator.
     * _NOTE: `Poco::DirectoryWatcher` was added in Poco 1.5+.  These files are included for backward compatibility._
 * File filters.
 * Compression
-    * Zip, GZip, COBS, SLIP, etc.
+    * Zip, deflate, gzip, snappy, LZ4
+* Encoding.
+   * COBS, SLIP, Hex Binary, Base64, etc.
 * ByteBuffer
     * Tools for interacting with raw byte buffers.
+    * ByteBuffer streams.
+    * ByteBufferReader.
+    * ByteBufferWriter.
+    * ByteBufferStream.
 * Recursive File Listing `Poco::RecursiveDirectoryIterator`
     * List files and folders inside of directories.
     * Use custom file filters to return relevant results.
