@@ -123,19 +123,19 @@ std::size_t SLIPEncoding::decode(const uint8_t* buffer,
     
     while (read_index < size)
     {
-        if(buffer[read_index] == END)
+        if (buffer[read_index] == END)
         {
             // flush or done
             read_index++;
         }
-        else if(buffer[read_index] == ESC)
+        else if (buffer[read_index] == ESC)
         {
-            if(buffer[read_index+1] == ESC_END)
+            if (buffer[read_index+1] == ESC_END)
             {
                 decoded[write_index++] = END;
                 read_index += 2;
             }
-            else if(buffer[read_index+1] == ESC_ESC)
+            else if (buffer[read_index+1] == ESC_ESC)
             {
                 decoded[write_index++] = ESC;
                 read_index += 2;
