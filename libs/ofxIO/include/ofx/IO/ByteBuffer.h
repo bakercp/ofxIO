@@ -55,6 +55,11 @@ public:
     /// \brief Construct a ByteBuffer from a byte array.
     /// \param buffer is an array of bytes.
     /// \param size is the number of bytes in the buffer.
+    explicit ByteBuffer(const char* buffer, std::size_t size);
+
+    /// \brief Construct a ByteBuffer from a byte array.
+    /// \param buffer is an array of bytes.
+    /// \param size is the number of bytes in the buffer.
     explicit ByteBuffer(const uint8_t* buffer, std::size_t size);
 
     /// \brief Construct a ByteBuffer from a byte vector.
@@ -156,6 +161,10 @@ public:
     /// \brief get the ByteBuffer as a std::string.
     /// \returns the std::string representation of the ByteBuffer.
     std::string toString() const;
+
+    /// \brief get the ByteBuffer as a std::string.
+    /// \returns the std::string representation of the ByteBuffer.
+    std::string getText() const;
 
     /// \brief Write the buffer to an output stream.
     /// \param ostr The std::ostream to write to.

@@ -49,6 +49,12 @@ ByteBuffer::ByteBuffer(uint8_t data)
 }
 
 
+ByteBuffer::ByteBuffer(const char* buffer, std::size_t size)
+{
+    writeBytes(reinterpret_cast<const uint8_t*>(buffer), size);
+}
+
+
 ByteBuffer::ByteBuffer(const uint8_t* buffer, std::size_t size)
 {
     writeBytes(buffer, size);
@@ -252,13 +258,19 @@ char* ByteBuffer::getCharPtr()
     }
 }
 
+
 std::string ByteBuffer::toString() const
 {
-    std::stringstream ss;
-    ss << (*this);
-    return ss.str();
+    return getText();
 }
 
+
+std::string ByteBuffer::getText() const
+{
+    std::string s;
+    readBytes(s);
+    return s;
+}
 
 
 } }  // namespace ofx::IO
