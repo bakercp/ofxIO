@@ -123,6 +123,27 @@ std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
 }
 
 
+std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
+                                    ByteBuffer& uncompressedBuffer,
+                                    int windowBits)
+{
+    try
+    {
+        uncompressedBuffer.clear();
+        uncompressedBuffer.reserve(compressedBuffer.size() * 4);
+        ByteBufferInputStream istr(compressedBuffer);
+        Poco::InflatingInputStream inflater(istr, windowBits);
+        inflater >> uncompressedBuffer;
+        return uncompressedBuffer.size();
+    }
+    catch (const Poco::Exception& exc)
+    {
+        ofLogError("Compression::uncompress") << exc.displayText();
+        return 0;
+    }
+}
+
+
 std::size_t Compression::compress(const ByteBuffer& uncompressedBuffer,
                                   ByteBuffer& compressedBuffer,
                                   Type type)
@@ -232,27 +253,6 @@ std::size_t Compression::compress(const ByteBuffer& uncompressedBuffer,
 }
 
 
-std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
-                                    ByteBuffer& uncompressedBuffer,
-                                    int windowBits)
-{
-    try
-    {
-        uncompressedBuffer.clear();
-        uncompressedBuffer.reserve(compressedBuffer.size() * 4);
-        ByteBufferInputStream istr(compressedBuffer);
-        Poco::InflatingInputStream inflater(istr, windowBits);
-        inflater >> uncompressedBuffer;
-        return uncompressedBuffer.size();
-    }
-    catch (const Poco::Exception& exc)
-    {
-        ofLogError("Compression::uncompress") << exc.displayText();
-        return 0;
-    }
-}
-
-
 std::string Compression::version(Type type)
 {
     switch (type)
@@ -261,8 +261,7 @@ std::string Compression::version(Type type)
         case GZIP:
         {
             std::stringstream ss;
-            ss << "POCO_";
-            ss << POCO_VERSION;
+            ss << ZLIB_VERSION;
             return ss.str();
         }
         case SNAPPY:
