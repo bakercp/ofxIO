@@ -1,6 +1,6 @@
 // =============================================================================
 //
-// Copyright (c) 2010-2014 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2010-2016 Christopher Baker <http://christopherbaker.net>
 //
 // Portions:
 //  Copyright (c) 2011, Jacques Fortier. All rights reserved.
@@ -28,7 +28,8 @@
 
 
 #include <stdint.h>
-#include "ByteBuffer.h"
+#include "ofx/IO/AbstractTypes.h"
+#include "ofx/IO/ByteBuffer.h"
 
 
 namespace ofx {

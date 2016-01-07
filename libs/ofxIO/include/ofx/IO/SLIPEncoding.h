@@ -1,6 +1,7 @@
 // =============================================================================
 //
 // Copyright (c) 2015 Jean-Pierre Mouilleseaux <jpm@chordedconstructions.com>
+// Copyright (c) 2016 Christopher Baker <http://christopherbaker.net>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,11 +25,13 @@
 
 
 #include <stdint.h>
-#include "ByteBuffer.h"
+#include "ofx/IO/AbstractTypes.h"
+#include "ofx/IO/ByteBuffer.h"
 
 
 namespace ofx {
 namespace IO {
+
 
 /// \brief A Serial Line IP (SLIP) Encoder.
 ///
@@ -76,11 +79,14 @@ public:
                               std::size_t size,
                               uint8_t* decodedBuffer);
 
-private:
-    static const uint8_t END;
-    static const uint8_t ESC;
-    static const uint8_t ESC_END;
-    static const uint8_t ESC_ESC;
+    /// \brief A collection of key values for SLIP encoding.
+    enum
+    {
+        END = 0300,
+        ESC = 0333,
+        ESC_END = 0334,
+        ESC_ESC = 0335
+    };
 
 };
 

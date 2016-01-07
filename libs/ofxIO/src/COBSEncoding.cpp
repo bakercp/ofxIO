@@ -1,6 +1,6 @@
 // =============================================================================
 //
-// Copyright (c) 2013 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2010-2016 Christopher Baker <http://christopherbaker.net>
 //
 // Portions:
 //  Copyright (c) 2011, Jacques Fortier. All rights reserved.
@@ -28,7 +28,6 @@
 
 
 #include "ofx/IO/COBSEncoding.h"
-#include "Poco/Buffer.h"
 
 
 namespace ofx {
@@ -48,32 +47,39 @@ COBSEncoding::~COBSEncoding()
 std::size_t COBSEncoding::encode(const ByteBuffer& buffer,
                                  ByteBuffer& encodedBuffer)
 {
-    std::vector<uint8_t> bytes = buffer.readBytes();
-
-    const std::size_t encodedMax = bytes.size() + (bytes.size() / 254) + 1;
-
-    Poco::Buffer<uint8_t> encoded(encodedMax);
-
-    std::size_t size = encode(&bytes[0], bytes.size(), encoded.begin());
-
-    encodedBuffer.writeBytes(encoded.begin(), size);
-
-    return encodedBuffer.size();
+    if (buffer.size() > 0)
+    {
+        const std::size_t encodedMax = buffer.size() + (buffer.size() / 254) + 1;
+        encodedBuffer.resize(encodedMax);
+        std::size_t size = encode(buffer.getPtr(),
+                                  buffer.size(),
+                                  encodedBuffer.getPtr());
+        encodedBuffer.resize(size);
+        return encodedBuffer.size();
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 
 std::size_t COBSEncoding::decode(const ByteBuffer& buffer,
                                  ByteBuffer& decodedBuffer)
 {
-    std::vector<uint8_t> bytes = buffer.readBytes();
-
-    Poco::Buffer<uint8_t> decoded(bytes.size());
-
-    std::size_t size = decode(&bytes[0], bytes.size(), decoded.begin());
-
-    decodedBuffer.writeBytes(decoded.begin(), size);
-
-    return decodedBuffer.size();
+    if (buffer.size() > 0)
+    {
+        decodedBuffer.resize(buffer.size());
+        std::size_t size = decode(buffer.getPtr(),
+                                  buffer.size(),
+                                  decodedBuffer.getPtr());
+        decodedBuffer.resize(size);
+        return decodedBuffer.size();
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 
@@ -81,6 +87,9 @@ std::size_t COBSEncoding::encode(const uint8_t* buffer,
                                  std::size_t size,
                                  uint8_t* encoded)
 {
+    if (size == 0)
+        return 0;
+
     std::size_t read_index  = 0;
     std::size_t write_index = 1;
     std::size_t code_index  = 0;
@@ -118,6 +127,9 @@ std::size_t COBSEncoding::decode(const uint8_t* buffer,
                                  std::size_t size,
                                  uint8_t* decoded)
 {
+    if (size == 0)
+        return 0;
+
     size_t read_index  = 0;
     size_t write_index = 0;
     uint8_t code;

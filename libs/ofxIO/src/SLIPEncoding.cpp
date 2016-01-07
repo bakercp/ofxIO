@@ -1,6 +1,7 @@
 // =============================================================================
 //
 // Copyright (c) 2015 Jean-Pierre Mouilleseaux <jpm@chordedconstructions.com>
+// Copyright (c) 2016 Christopher Baker <http://christopherbaker.net>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,17 +25,10 @@
 
 
 #include "ofx/IO/SLIPEncoding.h"
-#include "Poco/Buffer.h"
 
 
 namespace ofx {
 namespace IO {
-
-
-const uint8_t SLIPEncoding::END = 0300;
-const uint8_t SLIPEncoding::ESC = 0333;
-const uint8_t SLIPEncoding::ESC_END = 0334;
-const uint8_t SLIPEncoding::ESC_ESC = 0335;
 
 
 SLIPEncoding::SLIPEncoding()
@@ -50,32 +44,39 @@ SLIPEncoding::~SLIPEncoding()
 std::size_t SLIPEncoding::encode(const ByteBuffer& buffer,
                                  ByteBuffer& encodedBuffer)
 {
-    std::vector<uint8_t> bytes = buffer.readBytes();
-
-    const std::size_t encodedMax = 2 * bytes.size() + 2;
-
-    Poco::Buffer<uint8_t> encoded(encodedMax);
-
-    std::size_t size = encode(&bytes[0], bytes.size(), encoded.begin());
-
-    encodedBuffer.writeBytes(encoded.begin(), size);
-
-    return encodedBuffer.size();
+    if (buffer.size() > 0)
+    {
+        const std::size_t encodedMax = 2 * buffer.size() + 2;
+        encodedBuffer.resize(encodedMax);
+        std::size_t size = encode(buffer.getPtr(),
+                                  buffer.size(),
+                                  encodedBuffer.getPtr());
+        encodedBuffer.resize(size);
+        return encodedBuffer.size();
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 
 std::size_t SLIPEncoding::decode(const ByteBuffer& buffer,
                                  ByteBuffer& decodedBuffer)
 {
-    std::vector<uint8_t> bytes = buffer.readBytes();
-
-    Poco::Buffer<uint8_t> decoded(bytes.size() - 1);
-
-    std::size_t size = decode(&bytes[0], bytes.size(), decoded.begin());
-
-    decodedBuffer.writeBytes(decoded.begin(), size);
-
-    return decodedBuffer.size();
+    if (buffer.size() > 0)
+    {
+        decodedBuffer.resize(buffer.size());
+        std::size_t size = decode(buffer.getPtr(),
+                                  buffer.size(),
+                                  decodedBuffer.getPtr());
+        decodedBuffer.resize(size);
+        return decodedBuffer.size();
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 
@@ -83,6 +84,9 @@ std::size_t SLIPEncoding::encode(const uint8_t* buffer,
                                  std::size_t size,
                                  uint8_t* encoded)
 {
+    if (size == 0)
+        return 0;
+
     std::size_t read_index  = 0;
     std::size_t write_index = 0;
 
@@ -118,6 +122,9 @@ std::size_t SLIPEncoding::decode(const uint8_t* buffer,
                                  std::size_t size,
                                  uint8_t* decoded)
 {
+    if (size == 0)
+        return 0;
+
     std::size_t read_index  = 0;
     std::size_t write_index = 0;
     
