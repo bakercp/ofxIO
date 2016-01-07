@@ -24,6 +24,7 @@
 
 
 #include "ofx/IO/ByteBufferReader.h"
+#include <cstring>
 #include <string.h>
 
 

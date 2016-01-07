@@ -120,6 +120,8 @@ std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
             }
         }
     }
+
+    return 0;
 }
 
 
@@ -182,6 +184,8 @@ std::size_t Compression::compress(const ByteBuffer& uncompressedBuffer,
             return size;
         }
     }
+
+    return 0;
 }
 
 
@@ -235,14 +239,10 @@ std::size_t Compression::compress(const ByteBuffer& uncompressedBuffer,
     {
         compressedBuffer.clear();
         compressedBuffer.reserve(uncompressedBuffer.size());
-
         ByteBufferOutputStream ostr(compressedBuffer);
-
         Poco::DeflatingOutputStream deflater(ostr, windowBits, level);
-
         deflater << uncompressedBuffer;
         deflater.close();
-
         return compressedBuffer.size();
     }
     catch (const Poco::Exception& exc)
@@ -277,6 +277,8 @@ std::string Compression::version(Type type)
             return ss.str();
         }
     }
+
+    return "UNKNOWN";
 }
 
 std::string Compression::toString(Type type)
@@ -292,6 +294,8 @@ std::string Compression::toString(Type type)
         case LZ4:
             return "LZ4";
     }
+
+    return "UNKNOWN";
 }
 
 
