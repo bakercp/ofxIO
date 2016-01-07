@@ -174,29 +174,30 @@ public:
 
     /// \brief Register a class to receive notifications for all events.
     /// \param listener a pointer to the listener class.
-    /// \param order the event order.
+    /// \param priority the listener priority.
     template<class ListenerClass>
-    void registerAllEvents(ListenerClass* listener, int order = OF_EVENT_ORDER_AFTER_APP)
+    void registerAllEvents(ListenerClass* listener, int priority = OF_EVENT_ORDER_AFTER_APP)
     {
-        ofAddListener(events.onItemAdded, listener, &ListenerClass::onDirectoryWatcherItemAdded, order);
-        ofAddListener(events.onItemRemoved, listener, &ListenerClass::onDirectoryWatcherItemRemoved, order);
-        ofAddListener(events.onItemModified, listener, &ListenerClass::onDirectoryWatcherItemModified, order);
-        ofAddListener(events.onItemMovedFrom, listener, &ListenerClass::onDirectoryWatcherItemMovedFrom, order);
-        ofAddListener(events.onItemMovedTo, listener, &ListenerClass::onDirectoryWatcherItemMovedTo, order);
-        ofAddListener(events.onScanError,listener, &ListenerClass::onDirectoryWatcherError, order);
+        ofAddListener(events.onItemAdded, listener, &ListenerClass::onDirectoryWatcherItemAdded, priority);
+        ofAddListener(events.onItemRemoved, listener, &ListenerClass::onDirectoryWatcherItemRemoved, priority);
+        ofAddListener(events.onItemModified, listener, &ListenerClass::onDirectoryWatcherItemModified, priority);
+        ofAddListener(events.onItemMovedFrom, listener, &ListenerClass::onDirectoryWatcherItemMovedFrom, priority);
+        ofAddListener(events.onItemMovedTo, listener, &ListenerClass::onDirectoryWatcherItemMovedTo, priority);
+        ofAddListener(events.onScanError,listener, &ListenerClass::onDirectoryWatcherError, priority);
     }
 
     /// \brief Unregister a class to receive notifications for all events.
     /// \param listener a pointer to the listener class.
+    /// \param priority the listener priority.
     template<class ListenerClass>
-    void unregisterAllEvents(ListenerClass* listener)
+    void unregisterAllEvents(ListenerClass* listener, int priority = OF_EVENT_ORDER_AFTER_APP)
     {
-        ofRemoveListener(events.onItemAdded, listener, &ListenerClass::onDirectoryWatcherItemAdded);
-        ofRemoveListener(events.onItemRemoved, listener, &ListenerClass::onDirectoryWatcherItemRemoved);
-        ofRemoveListener(events.onItemModified, listener, &ListenerClass::onDirectoryWatcherItemModified);
-        ofRemoveListener(events.onItemMovedFrom, listener, &ListenerClass::onDirectoryWatcherItemMovedFrom);
-        ofRemoveListener(events.onItemMovedTo, listener, &ListenerClass::onDirectoryWatcherItemMovedTo);
-        ofRemoveListener(events.onScanError, listener, &ListenerClass::onDirectoryWatcherError);
+        ofRemoveListener(events.onItemAdded, listener, &ListenerClass::onDirectoryWatcherItemAdded, priority);
+        ofRemoveListener(events.onItemRemoved, listener, &ListenerClass::onDirectoryWatcherItemRemoved, priority);
+        ofRemoveListener(events.onItemModified, listener, &ListenerClass::onDirectoryWatcherItemModified, priority);
+        ofRemoveListener(events.onItemMovedFrom, listener, &ListenerClass::onDirectoryWatcherItemMovedFrom, priority);
+        ofRemoveListener(events.onItemMovedTo, listener, &ListenerClass::onDirectoryWatcherItemMovedTo, priority);
+        ofRemoveListener(events.onScanError, listener, &ListenerClass::onDirectoryWatcherError, priority);
     }
 
 protected:
