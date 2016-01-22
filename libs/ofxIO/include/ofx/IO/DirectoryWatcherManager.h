@@ -175,7 +175,7 @@ public:
     /// \brief Register a class to receive notifications for all events.
     /// \param listener a pointer to the listener class.
     /// \param priority the listener priority.
-    template<class ListenerClass>
+    template <class ListenerClass>
     void registerAllEvents(ListenerClass* listener, int priority = OF_EVENT_ORDER_AFTER_APP)
     {
         ofAddListener(events.onItemAdded, listener, &ListenerClass::onDirectoryWatcherItemAdded, priority);
@@ -189,7 +189,7 @@ public:
     /// \brief Unregister a class to receive notifications for all events.
     /// \param listener a pointer to the listener class.
     /// \param priority the listener priority.
-    template<class ListenerClass>
+    template <class ListenerClass>
     void unregisterAllEvents(ListenerClass* listener, int priority = OF_EVENT_ORDER_AFTER_APP)
     {
         ofRemoveListener(events.onItemAdded, listener, &ListenerClass::onDirectoryWatcherItemAdded, priority);
