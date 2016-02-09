@@ -240,7 +240,7 @@ protected:
 
 		Poco::KeyValueArgs<TKey, TValue> args(key, val);
 		Add.notify(this, args);
-		_data.insert(std::make_pair(key, std::shared_ptr<TValue>(new TValue(val))));
+		_data.insert(std::make_pair(key, std::make_shared<TValue>(val));
 		
 		doReplace();
 	}
@@ -268,12 +268,12 @@ protected:
 		if (it == _data.end())
 		{
 			Add.notify(this, args);
-			_data.insert(std::make_pair(key, std::shared_ptr<TValue>(new TValue(val))));
+			_data.insert(std::make_pair(key, std::make_shared<TValue>(val)));
 		}
 		else
 		{
 			Update.notify(this, args);
-			it->second = std::shared_ptr<TValue>(new TValue(val));
+			it->second = std::make_shared<TValue>(val);
 		}
 		
 		doReplace();
