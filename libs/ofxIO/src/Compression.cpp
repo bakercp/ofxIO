@@ -49,13 +49,13 @@ std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
         {
             Poco::InflatingStreamBuf::StreamType streamType;
 
-            if (type == ZLIB)
-            {
-                streamType = Poco::InflatingStreamBuf::StreamType::STREAM_ZLIB;
-            }
-            else if (type == GZIP)
+            if (type == GZIP)
             {
                 streamType = Poco::InflatingStreamBuf::StreamType::STREAM_GZIP;
+            }
+            else
+            {
+                streamType = Poco::InflatingStreamBuf::StreamType::STREAM_ZLIB;
             }
 
             try
