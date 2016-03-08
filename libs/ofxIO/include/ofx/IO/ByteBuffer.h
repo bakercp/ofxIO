@@ -194,6 +194,18 @@ public:
 
     /// \returns a const reverse end iterator to the buffer.
     std::vector<uint8_t>::const_reverse_iterator rend() const;
+
+    /// \brief Remove all instances of the given byte.
+    /// \param data The byte to remove.
+    /// \returns the number of bytes replaced.
+    void remove(uint8_t data);
+
+    /// \brief Replace all instances of the given byte \data with \replacement.
+    /// \param data The byte to replace.
+    /// \param replacement The byte to use during replacement.
+    /// \returns the number of bytes replaced.
+    void replace(uint8_t data, uint8_t replacement);
+
     /// \brief Write the buffer to an output stream.
     /// \param ostr The std::ostream to write to.
     /// \param byteBuffer the ByteBuffer to write.

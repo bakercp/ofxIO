@@ -330,4 +330,21 @@ std::vector<uint8_t>::const_reverse_iterator ByteBuffer::rend() const
 {
     return _buffer.rend();
 }
+
+
+void ByteBuffer::remove(uint8_t data)
+{
+    _buffer.erase(std::remove(_buffer.begin(),
+                              _buffer.end(),
+                              data),
+                  _buffer.end());
+}
+
+
+void ByteBuffer::replace(uint8_t data, uint8_t replacement)
+{
+    std::replace(_buffer.begin(), _buffer.end(), data, replacement);
+}
+
+
 } }  // namespace ofx::IO
