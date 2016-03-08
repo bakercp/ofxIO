@@ -284,4 +284,50 @@ std::string ByteBuffer::getText() const
 }
 
 
+std::vector<uint8_t>::iterator ByteBuffer::begin()
+{
+    return _buffer.begin();
+}
+
+
+std::vector<uint8_t>::const_iterator ByteBuffer::begin() const
+{
+    return _buffer.begin();
+}
+
+
+std::vector<uint8_t>::iterator ByteBuffer::end()
+{
+    return _buffer.end();
+}
+
+
+std::vector<uint8_t>::const_iterator ByteBuffer::end() const
+{
+    return _buffer.end();
+}
+
+
+std::vector<uint8_t>::reverse_iterator ByteBuffer::rbegin()
+{
+    return _buffer.rbegin();
+}
+
+
+std::vector<uint8_t>::const_reverse_iterator ByteBuffer::rbegin() const
+{
+    return _buffer.rbegin();
+}
+
+
+std::vector<uint8_t>::reverse_iterator ByteBuffer::rend()
+{
+    return _buffer.rend();
+}
+
+
+std::vector<uint8_t>::const_reverse_iterator ByteBuffer::rend() const
+{
+    return _buffer.rend();
+}
 } }  // namespace ofx::IO

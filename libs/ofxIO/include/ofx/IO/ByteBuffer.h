@@ -171,6 +171,29 @@ public:
     /// \returns the std::string representation of the ByteBuffer.
     std::string getText() const;
 
+    /// \returns an iterator to the buffer.
+    std::vector<uint8_t>::iterator begin();
+
+    /// \returns a const iterator to the buffer.
+    std::vector<uint8_t>::const_iterator begin() const;
+
+    /// \returns an end iterator to the buffer.
+    std::vector<uint8_t>::iterator end();
+
+    /// \returns a const end iterator to the buffer.
+    std::vector<uint8_t>::const_iterator end() const;
+
+    /// \returns a reverse iterator to the buffer.
+    std::vector<uint8_t>::reverse_iterator rbegin();
+
+    /// \returns a const reverse iterator to the buffer.
+    std::vector<uint8_t>::const_reverse_iterator rbegin() const;
+
+    /// \returns a reverse end iterator to the buffer.
+    std::vector<uint8_t>::reverse_iterator rend();
+
+    /// \returns a const reverse end iterator to the buffer.
+    std::vector<uint8_t>::const_reverse_iterator rend() const;
     /// \brief Write the buffer to an output stream.
     /// \param ostr The std::ostream to write to.
     /// \param byteBuffer the ByteBuffer to write.
