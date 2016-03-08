@@ -60,3 +60,4 @@
 #include "ofx/IO/PathFilterCollection.h"
 #include "ofx/IO/RegexPathFilter.h"
 #include "ofx/IO/SearchPath.h"
+#include "ofx/IO/URIEncoding.h"
