@@ -26,7 +26,7 @@
 #pragma once
 
 
-#include <set>
+#include <unordered_set>
 #include "Poco/Path.h"
 #include "Poco/String.h"
 #include "Poco/UTF8String.h"
@@ -87,7 +87,7 @@ private:
     bool _acceptMatches;
 
     /// \brief The list of file extensions to match.
-    std::set<std::string> _extensions;
+    std::unordered_set<std::string> _extensions;
 
 };
 

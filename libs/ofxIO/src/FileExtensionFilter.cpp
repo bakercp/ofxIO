@@ -56,7 +56,7 @@ bool FileExtensionFilter::accept(const Poco::Path& path) const
 {
     std::string extension = path.getExtension();
 
-    std::set<std::string>::iterator iter = _extensions.begin();
+    auto iter = _extensions.begin();
 
     while (iter != _extensions.end())
     {
