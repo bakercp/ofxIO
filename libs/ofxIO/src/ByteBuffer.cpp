@@ -88,7 +88,7 @@ std::size_t ByteBuffer::readBytes(uint8_t* buffer, std::size_t size) const
 
 std::size_t ByteBuffer::readBytes(std::vector<uint8_t>& buffer) const
 {
-    buffer.resize(_buffer.size());
+    buffer.clear();
     buffer.insert(buffer.begin(), _buffer.begin(), _buffer.end());
     return buffer.size();
 }
@@ -96,7 +96,7 @@ std::size_t ByteBuffer::readBytes(std::vector<uint8_t>& buffer) const
 
 std::size_t ByteBuffer::readBytes(std::string& buffer) const
 {
-    buffer.resize(_buffer.size());
+    buffer.clear();
     buffer.insert(buffer.begin(), _buffer.begin(), _buffer.end());
     return buffer.size();
 }
