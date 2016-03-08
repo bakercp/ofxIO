@@ -48,6 +48,11 @@ public:
     /// \brief Construct an empty ByteBuffer.
     ByteBuffer();
 
+    /// \brief Construct a ByteBuffer a repeated byte.
+    /// \param n The number of times to repeat the byte.
+    /// \param data The a single byte to repeat.
+    explicit ByteBuffer(std::size_t n, uint8_t data);
+
     /// \brief Construct a ByteBuffer with a single byte.
     /// \param data is a single inital byte.
     explicit ByteBuffer(uint8_t data);

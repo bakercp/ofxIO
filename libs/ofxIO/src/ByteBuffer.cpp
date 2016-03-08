@@ -43,6 +43,17 @@ ByteBuffer::ByteBuffer()
 }
 
 
+ByteBuffer::ByteBuffer(std::size_t n, uint8_t data)
+{
+    reserve(n);
+    
+    for (std::size_t i = 0; i < n; ++i)
+    {
+        writeByte(data);
+    }
+}
+
+
 ByteBuffer::ByteBuffer(uint8_t data)
 {
     writeByte(data);
