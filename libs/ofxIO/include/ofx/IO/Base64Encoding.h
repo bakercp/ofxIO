@@ -36,7 +36,12 @@ class Base64Encoding: public AbstractByteEncoderDecoder
 {
 public:
     /// \brief Create a Base64 Encoding.
-    Base64Encoding();
+    /// \param urlSafe Use URL safe en/de coding. Replace `+` with `-` and `/` with `_`.
+    /// \param isChunked When encoding, output line breaks.
+    /// \param paddedOutput When encoding, pad the output with = to align to byte boundaries.
+    Base64Encoding(bool urlSafe = false,
+                   bool isChunked = false,
+                   bool paddedOutput = false);
 
     /// \brief Destroy the Base64 Encoding.
     virtual ~Base64Encoding();
@@ -46,6 +51,47 @@ public:
 
     std::size_t decode(const ByteBuffer& buffer,
                        ByteBuffer& decodedBuffer) override;
+
+    /// \brief A base64 encoder for strings.
+    /// \param buffer The UTF8 encoded string to encoded.
+    /// \param isUrlSafe Make URL safe by replacing `+` with `-` and `/` with `_`.
+    /// \param isChunked Will wrap encoded output by adding line breaks.
+    /// \param isPadded Pad the output with = to align to byte boundaries.
+    /// \returns a base64 encoded UTF-8 std::string.
+    static std::string encode(const std::string& buffer,
+                              bool isUrlSafe = false,
+                              bool isChunked = false,
+                              bool isPadded = false);
+
+    /// \brief A base64 decoder for strings.
+    ///
+    /// Will pad with `=` if needed and remove chunking.
+    ///
+    /// \param buffer The string to decoded.
+    /// \param isUrlSafe Decode URL safe by replacing `-` with `+` and `_` with `/`.
+    /// \returns a base64 decoded UTF-8 std::string.
+    static std::string decode(const std::string& buffer,
+                              bool isUrlSafe = false);
+
+
+    /// \returns true if the en/decoding is URL safe.
+    bool isUrlSafe() const;
+
+    /// \returns true if the output is chunked.
+    bool isChunked() const;
+
+    /// \returns true if the output is padded with = to align to byte boundaries.
+    bool isPadded() const;
+
+private:
+    /// \brief Use URL safe en/decoding. Replace `+` with `-` and `/` with `_`.
+    bool _isUrlSafe = false;
+
+    /// \brief When encoding, output line breaks.
+    bool _isChunked = false;
+
+    /// \brief When encoding, pad the output with = to align to byte boundaries.
+    bool _isPadded = false;
 
 };
 
