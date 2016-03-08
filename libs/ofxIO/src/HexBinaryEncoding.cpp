@@ -28,6 +28,7 @@
 #include "Poco/HexBinaryEncoder.h"
 #include "Poco/HexBinaryDecoder.h"
 #include "ofx/IO/ByteBuffer.h"
+#include "ofx/IO/ByteBufferStream.h"
 
 
 namespace ofx {
@@ -47,26 +48,21 @@ HexBinaryEncoding::~HexBinaryEncoding()
 std::size_t HexBinaryEncoding::encode(const ByteBuffer& buffer,
                                       ByteBuffer& encodedBuffer)
 {
-    std::stringstream ss;
-    Poco::HexBinaryEncoder _encoder(ss);
-    ByteBuffer byteBuffer(buffer.readBytes());
-    ByteBufferUtils::copyBufferToStream(byteBuffer, _encoder);
+    encodedBuffer.clear();
+    ByteBufferOutputStream os(encodedBuffer);
+    Poco::HexBinaryEncoder _encoder(os);
+    ByteBufferUtils::copyBufferToStream(buffer, _encoder);
     _encoder.close(); // Flush bytes.
-    encodedBuffer.writeBytes(ss.str());
     return encodedBuffer.size();
 }
 
 std::size_t HexBinaryEncoding::decode(const ByteBuffer& buffer,
                                       ByteBuffer& decodedBuffer)
 {
-    ByteBuffer byteBuffer(buffer.readBytes());
-    std::stringstream ss;
-    ss << byteBuffer;
-    Poco::HexBinaryDecoder _decoder(ss);
-    ByteBuffer decoded;
-    ByteBufferUtils::copyStreamToBuffer(_decoder, decoded);
-    decodedBuffer.writeBytes(decoded);
-    return decodedBuffer.size();
+    decodedBuffer.clear();
+    ByteBufferInputStream is(buffer);
+    Poco::HexBinaryDecoder _decoder(is);
+    return ByteBufferUtils::copyStreamToBuffer(_decoder, decodedBuffer);
 }
 
 
