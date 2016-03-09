@@ -61,3 +61,5 @@
 #include "ofx/IO/RegexPathFilter.h"
 #include "ofx/IO/SearchPath.h"
 #include "ofx/IO/URIEncoding.h"
+
+namespace ofxIO = ofx::IO;
