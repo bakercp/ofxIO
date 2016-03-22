@@ -191,6 +191,15 @@ public:
                               AbstractPathFilter* pFilter = nullptr,
                               Poco::UInt16 maxDepth = INIFINITE_DEPTH,
                               TraversalOrder traversalOrder = CHILDREN_FIRST);
+
+    /// \brief Make \p path relative to \p base.
+    /// \param path The path to make relative.
+    /// \param base The reference base path used to make \p path relative.
+    /// \returns A \p path made relative to \p base.
+    /// \note This functionality comes with boost::filesystem::relative > 1.6.
+    static std::string makeRelativeTo(const std::string& path,
+                                      const std::string& base);
+
 };
 
 
