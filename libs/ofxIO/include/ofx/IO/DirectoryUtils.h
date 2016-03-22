@@ -77,12 +77,15 @@ public:
     ///        recursive searches.
     /// \param traversalOrder determines the order of traversal during
     ///        recursive searches.
+    /// \param makeRelativeToPath True if the output files should be relative to
+    ///        \p directory.
     static void list(const AbstractSearchPath& path,
                      std::vector<Poco::Path>& paths,
                      bool sortAlphaNumeric = false,
                      AbstractPathFilter* pFilter = nullptr,
                      Poco::UInt16 maxDepth = INIFINITE_DEPTH,
-                     TraversalOrder traversalOrder = CHILDREN_FIRST);
+                     TraversalOrder traversalOrder = CHILDREN_FIRST,
+                     bool makeRelativeToPath = false);
 
     /// \brief List the contents of a directory.
     /// \param directory is the path of the directory to list.
@@ -94,10 +97,13 @@ public:
     ///        numbers in numeric order.
     /// \param pFilter will allow only certain paths to be included
     ///        in the results.
+    /// \param makeRelativeToDirectory True if the output files should be relative to
+    ///        \p directory.
     static void list(const Poco::File& directory,
                      std::vector<Poco::File>& files,
                      bool sortAlphaNumeric = false,
-                     AbstractPathFilter* pFilter = nullptr);
+                     AbstractPathFilter* pFilter = nullptr,
+                     bool makeRelativeToDirectory = false);
 
     /// \brief List the contents of a directory.
     /// \param directory is the path of the directory to list.
@@ -109,10 +115,13 @@ public:
     ///        numbers in numeric order.
     /// \param pFilter will allow only certain paths to be included
     ///        in the results.
+    /// \param makeRelativeToDirectory True if the output files should be relative to
+    ///        \p directory.
     static void list(const ofFile& directory,
                      std::vector<ofFile>& files,
                      bool sortAlphaNumeric = false,
-                     AbstractPathFilter* pFilter = nullptr);
+                     AbstractPathFilter* pFilter = nullptr,
+                     bool makeRelativeToDirectory = false);
 
     /// \brief List the contents of a path.
     /// \param directory is the path of the directory to list.
@@ -124,10 +133,13 @@ public:
     ///        numbers in numeric order.
     /// \param pFilter will allow only certain paths to be included
     ///        in the results.
+    /// \param makeRelativeToDirectory True if the output files should be relative to
+    ///        \p directory.
     static void list(const std::string& directory,
                      std::vector<std::string>& files,
                      bool sortAlphaNumeric = false,
-                     AbstractPathFilter* pFilter = nullptr);
+                     AbstractPathFilter* pFilter = nullptr,
+                     bool makeRelativeToDirectory = false);
 
     /// \brief Recursively list the contents of a path.
     /// \param directory is the path of the directory to list.
@@ -143,12 +155,15 @@ public:
     ///        recursive searches.
     /// \param traversalOrder determines the order of traversal during
     ///        recursive searches.
+    /// \param makeRelativeToDirectory True if the output files should be relative to
+    ///        \p directory.
     static void listRecursive(const Poco::File& directory,
                               std::vector<Poco::File>& files,
                               bool sortAlphaNumeric = false,
                               AbstractPathFilter* pFilter = nullptr,
                               Poco::UInt16 maxDepth = INIFINITE_DEPTH,
-                              TraversalOrder traversalOrder = CHILDREN_FIRST);
+                              TraversalOrder traversalOrder = CHILDREN_FIRST,
+                              bool makeRelativeToDirectory = false);
 
     /// \brief Recursively list the contents of a path.
     /// \param directory is the path of the directory to list.
@@ -164,12 +179,15 @@ public:
     ///        recursive searches.
     /// \param traversalOrder determines the order of traversal during
     ///        recursive searches.
+    /// \param makeRelativeToDirectory True if the output files should be relative to
+    ///        \p directory.
     static void listRecursive(const ofFile& directory,
                               std::vector<ofFile>& files,
                               bool sortAlphaNumeric = false,
                               AbstractPathFilter* pFilter = nullptr,
                               Poco::UInt16 maxDepth = INIFINITE_DEPTH,
-                              TraversalOrder traversalOrder = CHILDREN_FIRST);
+                              TraversalOrder traversalOrder = CHILDREN_FIRST,
+                              bool makeRelativeToDirectory = false);
 
     /// \brief Recursively list the contents of a path.
     /// \param directory is the path of the directory to list.
@@ -185,12 +203,15 @@ public:
     ///        recursive searches.
     /// \param traversalOrder determines the order of traversal during
     ///        recursive searches.
+    /// \param makeRelativeToDirectory True if the output files should be relative to
+    ///        \p directory.
     static void listRecursive(const std::string& directory,
                               std::vector<std::string>& files,
                               bool sortAlphaNumeric = false,
                               AbstractPathFilter* pFilter = nullptr,
                               Poco::UInt16 maxDepth = INIFINITE_DEPTH,
-                              TraversalOrder traversalOrder = CHILDREN_FIRST);
+                              TraversalOrder traversalOrder = CHILDREN_FIRST,
+                              bool makeRelativeToDirectory = false);
 
     /// \brief Make \p path relative to \p base.
     /// \param path The path to make relative.
