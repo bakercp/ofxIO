@@ -80,7 +80,7 @@ public:
     static void list(const AbstractSearchPath& path,
                      std::vector<Poco::Path>& paths,
                      bool sortAlphaNumeric = false,
-                     AbstractPathFilter* pFilter = 0,
+                     AbstractPathFilter* pFilter = nullptr,
                      Poco::UInt16 maxDepth = INIFINITE_DEPTH,
                      TraversalOrder traversalOrder = CHILDREN_FIRST);
 
@@ -97,7 +97,7 @@ public:
     static void list(const Poco::File& directory,
                      std::vector<Poco::File>& files,
                      bool sortAlphaNumeric = false,
-                     AbstractPathFilter* pFilter = 0);
+                     AbstractPathFilter* pFilter = nullptr);
 
     /// \brief List the contents of a directory.
     /// \param directory is the path of the directory to list.
@@ -112,7 +112,7 @@ public:
     static void list(const ofFile& directory,
                      std::vector<ofFile>& files,
                      bool sortAlphaNumeric = false,
-                     AbstractPathFilter* pFilter = 0);
+                     AbstractPathFilter* pFilter = nullptr);
 
     /// \brief List the contents of a path.
     /// \param directory is the path of the directory to list.
@@ -127,7 +127,7 @@ public:
     static void list(const std::string& directory,
                      std::vector<std::string>& files,
                      bool sortAlphaNumeric = false,
-                     AbstractPathFilter* pFilter = 0);
+                     AbstractPathFilter* pFilter = nullptr);
 
     /// \brief Recursively list the contents of a path.
     /// \param directory is the path of the directory to list.
@@ -146,7 +146,7 @@ public:
     static void listRecursive(const Poco::File& directory,
                               std::vector<Poco::File>& files,
                               bool sortAlphaNumeric = false,
-                              AbstractPathFilter* pFilter = 0,
+                              AbstractPathFilter* pFilter = nullptr,
                               Poco::UInt16 maxDepth = INIFINITE_DEPTH,
                               TraversalOrder traversalOrder = CHILDREN_FIRST);
 
@@ -167,7 +167,7 @@ public:
     static void listRecursive(const ofFile& directory,
                               std::vector<ofFile>& files,
                               bool sortAlphaNumeric = false,
-                              AbstractPathFilter* pFilter = 0,
+                              AbstractPathFilter* pFilter = nullptr,
                               Poco::UInt16 maxDepth = INIFINITE_DEPTH,
                               TraversalOrder traversalOrder = CHILDREN_FIRST);
 
@@ -188,7 +188,7 @@ public:
     static void listRecursive(const std::string& directory,
                               std::vector<std::string>& files,
                               bool sortAlphaNumeric = false,
-                              AbstractPathFilter* pFilter = 0,
+                              AbstractPathFilter* pFilter = nullptr,
                               Poco::UInt16 maxDepth = INIFINITE_DEPTH,
                               TraversalOrder traversalOrder = CHILDREN_FIRST);
 };

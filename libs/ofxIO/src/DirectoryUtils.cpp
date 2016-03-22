@@ -124,7 +124,7 @@ void DirectoryUtils::list(const std::string& directory,
     {
         files.clear();
 
-        std::string _directory = ofToDataPath(directory,true);
+        std::string _directory = ofToDataPath(directory, true);
 
         ofFile file(_directory);
 
