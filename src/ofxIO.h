@@ -27,6 +27,7 @@
 
 
 #include <deque>
+#include "json.hpp"
 #include "Poco/FileStream.h"
 #include "ofx/DirectoryWatcher.h"
 #include "ofx/RecursiveDirectoryIterator.h"
