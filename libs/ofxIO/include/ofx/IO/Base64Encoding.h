@@ -53,12 +53,23 @@ public:
                        ByteBuffer& decodedBuffer) override;
 
     /// \brief A base64 encoder for strings.
-    /// \param buffer The UTF8 encoded string to encoded.
+    /// \param buffer The UTF8 encoded string to be encoded.
     /// \param isUrlSafe Make URL safe by replacing `+` with `-` and `/` with `_`.
     /// \param isChunked Will wrap encoded output by adding line breaks.
     /// \param isPadded Pad the output with = to align to byte boundaries.
     /// \returns a base64 encoded UTF-8 std::string.
     static std::string encode(const std::string& buffer,
+                              bool isUrlSafe = false,
+                              bool isChunked = false,
+                              bool isPadded = false);
+
+    /// \brief A base64 encoder for byte buffers.
+    /// \param buffer The Byte buffer to be encoded.
+    /// \param isUrlSafe Make URL safe by replacing `+` with `-` and `/` with `_`.
+    /// \param isChunked Will wrap encoded output by adding line breaks.
+    /// \param isPadded Pad the output with = to align to byte boundaries.
+    /// \returns a base64 encoded UTF-8 std::string.
+    static std::string encode(const ByteBuffer& buffer,
                               bool isUrlSafe = false,
                               bool isChunked = false,
                               bool isPadded = false);

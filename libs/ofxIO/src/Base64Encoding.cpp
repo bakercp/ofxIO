@@ -115,12 +115,21 @@ std::string Base64Encoding::encode(const std::string& buffer,
                                    bool isChunked,
                                    bool isPadded)
 {
+    return encode(ByteBuffer(buffer), isUrlSafe, isChunked, isPadded);
+}
+
+
+std::string Base64Encoding::encode(const ByteBuffer& buffer,
+                                   bool isUrlSafe,
+                                   bool isChunked,
+                                   bool isPadded)
+{
     Base64Encoding encoder(isUrlSafe, isChunked, isPadded);
-    ByteBuffer _buffer(buffer);
     ByteBuffer _output;
-    encoder.encode(_buffer, _output);
+    encoder.encode(buffer, _output);
     return _output.getText();
 }
+
 
 
 std::string Base64Encoding::decode(const std::string& buffer, bool isUrlSafe)
