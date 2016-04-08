@@ -36,8 +36,8 @@ public:
     void setup();
     void draw();
 
-    bool test(ofx::IO::AbstractByteEncoderDecoder& encoder);
-    void test(ofx::IO::Compression::Type type,
+    bool test(ofxIO::AbstractByteEncoderDecoder& encoder);
+    void test(ofxIO::Compression::Type type,
               int level = -1,
               int windowBits = -1);
 

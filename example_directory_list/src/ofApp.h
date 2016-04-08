@@ -31,11 +31,8 @@
 #include "ofxIO.h"
 
 
-using namespace ofx::IO;
-
-
 // a custom hidden path filter
-class CustomPathFilter: public AbstractPathFilter
+class CustomPathFilter: public ofxIO::AbstractPathFilter
 {
 public:
     CustomPathFilter()
@@ -67,10 +64,10 @@ public:
     void draw();
 
     void gotMessage(ofMessage msg);
-    
+
     CustomPathFilter pathFilter; // an example path filter
     std::deque<std::string> messages;
 
-    ByteBuffer buffer;
+    ofxIO::ByteBuffer buffer;
 
 };

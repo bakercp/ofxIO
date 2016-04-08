@@ -75,10 +75,10 @@ void ofApp::setup()
 //#endif
 
 
-    test(ofx::IO::Compression::GZIP);
-    test(ofx::IO::Compression::ZLIB);
-    test(ofx::IO::Compression::SNAPPY);
-    test(ofx::IO::Compression::LZ4);
+    test(ofxIO::Compression::GZIP);
+    test(ofxIO::Compression::ZLIB);
+    test(ofxIO::Compression::SNAPPY);
+    test(ofxIO::Compression::LZ4);
 
     // window bits can be range [8, 15] includsive.
     // level must be [1, 8] inclusive.
@@ -87,53 +87,53 @@ void ofApp::setup()
         for (int level = 1; level < 9; ++level)
         {
             std::cout << "level=" << level << " windowBits=" << windowBits << std::endl;
-            test(ofx::IO::Compression::ZLIB, level, windowBits);
+            test(ofxIO::Compression::ZLIB, level, windowBits);
         }
     }
 
 
-    ofx::IO::Base64Encoding base64Encoding;
+    ofxIO::Base64Encoding base64Encoding;
 
     if (test(base64Encoding))
     {
-        ofLogNotice("ofApp::test()") << "ofx::IO::Base64Encoding: SUCCESS";
+        ofLogNotice("ofApp::test()") << "ofxIO::Base64Encoding: SUCCESS";
     }
     else
     {
-        ofLogNotice("ofApp::test()") << "ofx::IO::Base64Encoding: FAILURE";
+        ofLogNotice("ofApp::test()") << "ofxIO::Base64Encoding: FAILURE";
     }
 
-    ofx::IO::HexBinaryEncoding hexBinaryEncoding;
-    
+    ofxIO::HexBinaryEncoding hexBinaryEncoding;
+
     if (test(hexBinaryEncoding))
     {
-        ofLogNotice("ofApp::test()") << "ofx::IO::HexBinaryEncoding: SUCCESS";
+        ofLogNotice("ofApp::test()") << "ofxIO::HexBinaryEncoding: SUCCESS";
     }
     else
     {
-        ofLogNotice("ofApp::test()") << "ofx::IO::HexBinaryEncoding: FAILURE";
+        ofLogNotice("ofApp::test()") << "ofxIO::HexBinaryEncoding: FAILURE";
     }
 
-    ofx::IO::COBSEncoding cobsEncoding;
+    ofxIO::COBSEncoding cobsEncoding;
 
     if (test(cobsEncoding))
     {
-        ofLogNotice("ofApp::test()") << "ofx::IO::COBSEncoding: SUCCESS";
+        ofLogNotice("ofApp::test()") << "ofxIO::COBSEncoding: SUCCESS";
     }
     else
     {
-        ofLogNotice("ofApp::test()") << "ofx::IO::COBSEncoding: FAILURE";
+        ofLogNotice("ofApp::test()") << "ofxIO::COBSEncoding: FAILURE";
     }
 
-    ofx::IO::SLIPEncoding slipEncoding;
+    ofxIO::SLIPEncoding slipEncoding;
 
     if (test(slipEncoding))
     {
-        ofLogNotice("ofApp::test()") << "ofx::IO::SLIPEncoding: SUCCESS";
+        ofLogNotice("ofApp::test()") << "ofxIO::SLIPEncoding: SUCCESS";
     }
     else
     {
-        ofLogNotice("ofApp::test()") << "ofx::IO::SLIPEncoding: FAILURE";
+        ofLogNotice("ofApp::test()") << "ofxIO::SLIPEncoding: FAILURE";
     }
 }
 
@@ -146,11 +146,11 @@ void ofApp::draw()
 }
 
 
-bool ofApp::test(ofx::IO::AbstractByteEncoderDecoder& encoderDecoder)
+bool ofApp::test(ofxIO::AbstractByteEncoderDecoder& encoderDecoder)
 {
-    ofx::IO::ByteBuffer original(LOREM_IPSUM + LOREM_IPSUM);
-    ofx::IO::ByteBuffer encoded;
-    ofx::IO::ByteBuffer decoded;
+    ofxIO::ByteBuffer original(LOREM_IPSUM + LOREM_IPSUM);
+    ofxIO::ByteBuffer encoded;
+    ofxIO::ByteBuffer decoded;
 
     if (encoderDecoder.encode(original, encoded) &&
         encoderDecoder.decode(encoded, decoded) &&
@@ -169,11 +169,11 @@ bool ofApp::test(ofx::IO::AbstractByteEncoderDecoder& encoderDecoder)
 }
 
 
-void ofApp::test(ofx::IO::Compression::Type type, int level, int windowBits)
+void ofApp::test(ofxIO::Compression::Type type, int level, int windowBits)
 {
-    ofx::IO::ByteBuffer raw(LOREM_IPSUM);
+    ofxIO::ByteBuffer raw(LOREM_IPSUM);
 
-    ofx::IO::ByteBuffer compressed;
+    ofxIO::ByteBuffer compressed;
 
     std::size_t result = 0;
 
@@ -181,45 +181,45 @@ void ofApp::test(ofx::IO::Compression::Type type, int level, int windowBits)
     {
         if (windowBits != -1)
         {
-            result = ofx::IO::Compression::compress(raw, compressed, windowBits, level);
+            result = ofxIO::Compression::compress(raw, compressed, windowBits, level);
         }
         else
         {
-            result = ofx::IO::Compression::compress(raw, compressed, type, level);
+            result = ofxIO::Compression::compress(raw, compressed, type, level);
         }
     }
     else
     {
-        result = ofx::IO::Compression::compress(raw, compressed, type);
+        result = ofxIO::Compression::compress(raw, compressed, type);
     }
 
     if (result <= 0)
     {
-        ofLogError("ofApp::test()") << "Error compressing with " << ofx::IO::Compression::toString(type);
+        ofLogError("ofApp::test()") << "Error compressing with " << ofxIO::Compression::toString(type);
         return;
     }
 
     ofLogNotice("ofApp::test()") << "------------------------";
-    ofLogNotice("ofApp::test()") << "      Compression Type: " << ofx::IO::Compression::toString(type);
-    ofLogNotice("ofApp::test()") << "           Lib Version: " << ofx::IO::Compression::version(type);
+    ofLogNotice("ofApp::test()") << "      Compression Type: " << ofxIO::Compression::toString(type);
+    ofLogNotice("ofApp::test()") << "           Lib Version: " << ofxIO::Compression::version(type);
     ofLogNotice("ofApp::test()") << "  Original buffer size: " << raw.size();
     ofLogNotice("ofApp::test()") << "Compressed buffer size: " << compressed.size();
     ofLogNotice("ofApp::test()") << "     Compression Ratio: " << ((double)compressed.size() / raw.size());
 
-    ofx::IO::ByteBuffer uncompressed;
+    ofxIO::ByteBuffer uncompressed;
 
-    if (windowBits != -1 && type == ofx::IO::Compression::ZLIB)
+    if (windowBits != -1 && type == ofxIO::Compression::ZLIB)
     {
-        result = ofx::IO::Compression::uncompress(compressed, uncompressed, windowBits);
+        result = ofxIO::Compression::uncompress(compressed, uncompressed, windowBits);
     }
     else
     {
-        result = ofx::IO::Compression::uncompress(compressed, uncompressed, type);
+        result = ofxIO::Compression::uncompress(compressed, uncompressed, type);
     }
 
     if (result <= 0)
     {
-        ofLogError("ofApp::test()") << "Error uncompressing with " << ofx::IO::Compression::toString(type);
+        ofLogError("ofApp::test()") << "Error uncompressing with " << ofxIO::Compression::toString(type);
         return;
     }
 

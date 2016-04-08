@@ -60,7 +60,7 @@ void ofApp::draw()
 void ofApp::gotMessage(ofMessage msg)
 {
     int height = ofGetHeight();
-    
+
     std::size_t numLines = static_cast<std::size_t>(height / TXT_HEIGHT);
 
     messages.push_front(msg.message);

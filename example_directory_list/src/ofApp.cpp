@@ -35,7 +35,7 @@ void ofApp::setup()
 
     std::vector<std::string> files;
 
-    DirectoryUtils::list("../../..", files, true, &pathFilter);
+    ofxIO::DirectoryUtils::list("../../..", files, true, &pathFilter);
 
     for (std::size_t i = 0; i < files.size(); ++i)
     {
@@ -44,12 +44,12 @@ void ofApp::setup()
 
     ofSendMessage("-----------------Recursive List");
 
-    DirectoryUtils::listRecursive("../..",
-                                  files,
-                                  true,
-                                  &pathFilter,
-                                  DirectoryUtils::INIFINITE_DEPTH,
-                                  DirectoryUtils::SIBLINGS_FIRST);
+    ofxIO::DirectoryUtils::listRecursive("../..",
+                                         files,
+                                         true,
+                                         &pathFilter,
+                                         ofxIO::DirectoryUtils::INIFINITE_DEPTH,
+                                         ofxIO::DirectoryUtils::SIBLINGS_FIRST);
 
     for (std::size_t i = 0; i < files.size(); ++i)
     {
