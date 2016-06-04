@@ -45,7 +45,7 @@ public:
     FileExtensionFilter();
 
     /// \brief Construct a simple file extension filter.
-    /// \param fileExtension a single file extension to add.
+    /// \param fileExtension a single file extension to add (e.g. "jpg").
     /// \param ignoreCase will ingore case when comparing file extensions.
     /// \param acceptMatches will accept matches. When acceptMatches is
     ///        false, matching extensions are rejected.
@@ -63,11 +63,13 @@ public:
     bool accept(const Poco::Path& path) const override;
 
     /// \brief Add an extension to the list of extensions.
-    /// \param extension to be added to the list (e.g. ".jpg").
+    /// \note Do not include the dot (e.g. use "jpg" not ".jpg").
+    /// \param extension to be added to the list (e.g. "jpg").
     void addExtension(const std::string& extension);
 
     /// \brief Remove an extension from the list of extensions.
-    /// \param extension to be removed from the list (e.g. ".jpg").
+    /// \note Do not include the dot (e.g. use "jpg" not ".jpg").
+    /// \param extension to be removed from the list (e.g. "jpg").
     void removeExtension(const std::string& extension);
 
     /// \brief Set if the case should be ignored.

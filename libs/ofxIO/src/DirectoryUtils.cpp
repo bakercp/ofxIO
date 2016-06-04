@@ -153,7 +153,7 @@ void DirectoryUtils::list(const std::string& directory,
 
         while (iter != endIter)
         {
-            if(!pFilter || pFilter->accept((*iter).path()))
+            if (!pFilter || pFilter->accept((*iter).path()))
             {
                 files.push_back(iter.path().toString());
             }

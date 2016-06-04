@@ -240,7 +240,7 @@ public:
     /// \brief Accept a path based on a defined criteria.
     /// \returns true iff the path is accepted by the path filter.
     virtual bool accept(const Poco::Path& path) const = 0;
-
+    
 };
 
 

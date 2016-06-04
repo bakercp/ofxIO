@@ -24,7 +24,7 @@
 
 
 #include "ofx/IO/FileExtensionFilter.h"
-
+#include <iostream>
 
 namespace ofx {
 namespace IO {
@@ -54,6 +54,8 @@ FileExtensionFilter::~FileExtensionFilter()
     
 bool FileExtensionFilter::accept(const Poco::Path& path) const
 {
+    // Note: We go through all of these steps to enable ignore case, etc.
+    
     std::string extension = path.getExtension();
 
     auto iter = _extensions.begin();
@@ -62,7 +64,7 @@ bool FileExtensionFilter::accept(const Poco::Path& path) const
     {
         bool match = false;
 
-        if(_ignoreCase)
+        if (_ignoreCase)
         {
             match = (0 == Poco::UTF8::icompare(extension, *iter));
         }
@@ -71,7 +73,7 @@ bool FileExtensionFilter::accept(const Poco::Path& path) const
             match = (0 == extension.compare(*iter));
         }
 
-        if(_acceptMatches && match)
+        if (_acceptMatches && match)
         {
             return true;
         }
