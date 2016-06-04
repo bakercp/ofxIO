@@ -24,6 +24,9 @@
 // =============================================================================
 
 
+#pragma once
+
+
 #include <stdint.h>
 #include "ofx/IO/AbstractTypes.h"
 #include "ofx/IO/ByteBuffer.h"
