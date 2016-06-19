@@ -127,7 +127,7 @@ std::string Base64Encoding::encode(const ByteBuffer& buffer,
     Base64Encoding encoder(isUrlSafe, isChunked, isPadded);
     ByteBuffer _output;
     encoder.encode(buffer, _output);
-    return _output.getText();
+    return _output.toString();
 }
 
 
@@ -138,7 +138,7 @@ std::string Base64Encoding::decode(const std::string& buffer, bool isUrlSafe)
     ByteBuffer output;
     Base64Encoding decoder(isUrlSafe);
     decoder.decode(_buffer, output);
-    return output.getText();
+    return output.toString();
 }
 
 

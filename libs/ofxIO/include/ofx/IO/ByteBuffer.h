@@ -31,6 +31,7 @@
 #include <sstream>
 #include <iostream>
 #include <algorithm>
+#include "ofConstants.h"
 #include "ofx/IO/AbstractTypes.h"
 #include "ofx/IO/ByteBufferUtils.h"
 
@@ -166,10 +167,7 @@ public:
     /// \brief get the ByteBuffer as a std::string with UTF-8 encoding.
     /// \returns the UTF-8-encoded std::string representation of the ByteBuffer.
     std::string toString() const;
-
-    /// \brief get the ByteBuffer as a std::string UTF-8 encoding.
-    /// \returns the UTF-8-encoded std::string representation of the ByteBuffer.
-    std::string getText() const;
+    OF_DEPRECATED_MSG("Use toString() instead.", std::string getText() const);
 
     /// \returns an iterator to the buffer.
     std::vector<uint8_t>::iterator begin();

@@ -27,6 +27,7 @@
 
 
 #include <deque>
+#include "ofConstants.h"
 #include "json.hpp"
 #include "Poco/FileStream.h"
 #include "ofx/DirectoryWatcher.h"

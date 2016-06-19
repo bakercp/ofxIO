@@ -272,15 +272,15 @@ char* ByteBuffer::getCharPtr()
 
 std::string ByteBuffer::toString() const
 {
-    return getText();
+    std::string s;
+    readBytes(s);
+    return s;
 }
 
 
 std::string ByteBuffer::getText() const
 {
-    std::string s;
-    readBytes(s);
-    return s;
+    return toString();
 }
 
 
