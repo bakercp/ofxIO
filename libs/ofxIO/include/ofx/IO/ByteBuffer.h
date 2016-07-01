@@ -195,13 +195,11 @@ public:
 
     /// \brief Remove all instances of the given byte.
     /// \param data The byte to remove.
-    /// \returns the number of bytes replaced.
     void remove(uint8_t data);
 
     /// \brief Replace all instances of the given byte \data with \replacement.
     /// \param data The byte to replace.
     /// \param replacement The byte to use during replacement.
-    /// \returns the number of bytes replaced.
     void replace(uint8_t data, uint8_t replacement);
 
     /// \brief Write the buffer to an output stream.
@@ -217,7 +215,6 @@ public:
     /// \returns the std::istream that was read from.
 	friend std::istream& operator >> (std::istream& istr,
                                       ByteBuffer& byteBuffer);
-
 
 private:
     /// \brief The backing byte buffer.
