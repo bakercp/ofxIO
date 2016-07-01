@@ -29,6 +29,7 @@
 #include "Poco/FileStream.h"
 #include <iostream> 
 #include "ofLog.h"
+#include "ofUtils.h"
 
 
 namespace ofx {
@@ -133,7 +134,7 @@ std::streamsize ByteBufferUtils::loadFromFile(const std::string& path,
                                               bool appendBuffer,
                                               std::ios::openmode openMode)
 {
-    Poco::FileInputStream fis(path, openMode);
+    Poco::FileInputStream fis(ofToDataPath(path, true), openMode);
 
     if (fis.good())
     {
@@ -157,7 +158,7 @@ bool ByteBufferUtils::saveToFile(const ByteBuffer& byteBuffer,
                                  const std::string& path,
                                  std::ios::openmode mode)
 {
-    Poco::FileOutputStream fos(path, mode);
+    Poco::FileOutputStream fos(ofToDataPath(path, true), mode);
 
     if (fos.good())
     {
