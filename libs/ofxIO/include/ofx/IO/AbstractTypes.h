@@ -264,4 +264,26 @@ public:
 };
 
 
+class AbstractInputStreamFilter
+{
+public:
+    virtual ~AbstractInputStreamFilter()
+    {
+    }
+
+    virtual std::istream& filter(std::istream& stream) = 0;
+};
+
+
+class AbstractOutputStreamFilter
+{
+public:
+    virtual ~AbstractOutputStreamFilter()
+    {
+    }
+
+    virtual std::ostream& filter(std::ostream& stream) = 0;
+};
+
+
 } } // namespace ofx::IO
