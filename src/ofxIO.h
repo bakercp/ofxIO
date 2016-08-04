@@ -32,6 +32,7 @@
 #include "Poco/FileStream.h"
 #include "ofx/DirectoryWatcher.h"
 #include "ofx/RecursiveDirectoryIterator.h"
+#include "ofx/LRUCache.h"
 #include "ofx/IO/AbstractTypes.h"
 #include "ofx/IO/Base64Encoding.h"
 #include "ofx/IO/ByteBuffer.h"
