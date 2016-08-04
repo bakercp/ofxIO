@@ -44,7 +44,9 @@ public:
         /// \brief Use the snappy compression algorithm.
         SNAPPY,
         /// \brief Use the LZ4 compression algorithm.
-        LZ4
+        LZ4,
+        /// \brief Use brotli compression algorithm.
+        BR
     };
 
     /// \brief Uncompress a ByteBuffer.

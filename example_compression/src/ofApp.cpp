@@ -79,6 +79,7 @@ void ofApp::setup()
     test(ofxIO::Compression::ZLIB);
     test(ofxIO::Compression::SNAPPY);
     test(ofxIO::Compression::LZ4);
+    test(ofxIO::Compression::BR);
 
     // window bits can be range [8, 15] includsive.
     // level must be [1, 8] inclusive.
