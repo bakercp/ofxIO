@@ -80,7 +80,6 @@ public:
 };
 
 
-
 class ByteBufferOutputStreamBuf: public Poco::UnbufferedStreamBuf
 {
 public:

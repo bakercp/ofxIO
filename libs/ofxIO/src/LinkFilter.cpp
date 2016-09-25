@@ -34,9 +34,11 @@ LinkFilter::LinkFilter()
 {
 }
 
+
 LinkFilter::~LinkFilter()
 {
 }
+
 
 bool LinkFilter::accept(const Poco::Path& path) const
 {

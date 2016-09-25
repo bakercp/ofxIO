@@ -51,6 +51,7 @@ std::size_t URIEncoding::encode(const ByteBuffer& buffer,
     return encodedBuffer.size();
 }
 
+
 std::size_t URIEncoding::decode(const ByteBuffer& buffer,
                                 ByteBuffer& decodedBuffer)
 {
