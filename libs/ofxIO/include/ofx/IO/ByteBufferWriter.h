@@ -89,8 +89,8 @@ public:
     std::size_t remaining() const;
 
 private:
-    ByteBufferWriter(const ByteBufferWriter& that);
-    ByteBufferWriter& operator = (const ByteBufferWriter& that);
+    ByteBufferWriter(const ByteBufferWriter& that) = delete;
+    ByteBufferWriter& operator = (const ByteBufferWriter& that) = delete;
 
     /// \brief The proxy writer function.
     /// \param source The byte source.

@@ -43,6 +43,17 @@ ByteBuffer::ByteBuffer()
 }
 
 
+ByteBuffer::ByteBuffer(std::initializer_list<uint8_t> data)
+{
+    reserve(data.size());
+
+    for (auto& byte: data)
+    {
+        writeByte(byte);
+    }
+}
+
+
 ByteBuffer::ByteBuffer(std::size_t n, uint8_t data)
 {
     reserve(n);
@@ -81,6 +92,12 @@ ByteBuffer::ByteBuffer(const std::vector<uint8_t>& buffer)
 ByteBuffer::ByteBuffer(const std::string& buffer)
 {
     writeBytes(buffer);
+}
+
+
+ByteBuffer::ByteBuffer(std::istream& istr, std::size_t bufferSize)
+{
+    ByteBufferUtils::copyStreamToBuffer(istr, *this, bufferSize);
 }
 
     
@@ -162,6 +179,12 @@ std::size_t ByteBuffer::writeBytes(const AbstractByteSource& buffer)
 }
 
 
+std::size_t ByteBuffer::writeBytes(std::istream& istr, std::size_t bufferSize)
+{
+    return ByteBufferUtils::copyStreamToBuffer(istr, *this, bufferSize);
+}
+
+
 std::size_t ByteBuffer::size() const
 {
     return _buffer.size();
@@ -200,7 +223,7 @@ std::size_t ByteBuffer::reserve(std::size_t capacity)
 }
 
     
-const std::vector<uint8_t>& ByteBuffer::getData() const
+const std::vector<uint8_t>& ByteBuffer::getBuffer() const
 {
     return _buffer;
 }
@@ -267,6 +290,18 @@ char* ByteBuffer::getCharPtr()
     {
         return nullptr;
     }
+}
+
+
+const char* ByteBuffer::getData() const
+{
+    return getCharPtr();
+}
+
+
+char* ByteBuffer::getData()
+{
+    return getCharPtr();
 }
 
 

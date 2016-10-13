@@ -49,6 +49,10 @@ public:
     /// \brief Construct an empty ByteBuffer.
     ByteBuffer();
 
+    /// \brief Construct a ByteBuffer using an initializer list.
+    /// \param data a list of bytes.
+    ByteBuffer(std::initializer_list<uint8_t> data);
+
     /// \brief Construct a ByteBuffer a repeated byte.
     /// \param n The number of times to repeat the byte.
     /// \param data The a single byte to repeat.
@@ -80,6 +84,12 @@ public:
     /// \param buffer is a source of bytes.
     explicit ByteBuffer(const AbstractByteSource& buffer);
 
+    /// \brief Construct a ByteBuffer from an input stream.
+    /// \param istr is the input stream to buffer.
+    /// \param bufferSize is the reading buffer size.
+    explicit ByteBuffer(std::istream& istr,
+                        std::size_t bufferSize = ByteBufferUtils::DEFAULT_BUFFER_SIZE);
+
     /// \brief Destroy the ByteBuffer.
     virtual ~ByteBuffer();
 
@@ -94,6 +104,9 @@ public:
     virtual std::size_t writeBytes(const std::vector<uint8_t>& buffer) override;
     virtual std::size_t writeBytes(const std::string& buffer) override;
     virtual std::size_t writeBytes(const AbstractByteSource& buffer) override;
+
+    std::size_t writeBytes(std::istream& istr,
+                           std::size_t bufferSize = ByteBufferUtils::DEFAULT_BUFFER_SIZE);
 
     /// \brief Query the number of bytes in the ByteBuffer.
     /// \returns the number of bytes in the ByteBuffer.
@@ -146,7 +159,7 @@ public:
 
     /// \brief Get a const reference to the backing data vector.
     /// \returns a const reference to the backing data vector.
-    const std::vector<uint8_t>& getData() const;
+    const std::vector<uint8_t>& getBuffer() const;
 
     /// \brief Get a const pointer to the backing unsigned char data vector.
     /// \returns a const pointer to the backing data vector.
@@ -163,6 +176,14 @@ public:
     /// \brief Get a pointer to the char data vector.
     /// \returns a pointer to the backing data vector.
     char* getCharPtr();
+
+    /// \brief Get a const pointer to the char data vector.
+    /// \returns a const pointer to the backing data vector.
+    const char* getData() const;
+
+    /// \brief Get a pointer to the char data vector.
+    /// \returns a pointer to the backing data vector.
+    char* getData();
 
     /// \brief get the ByteBuffer as a std::string with UTF-8 encoding.
     /// \returns the UTF-8-encoded std::string representation of the ByteBuffer.
