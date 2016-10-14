@@ -27,6 +27,7 @@
 
 
 #include <istream>
+#include <memory>
 #include "ofx/IO/AbstractTypes.h"
 
 

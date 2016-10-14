@@ -27,6 +27,7 @@
 
 
 #include <istream>
+#include <memory>
 #include "Poco/InflatingStream.h"
 #include "ofx/IO/AbstractTypes.h"
 
