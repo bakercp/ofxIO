@@ -4,6 +4,5 @@ meta:
 	ADDON_AUTHOR = bakercp
 	ADDON_TAGS = "directories" "io" "file filter"
 	ADDON_URL = http://github.com/bakercp/ofxIO
-
 common:
-        ADDON_DEPENDENCIES = ofxPoco
+	ADDON_DEPENDENCIES = ofxPoco
