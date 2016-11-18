@@ -40,7 +40,7 @@ Generate all project files using the openFrameworks [Project Generator](http://o
 
 Pull Requests are always welcome, so if you make any improvements please feel free to float them back upstream :)
 
-1. [Fork this repository on Github](https://github.com/bakercp/ofxIO).
+1. Fork this repository.
 2. Create your feature branch (`git checkout -b my-new-feature`).
 3. Commit your changes (`git commit -am 'Add some feature'`).
 4. Push to the branch (`git push origin my-new-feature`).
