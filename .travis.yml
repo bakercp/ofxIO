@@ -1,35 +1,35 @@
 language: c++
 compiler: gcc
-sudo: true
-matrix:
-  include:
-  - os: linux
-    dist: trusty
-    sudo: required
-    env: TARGET="linux"
-    addons:
-      apt:
-        sources:
-          - ubuntu-toolchain-r-test
-        packages:
-          - gcc-4.9
-          - g++-4.9
-          - gdb
-
-  # - os: osx
-  #   osx_image: xcode8
-  #   compiler: clang
-  #   env:
-  #     - TARGET="osx"
-  exclude:
-  - compiler: gcc
-
-env:
-  global:
-    - CI_REPO=https://github.com/bakercp/ofxAddonsCI.git
-
-git:
-  depth: 1
+# sudo: true
+# #matrix:
+# #  include:
+#   - os: linux
+#     dist: trusty
+#     sudo: required
+#     env: TARGET="linux"
+#     addons:
+#       apt:
+#         sources:
+#           - ubuntu-toolchain-r-test
+#         packages:
+#           - gcc-4.9
+#           - g++-4.9
+#           - gdb
+#
+#   # - os: osx
+#   #   osx_image: xcode8
+#   #   compiler: clang
+#   #   env:
+#   #     - TARGET="osx"
+#   exclude:
+#   - compiler: gcc
+#
+# env:
+#   global:
+#     - CI_REPO=https://github.com/bakercp/ofxAddonsCI.git
+#
+# git:
+#   depth: 1
 
 # All files in the build-lifecycle
 # https://docs.travis-ci.com/user/customizing-the-build/#The-Build-Lifecycle
