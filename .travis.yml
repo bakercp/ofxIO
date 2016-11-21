@@ -34,14 +34,17 @@ env:
 # All files in the build-lifecycle
 # https://docs.travis-ci.com/user/customizing-the-build/#The-Build-Lifecycle
 before_install:
-  - git clone $CI_REPO --depth=1 --branch="$TRAVIS_BRANCH" ~/scripts
+  - git clone $CI_REPO --depth=1 --branch="$TRAVIS_BRANCH" ~/ci
+  - pwd
+  - ls -la ~
+  - ls -la ~/ci
   - ~/scripts/before_install.sh
 install:
-  - ~/scripts/install.sh
+  - ~/ci/scripts/install.sh
 before_script:
-  - ~/scripts/before_script.sh
+  - ~/ci/before_script.sh
 script:
-  - ~/scripts/script.sh
+  - ~/ci/script.sh
 # after_success:
 #   - ~/scripts/after_success.sh
 # after_failure:
