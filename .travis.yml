@@ -1,28 +1,56 @@
 language: c++
 compiler: gcc
-sudo: false
+sudo: true
 matrix:
   include:
-  - os: osx
-    env:
-    - TARGET="docs"
+  - os: linux
+    dist: trusty
+    sudo: required
+    env: TARGET="linux"
+    addons:
+      apt:
+        sources:
+          - ubuntu-toolchain-r-test
+        packages:
+          - gcc-4.9
+          - g++-4.9
+          - gdb
+
+  # - os: osx
+  #   osx_image: xcode8
+  #   compiler: clang
+  #   env:
+  #     - TARGET="osx"
   exclude:
   - compiler: gcc
-install:
-- if [ "$TARGET" == "android" ] || [ "$TARGET" == "linux" ] || [ "$TARGET" == "docs" ]; then
-    scripts/ci/$TARGET/install.sh;
-  fi
-script:
-- scripts/ci/$TARGET/build.sh $OPT
-- if [ "$TARGET" == "osx" ] || [ "$TARGET" == "linux" ]; then
-    scripts/ci/$TARGET/run_tests.sh;
-  fi
-after_success:
-- if [ "$TARGET" == "docs" ]; then
-    scripts/ci/$TARGET/after_success.sh;
-  fi
-git:
-  depth: 1
+
 env:
   global:
-  - secure: dyeJqawQIXyF8enoShkp5mwk7FPH6MEM0YsniX0bxUGj1yJ/hNfAXbrz9mmfiRuO0creHKMFr+5yN+M791yxZ1p3i/0MQ0AS8YnAwdwd4stqg2qr5Ftbuw5bUPZ4mU+9giPHwLELT01qiDURblCJY01jC1ybXY8vmuwX9QEuhic=
+    - CI_REPO=https://github.com/bakercp/ofxAddonsCI.git
+
+git:
+  depth: 1
+
+# All files in the build-lifecycle
+# https://docs.travis-ci.com/user/customizing-the-build/#The-Build-Lifecycle
+before_install:
+  - git clone $CI_REPO --depth=1 --branch="$TRAVIS_BRANCH" ~/scripts 2> /dev/null
+  - ~/scripts/before_install.sh
+install:
+  - ~/scripts/install.sh
+before_script:
+  - ~/scripts/before_script.sh
+script:
+  - ~/scripts/script.sh
+after_success:
+  - ~/scripts/after_success.sh
+after_failure:
+  - ~/scripts/after_failure.sh
+before_deploy:
+  - ~/scripts/before_deploy.sh
+deploy:
+  - ~/scripts/deploy.sh
+after_deploy:
+  - ~/scripts/after_deploy.sh
+after_script:
+  - ~/scripts/after_script.sh
