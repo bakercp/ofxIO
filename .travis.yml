@@ -24,9 +24,9 @@ compiler: gcc
 #   exclude:
 #   - compiler: gcc
 #
-# env:
-#   global:
-#     - CI_REPO=https://github.com/bakercp/ofxAddonsCI.git
+env:
+  global:
+    - CI_REPO=https://github.com/bakercp/ofxAddonsCI.git
 #
 # git:
 #   depth: 1
@@ -34,7 +34,7 @@ compiler: gcc
 # All files in the build-lifecycle
 # https://docs.travis-ci.com/user/customizing-the-build/#The-Build-Lifecycle
 before_install:
-  - git clone $CI_REPO --depth=1 --branch="$TRAVIS_BRANCH" ~/scripts 2> /dev/null
+  - git clone $CI_REPO --depth=1 --branch="$TRAVIS_BRANCH" ~/scripts
   - ~/scripts/before_install.sh
 install:
   - ~/scripts/install.sh
