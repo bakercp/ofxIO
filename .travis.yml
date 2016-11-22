@@ -28,6 +28,7 @@ env:
   global:
     - OF_REPO=https://github.com/openFrameworks/openFrameworks.git
     - OF_ROOT=$TRAVIS_BUILD_DIR/openFrameworks
+    - OF_ADDONS=$OF_ROOT/addons
     - OFX_ADDONS_CI_REPO=https://github.com/bakercp/ofxAddonsCI.git
     - OFX_ADDONS_CI_ROOT=$TRAVIS_BUILD_DIR/addons-ci
     - OFX_ADDON_NAME=$( echo $TRAVIS_REPO_SLUG | cut -d '/' -f 2 )
@@ -48,24 +49,27 @@ before_install:
   - cd $TRAVIS_BUILD_DIR
   - ls -la $TRAVIS_BUILD_DIR
   - ls -la ~/$OFX_ADDON_NAME
-  - $OFX_ADDONS_CI_ROOT/before_install.sh
+  - mv ~/$OFX_ADDON_NAME $OF_ADDONS
+  - ls -la $OF_ADDONS
+  - ls -la $OF_ADDONS/$OFX_ADDON_NAME
+  - $OFX_ADDONS_CI_ROOT/scripts/before_install.sh
 install:
-  - $OFX_ADDONS_CI_ROOT/install.sh
+  - $OFX_ADDONS_CI_ROOT/scripts/install.sh
 
 before_script:
-  - $OFX_ADDONS_CI_ROOT/before_script.sh
+  - $OFX_ADDONS_CI_ROOT/scripts/before_script.sh
 script:
-  - $OFX_ADDONS_CI_ROOT/script.sh
+  - $OFX_ADDONS_CI_ROOT/scripts/script.sh
 after_script:
-  - $OFX_ADDONS_CI_ROOT/after_script.sh
+  - $OFX_ADDONS_CI_ROOT/scripts/after_script.sh
 
 after_success:
-  - $OFX_ADDONS_CI_ROOT/after_success.sh
+  - $OFX_ADDONS_CI_ROOT/scripts/after_success.sh
 after_failure:
-  - $OFX_ADDONS_CI_ROOT/after_failure.sh
+  - $OFX_ADDONS_CI_ROOT/scripts/after_failure.sh
 
 before_deploy:
-  - $OFX_ADDONS_CI_ROOT/before_deploy.sh
+  - $OFX_ADDONS_CI_ROOT/scripts/before_deploy.sh
 # deploy:
 #   - $OFX_ADDONS_CI_ROOT/deploy.sh
 after_deploy:
