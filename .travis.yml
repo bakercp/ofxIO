@@ -30,6 +30,7 @@ env:
     - OF_ROOT=$TRAVIS_BUILD_DIR/openFrameworks
     - OFX_ADDONS_CI_REPO=https://github.com/bakercp/ofxAddonsCI.git
     - OFX_ADDONS_CI_ROOT=$TRAVIS_BUILD_DIR/addons-ci
+    - OFX_ADDON_NAME=`echo $TRAVIS_BUILD_DIR | sed 's/.*\/\(.*\)/\1/'`
 
 git:
   depth: 1
@@ -37,12 +38,16 @@ git:
 # All files in the build-lifecycle
 # https://docs.travis-ci.com/user/customizing-the-build/#The-Build-Lifecycle
 before_install:
+  - mkdir ~/$OFX_ADDON_NAME
+  - mv * ~/$OFX_ADDON_NAME
+  - rm -rf *
   - git clone $OF_REPO --depth=1 --branch="$TRAVIS_BRANCH" $OF_ROOT
   - git clone $OFX_ADDONS_CI_REPO --depth=1 --branch="$TRAVIS_BRANCH" $OFX_ADDONS_CI_ROOT
   - cd $OFX_ADDONS_CI_ROOT
   - git submodule update --init --recursive
-  - cd -
-  - ls -la $TRAVIS_BUILD_DIR 
+  - cd $TRAVIS_BUILD_DIR
+  - ls -la $TRAVIS_BUILD_DIR
+  - ls -la ~/$OFX_ADDON_NAME
   - $OFX_ADDONS_CI_ROOT/before_install.sh
 install:
   - $OFX_ADDONS_CI_ROOT/install.sh
