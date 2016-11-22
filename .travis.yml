@@ -1,45 +1,47 @@
 language: c++
 compiler: gcc
-sudo: true
+# sudo: true
 matrix:
   include:
   - os: linux
-    dist: trusty
-    sudo: required
+    # dist: trusty
+    # sudo: required
     env: TARGET="linux"
-    addons:
-      apt:
-        sources:
-          - ubuntu-toolchain-r-test
-        packages:
-          - gcc-4.9
-          - g++-4.9
-          - gdb
+    # addons:
+    #   apt:
+    #     sources:
+    #       - ubuntu-toolchain-r-test
+    #     packages:
+    #       - gcc-4.9
+    #       - g++-4.9
+    #       - gdb
 
-  - os: osx
-    osx_image: xcode8
-    compiler: clang
-    env:
-      - TARGET="osx"
+  # - os: osx
+  #   osx_image: xcode8
+  #   compiler: clang
+  #   env:
+  #     - TARGET="osx"
   exclude:
     - compiler: gcc
 
 env:
   global:
     - OF_REPO=https://github.com/openFrameworks/openFrameworks.git
-    - OF_ROOT=$TRAVIS_BUILD_DIR/openFrameworks
+    - OF_ROOT=$TRAVIS_BUILD_DIR/../../openFrameworks
     - OF_ADDONS=$OF_ROOT/addons
     - OFX_ADDONS_CI_REPO=https://github.com/bakercp/ofxAddonsCI.git
-    - OFX_ADDONS_CI_ROOT=$TRAVIS_BUILD_DIR/addons-ci
+    - OFX_ADDONS_CI_ROOT=$TRAVIS_BUILD_DIR/../../addons-ci
     - OFX_ADDON_NAME=$( echo $TRAVIS_REPO_SLUG | cut -d '/' -f 2 )
-
+    
 git:
   depth: 1
 
 # All files in the build-lifecycle
 # https://docs.travis-ci.com/user/customizing-the-build/#The-Build-Lifecycle
 before_install:
+  - git clone $OFX_ADDONS_CI_REPO --depth=1 --branch="$TRAVIS_BRANCH" $OFX_ADDONS_CI_ROOT
   - $OFX_ADDONS_CI_ROOT/scripts/before_install.sh
+  - echo $TEST_VAR
 install:
   - $OFX_ADDONS_CI_ROOT/scripts/install.sh
   - echo $TEST_VAR
