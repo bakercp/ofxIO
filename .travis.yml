@@ -30,7 +30,7 @@ env:
     - OF_ROOT=$TRAVIS_BUILD_DIR/openFrameworks
     - OFX_ADDONS_CI_REPO=https://github.com/bakercp/ofxAddonsCI.git
     - OFX_ADDONS_CI_ROOT=$TRAVIS_BUILD_DIR/addons-ci
-    - OFX_ADDON_NAME=$( echo $TRAVIS_REPO_SLUG | cut -d '/' -f 2) )
+    - OFX_ADDON_NAME=$( echo $TRAVIS_REPO_SLUG | cut -d '/' -f 2 )
 
 git:
   depth: 1
