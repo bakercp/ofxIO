@@ -20,7 +20,7 @@ Generate all project files using the openFrameworks [Project Generator](http://o
   - _NOTE: `Poco::DirectoryWatcher` was added in Poco 1.5+.  These files are included for backward compatibility._
 - File filters.
 - Compression
-  - Zip, deflate, gzip, snappy, LZ4
+  - Zip, deflate, gzip, snappy, LZ4, [brotli](https://github.com/google/brotli)
   - Encoding.
     - COBS, SLIP, Hex Binary, Base64, etc.
 - ByteBuffer

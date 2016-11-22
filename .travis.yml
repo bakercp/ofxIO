@@ -39,38 +39,33 @@ git:
 # All files in the build-lifecycle
 # https://docs.travis-ci.com/user/customizing-the-build/#The-Build-Lifecycle
 before_install:
-  - mkdir ~/$OFX_ADDON_NAME
-  - mv * ~/$OFX_ADDON_NAME
-  - rm -rf *
-  - git clone $OF_REPO --depth=1 --branch="$TRAVIS_BRANCH" $OF_ROOT
-  - git clone $OFX_ADDONS_CI_REPO --depth=1 --branch="$TRAVIS_BRANCH" $OFX_ADDONS_CI_ROOT
-  - cd $OFX_ADDONS_CI_ROOT
-  - git submodule update --init --recursive
-  - cd $TRAVIS_BUILD_DIR
-  - ls -la $TRAVIS_BUILD_DIR
-  - ls -la ~/$OFX_ADDON_NAME
-  - mv ~/$OFX_ADDON_NAME $OF_ADDONS
-  - ls -la $OF_ADDONS
-  - ls -la $OF_ADDONS/$OFX_ADDON_NAME
   - $OFX_ADDONS_CI_ROOT/scripts/before_install.sh
 install:
   - $OFX_ADDONS_CI_ROOT/scripts/install.sh
-
+  - echo $TEST_VAR
 before_script:
   - $OFX_ADDONS_CI_ROOT/scripts/before_script.sh
+  - echo $TEST_VAR
 script:
   - $OFX_ADDONS_CI_ROOT/scripts/script.sh
+  - echo $TEST_VAR
 after_script:
   - $OFX_ADDONS_CI_ROOT/scripts/after_script.sh
+  - echo $TEST_VAR
 
 after_success:
   - $OFX_ADDONS_CI_ROOT/scripts/after_success.sh
+  - echo $TEST_VAR
+
 after_failure:
   - $OFX_ADDONS_CI_ROOT/scripts/after_failure.sh
+  - echo $TEST_VAR
 
 before_deploy:
   - $OFX_ADDONS_CI_ROOT/scripts/before_deploy.sh
+  - echo $TEST_VAR
 # deploy:
 #   - $OFX_ADDONS_CI_ROOT/deploy.sh
 after_deploy:
   - $OFX_ADDONS_CI_ROOT/after_deploy.sh
+  - echo $TEST_VAR
