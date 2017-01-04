@@ -30,7 +30,18 @@ A collection of I/O core utils.
 
 ## Getting Started
 
-See the examples.
+To get started, generate the example project files using the openFrameworks [Project Generator](http://openframeworks.cc/learning/01_basics/how_to_add_addon_to_project/).
+
+## Documentation
+
+API documentation can be found here.
+
+## Build Status
+
+Linux, OSX [![Build Status](https://travis-ci.org/bakercp/ofxIO.svg?branch=stable)](https://travis-ci.org/bakercp/ofxIO)
+[![Build Status](https://travis-ci.org/bakercp/ofxIO.svg?branch=master)](https://travis-ci.org/bakercp/ofxIO)
+
+Visual Studio, MSYS [![Build status](https://ci.appveyor.com/api/projects/status/krr0ck8ffida8nsj/branch/master?svg=true)](https://ci.appveyor.com/project/bakercp/ofxio/branch/master)
 
 ## Compatibility
 
@@ -40,9 +51,9 @@ The `master` branch of this repository is meant to be compatible with the openFr
 
 Some past openFrameworks releases are supported via tagged versions, but only `stable` and `master` branches are actively supported.
 
-## Project Files
+## Versioning
 
-Generate all project files using the openFrameworks [Project Generator](http://openframeworks.cc/learning/01_basics/how_to_add_addon_to_project/).
+This project uses Semantic Versioning, although strict adherence will only come into effect at version 1.0.0.
 
 ## Licensing
 
