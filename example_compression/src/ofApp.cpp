@@ -83,7 +83,7 @@ void ofApp::setup()
     }
     else
     {
-        ofLogNotice("ofApp::test()") << "ofxIO::Base64Encoding: FAILURE";
+        ofLogError("ofApp::test()") << "ofxIO::Base64Encoding: FAILURE";
     }
 
     ofxIO::HexBinaryEncoding hexBinaryEncoding;
@@ -94,7 +94,7 @@ void ofApp::setup()
     }
     else
     {
-        ofLogNotice("ofApp::test()") << "ofxIO::HexBinaryEncoding: FAILURE";
+        ofLogError("ofApp::test()") << "ofxIO::HexBinaryEncoding: FAILURE";
     }
 
     ofxIO::COBSEncoding cobsEncoding;
@@ -105,7 +105,7 @@ void ofApp::setup()
     }
     else
     {
-        ofLogNotice("ofApp::test()") << "ofxIO::COBSEncoding: FAILURE";
+        ofLogError("ofApp::test()") << "ofxIO::COBSEncoding: FAILURE";
     }
 
     ofxIO::SLIPEncoding slipEncoding;
@@ -116,7 +116,7 @@ void ofApp::setup()
     }
     else
     {
-        ofLogNotice("ofApp::test()") << "ofxIO::SLIPEncoding: FAILURE";
+        ofLogError("ofApp::test()") << "ofxIO::SLIPEncoding: FAILURE";
     }
 }
 
@@ -176,9 +176,9 @@ void ofApp::test(ofxIO::Compression::Type type, int level, int windowBits)
         result = ofxIO::Compression::compress(raw, compressed, type);
     }
 
-    if (result <= 0)
+    if (result == 0)
     {
-        ofLogError("ofApp::test()") << "Error compressing with " << ofxIO::Compression::toString(type);
+        ofLogError("ofApp::test()") << "Error compressing with " << ofxIO::Compression::toString(type) << " result = " << result;
         return;
     }
 
@@ -200,9 +200,9 @@ void ofApp::test(ofxIO::Compression::Type type, int level, int windowBits)
         result = ofxIO::Compression::uncompress(compressed, uncompressed, type);
     }
 
-    if (result <= 0)
+    if (result == 0)
     {
-        ofLogError("ofApp::test()") << "Error uncompressing with " << ofxIO::Compression::toString(type);
+        ofLogError("ofApp::test()") << "Error uncompressing with " << ofxIO::Compression::toString(type) << " result = " << result;
         return;
     }
 
