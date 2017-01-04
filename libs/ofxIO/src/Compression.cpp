@@ -326,12 +326,15 @@ std::size_t Compression::compress(const ByteBuffer& uncompressedBuffer,
         }
         case LZ4:
         {
+            std::size_t inputSize = uncompressedBuffer.size();
             std::size_t size = 0;
             // Allocate as many as needed.
-            compressedBuffer.resize(uncompressedBuffer.size());
-            size = LZ4_compress(uncompressedBuffer.getCharPtr(),
-                                compressedBuffer.getCharPtr(),
-                                uncompressedBuffer.size());
+            compressedBuffer.resize(inputSize);
+            size = LZ4_compress_default(uncompressedBuffer.getCharPtr(),
+                                        compressedBuffer.getCharPtr(),
+                                        inputSize,
+                                        LZ4_compressBound(inputSize));
+
             compressedBuffer.resize(size);
             return size;
         }
