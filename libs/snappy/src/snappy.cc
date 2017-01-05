@@ -36,6 +36,19 @@
 #include <string>
 #include <vector>
 
+#if !defined(__CYGWIN__)
+  #if defined(_WIN32) || defined(_WIN64)
+    #if defined(_WIN64)
+      typedef __int64 LONG_PTR;
+    #else
+      typedef long LONG_PTR;
+    #endif
+
+  typedef LONG_PTR SSIZE_T;
+  typedef SSIZE_T ssize_t;
+
+  #endif
+#endif
 
 namespace snappy {
 
