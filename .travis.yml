@@ -94,15 +94,15 @@ matrix:
 
 
 #Emscripten, OF master
-  - os: linux
-    sudo: false
-    env: TARGET="emscripten" OF_BRANCH="master"
-    addons:
-      apt:
-        sources:
-          - ubuntu-toolchain-r-test
-        packages:
-          - libstdc++6
+  # - os: linux
+  #   sudo: false
+  #   env: TARGET="emscripten" OF_BRANCH="master"
+  #   addons:
+  #     apt:
+  #       sources:
+  #         - ubuntu-toolchain-r-test
+  #       packages:
+  #         - libstdc++6
 
 
 # Emscripten, OF stable: Not supported yet
