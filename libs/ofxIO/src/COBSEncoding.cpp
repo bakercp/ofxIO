@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2010 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2010 Christopher Baker <https://christopherbaker.net>
 //
 // Portions:
 //  Copyright (c) 2011, Jacques Fortier. All rights reserved.

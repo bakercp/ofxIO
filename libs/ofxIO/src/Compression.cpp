@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2013 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2013 Christopher Baker <https://christopherbaker.net>
 //
 // SPDX-License-Identifier:	MIT
 //
@@ -352,9 +352,16 @@ std::size_t Compression::compress(const ByteBuffer& uncompressedBuffer,
                                                       &encodedSize,
                                                       compressedBuffer.getPtr());
 
-            compressedBuffer.resize(encodedSize);
-
-            return encodedSize;
+            if (result == 1)
+            {
+                compressedBuffer.resize(encodedSize);
+                return encodedSize;
+            }
+            else
+            {
+                ofLogError("Compression::compress") << "brotli::BrotliCompressBuffer compression error.";
+                return 0;
+            }
         }
     }
 

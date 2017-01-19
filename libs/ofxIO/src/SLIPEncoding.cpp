@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2015 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2015 Christopher Baker <https://christopherbaker.net>
 //
 // Portions:
 //  Copyright (c) 2015 Jean-Pierre Mouilleseaux <jpm@chordedconstructions.com>
