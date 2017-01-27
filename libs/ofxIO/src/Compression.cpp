@@ -25,7 +25,7 @@ namespace ofx {
 namespace IO {
 
 
-static const size_t kFileBufferSize = 65536;
+//static const size_t kFileBufferSize = 65536;
 //
 //
 //static int Decompress(FILE* fin, FILE* fout) {
