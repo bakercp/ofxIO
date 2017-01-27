@@ -2,8 +2,11 @@ docs/html
 docs/tagfile.xml
 docs/*.tag
 
+_*/
+
 raw/
 
+exampl*/.compiler*
 exampl*/config.make
 exampl*/Makefile
 exampl*/Project.xcconfig

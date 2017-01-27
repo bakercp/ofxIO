@@ -93,16 +93,16 @@ matrix:
 #        - ~/archlinux
 
 
-#Emscripten, OF master
-  # - os: linux
-  #   sudo: false
-  #   env: TARGET="emscripten" OF_BRANCH="master"
-  #   addons:
-  #     apt:
-  #       sources:
-  #         - ubuntu-toolchain-r-test
-  #       packages:
-  #         - libstdc++6
+# #Emscripten, OF master
+#   - os: linux
+#     sudo: false
+#     env: TARGET="emscripten" OF_BRANCH="master"
+#     addons:
+#       apt:
+#         sources:
+#           - ubuntu-toolchain-r-test
+#         packages:
+#           - libstdc++6
 
 
 # Emscripten, OF stable: Not supported yet
@@ -185,15 +185,18 @@ matrix:
   # see https://github.com/travis-ci/travis-ci/issues/1228
   exclude:
     - compiler: gcc
-
-install:
-  - cd ~
-  - git clone --depth=1 --branch=$OF_BRANCH https://github.com/openframeworks/openFrameworks
-  - cd openFrameworks
-  - scripts/ci/addons/install.sh
-
-script:
-  - scripts/ci/addons/build.sh
-
 git:
   depth: 10
+
+before_install:
+  - export MAKEFLAGS=-s
+  - cd $TRAVIS_BUILD_DIR/../
+  - export OF_ROOT=$PWD/openFrameworks
+  - export OF_ADDON_NAME=$(basename $TRAVIS_BUILD_DIR)
+install:
+  - git clone --depth=1 --branch=CI-TESTS https://github.com/bakercp/openFrameworks $OF_ROOT
+  - cd $OF_ROOT
+  - scripts/ci/addons/install.sh
+script:
+  - cd $OF_ROOT
+  - scripts/ci/addons/build.sh
