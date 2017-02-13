@@ -8,16 +8,15 @@
 #pragma once
 
 
-namespace ofx {
-namespace IO {
-
-#pragma once
-
 
 #include <mutex>
 #include <queue>
 #include <condition_variable>
 #include "ofUtils.h"
+
+
+namespace ofx {
+namespace IO {
 
 
 /// \brief Like ofThreadChannel, with a few extra functions.
