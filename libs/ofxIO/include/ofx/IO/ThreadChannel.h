@@ -266,7 +266,7 @@ public:
         return queue.empty();
     }
 
-    bool size() const {
+    std::size_t size() const {
         return queue.size();
     }
 
