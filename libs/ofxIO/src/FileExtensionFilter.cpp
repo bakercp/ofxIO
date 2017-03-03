@@ -66,10 +66,16 @@ bool FileExtensionFilter::accept(const Poco::Path& path) const
     return !_acceptMatches;
 }
 
-    
+
 void FileExtensionFilter::addExtension(const std::string& extension)
 {
     _extensions.insert(extension);
+}
+
+
+void FileExtensionFilter::addExtensions(const std::unordered_set<std::string>& extensions)
+{
+    _extensions.insert(extensions.begin(), extensions.end());
 }
 
 

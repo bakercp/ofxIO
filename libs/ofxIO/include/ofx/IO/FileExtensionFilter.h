@@ -49,6 +49,11 @@ public:
     /// \param extension to be added to the list (e.g. "jpg").
     void addExtension(const std::string& extension);
 
+    /// \brief Add a set of extensions to the list of extensions.
+    /// \note Do not include the dot (e.g. use "jpg" not ".jpg").
+    /// \param extensions to be added to the list (e.g. "jpg").
+    void addExtensions(const std::unordered_set<std::string>& extensions);
+
     /// \brief Remove an extension from the list of extensions.
     /// \note Do not include the dot (e.g. use "jpg" not ".jpg").
     /// \param extension to be removed from the list (e.g. "jpg").
