@@ -117,8 +117,8 @@ public:
     ///        in the results.
     /// \param makeRelativeToDirectory True if the output files should be relative to
     ///        \p directory.
-    static void list(const std::string& directory,
-                     std::vector<std::string>& files,
+    static void list(const std::filesystem::path& directory,
+                     std::vector<std::filesystem::path>& files,
                      bool sortAlphaNumeric = false,
                      AbstractPathFilter* pFilter = nullptr,
                      bool makeRelativeToDirectory = false);
@@ -187,8 +187,8 @@ public:
     ///        recursive searches.
     /// \param makeRelativeToDirectory True if the output files should be relative to
     ///        \p directory.
-    static void listRecursive(const std::string& directory,
-                              std::vector<std::string>& files,
+    static void listRecursive(const std::filesystem::path& directory,
+                              std::vector<std::filesystem::path>& files,
                               bool sortAlphaNumeric = false,
                               AbstractPathFilter* pFilter = nullptr,
                               Poco::UInt16 maxDepth = INIFINITE_DEPTH,
@@ -200,8 +200,10 @@ public:
     /// \param base The reference base path used to make \p path relative.
     /// \returns A \p path made relative to \p base.
     /// \note This functionality comes with boost::filesystem::relative > 1.6.
-    static std::string makeRelativeTo(const std::string& path,
-                                      const std::string& base);
+    static std::filesystem::path makeRelativeTo(const std::filesystem::path& path,
+                                                const std::filesystem::path& base);
+private:
+    static void _sortAlphaNumeric(std::vector<std::filesystem::path>& paths);
 
 };
 
