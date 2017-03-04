@@ -65,7 +65,7 @@ uint64_t BackoffStrategy::getInitialDelay() const
 
 void BackoffStrategy::setMaximumDelay(uint64_t maximumDelay)
 {
-    return _maximumDelay;
+    _maximumDelay = maximumDelay;
 }
 
 
