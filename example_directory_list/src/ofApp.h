@@ -42,10 +42,10 @@ public:
         TXT_HEIGHT = 14
     };
 
-    void setup();
-    void draw();
+    void setup() override;
+    void draw() override;
 
-    void gotMessage(ofMessage msg);
+    void gotMessage(ofMessage msg) override;
 
     CustomPathFilter pathFilter; // an example path filter
     std::deque<std::string> messages;

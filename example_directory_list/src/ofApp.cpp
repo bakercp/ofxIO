@@ -15,13 +15,13 @@ void ofApp::setup()
 
     ofSendMessage("-----------------Single List");
 
-    std::vector<std::string> files;
+    std::vector<std::filesystem::path> files;
 
     ofxIO::DirectoryUtils::list("../../..", files, true, &pathFilter);
 
-    for (std::size_t i = 0; i < files.size(); ++i)
+    for (const auto& file: files)
     {
-        ofSendMessage(ofMessage(files[i]));
+        ofSendMessage(ofMessage(file.string()));
     }
 
     ofSendMessage("-----------------Recursive List");
@@ -33,9 +33,9 @@ void ofApp::setup()
                                          ofxIO::DirectoryUtils::INIFINITE_DEPTH,
                                          ofxIO::DirectoryUtils::SIBLINGS_FIRST);
 
-    for (std::size_t i = 0; i < files.size(); ++i)
+    for (const auto& file: files)
     {
-        ofSendMessage(ofMessage(files[i]));
+        ofSendMessage(ofMessage(file.string()));
     }
 
 }
@@ -58,7 +58,6 @@ void ofApp::draw()
 
 void ofApp::gotMessage(ofMessage msg)
 {
-
     int height = ofGetHeight();
 
     std::size_t numLines = static_cast<std::size_t>(height / TXT_HEIGHT);

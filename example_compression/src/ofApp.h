@@ -15,8 +15,8 @@
 class ofApp: public ofBaseApp
 {
 public:
-    void setup();
-    void draw();
+    void setup() override;
+    void draw() override;
 
     bool test(ofxIO::AbstractByteEncoderDecoder& encoder);
     void test(ofxIO::Compression::Type type,

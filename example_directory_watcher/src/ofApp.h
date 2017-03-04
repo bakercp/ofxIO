@@ -21,10 +21,10 @@ public:
         TXT_HEIGHT = 14
     };
 
-    void setup();
-    void draw();
+    void setup() override;
+    void draw() override;
 
-    void gotMessage(ofMessage msg);
+    void gotMessage(ofMessage msg) override;
 
     void onDirectoryWatcherItemAdded(const ofxIO::DirectoryWatcherManager::DirectoryEvent& evt)
     {
