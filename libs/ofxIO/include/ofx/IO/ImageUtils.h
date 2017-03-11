@@ -8,7 +8,6 @@
 #pragma once
 
 
-#include "FreeImage.h"
 #include "ofTypes.h"
 #include "ofFileUtils.h"
 #include "ofImage.h"
@@ -25,8 +24,6 @@ public:
     /// \basic Image parameters.
     struct ImageHeader
     {
-        FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
-        FREE_IMAGE_TYPE type = FIT_UNKNOWN;
         std::size_t width = 0;
         std::size_t height = 0;
         std::size_t bpp = 0;
