@@ -44,6 +44,7 @@ public:
         seed ^= hasher(v) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
     }
 
+    /// \brief Calculate the SHA-256 hash of a given buffer.
     template <typename BufferType>
     static std::string sha256(const BufferType& image)
     {
@@ -52,12 +53,12 @@ public:
         Poco::Crypto::RSADigestEngine eng(key, "SHA256");
 
         // "MD5", "SHA1", "SHA256", "SHA512"
-
         eng.update(image.getData(), image.size());
         const auto& sig = eng.digest(); // We just want the digest, unsigned.
         return Poco::DigestEngine::digestToHex(sig);
     }
 
+    /// \brief Calculate the SHA-1 hash of a given buffer.
     template <typename BufferType>
     static std::string sha1(const BufferType& buffer)
     {
@@ -67,6 +68,7 @@ public:
         return Poco::DigestEngine::digestToHex(digest);
     }
 
+    /// \brief Calculate the MD5 hash has of a given buffer.
     template <typename BufferType>
     static std::string md5(const BufferType& buffer)
     {
