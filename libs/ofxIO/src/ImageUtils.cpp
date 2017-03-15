@@ -20,11 +20,11 @@ bool ImageUtils::loadHeader(ImageHeader& header,
 {
     int flags = FIF_LOAD_NOPIXELS;
 
-    auto fif = FreeImage_GetFIFFromFilename(path.c_str());
+    auto fif = FreeImage_GetFIFFromFilename(path.string().c_str());
 
     if (FreeImage_FIFSupportsNoPixels(fif))
     {
-        FIBITMAP* dib = FreeImage_Load(fif, path.c_str(), flags);
+        FIBITMAP* dib = FreeImage_Load(fif, path.string().c_str(), flags);
 
         if (dib)
         {
