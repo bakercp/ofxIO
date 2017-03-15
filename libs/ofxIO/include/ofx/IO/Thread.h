@@ -45,15 +45,11 @@ protected:
     /// \brief Update callback from the main thread.
     ///
     /// This is used to synchronize message delivery.
-    ///
-    /// \param evt The event passed from the main loop.
     virtual void onUpdate();
 
     /// \brief Exit callback from the main thread.
     ///
     /// This is called before the thread has been stopped and joined.
-    ///
-    /// \param evt The event passed from the main loop.
     virtual void onExit();
 
     /// \brief Called from the thread after _isRunning is true before _threadedFunction is called.

@@ -72,13 +72,11 @@ bool Thread::isRunning() const
 
 void Thread::onUpdate()
 {
-    //ofLogVerbose("Thread::onUpdate") << "On update.";
 }
 
 
 void Thread::onExit()
 {
-    ofLogVerbose("Thread::onExit") << "On exit.";
 }
 
 
