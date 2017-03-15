@@ -57,6 +57,8 @@ void Thread::stop()
 
 void Thread::start()
 {
+    stopAndJoin();
+
     if (!_isRunning)
     {
         _thread = std::thread(&Thread::_run, this);

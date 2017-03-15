@@ -26,6 +26,14 @@ public:
     ThreadChannel()
     :closed(false){}
 
+    std::vector<T> tryReceiveAll()
+    {
+        std::vector<T> values;
+        T value;
+        while (tryReceive(value)) values.emplace_back(value);
+        return values;
+    }
+
     /// \brief Block the receiving thread until a new sent value is available.
     ///
     /// The receiving thread will block until a new sent value is available. In
@@ -254,8 +262,15 @@ public:
         closed = true;
         condition.notify_all();
     }
-    
-    
+
+
+    /// \brief Consume all queued values.
+    void consume()
+    {
+        tryReceiveAll();
+    }
+
+
     /// \brief Queries empty channel.
     ///
     /// This call is only an approximation, since messages come from a different
