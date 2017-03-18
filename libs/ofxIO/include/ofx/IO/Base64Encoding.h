@@ -5,6 +5,9 @@
 //
 
 
+#pragma once
+
+
 #include "ofx/IO/AbstractTypes.h"
 
 
