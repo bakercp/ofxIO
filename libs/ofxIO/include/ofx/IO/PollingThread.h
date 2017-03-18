@@ -1,4 +1,3 @@
-
 //
 // Copyright (c) 2010 Christopher Baker <https://christopherbaker.net>
 //
@@ -108,7 +107,6 @@ private:
 
     /// \brief The maximum random polling variation in milliseconds.
     std::atomic<int64_t> _pollingIntervalRandomMaximum;
-
 
 };
 

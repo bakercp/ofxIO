@@ -8,7 +8,6 @@
 #pragma once
 
 
-
 #include <thread>
 #include <condition_variable>
 #include "ofEvents.h"
