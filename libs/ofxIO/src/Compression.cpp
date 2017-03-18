@@ -271,6 +271,11 @@ std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
             }
 
         }
+        case NONE:
+        {
+            uncompressedBuffer.clear();
+            uncompressedBuffer.writeBytes(compressedBuffer);
+        }
     }
 
     return 0;
@@ -362,6 +367,11 @@ std::size_t Compression::compress(const ByteBuffer& uncompressedBuffer,
                 ofLogError("Compression::compress") << "brotli::BrotliCompressBuffer compression error.";
                 return 0;
             }
+        }
+        case NONE:
+        {
+            compressedBuffer.clear();
+            compressedBuffer.writeBytes(uncompressedBuffer);
         }
     }
 
@@ -458,6 +468,8 @@ std::string Compression::version(Type type)
         }
         case BR:
             return BROTLI_VERSION;
+        case NONE:
+            return "0.0.0";
     }
 
     return "UNKNOWN";
@@ -477,6 +489,8 @@ std::string Compression::toString(Type type)
             return "LZ4";
         case BR:
             return "BROTLI";
+        case NONE:
+            return "NONE";
     }
 
     return "UNKNOWN";

@@ -22,6 +22,8 @@ class Compression
 public:
     enum Type
     {
+        /// \brief Use no compression.
+        NONE,
         /// \brief Expect a zlib header, use Adler-32 checksum.
         ZLIB,
         /// \brief Expect a gzip header, use CRC-32 checksum.
