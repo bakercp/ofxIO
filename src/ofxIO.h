@@ -33,6 +33,7 @@
 #include "ofx/IO/HexBinaryEncoding.h"
 #include "ofx/IO/HiddenFileFilter.h"
 #include "ofx/IO/ImageUtils.h"
+#include "ofx/IO/JSONUtils.h"
 #include "ofx/IO/LinkFilter.h"
 #include "ofx/IO/PathFilterCollection.h"
 #include "ofx/IO/RegexPathFilter.h"
