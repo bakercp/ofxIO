@@ -10,6 +10,7 @@
 
 #include <functional>
 #include <string>
+#include "Poco/Checksum.h"
 #include "Poco/DigestStream.h"
 #include "Poco/Exception.h"
 #include "Poco/MD5Engine.h"
@@ -22,6 +23,27 @@
 
 namespace ofx {
 namespace IO {
+
+
+class Checksum
+{
+public:
+    template <typename BufferType>
+    uint32_t crc32(const BufferType& buffer)
+    {
+        Poco::Checksum c(Poco::Checksum::TYPE_CRC32);
+        c.update(buffer.getData(), buffer.getSize());
+        return c.checksum();
+    }
+
+    template <typename BufferType>
+    uint32_t adler32(const BufferType& buffer)
+    {
+        Poco::Checksum c(Poco::Checksum::TYPE_ADLER32);
+        c.update(buffer.getData(), buffer.getSize());
+        return c.checksum();
+    }
+};
 
 
 class Hash
