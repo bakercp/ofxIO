@@ -57,7 +57,7 @@ public:
     ///
     /// \param seed The existing hash to amend.
     /// \param v The value to hash and amend.
-    /// \tparam The type of the value to hash and amend.
+    /// \tparam T The type of the value to hash and amend.
     /// \sa http://stackoverflow.com/a/2595226/1518329
     template <class T>
     static void combine(std::size_t& seed, const T& v)
@@ -67,20 +67,26 @@ public:
     }
 
     /// \brief Calculate the SHA-256 hash of a given buffer.
+    /// \param buffer The buffer hash.
+    /// \returns the calculated hash as a HEX string.
+    /// \tparam BufferType The buffer type.
     template <typename BufferType>
-    static std::string sha256(const BufferType& image)
+    static std::string sha256(const BufferType& buffer)
     {
         Poco::Crypto::RSAKey key(Poco::Crypto::RSAKey::KL_2048,
                                  Poco::Crypto::RSAKey::EXP_LARGE);
         Poco::Crypto::RSADigestEngine eng(key, "SHA256");
 
         // "MD5", "SHA1", "SHA256", "SHA512"
-        eng.update(image.getData(), image.size());
+        eng.update(buffer.getData(), buffer.size());
         const auto& sig = eng.digest(); // We just want the digest, unsigned.
         return Poco::DigestEngine::digestToHex(sig);
     }
 
     /// \brief Calculate the SHA-1 hash of a given buffer.
+    /// \param buffer The buffer hash.
+    /// \returns the calculated hash as a HEX string.
+    /// \tparam BufferType The buffer type.
     template <typename BufferType>
     static std::string sha1(const BufferType& buffer)
     {
@@ -91,6 +97,9 @@ public:
     }
 
     /// \brief Calculate the MD5 hash has of a given buffer.
+    /// \param buffer The buffer hash.
+    /// \returns the calculated hash as a HEX string.
+    /// \tparam BufferType The buffer type.
     template <typename BufferType>
     static std::string md5(const BufferType& buffer)
     {
