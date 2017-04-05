@@ -143,11 +143,11 @@ private:
     /// \brief The next delay.
     uint64_t _lastDelay = 0;
 
-    /// \brief The maximum number of retries before failure.
-    uint64_t _maximumRetries = DEFAULT_MAXIMUM_RETIRES;
-
     /// \brief The maximum delay time that can be generated.
     uint64_t _maximumDelay = DEFAULT_MAXIMUM_DELAY;
+
+    /// \brief The maximum number of retries before failure.
+    uint64_t _maximumRetries = DEFAULT_MAXIMUM_RETIRES;
 
 };
 
