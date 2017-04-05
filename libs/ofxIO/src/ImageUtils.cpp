@@ -55,6 +55,130 @@ bool ImageUtils::loadHeader(ImageHeader& header,
 }
 
 
+ofPixels_<unsigned char> ImageUtils::scaleAndCropTo(const ofPixels_<unsigned char>& pixels,
+                                                    std::size_t width,
+                                                    std::size_t height,
+                                                    ofScaleMode scaleMode)
+{
+    ofRectangle inRect(0, 0, pixels.getWidth(), pixels.getHeight());
+
+    ofRectangle outRect(0, 0, width, height);
+
+    inRect.scaleTo(outRect, scaleMode);
+
+    auto inPixels = pixels;
+
+    inPixels.resize(inRect.getWidth(), inRect.getHeight());
+
+    ofPixels_<unsigned char> outPixels;
+
+    inPixels.cropTo(outPixels,
+                    outRect.x - inRect.x,
+                    0,
+                    outRect.width,
+                    outRect.height);
+
+    return outPixels;
+}
+
+
+ofPixels_<unsigned char> ImageUtils::dither(const ofPixels_<unsigned char>& pixels,
+                                            float threshold,
+                                            float quantWeight)
+{
+    // Special thanks to @julapy / ofxDither
+    auto pixelsIn = pixels;
+
+    // ensure the image is grayscale
+    if (OF_IMAGE_GRAYSCALE != pixelsIn.getImageType())
+    {
+        pixelsIn = toGrayscale(pixels);
+    }
+
+    // make a copy
+    auto pixelsOut = pixelsIn;
+
+    // set up the quantization error
+    std::size_t width  = pixelsOut.getWidth();
+    std::size_t height = pixelsOut.getHeight();
+
+    std::size_t numPixels = width * height; // 1 byte / pixel
+
+    float qErrors[numPixels];
+
+    std::fill(qErrors, qErrors + numPixels, 0.0);
+
+    //unsigned char* inPix  = pixelsIn.getPixels();
+    unsigned char* outPix = pixelsOut.getData();
+
+    float limit = ofColor_<unsigned char>::limit();
+
+    for (std::size_t y = 0; y < height; y++)
+    {
+        for (std::size_t x = 0; x < width; x++)
+        {
+            std::size_t p = pixelsIn.getPixelIndex(x, y);
+
+            // Add error.
+            std::size_t oldPx = outPix[p] + qErrors[p];
+
+            // Threshold.
+            std::size_t newPx = (oldPx < (threshold * limit)) ? 0 : limit;
+
+            outPix[p] = newPx;
+
+            std::size_t qError = oldPx - newPx;
+
+            _accumulateDitherError(x + 1, y    , pixelsOut, qError, qErrors, quantWeight); // check east
+            _accumulateDitherError(x + 2, y    , pixelsOut, qError, qErrors, quantWeight); // check east east
+            _accumulateDitherError(x - 1, y + 1, pixelsOut, qError, qErrors, quantWeight); // check southwest
+            _accumulateDitherError(x    , y + 1, pixelsOut, qError, qErrors, quantWeight); // check south
+            _accumulateDitherError(x + 1, y + 1, pixelsOut, qError, qErrors, quantWeight); // check southeast
+            _accumulateDitherError(x    , y + 2, pixelsOut, qError, qErrors, quantWeight); // check south south
+        }
+    }
+    
+    return pixelsOut;
+}
+
+
+ofPixels_<unsigned char> ImageUtils::toGrayscale(const ofPixels_<unsigned char>& pixels)
+{
+    if (OF_IMAGE_GRAYSCALE == pixels.getImageType())
+    {
+        return pixels;
+    }
+
+    ofPixels pix;
+
+    pix.allocate(pixels.getWidth(), pixels.getHeight(), OF_IMAGE_GRAYSCALE);
+
+    for (std::size_t x = 0; x < pixels.getWidth(); ++x)
+    {
+        for (std::size_t y = 0; y < pixels.getHeight(); ++y)
+        {
+            auto c = pixels.getColor(x, y);
+            pix.setColor(x, y, 0.21 * c.r + 0.71 * c.g + 0.07 * c.b);
+        }
+    }
+    
+    return pix;
+}
+
+
+void ImageUtils::_accumulateDitherError(std::size_t x,
+                                        std::size_t y,
+                                        ofPixels_<unsigned char>& pixels,
+                                        int qError,
+                                        float* qErrors,
+                                        float quantWeight)
+{
+    if (x < pixels.getWidth() && y < pixels.getHeight())
+    {
+        qErrors[pixels.getPixelIndex(x, y)] += quantWeight * qError;
+    }
+}
+
 
 
 } } // namespace ofx::IO

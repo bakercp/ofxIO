@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2009 Christopher Baker <https://christopherbaker.net>
+// Copyright (c) 2017 Christopher Baker <https://christopherbaker.net>
 //
 // SPDX-License-Identifier:	MIT
 //
@@ -10,34 +10,71 @@
 
 void ofApp::setup()
 {
-    std::string path = ofToDataPath("openFrameworks.png", true);
+    ditherThreshold.addListener(this, &ofApp::ditherChanged);
+    ditherQuantWeight.addListener(this, &ofApp::ditherChanged);
 
-    ofx::IO::ByteBuffer byteBuffer;
+    gui.setup();
+    gui.add(ditherThreshold.setup("dither threshold", 0.75, 0, 1));
+    gui.add(ditherQuantWeight.setup("dither quant. weight", 0.125, 0, 1));
 
-    try
+    std::filesystem::path path = ofToDataPath("puppy.jpg", true);
+
+    bool success = ofxIO::ImageUtils::loadHeader(header, path);
+
+    if (!success)
     {
-        std::streamsize in = ofx::IO::ByteBufferUtils::loadFromFile(path, byteBuffer);
-
-        ofLogNotice("ofApp::setup") << in << " bytes read.";
-
-        std::string newPath = ofToDataPath("openFrameworks_copy.png", true);
-
-        bool result = ofx::IO::ByteBufferUtils::saveToFile(byteBuffer, newPath);
-
-        if (result)
-        {
-            ofLogNotice("ofApp::setup") << "File written to " << newPath;
-        }
-        else
-        {
-            ofLogError("ofApp::setup") << "File not written bytes written.";
-        }
-    }
-    catch (Poco::Exception& exception)
-    {
-        ofLogError("ofApp::setup") << "Exception: " << exception.displayText();
+        ofLogError() << "Unable to load header from image.";
     }
 
-    ofExit();
+    ofLoadImage(originalPix, path);
+    originalTex.loadData(originalPix);
 
+    grayscalePix = ofxIO::ImageUtils::toGrayscale(originalPix);
+    grayscaleTex.loadData(grayscalePix);
+
+    ofSetWindowShape(originalPix.getWidth() * 2,
+                     originalPix.getHeight() * 2);
+}
+
+
+void ofApp::update()
+{
+    if (doDither)
+    {
+        ditheredPix = ofxIO::ImageUtils::dither(grayscalePix,
+                                                ditherThreshold,
+                                                ditherQuantWeight);
+
+        ditheredTex.loadData(ditheredPix);
+        doDither = false;
+    }
+}
+
+
+void ofApp::draw()
+{
+    ofSetBackgroundColor(0);
+
+    originalTex.draw(0, 0);
+    grayscaleTex.draw(originalTex.getWidth(), 0);
+    ditheredTex.draw(0, originalTex.getHeight());
+
+    std::stringstream ss;
+
+    ss << "Header Data" << std::endl;
+    ss << "     Width: " << header.width << std::endl;
+    ss << "    Height: " << header.height << std::endl;
+    ss << "Bits/Pixel: " << header.bpp;
+
+    ofDrawBitmapStringHighlight(ss.str(),
+                                originalTex.getWidth() + 14,
+                                originalTex.getHeight() + 20);
+
+    gui.draw();
+}
+
+
+void ofApp::ditherChanged(float&)
+{
+    doDither = true;
 }

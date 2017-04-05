@@ -40,10 +40,27 @@ public:
                            bool loadPixelsIfRequired = true);
 
 
+    static ofPixels_<unsigned char> scaleAndCropTo(const ofPixels_<unsigned char>& pixelsRef,
+                                                   std::size_t width,
+                                                   std::size_t height,
+                                                   ofScaleMode scaleMode = OF_SCALEMODE_FIT);
+
+    static ofPixels_<unsigned char> dither(const ofPixels_<unsigned char>& pixels,
+                                           float threshold = 0.75,
+                                           float quantWeight = 0.125);
+
+    static ofPixels_<unsigned char> toGrayscale(const ofPixels_<unsigned char>& pixels);
 
 
 
-
+private:
+    static void _accumulateDitherError(std::size_t x,
+                                       std::size_t y,
+                                       ofPixels_<unsigned char>& pixels,
+                                       int qError,
+                                       float* qErrors,
+                                       float quantWeight);
+    
 };
 
 

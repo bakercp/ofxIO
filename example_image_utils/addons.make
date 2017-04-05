@@ -1,2 +1,3 @@
+ofxGui
 ofxIO
 ofxPoco
