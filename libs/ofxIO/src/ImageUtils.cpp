@@ -104,9 +104,7 @@ ofPixels_<unsigned char> ImageUtils::dither(const ofPixels_<unsigned char>& pixe
 
     std::size_t numPixels = width * height; // 1 byte / pixel
 
-    float qErrors[numPixels];
-
-    std::fill(qErrors, qErrors + numPixels, 0.0);
+    std::vector<float> qErrors(numPixels);
 
     //unsigned char* inPix  = pixelsIn.getPixels();
     unsigned char* outPix = pixelsOut.getData();
@@ -149,20 +147,11 @@ ofPixels_<unsigned char> ImageUtils::toGrayscale(const ofPixels_<unsigned char>&
         return pixels;
     }
 
-    ofPixels pix;
-
-    pix.allocate(pixels.getWidth(), pixels.getHeight(), OF_IMAGE_GRAYSCALE);
-
-    for (std::size_t x = 0; x < pixels.getWidth(); ++x)
-    {
-        for (std::size_t y = 0; y < pixels.getHeight(); ++y)
-        {
-            auto c = pixels.getColor(x, y);
-            pix.setColor(x, y, 0.21 * c.r + 0.71 * c.g + 0.07 * c.b);
-        }
-    }
-    
-    return pix;
+    ofImage img;
+    img.setUseTexture(false);
+    img.setFromPixels(pixels);
+    img.setImageType(OF_IMAGE_GRAYSCALE);
+    return img.getPixels();
 }
 
 
@@ -170,7 +159,7 @@ void ImageUtils::_accumulateDitherError(std::size_t x,
                                         std::size_t y,
                                         ofPixels_<unsigned char>& pixels,
                                         int qError,
-                                        float* qErrors,
+                                        std::vector<float>& qErrors,
                                         float quantWeight)
 {
     if (x < pixels.getWidth() && y < pixels.getHeight())

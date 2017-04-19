@@ -58,7 +58,7 @@ private:
                                        std::size_t y,
                                        ofPixels_<unsigned char>& pixels,
                                        int qError,
-                                       float* qErrors,
+                                       std::vector<float>& qErrors,
                                        float quantWeight);
     
 };
