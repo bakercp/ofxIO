@@ -72,8 +72,8 @@ std::thread::id LoggerMessage::threadId() const
 
 
 BaseThreadsafeLoggerChannel::BaseThreadsafeLoggerChannel():
-    _exitListener(ofEvents().exit.newListener(this, &BaseThreadsafeLoggerChannel::_exit)),
     _updateListener(ofEvents().update.newListener(this, &BaseThreadsafeLoggerChannel::_update))
+    _exitListener(ofEvents().exit.newListener(this, &BaseThreadsafeLoggerChannel::_exit)),
 {
 }
 
