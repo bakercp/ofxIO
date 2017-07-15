@@ -32,6 +32,9 @@ void ofApp::setup()
     grayscalePix = ofxIO::ImageUtils::toGrayscale(originalPix);
     grayscaleTex.loadData(grayscalePix);
 
+
+
+
     ofSetWindowShape(originalPix.getWidth() * 2,
                      originalPix.getHeight() * 2);
 }
@@ -58,6 +61,7 @@ void ofApp::draw()
     originalTex.draw(0, 0);
     grayscaleTex.draw(originalTex.getWidth(), 0);
     ditheredTex.draw(0, originalTex.getHeight());
+    scaleCropTex.draw(originalTex.getWidth(), originalTex.getHeight());
 
     std::stringstream ss;
 

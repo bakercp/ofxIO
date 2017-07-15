@@ -123,8 +123,8 @@ public:
     /// \param listExistingItemsOnStart will fire ITEM_ADDED events for
     ///        matching items in the directory upon startup.
     /// \param sortAlphaNumeric sorts all values alphanumerically.
-    /// \param pFilter is the path filter for this path.  The
-    ///        DirectoryWatcherManager does not take  ownership
+    /// \param pFilter is the path filter for this path. The
+    ///        DirectoryWatcherManager does not take ownership
     ///        ownership of the pointer.
     /// \param eventMask defines the behavior of the
     ///        DirectoryWatcherManager for this Path.
@@ -134,7 +134,7 @@ public:
     void addPath(const Poco::Path& path,
                  bool listExistingItemsOnStart = false,
                  bool sortAlphaNumeric         = false,
-                 AbstractPathFilter* pFilter   = 0,
+                 AbstractPathFilter* pFilter   = nullptr,
                  int  eventMask                = FILTER_ENABLE_ALL,
                  int  scanInterval             = DEFAULT_SCAN_INTERVAL);
 

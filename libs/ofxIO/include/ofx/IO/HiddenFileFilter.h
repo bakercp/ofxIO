@@ -31,8 +31,6 @@ public:
     /// \brief Destroys a hidden file filter.
     virtual ~HiddenFileFilter();
 
-    /// \brief Accept a path based if it represents a hidden file.
-    /// \returns true iff the path represents a hidden file.
     bool accept(const Poco::Path& path) const override;
 
 };

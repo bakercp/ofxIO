@@ -38,7 +38,7 @@ public:
     /// \brief Destroy the file extension filter.
     virtual ~FileExtensionFilter();
 
-    /// \brief Accept a path based if it represents satisfies the file filter.
+    /// \brief Accept a path if it satisfies the file filter.
     /// \returns true iff the path extension matches one from the list
     ///        and the additional match criteria (ignoreCase and
     ///        acceptMatches) are also satisfied.
@@ -69,11 +69,11 @@ public:
 
 private:
     /// \brief true iff the case should be ignored.
-    bool _ignoreCase;
+    bool _ignoreCase = true;
 
     /// \brief true iff matches should be accepted,
     /// otherwise false iff matches should be rejected.
-    bool _acceptMatches;
+    bool _acceptMatches = true;
 
     /// \brief The list of file extensions to match.
     std::unordered_set<std::string> _extensions;

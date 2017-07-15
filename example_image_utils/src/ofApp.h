@@ -27,10 +27,12 @@ public:
     ofPixels originalPix;
     ofPixels grayscalePix;
     ofPixels ditheredPix;
+    ofPixels scaleCropPix;
 
     ofTexture originalTex;
     ofTexture grayscaleTex;
     ofTexture ditheredTex;
+    ofTexture scaleCropTex;
 
     ofxIO::ImageUtils::ImageHeader header;
 
