@@ -213,10 +213,12 @@ ThreadsafeFileLoggerChannel::~ThreadsafeFileLoggerChannel()
     close();
 }
 
+
 void ThreadsafeFileLoggerChannel::close()
 {
     file.close();
 }
+
 
 void ThreadsafeFileLoggerChannel::setFile(const std::filesystem::path & path,
                                           bool append)
@@ -227,6 +229,7 @@ void ThreadsafeFileLoggerChannel::setFile(const std::filesystem::path & path,
     file << "--------------------------------------- " << ofGetTimestampString() << std::endl;
 }
 
+    
 void ThreadsafeFileLoggerChannel::output(const LoggerMessage& message)
 {
     // print to cerr for OF_LOG_ERROR and OF_LOG_FATAL_ERROR, everything else to cout
