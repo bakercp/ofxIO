@@ -34,7 +34,7 @@ public:
     ofTexture ditheredTex;
     ofTexture scaleCropTex;
 
-    ofxIO::ImageUtils::ImageHeader header;
+    ofxIO::ImageHeader header;
 
     ofxPanel gui;
     ofxFloatSlider ditherThreshold;

@@ -31,7 +31,7 @@ public:
     /// \brief Destroys a hidden file filter.
     virtual ~HiddenFileFilter();
 
-    bool accept(const Poco::Path& path) const override;
+    bool accept(const std::filesystem::path& path) const override;
 
 };
 

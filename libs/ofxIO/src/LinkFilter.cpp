@@ -22,9 +22,9 @@ LinkFilter::~LinkFilter()
 }
 
 
-bool LinkFilter::accept(const Poco::Path& path) const
+bool LinkFilter::accept(const std::filesystem::path& path) const
 {
-    return Poco::File(path).isLink();
+    return Poco::File(path.string()).isLink();
 }
 
 

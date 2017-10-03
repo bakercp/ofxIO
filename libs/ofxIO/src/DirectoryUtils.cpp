@@ -29,7 +29,7 @@ void DirectoryUtils::list(const AbstractSearchPath& path,
 
     if (path.isRecursive())
     {
-        listRecursive(path.getPath().toString(),
+        listRecursive(path.getPath().string(),
                       _files,
                       sortAlphaNumeric,
                       pFilter,
@@ -39,7 +39,7 @@ void DirectoryUtils::list(const AbstractSearchPath& path,
     }
     else
     {
-        list(path.getPath().toString(),
+        list(path.getPath().string(),
              _files,
              sortAlphaNumeric,
              pFilter,

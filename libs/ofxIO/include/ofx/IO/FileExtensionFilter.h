@@ -42,7 +42,7 @@ public:
     /// \returns true iff the path extension matches one from the list
     ///        and the additional match criteria (ignoreCase and
     ///        acceptMatches) are also satisfied.
-    bool accept(const Poco::Path& path) const override;
+    bool accept(const std::filesystem::path& path) const override;
 
     /// \brief Add an extension to the list of extensions.
     /// \note Do not include the dot (e.g. use "jpg" not ".jpg").

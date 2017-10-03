@@ -23,9 +23,9 @@ DirectoryFilter::~DirectoryFilter()
 }
 
 
-bool DirectoryFilter::accept(const Poco::Path& path) const
+bool DirectoryFilter::accept(const std::filesystem::path& path) const
 {
-	bool isDirectory = Poco::File(path).isDirectory();
+	bool isDirectory = std::filesystem::is_directory(path);
 
 	return _acceptMatches ? isDirectory : !isDirectory;
 }

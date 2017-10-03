@@ -34,10 +34,11 @@ FileExtensionFilter::~FileExtensionFilter()
 }
 
     
-bool FileExtensionFilter::accept(const Poco::Path& path) const
+bool FileExtensionFilter::accept(const std::filesystem::path& _path) const
 {
     // Note: We go through all of these steps to enable ignore case, etc.
-    
+    Poco::Path path(_path.string());
+
     std::string extension = path.getExtension();
 
     auto iter = _extensions.begin();

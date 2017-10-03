@@ -29,12 +29,12 @@ public:
 
     /// \brief Accept a path based if it represents a directory.
     /// \returns true iff the path represents a directory.
-    bool accept(const Poco::Path& path) const override;
+    bool accept(const std::filesystem::path& path) const override;
 
 private:
 	/// \brief true iff matches should be accepted,
 	/// otherwise false iff matches should be rejected.
-	bool _acceptMatches;
+	bool _acceptMatches = true;
 
 };
 

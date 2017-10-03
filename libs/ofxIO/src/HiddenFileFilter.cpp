@@ -22,9 +22,9 @@ HiddenFileFilter::~HiddenFileFilter()
 }
 
 
-bool HiddenFileFilter::accept(const Poco::Path& path) const
+bool HiddenFileFilter::accept(const std::filesystem::path& path) const
 {
-    return Poco::File(path).isHidden();
+    return Poco::File(path.string()).isHidden();
 }
 
 

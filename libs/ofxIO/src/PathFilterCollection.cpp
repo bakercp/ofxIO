@@ -22,7 +22,7 @@ PathFilterCollection::~PathFilterCollection()
 }
 
 
-bool PathFilterCollection::accept(const Poco::Path& path) const
+bool PathFilterCollection::accept(const std::filesystem::path& path) const
 {
     std::set<AbstractPathFilter*>::const_iterator iter = _filters.begin();
 

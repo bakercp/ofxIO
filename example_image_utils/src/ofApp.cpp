@@ -19,7 +19,7 @@ void ofApp::setup()
 
     std::filesystem::path path = ofToDataPath("puppy.jpg", true);
 
-    bool success = ofxIO::ImageUtils::loadHeader(header, path);
+    bool success = ofxIO::ImageHeader::loadHeader(header, path);
 
     if (!success)
     {
@@ -29,7 +29,7 @@ void ofApp::setup()
     ofLoadImage(originalPix, path);
     originalTex.loadData(originalPix);
 
-    grayscalePix = ofxIO::ImageUtils::toGrayscale(originalPix);
+    grayscalePix = ofxIO::ImageHeader::toGrayscale(originalPix);
     grayscaleTex.loadData(grayscalePix);
 
 

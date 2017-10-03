@@ -25,9 +25,9 @@ RegexPathFilter::~RegexPathFilter()
 }
 
 
-bool RegexPathFilter::accept(const Poco::Path& path) const
+bool RegexPathFilter::accept(const std::filesystem::path& path) const
 {
-    return _regex.match(path.toString());
+    return _regex.match(path.string());
 }
 
 

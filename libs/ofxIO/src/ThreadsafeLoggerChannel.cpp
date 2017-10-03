@@ -182,7 +182,7 @@ void BaseThreadsafeLoggerChannel::output(const LoggerMessage& message)
     auto& out = message.level() < OF_LOG_ERROR ? std::cout : std::cerr;
     out << "[" << ofGetLogLevelName(message.level(), true)  << "] ";
     if (!message.module().empty()) out << message.module() << ": ";
-    out << message.message() << endl;
+    out << message.message() << std::endl;
 }
 
 
@@ -197,7 +197,7 @@ void ThreadsafeConsoleLoggerChannel::output(const LoggerMessage& message)
     auto& out = message.level() < OF_LOG_ERROR ? std::cout : std::cerr;
     out << "[" << ofGetLogLevelName(message.level(), true)  << "] ";
     if (!message.module().empty()) out << message.module() << ": ";
-    out << message.message() << endl;
+    out << message.message() << std::endl;
 }
 
 
@@ -233,7 +233,7 @@ void ThreadsafeFileLoggerChannel::output(const LoggerMessage& message)
     auto& out = file;
     out << "[" << ofGetLogLevelName(message.level(), true)  << "] ";
     if (!message.module().empty()) out << message.module() << ": ";
-    out << message.message() << endl;
+    out << message.message() << std::endl;
 }
 
 

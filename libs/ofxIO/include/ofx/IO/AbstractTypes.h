@@ -11,7 +11,7 @@
 #include <stdint.h>
 #include <vector>
 #include <string>
-#include "Poco/File.h"
+#include "ofFileUtils.h"
 
 
 namespace ofx {
@@ -148,6 +148,23 @@ public:
 
 };
 
+class AbstractBufferedSerialDevice:
+    public virtual AbstractBufferedByteSource,
+    public virtual AbstractByteSink
+{
+public:
+    virtual ~AbstractBufferedSerialDevice()
+    {
+    }
+
+
+    /// \returns true if a connection to the device is open.
+    virtual bool isOpen() const = 0;
+
+    virtual void close() const = 0;
+
+};
+
 
 /// \brief Represents the abstract notion of a byte encoder.
 ///
@@ -221,7 +238,7 @@ public:
     
     /// \brief Accept a path based on a defined criteria.
     /// \returns true iff the path is accepted by the path filter.
-    virtual bool accept(const Poco::Path& path) const = 0;
+    virtual bool accept(const std::filesystem::path& path) const = 0;
     
 };
 
@@ -241,7 +258,8 @@ public:
 
     /// \brief Get the path for this search path.
     /// \returns the search path.
-    virtual Poco::Path getPath() const = 0;
+    virtual std::filesystem::path getPath() const = 0;
+
 
 };
 

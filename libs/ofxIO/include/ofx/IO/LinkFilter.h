@@ -33,7 +33,7 @@ public:
 
     /// \brief Accept a path based if it represents a symbolic link.
     /// \returns true iff the path represents a symbolic link.
-    bool accept(const Poco::Path& path) const override;
+    bool accept(const std::filesystem::path& path) const override;
 
 };
 

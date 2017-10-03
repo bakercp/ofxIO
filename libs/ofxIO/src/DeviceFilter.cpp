@@ -22,9 +22,9 @@ DeviceFilter::~DeviceFilter()
 }
 
 
-bool DeviceFilter::accept(const Poco::Path& path) const
+bool DeviceFilter::accept(const std::filesystem::path& path) const
 {
-    return Poco::File(path).isDevice();
+    return Poco::File(path.string()).isDevice();
 }
 
 

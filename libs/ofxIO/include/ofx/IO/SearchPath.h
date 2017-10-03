@@ -26,21 +26,21 @@ public:
     /// \brief Construct a search path.
     /// \param path is the search path.
     /// \param isRecursive enables recursive path searches.
-    SearchPath(const Poco::Path& path, bool isRecursive = false);
+    SearchPath(const std::filesystem::path& path, bool isRecursive = false);
 
     /// \brief Destroy a search path.
     virtual ~SearchPath();
 
     bool isRecursive() const override;
 
-    Poco::Path getPath() const override;
+    std::filesystem::path getPath() const override;
     
 private:
     /// \brief The path to search.
-    Poco::Path _path;
+    std::filesystem::path _path;
 
     /// \brief True if the search path is recursive.
-    bool _isRecursive;
+    bool _isRecursive = false;
 
 };
 

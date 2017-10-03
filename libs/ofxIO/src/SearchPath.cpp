@@ -19,7 +19,7 @@ SearchPath::SearchPath():
 }
 
 
-SearchPath::SearchPath(const Poco::Path& path, bool isRecursive):
+SearchPath::SearchPath(const std::filesystem::path& path, bool isRecursive):
     _path(path),
     _isRecursive(isRecursive)
 {
@@ -37,7 +37,7 @@ bool SearchPath::isRecursive() const
 }
 
 
-Poco::Path SearchPath::getPath() const
+std::filesystem::path SearchPath::getPath() const
 {
     return _path;
 }
