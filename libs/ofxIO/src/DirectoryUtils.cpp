@@ -8,6 +8,7 @@
 #include "ofx/IO/DirectoryUtils.h"
 #include "Poco/Exception.h"
 #include "alphanum.hpp"
+#include "ofLog.h"
 
 
 namespace ofx {

@@ -8,6 +8,7 @@
 #pragma once
 
 
+#include "ofRectangle.h"
 #include "ofTypes.h"
 #include "ofFileUtils.h"
 #include "ofImage.h"
