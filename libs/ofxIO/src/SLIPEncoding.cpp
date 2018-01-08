@@ -97,8 +97,6 @@ std::size_t SLIPEncoding::encode(const uint8_t* buffer,
         }
     }
 
-    encoded[write_index++] = END;
-
     return write_index;
 }
 
