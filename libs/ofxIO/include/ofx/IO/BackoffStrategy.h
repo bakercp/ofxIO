@@ -14,8 +14,8 @@
 
 namespace ofx {
 namespace IO {
-
-
+    
+    
 /// \brief A class for generating backoff delays based on a particular strategy.
 class BackoffStrategy
 {
