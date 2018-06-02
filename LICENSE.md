@@ -23,8 +23,8 @@ SOFTWARE.
 ---
 
 # Included libraries
-- `alphanum` [LGPL-3.0](https://opensource.org/licenses/LGPL-3.0)
-- `brotli` [MIT](https://opensource.org/licenses/MIT)
-- `lz4` [BSD-2-Clause](https://opensource.org/licenses/BSD-2-Clause)
-- `snappy` [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause)
-- `POCO` [BSL-1.0](https://opensource.org/licenses/BSL-1.0)
+-   `alphanum` [LGPL-3.0](https://opensource.org/licenses/LGPL-3.0)
+-   `brotli` [MIT](https://opensource.org/licenses/MIT)
+-   `lz4` [BSD-2-Clause](https://opensource.org/licenses/BSD-2-Clause)
+-   `snappy` [BSD-3-Clause](https://opensource.org/licenses/BSD-3-Clause)
+-   `POCO` [BSL-1.0](https://opensource.org/licenses/BSL-1.0)
