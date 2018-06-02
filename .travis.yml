@@ -1,28 +1,42 @@
 language: c++
 compiler: gcc
-sudo: false
+sudo: true
 matrix:
   include:
+  # fully specify builds, include can't dynamically expand matrix entries
+  # relative order of sudo and env is important so that addons: is recognized
+
+# Linux 64bit, OF master
+  - os: linux
+    dist: trusty
+    sudo: required
+    env: TARGET="linux64" OF_BRANCH="master"
+    addons:
+      apt:
+        sources:
+          - ubuntu-toolchain-r-test
+        packages:
+          - gcc-4.9
+          - g++-4.9
+          - gdb
+
+# OSX, OF master
   - os: osx
-    env:
-    - TARGET="docs"
+    osx_image: xcode8
+    compiler: clang
+    env: TARGET="osx" OF_BRANCH="master"
+
+  # Exclude the default build that would otherwise be generated
+  # see https://github.com/travis-ci/travis-ci/issues/1228
   exclude:
-  - compiler: gcc
+    - compiler: gcc
+before_install:
+  - curl -SLsO https://raw.githubusercontent.com/bakercp/ofxAddonScripts/${OF_BRANCH}/scripts/ci/tools/install.sh
+  - source install.sh
 install:
-- if [ "$TARGET" == "android" ] || [ "$TARGET" == "linux" ] || [ "$TARGET" == "docs" ]; then
-    scripts/ci/$TARGET/install.sh;
-  fi
+  - do_install
 script:
-- scripts/ci/$TARGET/build.sh $OPT
-- if [ "$TARGET" == "osx" ] || [ "$TARGET" == "linux" ]; then
-    scripts/ci/$TARGET/run_tests.sh;
-  fi
-after_success:
-- if [ "$TARGET" == "docs" ]; then
-    scripts/ci/$TARGET/after_success.sh;
-  fi
+  - do_script
+
 git:
-  depth: 1
-env:
-  global:
-  - secure: dyeJqawQIXyF8enoShkp5mwk7FPH6MEM0YsniX0bxUGj1yJ/hNfAXbrz9mmfiRuO0creHKMFr+5yN+M791yxZ1p3i/0MQ0AS8YnAwdwd4stqg2qr5Ftbuw5bUPZ4mU+9giPHwLELT01qiDURblCJY01jC1ybXY8vmuwX9QEuhic=
+  depth: 10

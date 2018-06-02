@@ -1,26 +1,8 @@
-// =============================================================================
 //
-// Copyright (c) 2013-2016 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2013 Christopher Baker <https://christopherbaker.net>
 //
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+// SPDX-License-Identifier:	MIT
 //
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
-//
-// =============================================================================
 
 
 #include "ofx/IO/Compression.h"
@@ -33,9 +15,151 @@
 #include "lz4.h"
 #include "ofLog.h"
 
+#include "dec/decode.h"
+#include "enc/encode.h"
+#include "enc/compressor.h"
+#include "tools/version.h"
+
 
 namespace ofx {
 namespace IO {
+
+
+//static const size_t kFileBufferSize = 65536;
+//
+//
+//static int Decompress(FILE* fin, FILE* fout) {
+//
+//    /* Dictionary should be kept during first rounds of decompression. */
+//    uint8_t* dictionary = NULL;
+//    uint8_t* input;
+//    uint8_t* output;
+//    size_t total_out;
+//    size_t available_in;
+//    const uint8_t* next_in;
+//    size_t available_out = kFileBufferSize;
+//    uint8_t* next_out;
+//    BrotliResult result = BROTLI_RESULT_ERROR;
+//    BrotliState* s = BrotliCreateState(NULL, NULL, NULL);
+//    if (!s) {
+//        fprintf(stderr, "out of memory\n");
+//        return 0;
+//    }
+//
+//    input = (uint8_t*)malloc(kFileBufferSize);
+//    output = (uint8_t*)malloc(kFileBufferSize);
+//    if (!input || !output) {
+//        fprintf(stderr, "out of memory\n");
+//        goto end;
+//    }
+//    
+//    next_out = output;
+//    result = BROTLI_RESULT_NEEDS_MORE_INPUT;
+//    while (1) {
+//        if (result == BROTLI_RESULT_NEEDS_MORE_INPUT) {
+//            if (feof(fin)) {
+//                break;
+//            }
+//            available_in = fread(input, 1, kFileBufferSize, fin);
+//            next_in = input;
+//            if (ferror(fin)) {
+//                break;
+//            }
+//        } else if (result == BROTLI_RESULT_NEEDS_MORE_OUTPUT) {
+//            fwrite(output, 1, kFileBufferSize, fout);
+//            if (ferror(fout)) {
+//                break;
+//            }
+//            available_out = kFileBufferSize;
+//            next_out = output;
+//        } else {
+//            break; /* Error or success. */
+//        }
+//        result = BrotliDecompressStream(&available_in, &next_in,
+//                                        &available_out, &next_out, &total_out, s);
+//    }
+//    if (next_out != output) {
+//        fwrite(output, 1, (size_t)(next_out - output), fout);
+//    }
+//
+//    if ((result == BROTLI_RESULT_NEEDS_MORE_OUTPUT) || ferror(fout)) {
+//        fprintf(stderr, "failed to write output\n");
+//    } else if (result != BROTLI_RESULT_SUCCESS) { /* Error or needs more input. */
+//        fprintf(stderr, "corrupt input\n");
+//    }
+//
+//end:
+//    free(dictionary);
+//    free(input);
+//    free(output);
+//    BrotliDestroyState(s);
+//    return (result == BROTLI_RESULT_SUCCESS) ? 1 : 0;
+//}
+//
+//static int Compress(int quality, int lgwin, FILE* fin, FILE* fout) {
+//    BrotliEncoderState* s = BrotliEncoderCreateInstance(0, 0, 0);
+//    uint8_t* buffer = (uint8_t*)malloc(kFileBufferSize << 1);
+//    uint8_t* input = buffer;
+//    uint8_t* output = buffer + kFileBufferSize;
+//    size_t available_in = 0;
+//    const uint8_t* next_in = NULL;
+//    size_t available_out = kFileBufferSize;
+//    uint8_t* next_out = output;
+//    int is_eof = 0;
+//    int is_ok = 1;
+//
+//    if (!s || !buffer) {
+//        is_ok = 0;
+//        goto finish;
+//    }
+//
+//    BrotliEncoderSetParameter(s, BROTLI_PARAM_QUALITY, (uint32_t)quality);
+//    BrotliEncoderSetParameter(s, BROTLI_PARAM_LGWIN, (uint32_t)lgwin);
+//
+//    while (1) {
+//        if (available_in == 0 && !is_eof) {
+//            available_in = fread(input, 1, kFileBufferSize, fin);
+//            next_in = input;
+//            if (ferror(fin)) break;
+//            is_eof = feof(fin);
+//        }
+//
+//        if (!BrotliEncoderCompressStream(s,
+//                                         is_eof ? BROTLI_OPERATION_FINISH : BROTLI_OPERATION_PROCESS,
+//                                         &available_in, &next_in, &available_out, &next_out, NULL)) {
+//            is_ok = 0;
+//            break;
+//        }
+//
+//        if (available_out != kFileBufferSize) {
+//            size_t out_size = kFileBufferSize - available_out;
+//            fwrite(output, 1, out_size, fout);
+//            if (ferror(fout)) break;
+//            available_out = kFileBufferSize;
+//            next_out = output;
+//        }
+//        
+//        if (BrotliEncoderIsFinished(s)) break;
+//    }
+//    
+//finish:
+//    free(buffer);
+//    BrotliEncoderDestroyInstance(s);
+//    
+//    if (!is_ok) {
+//        /* Should detect OOM? */
+//        fprintf(stderr, "failed to compress data\n");
+//        return 0;
+//    } else if (ferror(fout)) {
+//        fprintf(stderr, "failed to write output\n");
+//        return 0;
+//    } else if (ferror(fin)) {
+//        fprintf(stderr, "failed to read input\n");
+//        return 0;
+//    }
+//    return 1;
+//}
+//
 
 
 std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
@@ -73,7 +197,7 @@ std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
                 return 0;
             }
         }
-        case Type::SNAPPY:
+        case SNAPPY:
         {
             std::size_t size = 0;
 
@@ -99,7 +223,7 @@ std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
                 return 0;
             }
         }
-        case Type::LZ4:
+        case LZ4:
         {
             // TODO: Abritrary 4 x buffer.
             uncompressedBuffer.resize(compressedBuffer.size() * 4);
@@ -118,6 +242,39 @@ std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
             {
                 return 0;
             }
+        }
+        case BR:
+        {
+            size_t decodedSize = 0;
+
+            if (!BrotliDecompressedSize(compressedBuffer.size(), compressedBuffer.getPtr(), &decodedSize))
+            {
+                decodedSize = compressedBuffer.size() * 4;
+            }
+
+            uncompressedBuffer.resize(decodedSize);
+
+            BrotliResult result = BrotliDecompressBuffer(compressedBuffer.size(),
+                                                         compressedBuffer.getPtr(),
+                                                         &decodedSize,
+                                                         uncompressedBuffer.getPtr());
+
+            
+            if (result == BROTLI_RESULT_SUCCESS)
+            {
+                uncompressedBuffer.resize(decodedSize);
+                return decodedSize;
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
+        case NONE:
+        {
+            uncompressedBuffer.clear();
+            uncompressedBuffer.writeBytes(compressedBuffer);
         }
     }
 
@@ -164,7 +321,7 @@ std::size_t Compression::compress(const ByteBuffer& uncompressedBuffer,
         {
             std::size_t size = 0;
             // Allocate as many as needed.
-            compressedBuffer.resize(uncompressedBuffer.size());
+            compressedBuffer.resize(uncompressedBuffer.size() * 2);
             snappy::RawCompress(uncompressedBuffer.getCharPtr(),
                                 uncompressedBuffer.size(),
                                 compressedBuffer.getCharPtr(),
@@ -174,14 +331,47 @@ std::size_t Compression::compress(const ByteBuffer& uncompressedBuffer,
         }
         case LZ4:
         {
+            std::size_t inputSize = uncompressedBuffer.size();
             std::size_t size = 0;
             // Allocate as many as needed.
-            compressedBuffer.resize(uncompressedBuffer.size());
-            size = LZ4_compress(uncompressedBuffer.getCharPtr(),
-                                compressedBuffer.getCharPtr(),
-                                uncompressedBuffer.size());
+            compressedBuffer.resize(inputSize);
+            size = LZ4_compress_default(uncompressedBuffer.getCharPtr(),
+                                        compressedBuffer.getCharPtr(),
+                                        inputSize,
+                                        LZ4_compressBound(inputSize));
+
             compressedBuffer.resize(size);
             return size;
+        }
+        case BR:
+        {
+            brotli::BrotliParams params;
+
+            std::size_t encodedSize = BrotliEncoderMaxCompressedSize(uncompressedBuffer.size());
+
+            compressedBuffer.resize(encodedSize);
+
+            int result = brotli::BrotliCompressBuffer(params,
+                                                      uncompressedBuffer.size(),
+                                                      uncompressedBuffer.getPtr(),
+                                                      &encodedSize,
+                                                      compressedBuffer.getPtr());
+
+            if (result == 1)
+            {
+                compressedBuffer.resize(encodedSize);
+                return encodedSize;
+            }
+            else
+            {
+                ofLogError("Compression::compress") << "brotli::BrotliCompressBuffer compression error.";
+                return 0;
+            }
+        }
+        case NONE:
+        {
+            compressedBuffer.clear();
+            compressedBuffer.writeBytes(uncompressedBuffer);
         }
     }
 
@@ -276,6 +466,10 @@ std::string Compression::version(Type type)
             ss << LZ4_VERSION_MAJOR << "." << LZ4_VERSION_MINOR << "." << LZ4_VERSION_RELEASE;
             return ss.str();
         }
+        case BR:
+            return BROTLI_VERSION;
+        case NONE:
+            return "0.0.0";
     }
 
     return "UNKNOWN";
@@ -293,6 +487,10 @@ std::string Compression::toString(Type type)
             return "SNAPPY";
         case LZ4:
             return "LZ4";
+        case BR:
+            return "BROTLI";
+        case NONE:
+            return "NONE";
     }
 
     return "UNKNOWN";

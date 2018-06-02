@@ -1,31 +1,14 @@
-// =============================================================================
 //
-// Copyright (c) 2009-2016 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2009 Christopher Baker <https://christopherbaker.net>
 //
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+// SPDX-License-Identifier:	MIT
 //
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
-//
-// =============================================================================
 
 
 #include "ofx/IO/DirectoryUtils.h"
 #include "Poco/Exception.h"
 #include "alphanum.hpp"
+#include "ofLog.h"
 
 
 namespace ofx {
@@ -43,7 +26,7 @@ void DirectoryUtils::list(const AbstractSearchPath& path,
 {
     paths.clear();
 
-    std::vector<std::string> _files;
+    std::vector<std::filesystem::path> _files;
 
     if (path.isRecursive())
     {
@@ -68,7 +51,7 @@ void DirectoryUtils::list(const AbstractSearchPath& path,
 
     while (iter != _files.end())
     {
-        paths.push_back(*iter);
+        paths.push_back(iter->string());
         ++iter;
     }
 
@@ -82,7 +65,7 @@ void DirectoryUtils::list(const Poco::File& directory,
 {
 	files.clear();
 
-    std::vector<std::string> _files;
+    std::vector<std::filesystem::path> _files;
 
     list(directory.path(),
          _files,
@@ -94,7 +77,7 @@ void DirectoryUtils::list(const Poco::File& directory,
 
     while (iter != _files.end())
     {
-        files.push_back(Poco::File(*iter));
+        files.push_back(Poco::File(iter->string()));
         ++iter;
     }
 
@@ -109,7 +92,7 @@ void DirectoryUtils::list(const ofFile& directory,
 {
     files.clear();
 
-    std::vector<std::string> _files;
+    std::vector<std::filesystem::path> _files;
     
     list(directory.path(),
          _files,
@@ -128,8 +111,8 @@ void DirectoryUtils::list(const ofFile& directory,
 }
 
 
-void DirectoryUtils::list(const std::string& directory,
-                          std::vector<std::string>& files,
+void DirectoryUtils::list(const std::filesystem::path& directory,
+                          std::vector<std::filesystem::path>& files,
                           bool sortAlphaNumeric,
                           AbstractPathFilter* pFilter,
                           bool makeRelativeToDirectory)
@@ -138,17 +121,15 @@ void DirectoryUtils::list(const std::string& directory,
     {
         files.clear();
 
-        std::string _directory = ofToDataPath(directory, true);
+        std::filesystem::path _directory = ofToDataPath(directory, true);
 
-        ofFile file(_directory);
-
-        if (!file.exists())
+        if (!std::filesystem::exists(_directory))
         {
-            ofLogError("DirectoryUtils::list") << file.path() << " not found.";
+            ofLogError("DirectoryUtils::list") << _directory << " not found.";
             return;
         }
 
-        Poco::DirectoryIterator iter(_directory);
+        Poco::DirectoryIterator iter(_directory.string());
         Poco::DirectoryIterator endIter;
 
         while (iter != endIter)
@@ -169,13 +150,7 @@ void DirectoryUtils::list(const std::string& directory,
             }
         }
 
-        if (sortAlphaNumeric)
-        {
-            // now sort the vector with the algorithm
-            std::sort(files.begin(),
-                      files.end(),
-                      doj::alphanum_less<std::string>());
-        }
+        if (sortAlphaNumeric) _sortAlphaNumeric(files);
     }
     catch (const Poco::Exception& exc)
     {
@@ -185,8 +160,8 @@ void DirectoryUtils::list(const std::string& directory,
 }
 
 
-void DirectoryUtils::listRecursive(const std::string& directory,
-                                   std::vector<std::string>& files,
+void DirectoryUtils::listRecursive(const std::filesystem::path& directory,
+                                   std::vector<std::filesystem::path>& files,
                                    bool sortAlphaNumeric,
                                    AbstractPathFilter* pFilter,
                                    Poco::UInt16 maxDepth,
@@ -195,11 +170,11 @@ void DirectoryUtils::listRecursive(const std::string& directory,
 {
     files.clear();
 
-    std::string _directory = ofToDataPath(directory, true);
+    std::filesystem::path _directory = ofToDataPath(directory, true);
 
     if (traversalOrder == SIBLINGS_FIRST)
     {
-        SiblingsFirstRecursiveDirectoryIterator iter(_directory, maxDepth);
+        SiblingsFirstRecursiveDirectoryIterator iter(_directory.string(), maxDepth);
         SiblingsFirstRecursiveDirectoryIterator endIter;
         
         while (iter != endIter)
@@ -214,7 +189,7 @@ void DirectoryUtils::listRecursive(const std::string& directory,
     }
     else if (traversalOrder == CHILDREN_FIRST)
     {
-        SimpleRecursiveDirectoryIterator iter(_directory, maxDepth);
+        SimpleRecursiveDirectoryIterator iter(_directory.string(), maxDepth);
         SimpleRecursiveDirectoryIterator endIter;
 
         while (iter != endIter)
@@ -236,13 +211,7 @@ void DirectoryUtils::listRecursive(const std::string& directory,
         }
     }
 
-    if (sortAlphaNumeric)
-    {
-        // now sort the vector with the alpha numeric algorithm
-        std::sort(files.begin(),
-                  files.end(),
-                  doj::alphanum_less<std::string>());
-    }
+    if (sortAlphaNumeric) _sortAlphaNumeric(files);
 
 }
 
@@ -257,7 +226,7 @@ void DirectoryUtils::listRecursive(const ofFile& directory,
 {
     files.clear();
 
-    std::vector<std::string> _files;
+    std::vector<std::filesystem::path> _files;
 
     listRecursive(directory.path(),
                   _files,
@@ -288,7 +257,7 @@ void DirectoryUtils::listRecursive(const Poco::File& directory,
 {
 	files.clear();
 
-    std::vector<std::string> _files;
+    std::vector<std::filesystem::path> _files;
 
     listRecursive(directory.path(),
                   _files,
@@ -302,15 +271,15 @@ void DirectoryUtils::listRecursive(const Poco::File& directory,
 
     while (iter != _files.end())
     {
-        files.push_back(Poco::File(*iter));
+        files.push_back(Poco::File(iter->string()));
         ++iter;
     }
 }
 
 
 
-std::string DirectoryUtils::makeRelativeTo(const std::string& path,
-                                           const std::string& base)
+std::filesystem::path DirectoryUtils::makeRelativeTo(const std::filesystem::path& path,
+                                                     const std::filesystem::path& base)
 {
     // via http://stackoverflow.com/a/29221546/1518329
     std::filesystem::path from(ofToDataPath(base, true));
@@ -347,7 +316,18 @@ std::string DirectoryUtils::makeRelativeTo(const std::string& path,
         ++toIter;
     }
 
-    return finalPath.string();
+    return finalPath;
+}
+
+
+void DirectoryUtils::_sortAlphaNumeric(std::vector<std::filesystem::path>& paths)
+{
+    std::sort(paths.begin(),
+              paths.end(),
+              [](const std::filesystem::path& a,
+                 const std::filesystem::path& b) {
+                  return doj::alphanum_comp(a.string(), b.string()) < 0;
+              });
 }
 
 

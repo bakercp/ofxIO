@@ -1,26 +1,8 @@
-// =============================================================================
 //
-// Copyright (c) 2013-2016 Christopher Baker <http://christopherbaker.net>
+// Copyright (c) 2013 Christopher Baker <https://christopherbaker.net>
 //
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+// SPDX-License-Identifier:	MIT
 //
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
-//
-// =============================================================================
 
 
 #include "ofx/IO/ByteBuffer.h"
@@ -40,6 +22,17 @@ namespace IO {
     
 ByteBuffer::ByteBuffer()
 {
+}
+
+
+ByteBuffer::ByteBuffer(std::initializer_list<uint8_t> data)
+{
+    reserve(data.size());
+
+    for (auto& byte: data)
+    {
+        writeByte(byte);
+    }
 }
 
 
@@ -81,6 +74,12 @@ ByteBuffer::ByteBuffer(const std::vector<uint8_t>& buffer)
 ByteBuffer::ByteBuffer(const std::string& buffer)
 {
     writeBytes(buffer);
+}
+
+
+ByteBuffer::ByteBuffer(std::istream& istr, std::size_t bufferSize)
+{
+    ByteBufferUtils::copyStreamToBuffer(istr, *this, bufferSize);
 }
 
     
@@ -162,6 +161,12 @@ std::size_t ByteBuffer::writeBytes(const AbstractByteSource& buffer)
 }
 
 
+std::size_t ByteBuffer::writeBytes(std::istream& istr, std::size_t bufferSize)
+{
+    return ByteBufferUtils::copyStreamToBuffer(istr, *this, bufferSize);
+}
+
+
 std::size_t ByteBuffer::size() const
 {
     return _buffer.size();
@@ -200,7 +205,7 @@ std::size_t ByteBuffer::reserve(std::size_t capacity)
 }
 
     
-const std::vector<uint8_t>& ByteBuffer::getData() const
+const std::vector<uint8_t>& ByteBuffer::getBuffer() const
 {
     return _buffer;
 }
@@ -267,6 +272,18 @@ char* ByteBuffer::getCharPtr()
     {
         return nullptr;
     }
+}
+
+
+const char* ByteBuffer::getData() const
+{
+    return getCharPtr();
+}
+
+
+char* ByteBuffer::getData()
+{
+    return getCharPtr();
 }
 
 
