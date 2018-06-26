@@ -42,9 +42,8 @@ API documentation can be found here.
 
 Requirements
 -------------
-Some examples may require:
 
--   ofxPoco - Included with openFrameworks 0.10.0 + 
+-   ofxPoco (included with openFrameworks)
 
 Build Status
 ------------
