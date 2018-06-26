@@ -40,6 +40,12 @@ Documentation
 
 API documentation can be found here.
 
+Requirements
+-------------
+Some examples may require:
+
+-   ofxPoco - Included with openFrameworks 0.10.0 + 
+
 Build Status
 ------------
 
@@ -64,7 +70,7 @@ This project uses Semantic Versioning, although strict adherence will only come 
 Licensing
 ---------
 
-See `LICENSE.md`.
+See [LICENSE.md](LICENSE.md)
 
 Contributing
 ------------
