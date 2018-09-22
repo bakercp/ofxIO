@@ -275,11 +275,13 @@ public:
     /// This call is only an approximation, since messages come from a different
     /// thread the channel can return true when calling empty() and then receive
     /// a message right afterwards
-    bool empty() const{
+    bool empty() const
+    {
         return queue.empty();
     }
 
-    std::size_t size() const {
+    std::size_t size() const
+    {
         return queue.size();
     }
 
