@@ -129,14 +129,14 @@ void DirectoryUtils::list(const std::filesystem::path& directory,
             return;
         }
 
-        Poco::DirectoryIterator iter(_directory.string());
-        Poco::DirectoryIterator endIter;
+        std::filesystem::directory_iterator iter(_directory);
+        std::filesystem::directory_iterator endIter;
 
         while (iter != endIter)
         {
-            if (!pFilter || pFilter->accept((*iter).path()))
+            if (!pFilter || pFilter->accept(iter->path().string()))
             {
-                files.push_back(iter.path().toString());
+                files.push_back(iter->path());
             }
 
             ++iter;
@@ -144,7 +144,7 @@ void DirectoryUtils::list(const std::filesystem::path& directory,
 
         if (makeRelativeToDirectory)
         {
-            for (auto& file : files)
+            for (auto& file: files)
             {
                 file = makeRelativeTo(file, directory);
             }
@@ -179,7 +179,7 @@ void DirectoryUtils::listRecursive(const std::filesystem::path& directory,
         
         while (iter != endIter)
         {
-            if (!pFilter || pFilter->accept((*iter).path()))
+            if (!pFilter || pFilter->accept(iter.path()))
             {
                 files.push_back(iter.path().toString());
             }
