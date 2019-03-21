@@ -25,13 +25,23 @@ public:
     /// \basic Image parameters.
     struct ImageHeader
     {
+        /// \brief Image width in pixels.
         std::size_t width = 0;
+
+        /// \brief Image height in pixels.
         std::size_t height = 0;
+
+        /// \brief Image bits per pixel.
         std::size_t bpp = 0;
     };
 
 
     /// \brief Load image header information without loading pixels data.
+    ///
+    /// Get image information quickly by reading the header without reading the
+    /// image pixel data. This should be faster when supported. Some file types
+    /// do not support image header inspection.
+    ///
     /// \param header The header data to fill.
     /// \param path the path of the image.
     /// \param loadPixelsIfRequired If header loading is not supported, load the full image.
@@ -50,6 +60,9 @@ public:
                                            float threshold = 0.75,
                                            float quantWeight = 0.125);
 
+    /// \brief Convert ofPixels to grayscale.
+    /// \param pixels The pixels to convert.
+    /// \returns the grayscale version of the pixels.
     static ofPixels_<unsigned char> toGrayscale(const ofPixels_<unsigned char>& pixels);
 
 
