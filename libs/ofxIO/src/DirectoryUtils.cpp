@@ -281,42 +281,8 @@ void DirectoryUtils::listRecursive(const Poco::File& directory,
 std::filesystem::path DirectoryUtils::makeRelativeTo(const std::filesystem::path& path,
                                                      const std::filesystem::path& base)
 {
-    // via http://stackoverflow.com/a/29221546/1518329
-    std::filesystem::path from(ofToDataPath(base, true));
-    std::filesystem::path to(ofToDataPath(path, true));
-
-    std::filesystem::path result;
-
-    // Start at the root path and while they are the same then do nothing
-    // then when they first diverge take the remainder of the two path and
-    // replace the entire from path with ".." segments.
-    auto fromIter = from.begin();
-    auto toIter = to.begin();
-
-    // Loop through both
-    while (fromIter != from.end() &&
-           toIter != to.end() &&
-           (*toIter) == (*fromIter))
-    {
-        ++toIter;
-        ++fromIter;
-    }
-
-    std::filesystem::path finalPath;
-
-    while (fromIter != from.end())
-    {
-        finalPath /= "..";
-        ++fromIter;
-    }
-
-    while (toIter != to.end())
-    {
-        finalPath /= *toIter;
-        ++toIter;
-    }
-
-    return finalPath;
+    return std::filesystem::relative(ofToDataPath(path, true),
+                                     ofToDataPath(base, true));
 }
 
 
