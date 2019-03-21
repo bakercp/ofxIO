@@ -41,7 +41,7 @@ bool ImageUtils::loadHeader(ImageHeader& header,
 
     if (loadPixelsIfRequired)
     {
-        ofLogWarning("ImageUtils::loadHeader") << "Loading full pixels, may be slow: " << path;
+        ofLogVerbose("ImageUtils::loadHeader") << "Loading full pixels, may be slow: " << path;
         ofPixels pixels;
         if (ofLoadImage(pixels, path))
         {
