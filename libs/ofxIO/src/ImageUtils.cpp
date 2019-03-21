@@ -19,13 +19,15 @@ bool ImageUtils::loadHeader(ImageHeader& header,
                             const std::filesystem::path& path,
                             bool loadPixelsIfRequired)
 {
+    std::string _path = ofToDataPath(path, true);
+
     int flags = FIF_LOAD_NOPIXELS;
 
-    auto fif = FreeImage_GetFIFFromFilename(path.string().c_str());
+    auto fif = FreeImage_GetFIFFromFilename(_path.data());
 
     if (FreeImage_FIFSupportsNoPixels(fif))
     {
-        FIBITMAP* dib = FreeImage_Load(fif, path.string().c_str(), flags);
+        FIBITMAP* dib = FreeImage_Load(fif, _path.data(), flags);
 
         if (dib)
         {
@@ -43,7 +45,7 @@ bool ImageUtils::loadHeader(ImageHeader& header,
     {
         ofLogVerbose("ImageUtils::loadHeader") << "Loading full pixels, may be slow: " << path;
         ofPixels pixels;
-        if (ofLoadImage(pixels, path))
+        if (ofLoadImage(pixels, _path))
         {
             header.width = pixels.getWidth();
             header.height = pixels.getHeight();
