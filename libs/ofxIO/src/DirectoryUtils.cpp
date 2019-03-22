@@ -287,11 +287,18 @@ std::filesystem::path DirectoryUtils::makeRelativeTo(const std::filesystem::path
 #else
     // via http://stackoverflow.com/a/29221546/1518329
     //std::filesystem::path from(ofToDataPath(base, true));
-    std::filesystem::path from(ofToDataPath(base, true));
     std::filesystem::path to(ofToDataPath(path, true));
 
-    // Clean up base path if needed.
-    from = from.remove_trailing_separator();
+    // Clean up base path if needed. Apparently, some really old versions of
+    // boost don't have remove_trailing_separator().
+    // from = from.remove_trailing_separator();
+
+    std::string directory = base.string();
+
+    while ((directory.back() == '/') || (directory.back() == '\\'))
+        directory.erase(directory.size() - 1);
+
+    std::filesystem::path from(ofToDataPath(directory, true));
 
     std::filesystem::path result;
 
