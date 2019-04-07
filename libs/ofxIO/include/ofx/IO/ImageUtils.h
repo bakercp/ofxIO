@@ -65,7 +65,8 @@ public:
     /// \returns the grayscale version of the pixels.
     static ofPixels_<unsigned char> toGrayscale(const ofPixels_<unsigned char>& pixels);
 
-
+    static const float DEFAULT_DITHER_THRESHOLD;
+    static const float DEFAULT_DITHER_QUANT_WEIGHT;
 
 private:
     static void _accumulateDitherError(std::size_t x,
