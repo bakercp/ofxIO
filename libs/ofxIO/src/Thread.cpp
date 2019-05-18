@@ -147,7 +147,6 @@ void Thread::_run()
         catch (const std::exception& exc)
         {
             ofLogError("Thread::_run") << "Exception: " << exc.what();
-
         }
         catch (...)
         {
@@ -161,6 +160,7 @@ void Thread::_run()
             std::unique_lock<std::mutex> lock(mutex);
             condition.wait_for(lock, std::chrono::milliseconds(delay));
         }
+        
     } while (_isRunning && repeat);
 
     _isRunning = false;
