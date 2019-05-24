@@ -39,7 +39,7 @@ void Thread::stopAndJoin()
     }
     catch (...)
     {
-        ofLogVerbose("Thread::stopAndJoin") << "Thread join failed.";
+        // This happens if a thread is not running.
     }
 }
 
