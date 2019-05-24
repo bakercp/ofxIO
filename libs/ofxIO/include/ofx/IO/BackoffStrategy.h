@@ -14,8 +14,8 @@
 
 namespace ofx {
 namespace IO {
-    
-    
+
+
 /// \brief A class for generating backoff delays based on a particular strategy.
 class BackoffStrategy
 {
@@ -127,7 +127,6 @@ public:
 
         /// \brief The default maximum delay in milliseconds.
         DEFAULT_MAXIMUM_DELAY = 120000
-
     };
 
 private:
