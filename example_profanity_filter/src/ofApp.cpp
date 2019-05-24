@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2009 Christopher Baker <https://christopherbaker.net>
+// Copyright (c) 2019 Christopher Baker <https://christopherbaker.net>
 //
 // SPDX-License-Identifier:	MIT
 //
@@ -12,9 +12,9 @@ void ofApp::setup()
 {
     ofxIO::StringFilter filter = ofLoadJson("filter.json");
 
-    filter.setWhitelist({  "drug" });
+    filter.setWhitelist({ "drug" });
 
-    std::string input = " drug drugs.";
+    std::string input = "Drug drugs xxx.";
 
     std::string output = filter.filter(input);
 
