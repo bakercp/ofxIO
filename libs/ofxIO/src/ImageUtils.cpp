@@ -14,8 +14,8 @@ namespace ofx {
 namespace IO {
 
 
-const float ImageUtils::DEFAULT_DITHER_THRESHOLD = 0.5;
-const float ImageUtils::DEFAULT_DITHER_QUANT_WEIGHT = 0.125;
+const float ImageUtils::DEFAULT_DITHER_THRESHOLD = 1.0;
+const float ImageUtils::DEFAULT_DITHER_QUANT_WEIGHT = 0.1625;
 
 
 bool ImageUtils::loadHeader(ImageHeader& header,
