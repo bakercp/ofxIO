@@ -100,6 +100,12 @@ public:
     ///        written into this byte sink.
     virtual std::size_t writeBytes(const std::vector<uint8_t>& buffer) = 0;
 
+    /// \brief Write these bytes into this byte sink.
+    /// \param bytes the list of bytes to be written to this byte sink.
+    /// \returns the number of bytes that were successfully
+    ///        written into this byte sink.
+    virtual std::size_t writeBytes(std::initializer_list<uint8_t> bytes) = 0;
+
     /// \brief Write the contents of the buffer into this byte sink.
     /// \param buffer is the array of bytes to be written to this byte sink.
     /// \returns the number of bytes that were successfully

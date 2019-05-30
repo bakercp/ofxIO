@@ -147,6 +147,13 @@ std::size_t ByteBuffer::writeBytes(const std::vector<uint8_t>& buffer)
 }
 
 
+std::size_t ByteBuffer::writeBytes(std::initializer_list<uint8_t> bytes)
+{
+    std::vector<uint8_t> buffer = bytes;
+    return writeBytes(buffer);
+}
+
+
 std::size_t ByteBuffer::writeBytes(const std::string& buffer)
 {
     _buffer.reserve(_buffer.size() + buffer.size());
