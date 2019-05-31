@@ -38,7 +38,6 @@
 #include "ofx/IO/PathFilterCollection.h"
 #include "ofx/IO/RegexPathFilter.h"
 #include "ofx/IO/SearchPath.h"
-#include "ofx/IO/StringFilter.h"
 #include "ofx/IO/Thread.h"
 #include "ofx/IO/PollingThread.h"
 #include "ofx/IO/ThreadChannel.h"

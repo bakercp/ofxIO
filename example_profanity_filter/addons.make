@@ -1,2 +1,0 @@
-ofxIO
-ofxPoco
