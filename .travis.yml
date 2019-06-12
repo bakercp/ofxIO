@@ -33,7 +33,7 @@ matrix:
   #  - compiler: gcc
 # before_install:
 install:
-  - git clone --depth=1 --branch=${TRAVIS_BRANCH} https://github.com/openFrameworks/openFrameworks.git ~/openFrameworks
+  - git clone --depth=1 --branch=master https://github.com/openFrameworks/openFrameworks.git ~/openFrameworks
   - /usr/bin/env bash ~/openFrameworks/scripts/ci/addons/install.sh
   - git clone https://github.com/bakercp/ofx.git ~/openFrameworks/scripts/ofx
 script:
