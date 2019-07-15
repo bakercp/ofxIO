@@ -17,7 +17,7 @@ namespace IO {
 
 
 /// \brief A utility for reading variable types from a raw byte buffer.
-class ByteBufferParser
+class ByteBufferReader
 {
 public:
     /// \brief Create a ByteBufferReader from a byte buffer.

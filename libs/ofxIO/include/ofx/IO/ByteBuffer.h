@@ -130,7 +130,7 @@ public:
     ///
     /// \returns a reference to the byte at position n in the ByteBuffer.
     /// \note The first element has a position of 0 (not 1).
-	uint8_t& operator [] (std::size_t n);
+    uint8_t& operator [] (std::size_t n);
 
     /// \param n is the element index in the ByteBuffer.
     ///
@@ -138,7 +138,7 @@ public:
     ///
     /// \returns a copy of the byte at position n in the ByteBuffer.
     /// \note The first element has a position of 0 (not 1).
-	uint8_t operator [] (std::size_t n) const;
+    uint8_t operator [] (std::size_t n) const;
 
     /// \brief Get a const reference to the backing data vector.
     /// \returns a const reference to the backing data vector.
@@ -217,7 +217,7 @@ public:
     /// \param istr The std::istream to read from.
     /// \param byteBuffer the ByteBuffer to read into.
     /// \returns the std::istream that was read from.
-	friend std::istream& operator >> (std::istream& istr,
+    friend std::istream& operator >> (std::istream& istr,
                                       ByteBuffer& byteBuffer);
 
 private:
