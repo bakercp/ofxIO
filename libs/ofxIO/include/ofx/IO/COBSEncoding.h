@@ -5,7 +5,7 @@
 //  Copyright (c) 2011, Jacques Fortier. All rights reserved.
 //  https://github.com/jacquesf/COBS-Consistent-Overhead-Byte-Stuffing
 //
-// SPDX-License-Identifier:    MIT
+// SPDX-License-Identifier: MIT
 //
 
 

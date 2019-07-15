@@ -1,7 +1,7 @@
 //
 // Copyright (c) 2010 Christopher Baker <https://christopherbaker.net>
 //
-// SPDX-License-Identifier:	MIT
+// SPDX-License-Identifier: MIT
 //
 
 
@@ -85,7 +85,7 @@ private:
 
     /// \brief The current write offset.
     std::size_t _offset;
-    
+
 };
 
 

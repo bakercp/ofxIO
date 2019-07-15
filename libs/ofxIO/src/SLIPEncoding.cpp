@@ -4,7 +4,7 @@
 // Portions:
 //  Copyright (c) 2015 Jean-Pierre Mouilleseaux <jpm@chordedconstructions.com>
 //
-// SPDX-License-Identifier:    MIT
+// SPDX-License-Identifier: MIT
 //
 
 
@@ -109,7 +109,7 @@ std::size_t SLIPEncoding::decode(const uint8_t* buffer,
 
     std::size_t read_index  = 0;
     std::size_t write_index = 0;
-    
+
     while (read_index < size)
     {
         if (buffer[read_index] == END)
@@ -139,7 +139,7 @@ std::size_t SLIPEncoding::decode(const uint8_t* buffer,
             decoded[write_index++] = buffer[read_index++];
         }
     }
-    
+
     return write_index;
 }
 

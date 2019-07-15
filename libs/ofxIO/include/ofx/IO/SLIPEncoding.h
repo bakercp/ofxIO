@@ -4,7 +4,7 @@
 // Portions:
 //  Copyright (c) 2015 Jean-Pierre Mouilleseaux <jpm@chordedconstructions.com>
 //
-// SPDX-License-Identifier:    MIT
+// SPDX-License-Identifier: MIT
 //
 
 #pragma once

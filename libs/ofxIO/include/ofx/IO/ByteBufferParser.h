@@ -1,7 +1,7 @@
 //
 // Copyright (c) 2010 Christopher Baker <https://christopherbaker.net>
 //
-// SPDX-License-Identifier:	MIT
+// SPDX-License-Identifier: MIT
 //
 
 
@@ -89,7 +89,7 @@ std::size_t ByteBufferReader::read(Type& value) const
 
 template <typename Type>
 std::size_t ByteBufferReader::read(Type* destination, std::size_t size) const
-{   
+{
     static_assert(std::is_pod<Type>::value, "Type must be POD.");
     return _read(destination, sizeof(Type) * size);
 }
