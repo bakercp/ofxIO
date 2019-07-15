@@ -45,7 +45,7 @@ public:
     COBSEncoding();
 
     /// \brief Destroy a COBSEncoding.
-    virtual ~COBSEncoding();
+    virtual ~COBSEncoding() override;
 
     std::size_t encode(const ByteBuffer& buffer,
                        ByteBuffer& encodedBuffer) override;

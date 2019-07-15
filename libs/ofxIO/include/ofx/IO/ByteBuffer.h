@@ -73,7 +73,7 @@ public:
                         std::size_t bufferSize = ByteBufferUtils::DEFAULT_BUFFER_SIZE);
 
     /// \brief Destroy the ByteBuffer.
-    virtual ~ByteBuffer();
+    virtual ~ByteBuffer() override;
 
     virtual std::size_t readBytes(uint8_t* buffer, std::size_t size) const override;
     virtual std::size_t readBytes(std::vector<uint8_t>& buffer) const override;

@@ -24,8 +24,8 @@ class ByteBufferInputStreamBuf: public Poco::UnbufferedStreamBuf
 {
 public:
     ByteBufferInputStreamBuf(const ByteBuffer& buffer, std::size_t offset = 0);
-    
-    virtual ~ByteBufferInputStreamBuf();
+
+    virtual ~ByteBufferInputStreamBuf() override;
 
 protected:
     int readFromDevice() override;

@@ -36,7 +36,7 @@ public:
                         bool acceptMatches = true);
 
     /// \brief Destroy the file extension filter.
-    virtual ~FileExtensionFilter();
+    virtual ~FileExtensionFilter() override;
 
     /// \brief Accept a path if it satisfies the file filter.
     /// \returns true iff the path extension matches one from the list

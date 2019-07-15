@@ -25,7 +25,7 @@ public:
     DeviceFilter();
 
     /// \brief Destroy a device filter.
-    virtual ~DeviceFilter();
+    virtual ~DeviceFilter() override;
 
     /// \brief Accept a path based if it represents a device.
     /// \returns true iff the path represents a device.

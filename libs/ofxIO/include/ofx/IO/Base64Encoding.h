@@ -29,7 +29,7 @@ public:
                    bool paddedOutput = false);
 
     /// \brief Destroy the Base64 Encoding.
-    virtual ~Base64Encoding();
+    virtual ~Base64Encoding() override;
 
     std::size_t encode(const ByteBuffer& buffer,
                        ByteBuffer& encodedBuffer) override;

@@ -25,7 +25,7 @@ public:
     DirectoryFilter(bool acceptMatches = true);
 
     /// \brief Destroys a directory filter.
-    virtual ~DirectoryFilter();
+    virtual ~DirectoryFilter() override;
 
     /// \brief Accept a path based if it represents a directory.
     /// \returns true iff the path represents a directory.

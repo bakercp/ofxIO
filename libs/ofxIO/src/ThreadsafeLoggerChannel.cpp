@@ -128,7 +128,7 @@ std::size_t BaseThreadsafeLoggerChannel::size() const
 }
 
 
-void BaseThreadsafeLoggerChannel::_update(ofEventArgs& evt)
+void BaseThreadsafeLoggerChannel::_update(ofEventArgs&)
 {
     if (_updateInterval > 0)
     {
@@ -146,7 +146,7 @@ void BaseThreadsafeLoggerChannel::_update(ofEventArgs& evt)
 }
 
 
-void BaseThreadsafeLoggerChannel::_exit(ofEventArgs& evt)
+void BaseThreadsafeLoggerChannel::_exit(ofEventArgs&)
 {
     // Flush any messages before exit.
     _receive();
