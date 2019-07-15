@@ -201,7 +201,7 @@ public:
     /// \param data The byte to remove.
     void remove(uint8_t data);
 
-    /// \brief Replace all instances of the given byte \data with \replacement.
+    /// \brief Replace all instances of the given byte \p data with \p replacement.
     /// \param data The byte to replace.
     /// \param replacement The byte to use during replacement.
     void replace(uint8_t data, uint8_t replacement);

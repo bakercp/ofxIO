@@ -58,7 +58,7 @@ public:
     ///
     /// Will set the offset past the end of the buffer.
     ///
-    /// \offset The byte offset to set.
+    /// \param offset The byte offset to set.
     void setOffset(std::size_t offset);
 
     /// \returns Get the current write offset.

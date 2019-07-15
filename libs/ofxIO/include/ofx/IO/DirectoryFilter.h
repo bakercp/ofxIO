@@ -32,9 +32,9 @@ public:
     bool accept(const Poco::Path& path) const override;
 
 private:
-	/// \brief true iff matches should be accepted,
-	/// otherwise false iff matches should be rejected.
-	bool _acceptMatches;
+    /// \brief true iff matches should be accepted,
+    /// otherwise false iff matches should be rejected.
+    bool _acceptMatches;
 
 };
 
