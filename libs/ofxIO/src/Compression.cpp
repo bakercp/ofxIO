@@ -15,10 +15,12 @@
 #include "lz4.h"
 #include "ofLog.h"
 
-#include "dec/decode.h"
-#include "enc/encode.h"
-#include "enc/compressor.h"
-#include "tools/version.h"
+#include "brotli/decode.h"
+#include "brotli/encode.h"
+#include "common/version.h"
+
+//#include "enc/compressor.h"
+//#include "tools/version.h"
 
 
 namespace ofx {
@@ -247,26 +249,33 @@ std::size_t Compression::uncompress(const ByteBuffer& compressedBuffer,
         {
             size_t decodedSize = 0;
 
-            if (!BrotliDecompressedSize(compressedBuffer.size(), compressedBuffer.getPtr(), &decodedSize))
-            {
+//            if (!BrotliDecompressedSize(compressedBuffer.size(), compressedBuffer.getPtr(), &decodedSize))
+//            {
                 decodedSize = compressedBuffer.size() * 4;
-            }
+//            }
 
             uncompressedBuffer.resize(decodedSize);
 
-            BrotliResult result = BrotliDecompressBuffer(compressedBuffer.size(),
-                                                         compressedBuffer.getPtr(),
-                                                         &decodedSize,
-                                                         uncompressedBuffer.getPtr());
+            BrotliDecoderResult result = BrotliDecoderDecompress(compressedBuffer.size(),
+                                                                 compressedBuffer.getPtr(),
+                                                                 &decodedSize,
+                                                                 uncompressedBuffer.getPtr());
+
+
+//            BrotliResult result = BrotliDecompressBuffer(compressedBuffer.size(),
+//                                                         compressedBuffer.getPtr(),
+//                                                         &decodedSize,
+//                                                         uncompressedBuffer.getPtr());
 
             
-            if (result == BROTLI_RESULT_SUCCESS)
+            if (result == BROTLI_DECODER_RESULT_SUCCESS)
             {
                 uncompressedBuffer.resize(decodedSize);
                 return decodedSize;
             }
             else
             {
+                ofLogError("Compression::uncompress") << "Brotli error: " << result << std::endl;
                 return 0;
             }
 
@@ -345,19 +354,29 @@ std::size_t Compression::compress(const ByteBuffer& uncompressedBuffer,
         }
         case BR:
         {
-            brotli::BrotliParams params;
+//            brotli::BrotliParams params;
+//
 
             std::size_t encodedSize = BrotliEncoderMaxCompressedSize(uncompressedBuffer.size());
 
             compressedBuffer.resize(encodedSize);
+//
+//            int result = brotli::BrotliCompressBuffer(params,
+//                                                      uncompressedBuffer.size(),
+//                                                      uncompressedBuffer.getPtr(),
+//                                                      &encodedSize,
+//                                                      compressedBuffer.getPtr());
 
-            int result = brotli::BrotliCompressBuffer(params,
-                                                      uncompressedBuffer.size(),
-                                                      uncompressedBuffer.getPtr(),
-                                                      &encodedSize,
-                                                      compressedBuffer.getPtr());
 
-            if (result == 1)
+            BROTLI_BOOL result = BrotliEncoderCompress(BROTLI_DEFAULT_QUALITY,
+                                                       BROTLI_DEFAULT_WINDOW,
+                                                       BROTLI_DEFAULT_MODE,
+                                                       uncompressedBuffer.size(),
+                                                       uncompressedBuffer.getPtr(),
+                                                       &encodedSize,
+                                                       compressedBuffer.getPtr());
+
+            if (result == BROTLI_TRUE)
             {
                 compressedBuffer.resize(encodedSize);
                 return encodedSize;
@@ -467,7 +486,11 @@ std::string Compression::version(Type type)
             return ss.str();
         }
         case BR:
-            return BROTLI_VERSION;
+        {
+            std::stringstream ss;
+            ss << BROTLI_VERSION;
+            return ss.str();
+        }
         case NONE:
             return "0.0.0";
     }
