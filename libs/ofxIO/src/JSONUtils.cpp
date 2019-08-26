@@ -6,6 +6,8 @@
 
 
 #include "ofx/IO/JSONUtils.h"
+#include "ofLog.h"
+#include "ofUtils.h"
 #include "Poco/DeflatingStream.h"
 #include "Poco/Exception.h"
 #include "Poco/InflatingStream.h"
@@ -16,7 +18,7 @@ namespace IO {
 
 
 bool JSONUtils::saveJSON(const std::filesystem::path& filename,
-                         const ofJson& json)
+                         const nlohmann::json& json)
 {
     try
     {
@@ -56,7 +58,8 @@ bool JSONUtils::saveJSON(const std::filesystem::path& filename,
 }
 
     
-bool JSONUtils::loadJSON(const std::filesystem::path& filename, ofJson& json)
+bool JSONUtils::loadJSON(const std::filesystem::path& filename,
+                         nlohmann::json& json)
 {
     try
     {
@@ -92,6 +95,48 @@ bool JSONUtils::loadJSON(const std::filesystem::path& filename, ofJson& json)
 
     return false;
 }
+
+
+
+
+bool JSONUtils::saveCBOR(const std::filesystem::path& filename,
+                         const nlohmann::json& json)
+{
+    ByteBuffer cbor(nlohmann::json::to_cbor(json));
+    ByteBuffer out;
+
+    if (std::filesystem::extension(filename) == ".gz")
+        Compression::compress(cbor, out, Compression::GZIP);
+    else if (std::filesystem::extension(filename) == ".br")
+        Compression::compress(cbor, out, Compression::BR);
+    else
+        out = cbor;
+
+    return ByteBufferUtils::saveToFile(out, filename.string());
+}
+
+
+bool JSONUtils::loadCBOR(const std::filesystem::path& filename,
+                         nlohmann::json& json)
+{
+    ByteBuffer bytes;
+    ByteBuffer cbor;
+    ByteBufferUtils::loadFromFile(filename.string(), bytes);
+
+    if (std::filesystem::extension(filename) == ".gz")
+        Compression::uncompress(bytes, cbor, Compression::GZIP);
+    else if (std::filesystem::extension(filename) == ".br")
+        Compression::uncompress(bytes, cbor, Compression::BR);
+    else
+        cbor = bytes;
+
+    json = nlohmann::json::from_cbor(cbor);
+
+    return true;
+}
+
+
+
 
 
 } } // namespace ofx::IO
