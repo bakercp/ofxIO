@@ -25,7 +25,7 @@ bool JSONUtils::saveJSON(const std::filesystem::path& filename,
         std::ofstream ostr(ofToDataPath(filename.string(), true),
                            std::ios::binary);
 
-        if (std::filesystem::extension(filename) == ".gz")
+        if (filename.extension() == ".gz")
         {
             Poco::DeflatingOutputStream deflater(ostr,
                                                  Poco::DeflatingStreamBuf::STREAM_GZIP);
@@ -66,7 +66,7 @@ bool JSONUtils::loadJSON(const std::filesystem::path& filename,
         std::ifstream istr(ofToDataPath(filename.string(), true),
                            std::ios::binary);
 
-        if (std::filesystem::extension(filename) == ".gz")
+        if (filename.extension() == ".gz")
         {
             Poco::InflatingInputStream inflater(istr, Poco::InflatingStreamBuf::STREAM_GZIP);
             inflater >> json;
@@ -105,9 +105,9 @@ bool JSONUtils::saveCBOR(const std::filesystem::path& filename,
     ByteBuffer cbor(nlohmann::json::to_cbor(json));
     ByteBuffer out;
 
-    if (std::filesystem::extension(filename) == ".gz")
+    if (filename.extension() == ".gz")
         Compression::compress(cbor, out, Compression::GZIP);
-    else if (std::filesystem::extension(filename) == ".br")
+    else if (filename.extension() == ".br")
         Compression::compress(cbor, out, Compression::BR);
     else
         out = cbor;
@@ -123,9 +123,9 @@ bool JSONUtils::loadCBOR(const std::filesystem::path& filename,
     ByteBuffer cbor;
     ByteBufferUtils::loadFromFile(filename.string(), bytes);
 
-    if (std::filesystem::extension(filename) == ".gz")
+    if (filename.extension() == ".gz")
         Compression::uncompress(bytes, cbor, Compression::GZIP);
-    else if (std::filesystem::extension(filename) == ".br")
+    else if (filename.extension() == ".br")
         Compression::uncompress(bytes, cbor, Compression::BR);
     else
         cbor = bytes;

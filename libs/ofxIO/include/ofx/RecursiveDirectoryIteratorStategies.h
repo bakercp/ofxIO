@@ -55,7 +55,7 @@ namespace ofx {
     {
     public:
         typedef std::stack<Poco::DirectoryIterator> Stack;
-        typedef std::pointer_to_unary_function<const Stack&, Poco::UInt16> DepthFunPtr;
+        using DepthFunPtr = std::function<Poco::UInt16(const Stack&)>;
 
         enum { D_INFINITE = 0 };
         /// Constant for infinite traverse depth.

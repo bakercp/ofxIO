@@ -66,11 +66,11 @@ public:
 
     virtual void log(ofLogLevel level,
                      const std::string& module,
-                     const char* format, ...) override OF_PRINTF_ATTR(4, 5);
+                     const char* format, ...)  OF_PRINTF_ATTR(4, 5);
 
     virtual void log(ofLogLevel level,
                      const std::string& module,
-                     const char* format, std::va_list args) override;
+                     const char* format, std::va_list args) ;
 
     /// \brief Set the poll interval in milliseconds.
     /// \param interval The poll interval in milliseconds.

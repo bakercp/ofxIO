@@ -146,16 +146,15 @@ namespace ofx {
     //
     // not inlines
     //
-    template <class TTraverseStrategy>
-    RecursiveDirectoryIteratorImpl<TTraverseStrategy>
-    ::RecursiveDirectoryIteratorImpl(const std::string& path, Poco::UInt16 maxDepth)
-	: _maxDepth(maxDepth),
-	_traverseStrategy(std::ptr_fun(depthFun), _maxDepth),
-	_isFinished(false)
-    {
-        _itStack.push(Poco::DirectoryIterator(path));
-        _current = _itStack.top()->path();
-    }
+template <class TTraverseStrategy>
+RecursiveDirectoryIteratorImpl<TTraverseStrategy>::RecursiveDirectoryIteratorImpl(const std::string& path, Poco::UInt16 maxDepth)
+    : _maxDepth(maxDepth),
+      _traverseStrategy(depthFun, _maxDepth),
+      _isFinished(false)
+{
+    _itStack.push(Poco::DirectoryIterator(path));
+    _current = _itStack.top()->path();
+}
     
     
     template <class TTraverseStrategy>
