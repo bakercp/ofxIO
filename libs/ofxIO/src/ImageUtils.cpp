@@ -8,6 +8,7 @@
 #include "ofx/IO/ImageUtils.h"
 #include "FreeImage.h"
 #include "ofRectangle.h"
+#include "ofMain.h"
 
 
 namespace ofx {

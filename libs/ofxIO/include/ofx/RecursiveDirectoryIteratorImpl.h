@@ -150,7 +150,7 @@ namespace ofx {
     RecursiveDirectoryIteratorImpl<TTraverseStrategy>
     ::RecursiveDirectoryIteratorImpl(const std::string& path, Poco::UInt16 maxDepth)
 	: _maxDepth(maxDepth),
-	_traverseStrategy(std::ptr_fun(depthFun), _maxDepth),
+_traverseStrategy([this](const Stack& stack) { return depthFun(stack); }, _maxDepth),
 	_isFinished(false)
     {
         _itStack.push(Poco::DirectoryIterator(path));

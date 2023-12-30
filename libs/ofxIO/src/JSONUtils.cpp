@@ -23,7 +23,7 @@ bool JSONUtils::saveJSON(const std::filesystem::path& filename,
         std::ofstream ostr(ofToDataPath(filename.string(), true),
                            std::ios::binary);
 
-        if (std::filesystem::extension(filename) == ".gz")
+        if (std::filesystem::path(filename).extension() == ".gz")
         {
             Poco::DeflatingOutputStream deflater(ostr,
                                                  Poco::DeflatingStreamBuf::STREAM_GZIP);
@@ -63,7 +63,7 @@ bool JSONUtils::loadJSON(const std::filesystem::path& filename, ofJson& json)
         std::ifstream istr(ofToDataPath(filename.string(), true),
                            std::ios::binary);
 
-        if (std::filesystem::extension(filename) == ".gz")
+        if (std::filesystem::path(filename).extension() == ".gz")
         {
             Poco::InflatingInputStream inflater(istr, Poco::InflatingStreamBuf::STREAM_GZIP);
             inflater >> json;
